@@ -1,0 +1,3 @@
+﻿DocInfo/Name=[ARC] All Races PvP 2 Data
+Effect/Name/InstantUnburrow3=Instant Unburrow Copy
+UI/HelpMenuDialogTechLoomings=All RACES TECH

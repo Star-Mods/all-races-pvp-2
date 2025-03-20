@@ -1,0 +1,35 @@
+include "TriggerLibs/natives"
+
+//--------------------------------------------------------------------------------------------------
+// Library: All Races
+//--------------------------------------------------------------------------------------------------
+// Preset Declarations
+const int libARMP_ge_PreplacedResourceType_Default = 0;
+const int libARMP_ge_PreplacedResourceType_Rich = 1;
+const int libARMP_ge_PreplacedResourceType_BGH = 2;
+const int libARMP_ge_PreplacedResourceType_RichBGH = 3;
+const int libARMP_ge_PreplacedResourceType_Tiberium = 4;
+
+// Variable Declarations
+int libARMP_gv_startMinerals;
+int libARMP_gv_startVespene;
+int libARMP_gv_resourceType;
+int libARMP_gv_supplyCap;
+
+// Function Declarations
+string libARMP_gf_GetUnitUserData (string lp_unit);
+string libARMP_gf_GetResourceUserData (string lp_unit);
+
+// Trigger Declarations
+trigger libARMP_gt_OfflineGameAttributesInitialisation;
+trigger libARMP_gt_OnlineGameAttributesInitialisation;
+trigger libARMP_gt_FactionTriggers;
+trigger libARMP_gt_SupportWorkerOnlyPathsForSomeCustomMaps;
+trigger libARMP_gt_SprayUpgrades;
+trigger libARMP_gt_ApplyInitialResources;
+trigger libARMP_gt_ApplyHarvestableResources;
+trigger libARMP_gt_ApplySupplyCap;
+
+// Library Initialization
+void libARMP_InitVariables ();
+

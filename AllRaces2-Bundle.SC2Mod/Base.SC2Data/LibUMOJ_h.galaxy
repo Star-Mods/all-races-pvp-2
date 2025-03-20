@@ -1,0 +1,8 @@
+include "TriggerLibs/natives"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Factions - Umojan
+//--------------------------------------------------------------------------------------------------
+// Trigger Declarations
+trigger libUMOJ_gt_HexaremStuckRaptorFix;
+
