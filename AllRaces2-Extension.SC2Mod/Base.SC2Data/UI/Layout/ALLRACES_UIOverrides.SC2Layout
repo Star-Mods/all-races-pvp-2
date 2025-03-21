@@ -61,7 +61,7 @@
 
         <!-- URL Template -->
         <Frame type="Frame" name="URL" template="ScreenCustomFeatured/CTABannerTemplate">
-            <Frame type="LaunchURLButton" name="WebsiteButton" template="SCBW_UIOverrides/MenuBarButtonTemplate">
+            <Frame type="LaunchURLButton" name="WebsiteButton" template="ALLRACES_UIOverrides/MenuBarButtonTemplate">
                 <Anchor side="Top" relative="$parent" pos="Min" offset="0" />
                 <Anchor side="Left" relative="$parent" pos="Min" offset="0" />
                 <Anchor side="Right" relative="$parent" pos="Max" offset="0" />
@@ -105,7 +105,7 @@
             <StateGroup name="UnitStateNew">
                 <!-- High Templar -->
                 <State name="highTemplar">
-                    <When type="Property" frame="$this" UnitLink="HighTemplarSCBW"/>
+                    <When type="Property" frame="$this" UnitLink="HighTemplarALLRACES"/>
                     <Action type="SetProperty" frame="$this" UnitWorldZ="-0.5"/>
                 </State>
             </StateGroup>
@@ -140,7 +140,7 @@
             <Width val="54"/>
         </Frame>
 
-        <Frame type="Frame" name="URL" template="SCBW_UIOverrides/URL">
+        <Frame type="Frame" name="URL" template="ALLRACES_UIOverrides/URL">
             <Anchor side="Left" relative="$parent/MenuBarBackgroundImage" pos="Min" offset="-40"/>
             <Anchor side="Top" relative="$parent/MenuBarBackgroundImage" pos="Min" offset="9"/>
             <Width val="36"/>

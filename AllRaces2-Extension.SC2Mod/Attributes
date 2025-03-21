@@ -41,7 +41,7 @@
         <Value>
             <Id Value="18"/>
             <Name Value="Attribute016/Value018/Name"/>
-            <Icon Value="Assets\Textures\icon-dragon-64.dds"/>
+            <Icon Value="Assets\UI\lobbyrace-dragon.dds"/>
         </Value>
         <Value>
             <Id Value="7"/>
