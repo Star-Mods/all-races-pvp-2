@@ -77,9 +77,9 @@
   <EditorCategories value="Race:UPL"/>
 </CModel>
 <CModel default="1" id="LOTC_CaevRigBase" parent="LOTC_GenericUnitBase">
-  <RequiredAnims value="Assets\Units\Neutral\LOTC_CaevRig\LOTC_CaevRig.m3a"/>
-  <RequiredAnims value="Assets\Units\Neutral\LOTC_CaevRig\LOTC_CaevRig_ReadyAnims.m3a"/>
-  <RequiredAnims value="Assets\Units\Neutral\LOTC_CaevRig\LOTC_CaevRig_TalkAnims.m3a"/>
+  <RequiredAnims value="Assets\Units\UPL\LOTC_CaevRig\LOTC_CaevRig.m3a"/>
+  <RequiredAnims value="Assets\Units\UPL\LOTC_CaevRig\LOTC_CaevRig_ReadyAnims.m3a"/>
+  <RequiredAnims value="Assets\Units\UPL\LOTC_CaevRig\LOTC_CaevRig_TalkAnims.m3a"/>
   <Events Anim="Attack,D" Name="UPLShotgunPump" Type="Sound" Time="0.8" Payload="UPLShotgunPump"/>
   <Events Anim="Attack,Inferior,D" Name="UPLShotgunPump" Type="Sound" Time="0.8" Payload="UPLShotgunPump"/>
   <Events Anim="Attack,Superior,D" Name="UPLShotgunPump" Type="Sound" Time="0.8" Payload="UPLShotgunPump"/>
@@ -90,7 +90,7 @@
   <FuzzyGeometryPadding value="0.05"/>
 </CModel>
 <CModel default="1" id="LOTC_CaevRigDeathBase" parent="UnitDeath">
-  <RequiredAnims value="Assets\Units\Neutral\LOTC_CaevRig\LOTC_CaevRigDeath.m3a"/>
+  <RequiredAnims value="Assets\Units\UPL\LOTC_CaevRig\LOTC_CaevRigDeath.m3a"/>
   <LowQualityModel value="TerranBloodDeathLow"/>
   <Flags index="ParticipatesInRagdollOnRagdollCollisions" value="1"/>
   <Occlusion value="Show"/>
@@ -98,7 +98,7 @@
   <?token id="low" value="TerranBloodDeathLow" type="CModelLink"?>
 </CModel>
 <CModel default="1" id="LOTC_CaevRigDeathFireBase" parent="UnitDeath">
-  <RequiredAnims value="Assets\Units\Neutral\LOTC_CaevRig\LOTC_CaevRig_DeathFire.m3a"/>
+  <RequiredAnims value="Assets\Units\UPL\LOTC_CaevRig\LOTC_CaevRig_DeathFire.m3a"/>
   <LowQualityModel value="TerranBloodDeathLow"/>
   <Flags index="ParticipatesInRagdollOnRagdollCollisions" value="1"/>
   <Occlusion value="Show"/>
@@ -106,7 +106,7 @@
   <?token id="low" value="TerranBloodDeathLow" type="CModelLink"?>
 </CModel>
 <CModel default="1" id="LOTC_CaevRigDeathAcidBase" parent="UnitDeath">
-  <RequiredAnims value="Assets\Units\Neutral\LOTC_CaevRig\LOTC_CaevRig_DeathAcid.m3a"/>
+  <RequiredAnims value="Assets\Units\UPL\LOTC_CaevRig\LOTC_CaevRig_DeathAcid.m3a"/>
   <LowQualityModel value="TerranBloodDeathLow"/>
   <Flags index="ParticipatesInRagdollOnRagdollCollisions" value="1"/>
   <Occlusion value="Show"/>
@@ -114,7 +114,7 @@
   <?token id="low" value="TerranBloodDeathLow" type="CModelLink"?>
 </CModel>
 <CModel default="1" id="LOTC_CaevRigDeathRagdollBase" parent="UnitDeathRagdoll">
-  <RequiredAnims value="Assets\Units\Neutral\LOTC_CaevRig\LOTC_CaevRig_DeathRagdoll.m3a"/>
+  <RequiredAnims value="Assets\Units\UPL\LOTC_CaevRig\LOTC_CaevRig_DeathRagdoll.m3a"/>
   <Flags index="ParticipatesInRagdollOnRagdollCollisions" value="1"/>
   <EditorCategories value="Race:UPL"/>
 </CModel>
@@ -237,73 +237,8 @@
 <CModel id="CommandCenter">
   <RequiredAnims value="Assets\Buildings\Terran\CommandCenterEx1\CommandCenterEx1_UnpoweredAnims.m3a"/>
 </CModel>
-<CModel id="UltraliskCE">
-  <AttachProps Id="Ref_Head">
-    <Keys index="Weapon" value="0"/>
-  </AttachProps>
-</CModel>
-<CModel id="Ultralisk_CollectionSkin_Primal">
-  <AttachProps Id="Ref_Head">
-    <Keys index="Weapon" value="0"/>
-  </AttachProps>
-</CModel>
-<CModel id="Ultralisk_Collectors_Collection">
-  <AttachProps Id="Ref_Head">
-    <Keys index="Weapon" value="0"/>
-  </AttachProps>
-</CModel>
-<CModel id="Ultralisk_Primal_Collection">
-  <AttachProps Id="Ref_Head">
-    <Keys index="Weapon" value="0"/>
-  </AttachProps>
-</CModel>
-<CModel id="Ultralisk">
-  <AttachProps Id="Ref_Head">
-    <Keys index="Weapon" value="0"/>
-  </AttachProps>
-</CModel>
-<CModel id="Ultralisk_Webby">
-  <AttachProps Id="Ref_Head">
-    <Keys index="Weapon" value="0"/>
-  </AttachProps>
-</CModel>
-<CModel id="Ultralisk_Primal">
-  <AttachProps Id="Ref_Head">
-    <Keys index="Weapon" value="0"/>
-  </AttachProps>
-</CModel>
-<CModel id="Ultralisk_CollectorEdition">
-  <AttachProps Id="Ref_Head">
-    <Keys index="Weapon" value="0"/>
-  </AttachProps>
-</CModel>
-<CModel id="UltraliskSkin_Webby">
-  <AttachProps Id="Ref_Head">
-    <Keys index="Weapon" value="0"/>
-  </AttachProps>
-</CModel>
-<CModel id="UltraliskSkin_Primal">
-  <AttachProps Id="Ref_Head">
-    <Keys index="Weapon" value="0"/>
-  </AttachProps>
-</CModel>
-<CModel id="Ultralisk_Mecha">
-  <AttachProps Id="Ref_Head">
-    <Keys index="Weapon" value="0"/>
-  </AttachProps>
-</CModel>
-<CModel id="Ultralisk_Remastered">
-  <AttachProps Id="Ref_Head">
-    <Keys index="Weapon" value="0"/>
-  </AttachProps>
-</CModel>
 <CModel id="CommandCenter_CovertOps">
   <RequiredAnims value="Assets\Buildings\Terran\CommandCenterEx1\CommandCenterEx1_UnpoweredAnims.m3a"/>
-</CModel>
-<CModel id="Ultralisk_RCZ">
-  <AttachProps Id="Ref_Head">
-    <Keys index="Weapon" value="0"/>
-  </AttachProps>
 </CModel>
 <CModel id="CommandCenter_Silver">
   <RequiredAnims value="Assets\Buildings\Terran\CommandCenterEx1\CommandCenterEx1_UnpoweredAnims.m3a"/>
@@ -320,6 +255,71 @@
   <Flags index="Ignorable" value="1"/>
   <ScaleMax value="0.750000,0.750000,0.750000"/>
   <ScaleMin value="0.750000,0.750000,0.750000"/>
+</CModel>
+<CModel id="UltraliskSkin_Webby">
+  <AttachProps Id="Ref_Head">
+    <Keys index="Weapon" value="0"/>
+  </AttachProps>
+</CModel>
+<CModel id="Ultralisk_Collectors_Collection">
+  <AttachProps Id="Ref_Head">
+    <Keys index="Weapon" value="0"/>
+  </AttachProps>
+</CModel>
+<CModel id="Ultralisk_Mecha">
+  <AttachProps Id="Ref_Head">
+    <Keys index="Weapon" value="0"/>
+  </AttachProps>
+</CModel>
+<CModel id="Ultralisk_Primal_Collection">
+  <AttachProps Id="Ref_Head">
+    <Keys index="Weapon" value="0"/>
+  </AttachProps>
+</CModel>
+<CModel id="Ultralisk">
+  <AttachProps Id="Ref_Head">
+    <Keys index="Weapon" value="0"/>
+  </AttachProps>
+</CModel>
+<CModel id="UltraliskCE">
+  <AttachProps Id="Ref_Head">
+    <Keys index="Weapon" value="0"/>
+  </AttachProps>
+</CModel>
+<CModel id="UltraliskSkin_Primal">
+  <AttachProps Id="Ref_Head">
+    <Keys index="Weapon" value="0"/>
+  </AttachProps>
+</CModel>
+<CModel id="Ultralisk_CollectionSkin_Primal">
+  <AttachProps Id="Ref_Head">
+    <Keys index="Weapon" value="0"/>
+  </AttachProps>
+</CModel>
+<CModel id="Ultralisk_CollectorEdition">
+  <AttachProps Id="Ref_Head">
+    <Keys index="Weapon" value="0"/>
+  </AttachProps>
+</CModel>
+<CModel id="Ultralisk_Primal">
+  <AttachProps Id="Ref_Head">
+    <Keys index="Weapon" value="0"/>
+  </AttachProps>
+</CModel>
+<CModel id="Ultralisk_RCZ">
+  <AttachProps Id="Ref_Head">
+    <Keys index="Weapon" value="0"/>
+  </AttachProps>
+</CModel>
+<CModel id="Ultralisk_Remastered">
+  <AttachProps Id="Ref_Head">
+    <Keys index="Weapon" value="0"/>
+  </AttachProps>
+</CModel>
+<CModel id="Ultralisk_Webby">
+  <AttachProps Id="Ref_Head">
+    <Keys index="Weapon" value="0"/>
+  </AttachProps>
 </CModel>
 <CModel id="CreepGlazeSCBW" parent="Glaze">
   <Model value="Assets\Effects\Race\Creep@SCBWGlaze\Creep@SCBWGlaze.m3"/>
@@ -11357,6 +11357,7 @@
 <CModel id="ALLRACE2AdditionalPeenemundeMRLSDeathModel">
   <Model value="Assets\COOP\Mengsk\Effects\Ghost_Mengsk_COOP_Immolate_Explosion\Ghost_Mengsk_COOP_Immolate_Explosion.m3"/>
   <Flags index="Download" value="0"/>
+  <EditorCategories value="Race:UED"/>
 </CModel>
 <CModel id="UEDModelFieldOnPsionic" parent="OneShotSpellFX">
   <Model value="Assets\Effects\Protoss\Alarak_COOP_LightningStrikes_PowerUp\Alarak_COOP_LightningStrikes_PowerUp.m3"/>
@@ -11383,7 +11384,7 @@
 </CModel>
 <CModel id="UEDModelSpartanImpactMissle" parent="ImpactFX">
   <Model value="Assets\Effects\Protoss\Adept_Collection_Purifier_Missile_Impact\Adept_Collection_Purifier_Missile_Impact.m3"/>
-  <EditorCategories value="Race:Protoss"/>
+  <EditorCategories value="Race:UED"/>
   <ScaleMax value="1.500000,1.500000,1.500000"/>
   <ScaleMin value="1.500000,1.500000,1.500000"/>
 </CModel>
@@ -11426,7 +11427,21 @@
   <Image value="Assets\Textures\aresportrait_static.dds"/>
   <Lighting value="WarhoundPortrait"/>
 </CModel>
-<CModel id="UEDModelSpartan" parent="ThorBase">
+<CModel id="UEDModelSpartan" parent="Unit">
+  <AttachProps Id="Ref_Weapon 01">
+    <Keys index="SetA" value="2"/>
+  </AttachProps>
+  <AttachProps Id="Ref_Weapon 02">
+    <Keys index="SetA" value="2"/>
+  </AttachProps>
+  <AttachProps Id="Ref_Weapon 03">
+    <Keys index="SetA" value="2"/>
+  </AttachProps>
+  <AttachProps Id="Ref_Weapon 04">
+    <Keys index="SetA" value="2"/>
+  </AttachProps>
+  <Occlusion value="Show"/>
+  <SquibTypeDefault value="Metal"/>
   <Model value="Assets\Models\UED_SpartanAAC_Inquisitor_Tank.m3"/>
   <RequiredAnims index="0" value="Assets\Units\Terran\Hellion_SwarmAnims\Hellion_SwarmAnims.m3a"/>
   <RequiredAnims index="1" removed="1"/>
@@ -11456,7 +11471,9 @@
   <SelectionRadius value="1"/>
   <ShadowRadius value="1"/>
 </CModel>
-<CModel id="HighTemplarPsiStormModel"/>
+<CModel id="HighTemplarPsiStormModel">
+  <EditorCategories value="Race:UED"/>
+</CModel>
 <CModel id="ModelUEDAnimationDefMatrix" parent="PersistentSpellFX">
   <Model value="Assets\Effects\Terran\ArcadeVikingShield\ArcadeVikingShield.m3"/>
   <EditorCategories value="Race:UED"/>
@@ -11990,7 +12007,7 @@
   <RadiusLoose value="1"/>
 </CModel>
 <CModel id="SupplyDropModel2TomSawyer" parent="SupplyDepotAttachmentBase">
-  <Model value="Assets\Buildings\UED_Sensor_Tower\UED_SensorTower_V1.m3"/>
+  <Model value="Assets\Buildings\UED\UED_Sensor_Tower\UED_SensorTower_V1.m3"/>
   <EditorCategories value="Race:UED"/>
   <ScaleMax value="0.610000,0.610000,0.610000"/>
   <ScaleMin value="0.610000,0.610000,0.610000"/>
@@ -12012,7 +12029,7 @@
   <EditorCategories value="Race:UED"/>
 </CModel>
 <CModel id="StarshipMaintenancePlant" parent="ArmoryBase">
-  <Model value="Assets\Buildings\Viper\Viper_TempleofViper\Viper_TempleofViper_V3.m3"/>
+  <Model value="Assets\Buildings\UED\UEDMaintenancePlane.m3"/>
   <SelectionRadius value="2.6"/>
   <ShadowRadius value="2.6"/>
   <EditorCategories value="Race:UED"/>
@@ -12043,7 +12060,7 @@
   <EditorCategories value="Race:UED"/>
 </CModel>
 <CModel id="StarshipMaintenancePlantPlacement" parent="ArmoryPlacementBase" low="StarshipMaintenancePlant">
-  <Model value="Assets\Buildings\Viper\Viper_TempleofViper\Viper_TempleofViper_V3.m3"/>
+  <Model value="Assets\Buildings\UED\UEDMaintenancePlane.m3"/>
   <SelectionLayer value="2"/>
   <ScaleMax value="0.750000,0.750000,0.750000"/>
   <ScaleMin value="0.750000,0.750000,0.750000"/>
@@ -12194,7 +12211,7 @@
   <EditorCategories value="Race:UED"/>
 </CModel>
 <CModel id="Lazarus" parent="GhostBase">
-  <Model value="Assets\Units\UED_Spectre\UED_Spectre_V1.m3"/>
+  <Model value="Assets\Units\UED\UED_Spectre\UED_Spectre_V1.m3"/>
   <ScaleMax value="0.935000,0.935000,0.935000"/>
   <ScaleMin value="0.935000,0.935000,0.935000"/>
   <EditorCategories value="Race:UED"/>
@@ -12251,7 +12268,18 @@
   <ScaleMax value="1.250000,1.250000,1.250000"/>
   <ScaleMin value="1.250000,1.250000,1.250000"/>
 </CModel>
-<CModel id="SuppressionTower" parent="MissileTurretBase">
+<CModel id="SuppressionTower" parent="BuildingEx">
+  <SquibTypeDefault value="Metal"/>
+  <AttachProps Id="Ref_Hardpoint">
+    <Keys index="Turret" value="0"/>
+  </AttachProps>
+  <AttachProps Id="Ref_Weapon 01">
+    <Keys index="SetA" value="0"/>
+  </AttachProps>
+  <Radius value="0.75"/>
+  <TechPurchaseCamera value="TechPurchaseMissileTurret"/>
+  <UnitGlossaryCamera value="Star2CameraHigh05"/>
+  <PlanetPanelCamera value="Star2CameraHigh05"/>
   <Model value="Assets\Models\NC_LaserTurret.m3"/>
   <SelectionRadius value="1"/>
   <ShadowRadius value="1"/>
@@ -12259,7 +12287,18 @@
   <ScaleMin value="1.090000,1.090000,1.090000"/>
   <EditorCategories value="Race:UED"/>
 </CModel>
-<CModel id="HeavyTower" parent="MissileTurretBase">
+<CModel id="HeavyTower" parent="BuildingEx">
+  <SquibTypeDefault value="Metal"/>
+  <AttachProps Id="Ref_Hardpoint">
+    <Keys index="Turret" value="0"/>
+  </AttachProps>
+  <AttachProps Id="Ref_Weapon 01">
+    <Keys index="SetA" value="0"/>
+  </AttachProps>
+  <Radius value="0.75"/>
+  <TechPurchaseCamera value="TechPurchaseMissileTurret"/>
+  <UnitGlossaryCamera value="Star2CameraHigh05"/>
+  <PlanetPanelCamera value="Star2CameraHigh05"/>
   <Model value="Assets\Models\NC_GuardianCannon.m3"/>
   <SelectionRadius value="1.2"/>
   <ShadowRadius value="1.2"/>
@@ -12288,7 +12327,7 @@
   <EditorCategories value="Race:UED"/>
 </CModel>
 <CModel id="PeenemundeMRLS" parent="Unit">
-  <Model value="Assets\Units\UED_A.R.E.S\UED_A.R.E.S_V1.m3"/>
+  <Model value="Assets\Units\UED\UED_A.R.E.S\UED_A.R.E.S_V1.m3"/>
   <AttachProps Id="Ref_Weapon 01"/>
   <AttachProps Id="Ref_Weapon 02"/>
   <AttachProps Id="Ref_Weapon 03"/>
@@ -12344,7 +12383,7 @@
   <EditorCategories value="Race:UED"/>
 </CModel>
 <CModel id="DrakkarAPC" parent="HellionBase">
-  <Model value="Assets\Units\UED_Militarized_Transport\UED_MilitarizedTransport_V1.m3"/>
+  <Model value="Assets\Units\UED\UED_Militarized_Transport\UED_MilitarizedTransport_V1.m3"/>
   <ScaleMax value="0.680000,0.680000,0.680000"/>
   <ScaleMin value="0.680000,0.680000,0.680000"/>
   <SelectionRadius value="2"/>
@@ -12368,7 +12407,7 @@
   <EditorCategories value="Race:UED"/>
 </CModel>
 <CModel id="HonorguardCruiser" parent="BattlecruiserBase">
-  <Model value="Assets\Units\UED_Honorguard\UED_Shieldwall_V4.m3"/>
+  <Model value="Assets\Units\UED\UED_Honorguard\UED_Shieldwall_V4.m3"/>
   <ScaleMax value="1.100000,1.100000,1.100000"/>
   <ScaleMin value="1.100000,1.100000,1.100000"/>
   <EditorCategories value="Race:UED"/>
@@ -12745,8 +12784,17 @@
   <ScaleMax value="1.600000,1.600000,1.600000"/>
   <ScaleMin value="1.600000,1.600000,1.600000"/>
 </CModel>
-<CModel id="Strikefighter" parent="BansheeBase">
-  <Model value="Assets\Units\UED\UED_shadow's_pacifier V2\UED_shadow's_pacifier_V3.m3"/>
+<CModel id="Strikefighter" parent="Unit">
+  <Occlusion value="Show"/>
+  <SelectionOffset value="0.000000,0.000000,-0.500000"/>
+  <Tipability value="0.65"/>
+  <SquibTypeDefault value="Metal"/>
+  <Radius value="0.75"/>
+  <TechPurchaseCamera value="TechPurchaseStarship"/>
+  <UnitGlossaryCamera value="Star2CameraLow07"/>
+  <PlanetPanelCamera value="Star2CameraLow07"/>
+  <ShadowRadius value="0.9375"/>
+  <Model value="Assets\Units\UED\UED_Strikefighter\UED_Strikefighter.m3"/>
   <ScaleMax value="0.380000,0.380000,0.380000"/>
   <ScaleMin value="0.380000,0.380000,0.380000"/>
   <SelectionRadius value="2.4"/>
@@ -12774,7 +12822,7 @@
   <EditorCategories value="Race:UED"/>
 </CModel>
 <CModel id="OperationHeadquarters" parent="CommandCenterBase">
-  <Model value="Assets\Buildings\UED_Biodome_Command_Center\UED_BiodomeCommand_V1.m3"/>
+  <Model value="Assets\Buildings\UED\UED_Biodome_Command_Center\UED_BiodomeCommand_V1.m3"/>
   <EditorCategories value="Race:UED"/>
 </CModel>
 <CModel id="OperationHeadquartersDeath" parent="CommandCenterDeathBase">
@@ -12839,13 +12887,13 @@
   <EditorCategories value="Race:UED"/>
 </CModel>
 <CModel id="TacticsAcademy" parent="EngineeringBayBase">
-  <Model value="Assets\Buildings\UED_Science_Facility\UED_ScienceFacility_V1.m3"/>
+  <Model value="Assets\Buildings\UED\UED_Science_Facility\UED_ScienceFacility_V1.m3"/>
   <SelectionRadius value="2.7"/>
   <ShadowRadius value="2.7"/>
   <EditorCategories value="Race:UED"/>
 </CModel>
 <CModel id="FieldBureau" parent="EngineeringBayBase">
-  <Model value="Assets\Buildings\UED_Merc_Compound\UED_MercCompound_V2.m3"/>
+  <Model value="Assets\Buildings\UED\UED_Merc_Compound\UED_MercCompound_V2.m3"/>
   <ScaleMax value="0.800000,0.800000,0.800000"/>
   <ScaleMin value="0.800000,0.800000,0.800000"/>
   <SelectionRadius value="2.1"/>
@@ -12885,7 +12933,7 @@
   <ScaleMin value="0.750000,0.750000,0.750000"/>
 </CModel>
 <CModel id="TachyonRelay" parent="FusionCoreBase">
-  <Model value="Assets\Buildings\Viper\Viper_Operationscenter\Viper_Operationscenter_V1.m3"/>
+  <Model value="Assets\Buildings\UED\UEDOperationscenter.m3"/>
   <SelectionOffset value="0.000000,-0.500000,-0.300000"/>
   <SelectionRadius value="2.7"/>
   <ShadowRadius value="2.7"/>
@@ -12896,7 +12944,7 @@
   <EditorCategories value="Race:UED"/>
 </CModel>
 <CModel id="TachyonRelayPlacement" parent="FusionCorePlacementBase" low="TachyonRelay">
-  <Model value="Assets\Buildings\Viper\Viper_Operationscenter\Viper_Operationscenter_V1.m3"/>
+  <Model value="Assets\Buildings\UED\UEDOperationscenter.m3"/>
   <SelectionLayer value="2"/>
   <EditorCategories value="Race:UED"/>
 </CModel>
@@ -12929,7 +12977,7 @@
   <ScaleMin value="0.800000,0.800000,0.800000"/>
 </CModel>
 <CModel id="Valkyrie" parent="LiberatorBase">
-  <Model value="Assets\Units\UED_Valkyrie\UED_Valkyrie_V1.m3"/>
+  <Model value="Assets\Units\UED\UED_Valkyrie\UED_Valkyrie_V1.m3"/>
   <SelectionRadius value="0.9"/>
   <ShadowRadius value="1.5"/>
   <EditorCategories value="Race:UED"/>
@@ -13049,7 +13097,7 @@
   <EditorCategories value="Race:UED"/>
 </CModel>
 <CModel id="StrikeTrooper" parent="MarineBase">
-  <Model value="Assets\Units\UED_Trooper\UPL_Trooper.m3"/>
+  <Model value="Assets\Units\UED\UED_Trooper\UPL_Trooper.m3"/>
   <EditorCategories value="Race:UED"/>
 </CModel>
 <CModel id="StrikeTrooperAttackLaunch" parent="LaunchFX">
@@ -13093,7 +13141,18 @@
   <Lighting value="MarinePortrait"/>
   <EditorCategories value="Race:UED"/>
 </CModel>
-<CModel id="MissileTurret2" parent="MissileTurretBase">
+<CModel id="MissileTurret2" parent="BuildingEx">
+  <SquibTypeDefault value="Metal"/>
+  <AttachProps Id="Ref_Hardpoint">
+    <Keys index="Turret" value="0"/>
+  </AttachProps>
+  <AttachProps Id="Ref_Weapon 01">
+    <Keys index="SetA" value="0"/>
+  </AttachProps>
+  <Radius value="0.75"/>
+  <TechPurchaseCamera value="TechPurchaseMissileTurret"/>
+  <UnitGlossaryCamera value="Star2CameraHigh05"/>
+  <PlanetPanelCamera value="Star2CameraHigh05"/>
   <Model value="Assets\Models\NC_MissileTurret.m3"/>
   <SelectionRadius value="0.9"/>
   <ShadowRadius value="0.9"/>
@@ -13169,7 +13228,7 @@
   <EditorCategories value="Race:UED"/>
 </CModel>
 <CModel id="Refinery2" parent="RefineryBase">
-  <Model value="Assets\Buildings\UED_Refinery_Automated\UED_RefineryAutomated_V1.m3"/>
+  <Model value="Assets\Buildings\UED\UED_Refinery_Automated\UED_RefineryAutomated_V1.m3"/>
   <EditorCategories value="Race:UED"/>
 </CModel>
 <CModel id="RefineryDeath2" parent="RefineryDeathBase">
@@ -13202,7 +13261,7 @@
   <EditorCategories value="Race:UED"/>
 </CModel>
 <CModel id="TeleportationNode" parent="StarportBase">
-  <Model value="Assets\Buildings\Viper\Viper_WarFactory\Viper_WarFactory1.m3"/>
+  <Model value="Assets\Buildings\UED\UEDTeleportationNode.m3"/>
   <ScaleMax value="0.650000,0.650000,0.650000"/>
   <ScaleMin value="0.650000,0.650000,0.650000"/>
   <SelectionRadius value="2.8"/>
@@ -13214,14 +13273,14 @@
   <EditorCategories value="Race:UED"/>
 </CModel>
 <CModel id="TeleportationNodePlacement" parent="StarportPlacementBase" low="TeleportationNode">
-  <Model value="Assets\Buildings\Viper\Viper_WarFactory\Viper_WarFactory1.m3"/>
+  <Model value="Assets\Buildings\UED\UEDTeleportationNode.m3"/>
   <ScaleMax value="0.750000,0.750000,0.750000"/>
   <ScaleMin value="0.750000,0.750000,0.750000"/>
   <SelectionLayer value="2"/>
   <EditorCategories value="Race:UED"/>
 </CModel>
 <CModel id="InfusionTower" parent="SupplyDepotBase">
-  <Model value="Assets\Buildings\UED_Hive_Mind_Emulator\UED_HiveMindEmulator_V1.m3"/>
+  <Model value="Assets\Buildings\UED\UED_Hive_Mind_Emulator\UED_HiveMindEmulator_V1.m3"/>
   <EditorCategories value="Race:UED"/>
   <ScaleMax value="0.650000,0.650000,0.650000"/>
   <ScaleMin value="0.650000,0.650000,0.650000"/>
@@ -14908,6 +14967,26 @@
   <ScaleMin value="1.200000,1.200000,1.200000"/>
   <EditorCategories value="Race:UPL"/>
 </CModel>
+<CModel id="Beacon_UPLSmall" parent="Doodad">
+  <Model value="Assets\UI\Feedback\Beacon_UPL\Beacon_UPL.m3"/>
+  <Events Anim="Death,00" Name="UIBeaconTerranDeath" Type="Sound" Time="0.01" Payload="UI_BeaconTerranDeath"/>
+  <ScaleMax value="0.350000,0.350000,0.350000"/>
+  <ScaleMin value="0.350000,0.350000,0.350000"/>
+  <SelectionLayer value="1"/>
+  <SelectionRadius value="1.9997"/>
+  <ShadowRadius value="1.4284"/>
+  <EditorCategories value="Race:UPL"/>
+</CModel>
+<CModel id="Beacon_UPL" parent="Doodad">
+  <Model value="Assets\UI\Feedback\Beacon_UPL\Beacon_UPL.m3"/>
+  <Events Anim="Death,00" Name="UIBeaconTerranDeath" Type="Sound" Time="0.01" Payload="UI_BeaconTerranDeath"/>
+  <ScaleMax value="0.750000,0.750000,0.750000"/>
+  <ScaleMin value="0.750000,0.750000,0.750000"/>
+  <SelectionLayer value="1"/>
+  <SelectionRadius value="1.9997"/>
+  <ShadowRadius value="1.6665"/>
+  <EditorCategories value="Race:UPL"/>
+</CModel>
 <CModel id="UPLNightjarLaunchLight" parent="GenericLaunchLight">
   <ScaleMax value="1.100000,1.100000,1.100000"/>
   <ScaleMin value="1.150000,1.150000,1.150000"/>
@@ -15687,7 +15766,7 @@
   <SelectionRadius value="0.38"/>
   <RequiredAnims value="Assets\Units\UPL\InfantryRifle\InfantryRifle_AttackAnims.m3a"/>
   <RequiredAnims value="Assets\Units\UPL\InfantryRifle\InfantryRifle_ReadyAnims.m3a"/>
-  <RequiredAnims value="Assets\Units\Neutral\LOTC_CaevRig\LOTC_CaevRig_TalkAnims.m3a"/>
+  <RequiredAnims value="Assets\Units\UPL\LOTC_CaevRig\LOTC_CaevRig_TalkAnims.m3a"/>
   <AnimAliases Anim="Stand,C,Talk" Alias="Stand,Talk"/>
   <AnimAliases Anim="Stand,C,Talk,01" Alias="Stand,Talk,01"/>
   <TextureDeclares Prefix="INF_">
@@ -16365,42 +16444,42 @@
   <ScaleMin value="0.500000,0.500000,0.500000"/>
 </CModel>
 <CModel id="MilesJenkins" parent="LOTC_OfficerBase">
-  <Model value="Assets\Units\Neutral\UPLRiotOfficer\UPLRiotOfficer.m3"/>
+  <Model value="Assets\Units\UPL\UPLRiotOfficer\UPLRiotOfficer.m3"/>
   <ScaleMax value="1.150000,1.150000,1.150000"/>
   <ScaleMin value="1.150000,1.150000,1.150000"/>
 </CModel>
 <CModel id="MilesJenkinsDeath" parent="LOTC_CaevRigDeathBase">
-  <Model value="Assets\Units\Neutral\UPLRiotOfficerDeath\UPLRiotOfficerDeath.m3"/>
+  <Model value="Assets\Units\UPL\UPLRiotOfficerDeath\UPLRiotOfficerDeath.m3"/>
 </CModel>
 <CModel id="MilesJenkinsDeathAcid" parent="LOTC_CaevRigDeathAcidBase">
-  <Model value="Assets\Units\Neutral\UPLRiotOfficerDeathAcid\UPLRiotOfficerDeathAcid.m3"/>
+  <Model value="Assets\Units\UPL\UPLRiotOfficerDeathAcid\UPLRiotOfficerDeathAcid.m3"/>
 </CModel>
 <CModel id="MilesJenkinsDeathFire" parent="LOTC_CaevRigDeathFireBase">
-  <Model value="Assets\Units\Neutral\UPLRiotOfficerDeathFire\UPLRiotOfficerDeathFire.m3"/>
+  <Model value="Assets\Units\UPL\UPLRiotOfficerDeathFire\UPLRiotOfficerDeathFire.m3"/>
 </CModel>
 <CModel id="MilesJenkinsDeathRagdoll" parent="LOTC_CaevRigDeathRagdollBase">
-  <Model value="Assets\Units\Neutral\UPLRiotOfficerDeathRagdoll\UPLRiotOfficerDeathRagdoll.m3"/>
+  <Model value="Assets\Units\UPL\UPLRiotOfficerDeathRagdoll\UPLRiotOfficerDeathRagdoll.m3"/>
 </CModel>
 <CModel id="MilesJenkinsPortrait" parent="Portrait" Race="UPL">
   <Model value="Assets\Portraits\UPL\MilesJenkins\MilesJenkinsPortrait.m3"/>
   <Image value="Assets\Textures\MilesJenkins_Portrait_Static.tga"/>
 </CModel>
 <CModel id="RusellPeters" parent="LOTC_OfficerBase">
-  <Model value="Assets\Units\Neutral\UPLRiotOfficer\UPLRiotOfficer.m3"/>
+  <Model value="Assets\Units\UPL\UPLRiotOfficer\UPLRiotOfficer.m3"/>
   <ScaleMax value="1.150000,1.150000,1.150000"/>
   <ScaleMin value="1.150000,1.150000,1.150000"/>
 </CModel>
 <CModel id="RusellPetersDeath" parent="LOTC_CaevRigDeathBase">
-  <Model value="Assets\Units\Neutral\UPLRiotOfficerDeath\UPLRiotOfficerDeath.m3"/>
+  <Model value="Assets\Units\UPL\UPLRiotOfficerDeath\UPLRiotOfficerDeath.m3"/>
 </CModel>
 <CModel id="RusellPetersDeathAcid" parent="LOTC_CaevRigDeathAcidBase">
-  <Model value="Assets\Units\Neutral\UPLRiotOfficerDeathAcid\UPLRiotOfficerDeathAcid.m3"/>
+  <Model value="Assets\Units\UPL\UPLRiotOfficerDeathAcid\UPLRiotOfficerDeathAcid.m3"/>
 </CModel>
 <CModel id="RusellPetersDeathFire" parent="LOTC_CaevRigDeathFireBase">
-  <Model value="Assets\Units\Neutral\UPLRiotOfficerDeathFire\UPLRiotOfficerDeathFire.m3"/>
+  <Model value="Assets\Units\UPL\UPLRiotOfficerDeathFire\UPLRiotOfficerDeathFire.m3"/>
 </CModel>
 <CModel id="RusellPetersDeathRagdoll" parent="LOTC_CaevRigDeathRagdollBase">
-  <Model value="Assets\Units\Neutral\UPLRiotOfficerDeathRagdoll\UPLRiotOfficerDeathRagdoll.m3"/>
+  <Model value="Assets\Units\UPL\UPLRiotOfficerDeathRagdoll\UPLRiotOfficerDeathRagdoll.m3"/>
 </CModel>
 <CModel id="RusellPetersPortrait" parent="Portrait" Race="UPL">
   <Model value="Assets\Portraits\UPL\RussellPeters\RussellPetersPortrait.m3"/>
@@ -17175,21 +17254,21 @@
   <EditorCategories value="Race:UPL"/>
 </CModel>
 <CModel id="DarrenRodgers" parent="LOTC_OfficerBase">
-  <Model value="Assets\Units\Neutral\UPLRiotOfficer\UPLRiotOfficer.m3"/>
+  <Model value="Assets\Units\UPL\UPLRiotOfficer\UPLRiotOfficer.m3"/>
   <ScaleMax value="0.850000,0.850000,0.850000"/>
   <ScaleMin value="0.850000,0.850000,0.850000"/>
 </CModel>
 <CModel id="DarrenRodgersDeath" parent="LOTC_CaevRigDeathBase">
-  <Model value="Assets\Units\Neutral\UPLRiotOfficerDeath\UPLRiotOfficerDeath.m3"/>
+  <Model value="Assets\Units\UPL\UPLRiotOfficerDeath\UPLRiotOfficerDeath.m3"/>
 </CModel>
 <CModel id="DarrenRodgersDeathAcid" parent="LOTC_CaevRigDeathAcidBase">
-  <Model value="Assets\Units\Neutral\UPLRiotOfficerDeathAcid\UPLRiotOfficerDeathAcid.m3"/>
+  <Model value="Assets\Units\UPL\UPLRiotOfficerDeathAcid\UPLRiotOfficerDeathAcid.m3"/>
 </CModel>
 <CModel id="DarrenRodgersDeathFire" parent="LOTC_CaevRigDeathFireBase">
-  <Model value="Assets\Units\Neutral\UPLRiotOfficerDeathFire\UPLRiotOfficerDeathFire.m3"/>
+  <Model value="Assets\Units\UPL\UPLRiotOfficerDeathFire\UPLRiotOfficerDeathFire.m3"/>
 </CModel>
 <CModel id="DarrenRodgersDeathRagdoll" parent="LOTC_CaevRigDeathRagdollBase">
-  <Model value="Assets\Units\Neutral\UPLRiotOfficerDeathRagdoll\UPLRiotOfficerDeathRagdoll.m3"/>
+  <Model value="Assets\Units\UPL\UPLRiotOfficerDeathRagdoll\UPLRiotOfficerDeathRagdoll.m3"/>
 </CModel>
 <CModel id="DarrenRodgersPortrait" parent="Portrait" Race="UPL">
   <Image value="Assets\Textures\OfficerRiot_Portrait_Static.tga"/>
@@ -17413,19 +17492,19 @@
   <EditorCategories value="Race:UPL"/>
 </CModel>
 <CModel id="UPLGuardian" parent="LOTC_OfficerBase">
-  <Model value="Assets\Units\Neutral\UPLRiotOfficer\UPLRiotOfficer.m3"/>
+  <Model value="Assets\Units\UPL\UPLRiotOfficer\UPLRiotOfficer.m3"/>
 </CModel>
 <CModel id="UPLGuardianDeath" parent="LOTC_CaevRigDeathBase">
-  <Model value="Assets\Units\Neutral\UPLRiotOfficerDeath\UPLRiotOfficerDeath.m3"/>
+  <Model value="Assets\Units\UPL\UPLRiotOfficerDeath\UPLRiotOfficerDeath.m3"/>
 </CModel>
 <CModel id="UPLGuardianDeathAcid" parent="LOTC_CaevRigDeathAcidBase">
-  <Model value="Assets\Units\Neutral\UPLRiotOfficerDeathAcid\UPLRiotOfficerDeathAcid.m3"/>
+  <Model value="Assets\Units\UPL\UPLRiotOfficerDeathAcid\UPLRiotOfficerDeathAcid.m3"/>
 </CModel>
 <CModel id="UPLGuardianDeathFire" parent="LOTC_CaevRigDeathFireBase">
-  <Model value="Assets\Units\Neutral\UPLRiotOfficerDeathFire\UPLRiotOfficerDeathFire.m3"/>
+  <Model value="Assets\Units\UPL\UPLRiotOfficerDeathFire\UPLRiotOfficerDeathFire.m3"/>
 </CModel>
 <CModel id="UPLGuardianDeathRagdoll" parent="LOTC_CaevRigDeathRagdollBase">
-  <Model value="Assets\Units\Neutral\UPLRiotOfficerDeathRagdoll\UPLRiotOfficerDeathRagdoll.m3"/>
+  <Model value="Assets\Units\UPL\UPLRiotOfficerDeathRagdoll\UPLRiotOfficerDeathRagdoll.m3"/>
 </CModel>
 <CModel id="UPLGuardianPortrait" parent="Portrait" Race="UPL">
   <Model value="Assets\Portraits\UPL\DarrenRodgers\DarrenRodgersPortrait.m3"/>
@@ -17576,7 +17655,7 @@
   <EditorCategories value="Race:UPL"/>
 </CModel>
 <CModel id="ClaymoreMine" parent="Unit" Race="Terran">
-  <Model value="Assets\Units\Terran\SpiderMine\SpiderMine.m3"/>
+  <Model value="Assets\Units\UPL\ClaymoreMine\NanaKey_WP_Claymore.m3"/>
   <Occlusion value="Show"/>
   <PlanetPanelCamera value="Star2CameraLow02"/>
   <Radius value="0.2"/>
@@ -17585,12 +17664,10 @@
   <ShadowRadius value="0.2"/>
   <TechPurchaseCamera value="Star2CameraLow02"/>
   <UnitGlossaryCamera value="Star2CameraLow02"/>
-  <ScaleMax value="1.300000,1.300000,1.300000"/>
-  <ScaleMin value="1.300000,1.300000,1.300000"/>
   <EditorCategories value="Race:UPL"/>
 </CModel>
 <CModel id="ClaymoreMinePlacement" parent="Placement" Race="Terran">
-  <Model value="Assets\Effects\Terran\SpiderMinePlacement\SpiderMinePlacement.m3"/>
+  <Model value="Assets\Units\UPL\ClaymoreMine\NanaKey_WP_Claymore.m3"/>
   <SelectionRadius value="0.25"/>
   <ShadowRadius value="0.25"/>
   <EditorCategories value="Race:UPL"/>
@@ -17600,7 +17677,7 @@
   <EditorCategories value="Race:UPL"/>
 </CModel>
 <CModel id="ClaymoreMineDeath" parent="OneShotSpellFX">
-  <Model value="Assets\Effects\Terran\TerranSmallUnitDeath\TerranSmallUnitDeath.m3"/>
+  <Model value="Assets\Units\UPL\ClaymoreMine\NanaKey_EF_ClaymoreBOOM.m3"/>
   <Occlusion value="Show"/>
   <EditorCategories value="Race:UPL"/>
   <ScaleMax value="0.250000,0.250000,0.250000"/>

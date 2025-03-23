@@ -512,7 +512,7 @@ bool ZergHDFastExpand (int player) {
     if (AITechCount(player, c_ZB_Hatchery_Alias, c_techCountQueuedOrBetter) >= 2) {
         return false;
     }
-    
+
     defenseEval = AISelfDefenseThreatEval(c_dtRealSelfThreat, player);
     if (defenseEval >= 120) {
         // don't expand if currently under attack
@@ -549,7 +549,7 @@ bool ProtossHDFastExpand (int player) {
     if (AITechCount(player, c_PB_Nexus, c_techCountQueuedOrBetter) >= 2) {
         return false;
     }
-    
+
     defenseEval = AISelfDefenseThreatEval(c_dtRealSelfThreat, player);
     if (defenseEval >= 120) {
         // don't expand if currently under attack
@@ -640,7 +640,7 @@ bool AIHighOpponentLikelyRushing (int player) {
 
     if (time < 180) {
         if (AIKnownUnitCount(player, c_maxPlayers, c_ZB_RoachWarren) > 0 ||
-            AIKnownUnitCount(player, c_maxPlayers, c_ZB_BanelingNest) > 0 ||            
+            AIKnownUnitCount(player, c_maxPlayers, c_ZB_BanelingNest) > 0 ||
             AIKnownUnitCount(player, c_maxPlayers, c_PB_Gateway) >= 3 ||
             AIKnownUnitCount(player, c_maxPlayers, c_TB_Barracks) >= 3 ||
             AIKnownUnitCount(player, c_maxPlayers, c_BWZB_HydraliskDen) > 0 ||
@@ -744,7 +744,7 @@ bool AIHighDontRush (int player) {
 //--------------------------------------------------------------------------------------------------
 bool AIHighCurrentlyUnderHeavyAttack (int player) {
     fixed threatEval = 0;
-    
+
     if (!AIDefenseThreat(c_dtRealSelfThreat | c_dtIncludeCantAttack, player, c_nullWave)) {
         return false;
     }
@@ -768,7 +768,7 @@ bool AIHighCurrentlyUnderHeavyAttack (int player) {
 //--------------------------------------------------------------------------------------------------
 bool AIHighLateGameUnderHeavyAttack (int player) {
     fixed threatEval = 0;
-    
+
     if (!AIDefenseThreat(c_dtRealSelfThreat | c_dtIncludeCantAttack, player, c_nullWave)) {
         return false;
     }

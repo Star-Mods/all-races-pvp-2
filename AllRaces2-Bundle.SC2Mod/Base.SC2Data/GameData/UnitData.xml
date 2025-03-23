@@ -1040,94 +1040,17 @@
     <LayoutButtons Face="ZHBRNemesisDisintegrator@DisintegratorExtended" Type="AbilCmd" AbilCmd="ZHBRNemesisDisintegrator,On" Row="2" Column="1"/>
   </CardLayouts>
 </CUnit>
-<CUnit id="AssimilatorRich">
-  <LeaderAlias value="Assimilator"/>
-</CUnit>
-<CUnit id="ExtractorRich">
-  <LeaderAlias value="Extractor"/>
-</CUnit>
-<CUnit id="RefineryRich">
-  <LeaderAlias value="Refinery"/>
-</CUnit>
-<CUnit id="MULE">
-  <Attributes index="Robotic" value="1"/>
-  <Attributes index="Hover" value="1"/>
-</CUnit>
-<CUnit id="Probe">
-  <Attributes index="Robotic" value="1"/>
-  <Attributes index="Hover" value="1"/>
-</CUnit>
-<CUnit id="Observer">
-  <CardLayouts index="0">
-    <LayoutButtons index="7" Requirements="SCBW_NotDetectionSuppressed"/>
-  </CardLayouts>
-</CUnit>
-<CUnit id="Archon">
-  <Attributes index="Hover" value="1"/>
-  <Collide index="Flying6" value="1"/>
-</CUnit>
-<CUnit id="Colossus">
-  <Attributes index="Robotic" value="1"/>
-</CUnit>
 <CUnit id="Assimilator">
   <BuiltOn value="TempleVespeneGeyserSCBW"/>
-</CUnit>
-<CUnit id="SCV">
-  <Attributes index="Hover" value="1"/>
-</CUnit>
-<CUnit id="Reaper">
-  <Attributes index="Hover" value="1"/>
-</CUnit>
-<CUnit id="Banshee">
-  <CardLayouts index="0">
-    <LayoutButtons index="5" Column="2"/>
-    <LayoutButtons index="6" Column="3"/>
-  </CardLayouts>
-</CUnit>
-<CUnit id="Raven">
-  <CardLayouts index="0">
-    <LayoutButtons index="7" Requirements="SCBW_NotDetectionSuppressed"/>
-  </CardLayouts>
-</CUnit>
-<CUnit id="Refinery">
-  <BuiltOn value="TempleVespeneGeyserSCBW"/>
-</CUnit>
-<CUnit id="MissileTurret">
-  <CardLayouts index="0">
-    <LayoutButtons index="3" Requirements="SCBW_NotDetectionSuppressed" Column="2"/>
-  </CardLayouts>
-</CUnit>
-<CUnit id="Nuke">
-  <TechAliasArray value="Alias_Nuke"/>
-</CUnit>
-<CUnit id="Drone">
-  <Attributes index="Hover" value="1"/>
-</CUnit>
-<CUnit id="Overseer">
-  <CardLayouts index="0">
-    <LayoutButtons index="7" Requirements="SCBW_NotDetectionSuppressed"/>
-  </CardLayouts>
-</CUnit>
-<CUnit id="Ultralisk">
-  <FlagArray index="Resistant" value="1"/>
-  <Collide index="Flying6" value="1"/>
-</CUnit>
-<CUnit id="UltraliskBurrowed">
-  <FlagArray index="Resistant" value="1"/>
-</CUnit>
-<CUnit id="Extractor">
-  <BuiltOn value="TempleVespeneGeyserSCBW"/>
-</CUnit>
-<CUnit id="SporeCrawler">
-  <CardLayouts index="0">
-    <LayoutButtons index="4" Requirements="SCBW_NotDetectionSuppressed"/>
-  </CardLayouts>
 </CUnit>
 <CUnit id="CommandCenter">
   <AbilArray Link="InfestedCommandCenterSC2@Morph"/>
 </CUnit>
 <CUnit id="CommandCenterFlying">
   <AbilArray Link="InfestedCommandCenterSC2@MorphFlyer"/>
+</CUnit>
+<CUnit id="Extractor">
+  <BuiltOn value="TempleVespeneGeyserSCBW"/>
 </CUnit>
 <CUnit id="OrbitalCommand">
   <AbilArray Link="InfestedOrbitalCommandSCBW@Morph"/>
@@ -1138,24 +1061,8 @@
 <CUnit id="PlanetaryFortress">
   <AbilArray Link="InfestedPlanetaryFortressSCBW@Morph"/>
 </CUnit>
-<CUnit id="PhotonCannon">
-  <CardLayouts index="0">
-    <LayoutButtons index="3" Requirements="SCBW_NotDetectionSuppressed"/>
-  </CardLayouts>
-</CUnit>
-<CUnit id="Sentry">
-  <Attributes index="Robotic" value="1"/>
-  <Attributes index="Hover" value="1"/>
-</CUnit>
-<CUnit id="WidowMine">
-  <Attributes index="Robotic" value="1"/>
-</CUnit>
-<CUnit id="WidowMineBurrowed">
-  <Attributes index="Robotic" value="1"/>
-</CUnit>
-<CUnit id="Disruptor">
-  <Attributes index="Robotic" value="1"/>
-  <Attributes index="Hover" value="1"/>
+<CUnit id="Refinery">
+  <BuiltOn value="TempleVespeneGeyserSCBW"/>
 </CUnit>
 <CUnit id="SCBW_DummyUpgradeTarget">
   <EditorFlags index="NoPlacement" value="1"/>
@@ -1634,6 +1541,30 @@
     <LayoutButtons Face="GuardianSCBW" Type="AbilCmd" AbilCmd="DevourerSCBW@Morph,Execute" Row="2" Column="1"/>
   </CardLayouts>
 </CUnit>
+<CUnit id="ProtossVespeneGeyser">
+  <BehaviorArray Link="GeyserExhaustedRaw"/>
+  <BehaviorArray index="1" removed="1"/>
+</CUnit>
+<CUnit id="PurifierVespeneGeyser">
+  <BehaviorArray Link="GeyserExhaustedRaw"/>
+  <BehaviorArray index="1" removed="1"/>
+</CUnit>
+<CUnit id="RichVespeneGeyser">
+  <BehaviorArray Link="GeyserExhaustedRaw"/>
+  <BehaviorArray index="1" removed="1"/>
+</CUnit>
+<CUnit id="ShakurasVespeneGeyser">
+  <BehaviorArray Link="GeyserExhaustedRaw"/>
+  <BehaviorArray index="1" removed="1"/>
+</CUnit>
+<CUnit id="SpacePlatformGeyser">
+  <BehaviorArray Link="GeyserExhaustedRaw"/>
+  <BehaviorArray index="1" removed="1"/>
+</CUnit>
+<CUnit id="VespeneGeyser">
+  <BehaviorArray Link="GeyserExhaustedRaw"/>
+  <BehaviorArray index="1" removed="1"/>
+</CUnit>
 <CUnit id="TempleVespeneGeyserSCBW" parent="VespeneGeyser"/>
 <CUnit id="ArbiterSCBWWeapon@Missile" parent="MISSILE">
   <Race value="BWPr"/>
@@ -1863,6 +1794,8 @@
     <LayoutButtons Face="ShuttleSCBW@Transport" Type="AbilCmd" AbilCmd="ShuttleSCBW@Transport,Load" Row="2" Column="2"/>
     <LayoutButtons Face="WarpPrismUnloadAll" Type="AbilCmd" AbilCmd="ShuttleSCBW@Transport,UnloadAt" Row="2" Column="3"/>
     <LayoutButtons Face="ShuttleSCBWSpeedUpgrade@Passive" Type="Passive" Requirements="ShuttleSCBWSpeedUpgrade@Passive" ShowInGlossary="0" Row="1" Column="0"/>
+  </CardLayouts>
+  <CardLayouts index="0">
     <LayoutButtons Face="ScarabSCBW" Type="AbilCmd" AbilCmd="ShuttleSCBW@RedirectScarab,Execute" ShowInGlossary="0" Row="2" Column="0"/>
     <LayoutButtons Face="Cancel" Type="AbilCmd" AbilCmd="ShuttleSCBW@RedirectScarabCancel,Execute" ShowInGlossary="0" Row="2" Column="4"/>
   </CardLayouts>
@@ -2112,7 +2045,9 @@
     <LayoutButtons Face="CorsairSCBWDisruptionWeb" Type="AbilCmd" AbilCmd="CorsairSCBWDisruptionWeb,Execute" Row="2" Column="0"/>
     <LayoutButtons Face="CorsairSCBWEnergyUpgrade@Passive" Type="Passive" Requirements="CorsairSCBWEnergyUpgrade@Passive" ShowInGlossary="0" Row="1" Column="0"/>
   </CardLayouts>
+  <SeparationRadius value="0.5"/>
   <SubgroupPriority value="81"/>
+  <MinimapRadius value="0.5"/>
   <GlossaryPriority value="160"/>
   <GlossaryStrongArray value="MissileTurretSCBW"/>
   <GlossaryStrongArray value="MutaliskSCBW"/>
@@ -2600,13 +2535,15 @@
     <LayoutButtons Face="ProbeSCBW@ReturnCargo" Type="AbilCmd" AbilCmd="ProbeSCBW@Harvest,Return" Row="1" Column="1"/>
     <LayoutButtons Face="ProbeSCBW@Build" Type="Submenu" SubmenuCardId="Bld1" Row="2" Column="0"/>
     <LayoutButtons Face="ProbeSCBW@BuildAdv" Type="Submenu" SubmenuCardId="Bld2" Row="2" Column="1"/>
-    <LayoutButtons Face="Spray" Type="AbilCmd" AbilCmd="SprayProtoss,Execute" ShowInGlossary="0" Row="2" Column="3"/>
   </CardLayouts>
   <CardLayouts CardId="Bld1">
     <LayoutButtons Face="Cancel" Type="CancelSubmenu" Row="2" Column="4"/>
   </CardLayouts>
   <CardLayouts CardId="Bld2">
     <LayoutButtons Face="Cancel" Type="CancelSubmenu" Row="2" Column="4"/>
+  </CardLayouts>
+  <CardLayouts index="0">
+    <LayoutButtons Face="Spray" Type="AbilCmd" AbilCmd="SprayProtoss,Execute" ShowInGlossary="0" Row="2" Column="3"/>
   </CardLayouts>
   <Radius value="0.375"/>
   <SeparationRadius value="0.375"/>
@@ -2861,7 +2798,10 @@
   <GlossaryWeakArray index="1" removed="1"/>
   <GlossaryWeakArray index="2" removed="1"/>
   <HotkeyCategory value=""/>
+  <Sight value="9"/>
   <EnergyRegenRate value="0"/>
+  <ShieldsStart value="65"/>
+  <ShieldsMax value="65"/>
 </CUnit>
 <CUnit id="AssimilatorSCBW@Rich">
   <DeathRevealRadius value="3"/>
@@ -2969,9 +2909,10 @@
   <AbilArray Link="WarpInProgressSCBW"/>
   <AbilArray Link="stop"/>
   <AbilArray Link="attack"/>
-  <BehaviorArray Link="Detector11"/>
+  <BehaviorArray Link="Detector9"/>
   <BehaviorArray Link="PowerUserBaseDefenseSmall"/>
   <BehaviorArray Link="UnderConstruction"/>
+  <BehaviorArray index="0" Link="Detector11"/>
   <WeaponArray Link="PhotonCannonSCBWWeapon" Turret="PhotonCannonSCBW@Turret"/>
   <CardLayouts>
     <LayoutButtons Face="CancelBuilding" Type="AbilCmd" AbilCmd="WarpInProgressSCBW,Cancel" Row="2" Column="4"/>
@@ -2999,6 +2940,7 @@
   <GlossaryWeakArray value="GuardianSCBW"/>
   <GlossaryWeakArray value="ReaverSCBW"/>
   <HotkeyCategory value="Unit/Category/ProtossUnitsSCBW"/>
+  <Speed value="0"/>
   <BuildTime value="40"/>
 </CUnit>
 <CUnit id="StargateSCBW">
@@ -3529,13 +3471,19 @@
   <CostResource index="Minerals" value="100"/>
   <AttackTargetPriority value="11"/>
   <AbilArray Link="WarpInProgressSCBW"/>
-  <AbilArray Link="ShieldBatterySCBWRecharge"/>
+  <AbilArray Link="ShieldBatterySCBWRecharge@Battery"/>
   <AbilArray Link="stop"/>
+  <AbilArray index="1" Link="ShieldBatterySCBWRecharge"/>
   <BehaviorArray Link="PowerUserQueueSmall"/>
   <CardLayouts>
+    <LayoutButtons Face="ShieldBatterySCBWRecharge@BatteryClassic" Type="AbilCmd" AbilCmd="ShieldBatterySCBWRecharge@Battery,Execute" Row="2" Column="0"/>
+    <LayoutButtons Face="Cancel" Type="AbilCmd" AbilCmd="WarpInProgressSCBW,Cancel" Row="2" Column="4"/>
     <LayoutButtons Face="Stop" Type="AbilCmd" AbilCmd="ShieldBatterySCBWRecharge,Cancel" Row="0" Column="1"/>
-    <LayoutButtons Face="ShieldBatterySCBWRecharge" Type="AbilCmd" AbilCmd="ShieldBatterySCBWRecharge,Execute" Row="2" Column="0"/>
-    <LayoutButtons Face="CancelBuilding" Type="AbilCmd" AbilCmd="WarpInProgressSCBW,Cancel" Row="2" Column="4"/>
+  </CardLayouts>
+  <CardLayouts index="0">
+    <LayoutButtons index="0" Face="Stop" AbilCmd="ShieldBatterySCBWRecharge,Cancel" Row="0" Column="1"/>
+    <LayoutButtons index="1" Face="ShieldBatterySCBWRecharge" AbilCmd="ShieldBatterySCBWRecharge,Execute" Column="0"/>
+    <LayoutButtons index="2" Face="CancelBuilding" AbilCmd="WarpInProgressSCBW,Cancel" Row="2" Column="4"/>
   </CardLayouts>
   <Radius value="1"/>
   <SeparationRadius value="1"/>
@@ -3810,6 +3758,8 @@
   <AbilArray Link="GatewaySCBW@Train"/>
   <AbilArray Link="Rally"/>
   <BehaviorArray Link="PowerUserQueue"/>
+  <BehaviorArray Link="GatewaySCBWResonantMatrixResearch@Queue"/>
+  <BehaviorArray index="1" removed="1"/>
   <CardLayouts>
     <LayoutButtons Face="Cancel" Type="AbilCmd" AbilCmd="que5,CancelLast" Row="2" Column="4"/>
     <LayoutButtons Face="CancelBuilding" Type="AbilCmd" AbilCmd="WarpInProgressSCBW,Cancel" Row="2" Column="4"/>
@@ -4113,6 +4063,7 @@
   <ScoreMake value="200"/>
   <ScoreResult value="BuildOrder"/>
   <EditorCategories value="ObjectType:Projectile,ObjectFamily:Melee"/>
+  <Food value="0"/>
   <Sight value="3"/>
   <TechAliasArray value="Alias_Nuke"/>
 </CUnit>
@@ -4675,13 +4626,15 @@
     <LayoutButtons Face="SCVSCBW@Harvest" Type="AbilCmd" AbilCmd="SCVSCBW@Harvest,Gather" Row="1" Column="0"/>
     <LayoutButtons Face="SCVSCBW@ReturnCargo" Type="AbilCmd" AbilCmd="SCVSCBW@Harvest,Return" Row="1" Column="1"/>
     <LayoutButtons Face="SCVSCBW@Repair" Type="AbilCmd" AbilCmd="SCVSCBW@Repair,Execute" Row="2" Column="2"/>
-    <LayoutButtons Face="Spray" Type="AbilCmd" AbilCmd="SprayTerran,Execute" ShowInGlossary="0" Row="2" Column="3"/>
   </CardLayouts>
   <CardLayouts CardId="Bld1">
     <LayoutButtons Face="Cancel" Type="CancelSubmenu" Row="2" Column="4"/>
   </CardLayouts>
   <CardLayouts CardId="Bld2">
     <LayoutButtons Face="Cancel" Type="CancelSubmenu" Row="2" Column="4"/>
+  </CardLayouts>
+  <CardLayouts index="0">
+    <LayoutButtons Face="Spray" Type="AbilCmd" AbilCmd="SprayTerran,Execute" ShowInGlossary="0" Row="2" Column="3"/>
   </CardLayouts>
   <Radius value="0.375"/>
   <SeparationRadius value="0.375"/>
@@ -5151,6 +5104,7 @@
   <Mob value="Campaign"/>
   <Gender value="Female"/>
   <FlagArray index="PreventDestroy" value="1"/>
+  <FlagArray index="AlwaysThreatens" value="0"/>
   <FlagArray index="AIHighPrioTarget" value="1"/>
   <FlagArray index="AICaster" value="1"/>
   <FlagArray index="AISupport" value="1"/>
@@ -5246,6 +5200,9 @@
   <GlossaryWeakArray index="1" removed="1"/>
   <GlossaryWeakArray index="2" removed="1"/>
   <HotkeyCategory value=""/>
+  <Sight value="9"/>
+  <LifeStart value="45"/>
+  <LifeMax value="45"/>
 </CUnit>
 <CUnit id="ArmorySCBW" parent="TerranBuildingSCBW">
   <LifeStart value="750"/>
@@ -5278,6 +5235,7 @@
   <GlossaryPriority value="326"/>
   <TechTreeUnlockedUnitArray value="GoliathSCBW"/>
   <TechTreeUnlockedUnitArray value="ValkyrieSCBW"/>
+  <Sight value="9"/>
   <BuildTime value="50"/>
   <TacticalAIThink value="AIThinkArmorySCBW"/>
   <HotkeyCategory value="Unit/Category/TerranUnitsSCBW"/>
@@ -5306,6 +5264,7 @@
   <SubgroupPriority value="4"/>
   <MinimapRadius value="1.75"/>
   <HotkeyCategory value="Unit/Category/TerranUnitsSCBW"/>
+  <Sight value="9"/>
 </CUnit>
 <CUnit id="CommandCenterSCBW@Flying" parent="TerranBuildingSCBW@Flying" AliasUnit="CommandCenterSCBW">
   <Facing value="315"/>
@@ -5438,6 +5397,7 @@
   <SubgroupPriority value="5"/>
   <MinimapRadius value="1.75"/>
   <HotkeyCategory value="Unit/Category/TerranUnitsSCBW"/>
+  <Sight value="9"/>
 </CUnit>
 <CUnit id="FactorySCBW@Flying" parent="TerranBuildingSCBW@Flying" AliasUnit="FactorySCBW">
   <Facing value="315"/>
@@ -5464,6 +5424,7 @@
   <ScoreKill value="250"/>
   <MinimapRadius value="1.625"/>
   <HotkeyCategory value="Unit/Category/TerranUnitsSCBW"/>
+  <Sight value="9"/>
 </CUnit>
 <CUnit id="NuclearSiloSCBW" parent="TerranBuildingSCBW@AddOnCC">
   <LifeStart value="600"/>
@@ -5538,6 +5499,7 @@
   <SubgroupPriority value="1"/>
   <MinimapRadius value="1.625"/>
   <HotkeyCategory value="Unit/Category/TerranUnitsSCBW"/>
+  <Sight value="9"/>
 </CUnit>
 <CUnit id="StarportSCBW@Flying" parent="TerranBuildingSCBW@Flying" AliasUnit="StarportSCBW">
   <Facing value="315"/>
@@ -5565,6 +5527,7 @@
   <SubgroupPriority value="2"/>
   <MinimapRadius value="1.625"/>
   <HotkeyCategory value="Unit/Category/TerranUnitsSCBW"/>
+  <Sight value="9"/>
 </CUnit>
 <CUnit id="ScienceFacilitySCBW" parent="TerranBuildingSCBW">
   <Facing value="315"/>
@@ -5601,6 +5564,7 @@
   <SubgroupPriority value="14"/>
   <MinimapRadius value="1.625"/>
   <GlossaryPriority value="322"/>
+  <Sight value="9"/>
   <BuildTime value="54"/>
   <TechTreeUnlockedUnitArray value="ScienceVesselSCBW"/>
   <HotkeyCategory value="Unit/Category/TerranUnitsSCBW"/>
@@ -5670,6 +5634,7 @@
   <GlossaryPriority value="318"/>
   <TechTreeUnlockedUnitArray value="FirebatSCBW"/>
   <TechTreeUnlockedUnitArray value="MedicSCBW"/>
+  <Sight value="9"/>
   <BuildTime value="40.5"/>
   <HotkeyCategory value="Unit/Category/TerranUnitsSCBW"/>
 </CUnit>
@@ -5707,6 +5672,7 @@
   <TechTreeProducedUnitArray value="VultureSCBW"/>
   <TechTreeProducedUnitArray value="SiegeTankSCBW"/>
   <TechTreeProducedUnitArray value="GoliathSCBW"/>
+  <Sight value="9"/>
   <BuildTime value="54.5"/>
   <TacticalAIThink value="AIThinkFactorySCBW"/>
   <HotkeyCategory value="Unit/Category/TerranUnitsSCBW"/>
@@ -5745,6 +5711,7 @@
   <GlossaryAlias value="Refinery"/>
   <BuildTime value="30"/>
   <HotkeyCategory value="Unit/Category/TerranUnitsSCBW"/>
+  <Sight value="9"/>
   <LeaderAlias value="RefinerySCBW"/>
 </CUnit>
 <CUnit id="MissileTurretSCBW" parent="TerranBuildingSCBW">
@@ -5758,8 +5725,9 @@
   <AbilArray Link="stop"/>
   <AbilArray Link="attack"/>
   <AbilArray Link="que1"/>
-  <BehaviorArray Link="Detector11"/>
+  <BehaviorArray Link="Detector9"/>
   <BehaviorArray Link="UnderConstruction"/>
+  <BehaviorArray index="1" Link="Detector11"/>
   <WeaponArray Link="MissileTurretSCBWWeapon" Turret="MissileTurretSCBW"/>
   <CardLayouts>
     <LayoutButtons Face="Halt" Type="AbilCmd" AbilCmd="BuildInProgress,Halt" Row="2" Column="3"/>
@@ -5807,6 +5775,8 @@
   <AbilArray Link="BunkerSCBW@AttackRedirect"/>
   <AbilArray Link="BunkerSCBW@HealRedirect"/>
   <AbilArray Link="BunkerSCBWStop"/>
+  <AbilArray Link="SalvageRedirect"/>
+  <AbilArray index="9" removed="1"/>
   <CardLayouts>
     <LayoutButtons Face="BunkerSCBW@AttackRedirect" Type="AbilCmd" AbilCmd="BunkerSCBW@AttackRedirect,Execute" Row="0" Column="4"/>
     <LayoutButtons Face="Attack" Type="AbilCmd" AbilCmd="BunkerAttack,255" Row="0" Column="4"/>
@@ -5870,6 +5840,7 @@
   <SubgroupPriority value="18"/>
   <MinimapRadius value="1.75"/>
   <GlossaryPriority value="256"/>
+  <Sight value="9"/>
   <BuildTime value="30"/>
   <TacticalAIThink value="AIThinkEngineeringBaySCBW"/>
   <HotkeyCategory value="Unit/Category/TerranUnitsSCBW"/>
@@ -5909,6 +5880,7 @@
   <SubgroupPriority value="1"/>
   <MinimapRadius value="1.5"/>
   <GlossaryPriority value="244"/>
+  <Sight value="9"/>
   <BuildTime value="30"/>
   <HotkeyCategory value="Unit/Category/TerranUnitsSCBW"/>
 </CUnit>
@@ -5948,6 +5920,7 @@
   <TechTreeProducedUnitArray value="ScienceVesselSCBW"/>
   <TechTreeProducedUnitArray value="ValkyrieSCBW"/>
   <TechTreeProducedUnitArray value="BattlecruiserSCBW"/>
+  <Sight value="9"/>
   <BuildTime value="50"/>
   <TacticalAIThink value="AIThinkStarportSCBW"/>
   <HotkeyCategory value="Unit/Category/TerranUnitsSCBW"/>
@@ -5975,6 +5948,7 @@
   <SubgroupPriority value="1"/>
   <MinimapRadius value="1.25"/>
   <GlossaryPriority value="248"/>
+  <Sight value="9"/>
   <BuildTime value="30"/>
   <HotkeyCategory value="Unit/Category/TerranUnitsSCBW"/>
 </CUnit>
@@ -6058,13 +6032,13 @@
   <TechTreeProducedUnitArray value="FirebatSCBW"/>
   <TechTreeProducedUnitArray value="MedicSCBW"/>
   <TechTreeProducedUnitArray value="GhostSCBW"/>
+  <Sight value="9"/>
   <BuildTime value="67"/>
   <TacticalAIThink value="AIThinkBarracksSCBW"/>
   <HotkeyCategory value="Unit/Category/TerranUnitsSCBW"/>
 </CUnit>
 <CUnit id="QueenSCBWInfestCommandCenter@Missile" parent="MISSILE_INVULNERABLE">
   <Race value="Zerg"/>
-  <EditorCategories value="ObjectType:Projectile,ObjectFamily:Melee"/>
 </CUnit>
 <CUnit id="QueenSCBWEnsnare@CreepDummy">
   <DeathRevealRadius value="0"/>
@@ -6698,6 +6672,8 @@
   <Height value="4"/>
   <VisionHeight value="15"/>
   <Food value="-0.5"/>
+  <CostResource index="Minerals" value="0"/>
+  <CostResource index="Vespene" value="0"/>
   <AttackTargetPriority value="20"/>
   <AbilArray Link="move"/>
   <AbilArray Link="attack"/>
@@ -7464,13 +7440,15 @@
     <LayoutButtons Face="BurrowUpSCBW" Type="AbilCmd" AbilCmd="ZerglingSCBW@BurrowUp,Execute" ShowInGlossary="0" Row="2" Column="4"/>
     <LayoutButtons Face="BurrowUpSCBW" Type="AbilCmd" AbilCmd="UltraliskSCBW@BurrowUp,Execute" ShowInGlossary="0" Row="2" Column="4"/>
     <LayoutButtons Face="DroneSCBW@Harvest" Type="AbilCmd" AbilCmd="DroneSCBW@Harvest,Gather" Row="1" Column="0"/>
-    <LayoutButtons Face="Spray" Type="AbilCmd" AbilCmd="SprayZerg,Execute" ShowInGlossary="0" Row="2" Column="2"/>
   </CardLayouts>
   <CardLayouts CardId="Bld1">
     <LayoutButtons Face="Cancel" Type="CancelSubmenu" Row="2" Column="4"/>
   </CardLayouts>
   <CardLayouts CardId="Bld2">
     <LayoutButtons Face="Cancel" Type="CancelSubmenu" Row="2" Column="4"/>
+  </CardLayouts>
+  <CardLayouts index="0">
+    <LayoutButtons Face="Spray" Type="AbilCmd" AbilCmd="SprayZerg,Execute" ShowInGlossary="0" Row="2" Column="2"/>
   </CardLayouts>
   <Radius value="0.375"/>
   <SeparationRadius value="0.375"/>
@@ -7753,6 +7731,10 @@
   <HotkeyCategory value=""/>
   <KillDisplay value="Default"/>
   <RankDisplay value="Default"/>
+  <Sight value="8"/>
+  <LifeRegenRate value="0.2734"/>
+  <SpeedMultiplierCreep value="1.2"/>
+  <Speed value="3.0937"/>
 </CUnit>
 <CUnit id="InfestedCommandCenterSCBW" parent="TerranBuildingSCBW">
   <Facing value="315"/>
@@ -8248,7 +8230,10 @@
   <AbilArray Link="MutateInProgressSCBW"/>
   <AbilArray Link="que5"/>
   <AbilArray Link="DefilerSCBWEnergyUpgrade"/>
+  <AbilArray Link="DefilerSCBWConsumeResearch"/>
   <AbilArray Link="DefilerSCBWPlagueResearch"/>
+  <AbilArray index="3" Link="DefilerSCBWPlagueResearch"/>
+  <AbilArray index="4" removed="1"/>
   <BehaviorArray Link="OnCreep"/>
   <CardLayouts>
     <LayoutButtons Face="Cancel" Type="AbilCmd" AbilCmd="que5,CancelLast" Row="2" Column="4"/>
@@ -8452,9 +8437,13 @@
     <LayoutButtons Face="HatcherySCBW@RallyPointWorker" Type="AbilCmd" AbilCmd="HatcherySCBW@Rally,Rally2" Row="1" Column="3"/>
     <LayoutButtons Face="HatcherySCBW@RallyPoint" Type="AbilCmd" AbilCmd="HatcherySCBW@Rally,Rally1" Row="1" Column="4"/>
     <LayoutButtons Face="ZergSCBWBurrowResearch" Type="AbilCmd" AbilCmd="ZergSCBWBurrowResearch,Research1" ShowInGlossary="0" Row="0" Column="4"/>
-    <LayoutButtons Face="OverlordSCBWTransportResearch" Type="AbilCmd" AbilCmd="OverlordSCBWTransportResearch,Research1" Row="1" Column="2"/>
+    <LayoutButtons Face="OverlordSCBWTransportResearch" Type="AbilCmd" AbilCmd="OverlordSCBWTransportResearch,Research1" Row="1" Column="0"/>
     <LayoutButtons Face="OverlordSCBWSightUpgrade" Type="AbilCmd" AbilCmd="OverlordSCBWSightUpgrade,Research1" Row="1" Column="1"/>
-    <LayoutButtons Face="OverlordSCBWSpeedUpgrade" Type="AbilCmd" AbilCmd="OverlordSCBWSpeedUpgrade,Research1" Row="1" Column="0"/>
+    <LayoutButtons Face="OverlordSCBWSpeedUpgrade" Type="AbilCmd" AbilCmd="OverlordSCBWSpeedUpgrade,Research1" Row="1" Column="2"/>
+  </CardLayouts>
+  <CardLayouts index="0">
+    <LayoutButtons index="8" Column="2"/>
+    <LayoutButtons index="10" Column="0"/>
   </CardLayouts>
   <Radius value="2"/>
   <SeparationRadius value="2"/>
@@ -8714,10 +8703,11 @@
   <AbilArray Link="MutateInProgressSCBW"/>
   <AbilArray Link="stop"/>
   <AbilArray Link="attack"/>
-  <BehaviorArray Link="Detector11"/>
+  <BehaviorArray Link="Detector9"/>
   <BehaviorArray Link="OnCreep"/>
   <BehaviorArray Link="UnderConstruction"/>
   <BehaviorArray Link="ZergBuildingSCBW@CreepGrowthMedium"/>
+  <BehaviorArray index="0" Link="Detector11"/>
   <WeaponArray Link="SporeColonySCBWWeapon"/>
   <CardLayouts>
     <LayoutButtons Face="CancelBuilding" Type="AbilCmd" AbilCmd="MutateInProgressSCBW,Cancel" Row="2" Column="4"/>
@@ -9249,6 +9239,62 @@
   <Attributes index="Armored" value="1"/>
   <Attributes index="Structure" value="1"/>
   <Mover value="Fly"/>
+</CUnit>
+<CUnit id="AssimilatorRich">
+  <LeaderAlias value="Assimilator"/>
+</CUnit>
+<CUnit id="ExtractorRich">
+  <LeaderAlias value="Extractor"/>
+</CUnit>
+<CUnit id="RefineryRich">
+  <LeaderAlias value="Refinery"/>
+</CUnit>
+<CUnit id="Archon">
+  <Attributes index="Hover" value="1"/>
+  <Collide index="Flying6" value="1"/>
+</CUnit>
+<CUnit id="Colossus">
+  <Attributes index="Robotic" value="1"/>
+</CUnit>
+<CUnit id="Disruptor">
+  <Attributes index="Robotic" value="1"/>
+  <Attributes index="Hover" value="1"/>
+</CUnit>
+<CUnit id="Drone">
+  <Attributes index="Hover" value="1"/>
+  <Collide index="Locust" value="0"/>
+</CUnit>
+<CUnit id="Nuke">
+  <TechAliasArray value="Alias_Nuke"/>
+</CUnit>
+<CUnit id="Probe">
+  <Collide index="Locust" value="0"/>
+  <Attributes index="Robotic" value="1"/>
+  <Attributes index="Hover" value="1"/>
+</CUnit>
+<CUnit id="Reaper">
+  <Attributes index="Hover" value="1"/>
+</CUnit>
+<CUnit id="SCV">
+  <Collide index="Locust" value="0"/>
+  <Attributes index="Hover" value="1"/>
+</CUnit>
+<CUnit id="Sentry">
+  <Attributes index="Robotic" value="1"/>
+  <Attributes index="Hover" value="1"/>
+</CUnit>
+<CUnit id="Ultralisk">
+  <FlagArray index="Resistant" value="1"/>
+  <Collide index="Flying6" value="1"/>
+</CUnit>
+<CUnit id="UltraliskBurrowed">
+  <FlagArray index="Resistant" value="1"/>
+</CUnit>
+<CUnit id="WidowMine">
+  <Attributes index="Robotic" value="1"/>
+</CUnit>
+<CUnit id="WidowMineBurrowed">
+  <Attributes index="Robotic" value="1"/>
 </CUnit>
 <CUnit id="DragonHunter" parent="DragonArmyGroundArmored">
   <LifeStart value="105"/>
@@ -31953,7 +31999,7 @@
     <LayoutButtons Face="MovePatrol" Type="AbilCmd" AbilCmd="move,Patrol" Row="0" Column="3"/>
     <LayoutButtons Face="Attack" Type="AbilCmd" AbilCmd="attack,Execute" Row="0" Column="4"/>
     <LayoutButtons Face="AcquireMove" Type="AbilCmd" AbilCmd="move,AcquireMove" Row="0" Column="4"/>
-    <LayoutButtons Face="UPLSeekerDronExplode" Type="AbilCmd" AbilCmd="UPLSeekerDroneExplode,255" Row="2" Column="0"/>
+    <LayoutButtons Face="UPLSeekerDronExplode" Type="AbilCmd" AbilCmd="UPLSeekerDroneExplode,Execute" Row="2" Column="0"/>
     <LayoutButtons Face="LotCUPLSeekerShellPassive" Type="Passive" Requirements="LotCUPLSeekerShellCountUpgrade" ShowInGlossary="0" Row="2" Column="2"/>
   </CardLayouts>
   <Radius value="0.8125"/>
@@ -34247,8 +34293,7 @@
 <CUnit id="DarkShrine">
   <AbilArray index="1" Link="stopProtossBuilding"/>
   <AbilArray index="2" Link="DarkShrineResearch"/>
-  <AbilArray index="3" Link="que5"/>
-  <AbilArray index="4" removed="1"/>
+  <AbilArray Link="que5"/>
   <EditorCategories value="ObjectType:Structure"/>
 </CUnit>
 <CUnit id="ProtossSnakeSegmentDemo">
@@ -34267,5 +34312,6 @@
 <CUnit id="Replicant">
   <Attributes index="Hover" value="1"/>
 </CUnit>
+<CUnit id="MULE"/>
 
 </Catalog>

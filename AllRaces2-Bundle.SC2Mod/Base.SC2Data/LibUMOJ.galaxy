@@ -12,6 +12,26 @@ void libUMOJ_InitLibraries () {
 
 // Triggers
 //--------------------------------------------------------------------------------------------------
+// Trigger: Initialize Umojan Race
+//--------------------------------------------------------------------------------------------------
+bool libUMOJ_gt_InitializeUmojanRace_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    TriggerEnable(libUMOJ_gt_HexaremStuckRaptorFix, true);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libUMOJ_gt_InitializeUmojanRace_Init () {
+    libUMOJ_gt_InitializeUmojanRace = TriggerCreate("libUMOJ_gt_InitializeUmojanRace_Func");
+    TriggerAddEventGeneric(libUMOJ_gt_InitializeUmojanRace, "GAME START TerU");
+}
+
+//--------------------------------------------------------------------------------------------------
 // Trigger: Hexarem Stuck Raptor Fix
 //--------------------------------------------------------------------------------------------------
 bool libUMOJ_gt_HexaremStuckRaptorFix_Func (bool testConds, bool runActions) {
@@ -64,10 +84,12 @@ bool libUMOJ_gt_HexaremStuckRaptorFix_Func (bool testConds, bool runActions) {
 //--------------------------------------------------------------------------------------------------
 void libUMOJ_gt_HexaremStuckRaptorFix_Init () {
     libUMOJ_gt_HexaremStuckRaptorFix = TriggerCreate("libUMOJ_gt_HexaremStuckRaptorFix_Func");
+    TriggerEnable(libUMOJ_gt_HexaremStuckRaptorFix, false);
     TriggerAddEventPlayerEffectUsed(libUMOJ_gt_HexaremStuckRaptorFix, c_playerAny, "UmojanHexaremRaptorDummyRecallMU");
 }
 
 void libUMOJ_InitTriggers () {
+    libUMOJ_gt_InitializeUmojanRace_Init();
     libUMOJ_gt_HexaremStuckRaptorFix_Init();
 }
 

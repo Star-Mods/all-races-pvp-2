@@ -754,77 +754,6 @@
 <CAbilEffectInstant id="GhostWeaponsFree">
   <AbilSetId value="WeaponsFree"/>
 </CAbilEffectInstant>
-<CAbilEffectTarget id="Feedback">
-  <TargetFilters index="0" value="CanHaveEnergy,Visible,HasEnergy;Self,Player,Ally,Neutral,Structure,Missile,Stasis,Dead,Hidden,Invulnerable"/>
-  <TargetFilters index="0" value="CanHaveEnergy,Visible,HasEnergy;Self,Player,Ally,Neutral,Missile,Stasis,Dead,Hidden"/>
-  <EditorCategories value="Race:Keiron,AbilityorEffectType:Units"/>
-</CAbilEffectTarget>
-<CAbilRally id="RallyHatchery">
-  <TechAliasArray value="_HatchRally"/>
-</CAbilRally>
-<CAbilBuild id="TerranBuild">
-  <TechAliasArray value="_SCVBuild"/>
-</CAbilBuild>
-<CAbilMorph id="Unsiege">
-  <CmdButtonArray index="Execute">
-    <Flags index="ToSelection" value="1"/>
-  </CmdButtonArray>
-</CAbilMorph>
-<CAbilTransport id="MedivacTransport">
-  <LoadValidatorArray value="SCBW_IsTransportable"/>
-</CAbilTransport>
-<CAbilTransport id="BunkerTransport">
-  <LoadValidatorArray value="SCBW_IsTransportable"/>
-  <LoadValidatorArray index="0" value="RequiresTerranSCBWORTerran"/>
-</CAbilTransport>
-<CAbilTransport id="CommandCenterTransport">
-  <LoadValidatorArray value="SCBW_IsTransportable"/>
-</CAbilTransport>
-<CAbilArmMagazine id="ArmSiloWithNuke">
-  <CalldownEffect value="GhostSCBWNuclearStrike@CalldownDummy"/>
-</CAbilArmMagazine>
-<CAbilTransport id="WarpPrismTransport">
-  <LoadValidatorArray value="SCBW_IsTransportable"/>
-</CAbilTransport>
-<CAbilTrain id="LarvaTrain">
-  <InfoArray index="Train1" Effect="LarvaSCBW@TrainFinish"/>
-  <InfoArray index="Train2" Effect="LarvaSCBW@TrainFinish"/>
-  <InfoArray index="Train3" Effect="LarvaSCBW@TrainFinish"/>
-  <InfoArray index="Train4" Effect="LarvaSCBW@TrainFinish"/>
-  <InfoArray index="Train5" Effect="LarvaSCBW@TrainFinish"/>
-  <InfoArray index="Train7" Effect="LarvaSCBW@TrainFinish"/>
-  <InfoArray index="Train10" Effect="LarvaSCBW@TrainFinish"/>
-  <InfoArray index="Train11" Effect="LarvaSCBW@TrainFinish"/>
-  <InfoArray index="Train12" Effect="LarvaSCBW@TrainFinish"/>
-  <InfoArray index="Train13" Effect="LarvaSCBW@TrainFinish"/>
-  <InfoArray index="Train15" Effect="LarvaSCBW@TrainFinish"/>
-</CAbilTrain>
-<CAbilTransport id="OverlordTransport">
-  <LoadValidatorArray value="SCBW_IsTransportable"/>
-</CAbilTransport>
-<CAbilTransport id="NydusCanalTransport">
-  <LoadValidatorArray value="SCBW_IsTransportable"/>
-</CAbilTransport>
-<CAbilEffectTarget id="TacNukeStrike">
-  <Effect index="0" value="GhostSCBWNuclearStrike@CalldownDummy"/>
-  <CalldownEffect value="GhostSCBWNuclearStrike@CalldownDummy"/>
-</CAbilEffectTarget>
-<CAbilEffectTarget id="WidowMineAttack">
-  <TechAliasArray value="_Disruptable"/>
-  <AutoCastValidatorArray value="NotEggSCBW"/>
-  <EditorCategories value="Race:Terr,AbilityorEffectType:Units"/>
-</CAbilEffectTarget>
-<CAbilEffectInstant id="MedivacSpeedBoost">
-  <AbilSetId value="Boost"/>
-</CAbilEffectInstant>
-<CAbilEffectTarget id="LockOn">
-  <AutoCastValidatorArray value="NotLarvaSCBW"/>
-  <AutoCastValidatorArray value="NotEggSCBW"/>
-  <AutoCastValidatorArray value="NotInterceptorSCBW"/>
-</CAbilEffectTarget>
-<CAbilTransport id="NydusWormTransport">
-  <LoadValidatorArray value="SCBW_IsTransportable"/>
-</CAbilTransport>
 <CAbilBuildable id="MutateInProgressSCBW">
   <EditorCategories value="Race:Zerg,AbilityorEffectType:Units"/>
   <TechAliasArray value="_BuildInProgress"/>
@@ -835,6 +764,28 @@
   <TechAliasArray value="_BuildInProgress"/>
   <Activity value="UI/Warping"/>
 </CAbilBuildable>
+<CAbilTransport id="BunkerTransport">
+  <LoadValidatorArray value="SCBW_IsTransportable"/>
+  <LoadValidatorArray index="0" value="RequiresTerranSCBWORTerran"/>
+</CAbilTransport>
+<CAbilTransport id="CommandCenterTransport">
+  <LoadValidatorArray value="SCBW_IsTransportable"/>
+</CAbilTransport>
+<CAbilTransport id="MedivacTransport">
+  <LoadValidatorArray value="SCBW_IsTransportable"/>
+</CAbilTransport>
+<CAbilTransport id="NydusCanalTransport">
+  <LoadValidatorArray value="SCBW_IsTransportable"/>
+</CAbilTransport>
+<CAbilTransport id="NydusWormTransport">
+  <LoadValidatorArray value="SCBW_IsTransportable"/>
+</CAbilTransport>
+<CAbilTransport id="OverlordTransport">
+  <LoadValidatorArray value="SCBW_IsTransportable"/>
+</CAbilTransport>
+<CAbilEffectInstant id="MedivacSpeedBoost">
+  <AbilSetId value="Boost"/>
+</CAbilEffectInstant>
 <CAbilRedirectInstant id="SalvageRedirect">
   <EditorCategories value="AbilityorEffectType:Units,Race:Neutral"/>
   <Abil value="Salvage"/>
@@ -842,6 +793,12 @@
     <Flags index="AllowMinimap" value="0"/>
   </CmdButtonArray>
 </CAbilRedirectInstant>
+<CAbilBuild id="TerranBuild">
+  <TechAliasArray value="_SCVBuild"/>
+</CAbilBuild>
+<CAbilTransport id="WarpPrismTransport">
+  <LoadValidatorArray value="SCBW_IsTransportable"/>
+</CAbilTransport>
 <CAbilStop id="BunkerSCBWStop">
   <EditorCategories value="Race:Terran,AbilityorEffectType:Units"/>
   <CmdButtonArray index="Stop" DefaultButtonFace="StopBunker" Requirements="BunkerAttack"/>
@@ -4330,6 +4287,49 @@
   </InfoArray>
   <Activity value="UI/Upgrading"/>
 </CAbilResearch>
+<CAbilRally id="RallyHatchery">
+  <TechAliasArray value="_HatchRally"/>
+</CAbilRally>
+<CAbilArmMagazine id="ArmSiloWithNuke">
+  <CalldownEffect value="GhostSCBWNuclearStrike@CalldownDummy"/>
+</CAbilArmMagazine>
+<CAbilEffectTarget id="Feedback">
+  <TargetFilters index="0" value="CanHaveEnergy,Visible,HasEnergy;Self,Player,Ally,Neutral,Structure,Missile,Stasis,Dead,Hidden,Invulnerable"/>
+  <TargetFilters index="0" value="CanHaveEnergy,Visible,HasEnergy;Self,Player,Ally,Neutral,Missile,Stasis,Dead,Hidden"/>
+  <EditorCategories value="Race:Keiron,AbilityorEffectType:Units"/>
+</CAbilEffectTarget>
+<CAbilTrain id="LarvaTrain">
+  <InfoArray index="Train1" Effect="LarvaSCBW@TrainFinish"/>
+  <InfoArray index="Train2" Effect="LarvaSCBW@TrainFinish"/>
+  <InfoArray index="Train3" Effect="LarvaSCBW@TrainFinish"/>
+  <InfoArray index="Train4" Effect="LarvaSCBW@TrainFinish"/>
+  <InfoArray index="Train5" Effect="LarvaSCBW@TrainFinish"/>
+  <InfoArray index="Train7" Effect="LarvaSCBW@TrainFinish"/>
+  <InfoArray index="Train10" Effect="LarvaSCBW@TrainFinish"/>
+  <InfoArray index="Train11" Effect="LarvaSCBW@TrainFinish"/>
+  <InfoArray index="Train12" Effect="LarvaSCBW@TrainFinish"/>
+  <InfoArray index="Train13" Effect="LarvaSCBW@TrainFinish"/>
+  <InfoArray index="Train15" Effect="LarvaSCBW@TrainFinish"/>
+</CAbilTrain>
+<CAbilEffectTarget id="LockOn">
+  <AutoCastValidatorArray value="NotLarvaSCBW"/>
+  <AutoCastValidatorArray value="NotEggSCBW"/>
+  <AutoCastValidatorArray value="NotInterceptorSCBW"/>
+</CAbilEffectTarget>
+<CAbilEffectTarget id="TacNukeStrike">
+  <Effect index="0" value="GhostSCBWNuclearStrike@CalldownDummy"/>
+  <CalldownEffect value="GhostSCBWNuclearStrike@CalldownDummy"/>
+</CAbilEffectTarget>
+<CAbilMorph id="Unsiege">
+  <CmdButtonArray index="Execute">
+    <Flags index="ToSelection" value="1"/>
+  </CmdButtonArray>
+</CAbilMorph>
+<CAbilEffectTarget id="WidowMineAttack">
+  <TechAliasArray value="_Disruptable"/>
+  <AutoCastValidatorArray value="NotEggSCBW"/>
+  <EditorCategories value="Race:Terr,AbilityorEffectType:Units"/>
+</CAbilEffectTarget>
 <CAbilEffectInstant id="HunterDeactivateRegenesis">
   <AbilSetId value="BrwU"/>
   <EditorCategories value="Race:Dragon,AbilityorEffectType:Units"/>
@@ -16731,6 +16731,9 @@
 <CAbilMorph id="XelNaga_Caverns_DoorWOpened">
   <EditorCategories value="Race:Neut,AbilityorEffectType:MorphsandBurrows"/>
 </CAbilMorph>
+<CAbilEffectInstant id="MothershipCloak">
+  <EditorCategories value="Race:Prot,AbilityorEffectType:Units"/>
+</CAbilEffectInstant>
 <CAbilEffectTarget id="ArbiterMPStasisField">
   <EditorCategories value="AbilityorEffectType:Units,Race:Prot"/>
 </CAbilEffectTarget>
@@ -16750,9 +16753,6 @@
   <EditorCategories value="AbilityorEffectType:Units,Race:Prot"/>
 </CAbilEffectTarget>
 <CAbilEffectInstant id="LightofAiur">
-  <EditorCategories value="Race:Prot,AbilityorEffectType:Units"/>
-</CAbilEffectInstant>
-<CAbilEffectInstant id="MothershipCloak">
   <EditorCategories value="Race:Prot,AbilityorEffectType:Units"/>
 </CAbilEffectInstant>
 <CAbilEffectInstant id="NexusShieldOvercharge">

@@ -36,28 +36,24 @@
 <CBehaviorBuff default="1" id="SwarmHostEggAnimationDefault">
   <EditorCategories value="Race:Zerg,AbilityorEffectType:Units"/>
 </CBehaviorBuff>
-<CBehaviorBuff id="FungalGrowth">
-  <BehaviorCategories index="Restorable" value="1"/>
-  <BehaviorCategories index="User15" value="1"/>
-  <RemoveValidatorArray value="SCBW_NoStasisCategory"/>
-  <TechAliasArray value="_Transfer"/>
-</CBehaviorBuff>
-<CBehaviorBuff id="NeuralParasite">
-  <BehaviorCategories index="Restorable" value="1"/>
+<CBehaviorPowerSource id="PowerSource">
+  <CliffLevelFlags index="Higher" value="0"/>
+</CBehaviorPowerSource>
+<CBehaviorBuff id="SCBW_SuppressRegen">
+  <InfoFlags index="Hidden" value="1"/>
   <Modification>
-    <AbilClassDisableArray index="CAbilMerge" value="1"/>
-    <AbilLinkDisableArray value="SprayDragon"/>
+    <StateFlags index="SuppressLifeRegen" value="1"/>
+    <StateFlags index="SuppressShieldsRegen" value="1"/>
+    <StateFlags index="SuppressEnergyRegen" value="1"/>
   </Modification>
 </CBehaviorBuff>
-<CBehaviorResource id="HarvestableVespeneGeyserGas">
-  <EditorCategories value="Race:Neut,AbilityorEffectType:Units"/>
-</CBehaviorResource>
-<CBehaviorResource id="HarvestableVespeneGeyserGasProtoss"/>
-<CBehaviorResource id="HarvestableVespeneGeyserGasZerg"/>
-<CBehaviorBuff id="CarryHarvestableVespeneGeyserGas"/>
-<CBehaviorBuff id="CarryHarvestableVespeneGeyserGasProtoss"/>
-<CBehaviorBuff id="CarryHarvestableVespeneGeyserGasZerg"/>
-<CBehaviorPowerSource id="PowerSource"/>
+<CBehaviorPowerUser id="PowerUserBaseDefenseSmall">
+  <PowerStageArray index="0">
+    <Modification>
+      <AbilTechAliasEnableArray value="_BuildInProgress"/>
+    </Modification>
+  </PowerStageArray>
+</CBehaviorPowerUser>
 <CBehaviorPowerUser id="PowerUserQueue">
   <PowerStageArray index="0">
     <Modification>
@@ -72,134 +68,6 @@
     </Modification>
   </PowerStageArray>
 </CBehaviorPowerUser>
-<CBehaviorPowerUser id="PowerUserBaseDefenseSmall">
-  <PowerStageArray index="0">
-    <Modification>
-      <AbilTechAliasEnableArray value="_BuildInProgress"/>
-    </Modification>
-  </PowerStageArray>
-</CBehaviorPowerUser>
-<CBehaviorBuff id="Slow">
-  <BehaviorCategories index="Restorable" value="1"/>
-</CBehaviorBuff>
-<CBehaviorBuff id="Hallucination">
-  <BehaviorCategories index="Temporary" value="1"/>
-</CBehaviorBuff>
-<CBehaviorBuff id="Contaminated">
-  <Modification>
-    <BehaviorLinkDisableArray value="HatcherySCBW@SpawnLarva"/>
-  </Modification>
-</CBehaviorBuff>
-<CBehaviorBuff id="MothershipCoreRecalling">
-  <BehaviorCategories index="User7" value="1"/>
-</CBehaviorBuff>
-<CBehaviorBuff id="OracleRevelation">
-  <BehaviorCategories index="Restorable" value="1"/>
-  <RemoveValidatorArray index="0" value="SCBW_NoStasisCategory"/>
-  <TechAliasArray value="_Transfer"/>
-</CBehaviorBuff>
-<CBehaviorBuff id="Yoink">
-  <BehaviorCategories index="Stun" value="1"/>
-</CBehaviorBuff>
-<CBehaviorBuff id="ImmortalOverload">
-  <DamageResponse Priority="90">
-    <ExcludeEffectArray value="DefilerSCBWPlague@Damage"/>
-  </DamageResponse>
-</CBehaviorBuff>
-<CBehaviorBuff id="MothershipRecalling">
-  <BehaviorCategories index="User7" value="1"/>
-</CBehaviorBuff>
-<CBehaviorBuff id="OracleStasisTrapTarget">
-  <BehaviorCategories index="Magic" value="1"/>
-  <EditorCategories value="AbilityorEffectType:Units,Race:Prot"/>
-</CBehaviorBuff>
-<CBehaviorBuff id="ParasiticBomb">
-  <BehaviorCategories index="Restorable" value="1"/>
-  <BehaviorCategories index="User15" value="1"/>
-</CBehaviorBuff>
-<CBehaviorBuff id="ParasiticBombTimer">
-  <BehaviorCategories index="Restorable" value="1"/>
-</CBehaviorBuff>
-<CBehaviorBuff id="AdeptPhaseShiftTimer">
-  <RemoveValidatorArray value="SCBW_CasterNoMassTransport"/>
-  <RemoveValidatorArray value="DarkArchonSCBWMindControl@ActivationNotCaster"/>
-  <EditorCategories value="AbilityorEffectType:Units,Race:Prot"/>
-</CBehaviorBuff>
-<CBehaviorBuff id="ReaperKD8Knockback">
-  <Period value="0.125"/>
-  <PeriodicEffect value="ReaperKD8KnockbackClear"/>
-</CBehaviorBuff>
-<CBehaviorBuff id="PurificationNovaTargettedTarget">
-  <RemoveValidatorArray value="SCBW_CasterNoStasisCategory"/>
-  <RemoveValidatorArray value="SCBW_CasterNoMassTransport"/>
-  <RemoveValidatorArray value="SCBW_CasterNotStunned"/>
-  <RemoveValidatorArray value="CasterIsNotAnnexed"/>
-  <RemoveValidatorArray value="CasterIsNotBlindedByProwler"/>
-  <RemoveValidatorArray value="CasterHasNoStagnatingBileBuff"/>
-  <RemoveValidatorArray value="CasterHasNoNaniteGrenadeBuff"/>
-</CBehaviorBuff>
-<CBehaviorBuff id="RavenShredderMissileArmorReductionUIAdd">
-  <BehaviorCategories index="Restorable" value="1"/>
-  <RemoveValidatorArray value="SCBW_NoStasisCategory"/>
-  <TechAliasArray value="_Transfer"/>
-</CBehaviorBuff>
-<CBehaviorBuff id="RavenShredderMissileArmorReductionUISubtruct">
-  <BehaviorCategories index="Restorable" value="1"/>
-  <RemoveValidatorArray value="SCBW_NoStasisCategory"/>
-  <TechAliasArray value="_Transfer"/>
-</CBehaviorBuff>
-<CBehaviorBuff id="Transfusion">
-  <TechAliasArray value="_Transfer"/>
-</CBehaviorBuff>
-<CBehaviorBuff id="BarrierDamageResponse">
-  <DamageResponse Priority="95">
-    <ExcludeEffectArray value="ScienceVesselSCBWDefensiveMatrix@LeakDamage"/>
-    <ExcludeEffectArray value="ScienceVesselSCBWDefensiveMatrix@LeakDamagePassShields"/>
-    <ExcludeEffectArray value="DefilerSCBWPlague@Damage"/>
-  </DamageResponse>
-  <DisableValidatorArray value="SCBW_NotStunned"/>
-</CBehaviorBuff>
-<CBehaviorBuff id="FungalGrowthSlowMovement">
-  <BehaviorCategories index="Restorable" value="1"/>
-  <RemoveValidatorArray value="SCBW_NoStasisCategory"/>
-  <TechAliasArray value="_Transfer"/>
-</CBehaviorBuff>
-<CBehaviorBuff id="RavenScramblerMissile">
-  <BehaviorCategories index="Restorable" value="1"/>
-  <Modification>
-    <WeaponDisableArray value="CarrierSCBWWeapon"/>
-  </Modification>
-  <RemoveValidatorArray value="SCBW_NoStasisCategory"/>
-  <EditorCategories value="AbilityorEffectType:Units,Race:Terr"/>
-</CBehaviorBuff>
-<CBehaviorBuff id="RavenScramblerMissileCarrier">
-  <BehaviorCategories index="Restorable" value="1"/>
-  <InitialEffect value="RavenScramblerMissileCarrierRecallSet"/>
-  <Modification>
-    <WeaponDisableArray value="CarrierSCBWWeapon"/>
-  </Modification>
-  <RemoveValidatorArray value="SCBW_NoStasisCategory"/>
-  <EditorCategories value="AbilityorEffectType:Units,Race:Terr"/>
-</CBehaviorBuff>
-<CBehaviorBuff id="RavenShredderMissileArmorReduction">
-  <BehaviorCategories index="Restorable" value="1"/>
-  <RemoveValidatorArray value="SCBW_NoStasisCategory"/>
-  <TechAliasArray value="_Transfer"/>
-</CBehaviorBuff>
-<CBehaviorBuff id="NexusMassRecallWarpOut">
-  <BehaviorCategories index="User7" value="1"/>
-</CBehaviorBuff>
-<CBehaviorBuff id="WidowMineTargeted">
-  <RemoveValidatorArray value="SCBW_CasterNotStasis"/>
-</CBehaviorBuff>
-<CBehaviorBuff id="SCBW_SuppressRegen">
-  <InfoFlags index="Hidden" value="1"/>
-  <Modification>
-    <StateFlags index="SuppressLifeRegen" value="1"/>
-    <StateFlags index="SuppressShieldsRegen" value="1"/>
-    <StateFlags index="SuppressEnergyRegen" value="1"/>
-  </Modification>
-</CBehaviorBuff>
 <CBehaviorBuff id="SCBW_AttackReveal">
   <InfoFlags index="Hidden" value="1"/>
   <MaxStackCount value="65535"/>
@@ -211,6 +79,24 @@
     <ModifyFlags index="Reveal" value="1"/>
   </Modification>
   <RevealUnit Value="Target"/>
+</CBehaviorBuff>
+<CBehaviorBuff id="CarryHarvestableRichVespeneGeyserGas">
+  <InitialEffect value=""/>
+</CBehaviorBuff>
+<CBehaviorBuff id="CarryHarvestableRichVespeneGeyserGasProtoss">
+  <InitialEffect value=""/>
+</CBehaviorBuff>
+<CBehaviorBuff id="CarryHarvestableRichVespeneGeyserGasZerg">
+  <InitialEffect value=""/>
+</CBehaviorBuff>
+<CBehaviorBuff id="CarryHarvestableVespeneGeyserGas">
+  <InitialEffect value=""/>
+</CBehaviorBuff>
+<CBehaviorBuff id="CarryHarvestableVespeneGeyserGasProtoss">
+  <InitialEffect value=""/>
+</CBehaviorBuff>
+<CBehaviorBuff id="CarryHarvestableVespeneGeyserGasZerg">
+  <InitialEffect value=""/>
 </CBehaviorBuff>
 <CBehaviorBuff id="ChangelingDisguisePlayerIndex">
   <InfoFlags index="Hidden" value="1"/>
@@ -232,6 +118,12 @@
   <Modification>
     <StateFlags index="LineMovement" value="1"/>
   </Modification>
+</CBehaviorBuff>
+<CBehaviorBuff id="FungalGrowth">
+  <BehaviorCategories index="Restorable" value="1"/>
+  <BehaviorCategories index="User15" value="1"/>
+  <RemoveValidatorArray value="SCBW_NoStasisCategory"/>
+  <TechAliasArray value="_Transfer"/>
 </CBehaviorBuff>
 <CBehaviorBuff id="GeyserExhaustedRaw">
   <Alignment value="Negative"/>
@@ -259,6 +151,40 @@
   <PeriodCount value="1"/>
   <PeriodicEffect value="RichGeyserExhausted"/>
 </CBehaviorBuff>
+<CBehaviorResource id="HarvestableRichVespeneGeyserGas">
+  <EmptyHarvestAmount value="0"/>
+  <EditorCategories value="Race:Neut,AbilityorEffectType:Units"/>
+</CBehaviorResource>
+<CBehaviorResource id="HarvestableRichVespeneGeyserGasProtoss">
+  <EmptyHarvestAmount value="0"/>
+  <EditorCategories value="Race:Neut,AbilityorEffectType:Units"/>
+</CBehaviorResource>
+<CBehaviorResource id="HarvestableRichVespeneGeyserGasZerg">
+  <EmptyHarvestAmount value="0"/>
+  <EditorCategories value="Race:Neut,AbilityorEffectType:Units"/>
+</CBehaviorResource>
+<CBehaviorResource id="HarvestableVespeneGeyserGas">
+  <EmptyHarvestAmount value="0"/>
+  <EditorCategories value="Race:Neut,AbilityorEffectType:Units"/>
+</CBehaviorResource>
+<CBehaviorResource id="HarvestableVespeneGeyserGasProtoss">
+  <EmptyHarvestAmount value="0"/>
+</CBehaviorResource>
+<CBehaviorResource id="HarvestableVespeneGeyserGasZerg">
+  <EmptyHarvestAmount value="0"/>
+</CBehaviorResource>
+<CBehaviorResource id="RawRichVespeneGeyserGas">
+  <Capacity value="2250"/>
+  <Contents value="2250"/>
+  <HarvestAmount value="8"/>
+  <EmptyHarvestAmount value="0"/>
+</CBehaviorResource>
+<CBehaviorResource id="RawVespeneGeyserGas">
+  <Capacity value="2250"/>
+  <Contents value="2250"/>
+  <HarvestAmount value="4"/>
+  <EmptyHarvestAmount value="0"/>
+</CBehaviorResource>
 <CBehaviorBuff id="SCBW_MissChance">
   <BehaviorFlags index="Permanent" value="1"/>
   <InfoFlags index="Hidden" value="1"/>
@@ -311,6 +237,9 @@
     <AbilClassDisableArray index="CAbilEffectTarget" value="1"/>
     <AbilClassDisableArray index="CAbilResearch" value="1"/>
   </Modification>
+</CBehaviorBuff>
+<CBehaviorBuff id="Yoink">
+  <BehaviorCategories index="Stun" value="1"/>
 </CBehaviorBuff>
 <CBehaviorCreepSource id="ZergBuildingSCBW@CreepGrowthSmall">
   <InfoFlags index="Hidden" value="1"/>
@@ -1198,6 +1127,7 @@
   <FinalEffect value="CommandCenterSCBW@DetachAddon"/>
 </CBehaviorBuff>
 <CBehaviorBuff id="QueenSCBWInfestCommandCenter@InfestingCaster">
+  <InfoFlags index="Hidden" value="0"/>
   <InfoFlags index="AlwaysUseGameText" value="1"/>
   <InfoIcon value="Assets\Textures\btn-ability-zerg-infestationsource.dds"/>
   <EditorCategories value="AbilityorEffectType:Units"/>
@@ -1205,6 +1135,12 @@
   <DisplayDuration index="Ally" value="1"/>
   <BuffFlags index="Countdown" value="0"/>
   <Duration value="8"/>
+  <FinalEffect value=""/>
+  <Modification>
+    <StateFlags index="Invulnerable" value="0"/>
+    <StateFlags index="NoDraw" value="0"/>
+    <StateFlags index="Untargetable" value="0"/>
+  </Modification>
 </CBehaviorBuff>
 <CBehaviorBuff id="QueenSCBWInfestCommandCenter@InfestingTarget">
   <InfoIcon value="Assets\Textures\btn-ability-zerg-infestationsource.dds"/>
@@ -1307,6 +1243,7 @@
       <AccumulatorArray index="0" removed="1"/>
     </AdditiveAttackSpeedFactor>
   </Modification>
+  <Duration value="30"/>
 </CBehaviorBuff>
 <CBehaviorBuff id="DefilerSCBWDarkSwarm">
   <Alignment value="Positive"/>
@@ -1440,7 +1377,8 @@
 <CBehaviorSpawn id="HatcherySCBW@SpawnLarva">
   <InfoFlags index="Hidden" value="1"/>
   <EditorCategories value="Race:Zerg,AbilityorEffectType:Structures"/>
-  <InfoArray Unit="LarvaSCBW" MaxCount="3" Requirements="HatcherySCBW@SpawnLarva" Delay="14"/>
+  <InfoArray Unit="LarvaSCBW" MaxCount="3" Requirements="HatcherySCBW@SpawnLarva" Delay="19.875" Effect="HatcherySCBW@SpawnLarvaDisableDelay"/>
+  <InfoArray index="0" Delay="14" Effect=""/>
   <Center value="0,-3"/>
   <Offset value="0,-3"/>
   <Offset value="1,-3"/>
@@ -1493,6 +1431,123 @@
     <ModifyFlags index="SuppressMoving" value="1"/>
   </Modification>
   <InfoFlags index="Hidden" value="1"/>
+</CBehaviorBuff>
+<CBehaviorBuff id="ReaperKD8Knockback">
+  <Period value="0.125"/>
+  <PeriodicEffect value="ReaperKD8KnockbackClear"/>
+</CBehaviorBuff>
+<CBehaviorBuff id="WidowMineTargeted">
+  <RemoveValidatorArray value="SCBW_CasterNotStasis"/>
+</CBehaviorBuff>
+<CBehaviorBuff id="Slow">
+  <BehaviorCategories index="Restorable" value="1"/>
+</CBehaviorBuff>
+<CBehaviorBuff id="AdeptPhaseShiftTimer">
+  <RemoveValidatorArray value="SCBW_CasterNoMassTransport"/>
+  <RemoveValidatorArray value="DarkArchonSCBWMindControl@ActivationNotCaster"/>
+  <EditorCategories value="AbilityorEffectType:Units,Race:Prot"/>
+</CBehaviorBuff>
+<CBehaviorBuff id="BarrierDamageResponse">
+  <DamageResponse Priority="95">
+    <ExcludeEffectArray value="ScienceVesselSCBWDefensiveMatrix@LeakDamage"/>
+    <ExcludeEffectArray value="ScienceVesselSCBWDefensiveMatrix@LeakDamagePassShields"/>
+    <ExcludeEffectArray value="DefilerSCBWPlague@Damage"/>
+  </DamageResponse>
+  <DisableValidatorArray value="SCBW_NotStunned"/>
+</CBehaviorBuff>
+<CBehaviorBuff id="Contaminated">
+  <Modification>
+    <BehaviorLinkDisableArray value="HatcherySCBW@SpawnLarva"/>
+  </Modification>
+</CBehaviorBuff>
+<CBehaviorBuff id="FungalGrowthSlowMovement">
+  <BehaviorCategories index="Restorable" value="1"/>
+  <RemoveValidatorArray value="SCBW_NoStasisCategory"/>
+  <TechAliasArray value="_Transfer"/>
+</CBehaviorBuff>
+<CBehaviorBuff id="Hallucination">
+  <BehaviorCategories index="Temporary" value="1"/>
+</CBehaviorBuff>
+<CBehaviorBuff id="ImmortalOverload">
+  <DamageResponse Priority="90">
+    <ExcludeEffectArray value="DefilerSCBWPlague@Damage"/>
+  </DamageResponse>
+</CBehaviorBuff>
+<CBehaviorBuff id="MothershipCoreRecalling">
+  <BehaviorCategories index="User7" value="1"/>
+</CBehaviorBuff>
+<CBehaviorBuff id="MothershipRecalling">
+  <BehaviorCategories index="User7" value="1"/>
+</CBehaviorBuff>
+<CBehaviorBuff id="NeuralParasite">
+  <BehaviorCategories index="Restorable" value="1"/>
+  <Modification>
+    <AbilClassDisableArray index="CAbilMerge" value="1"/>
+    <AbilLinkDisableArray value="SprayDragon"/>
+  </Modification>
+</CBehaviorBuff>
+<CBehaviorBuff id="NexusMassRecallWarpOut">
+  <BehaviorCategories index="User7" value="1"/>
+</CBehaviorBuff>
+<CBehaviorBuff id="OracleRevelation">
+  <BehaviorCategories index="Restorable" value="1"/>
+  <RemoveValidatorArray index="0" value="SCBW_NoStasisCategory"/>
+  <TechAliasArray value="_Transfer"/>
+</CBehaviorBuff>
+<CBehaviorBuff id="OracleStasisTrapTarget">
+  <BehaviorCategories index="Magic" value="1"/>
+  <EditorCategories value="AbilityorEffectType:Units,Race:Prot"/>
+</CBehaviorBuff>
+<CBehaviorBuff id="ParasiticBomb">
+  <BehaviorCategories index="Restorable" value="1"/>
+  <BehaviorCategories index="User15" value="1"/>
+</CBehaviorBuff>
+<CBehaviorBuff id="ParasiticBombTimer">
+  <BehaviorCategories index="Restorable" value="1"/>
+</CBehaviorBuff>
+<CBehaviorBuff id="PurificationNovaTargettedTarget">
+  <RemoveValidatorArray value="SCBW_CasterNoStasisCategory"/>
+  <RemoveValidatorArray value="SCBW_CasterNoMassTransport"/>
+  <RemoveValidatorArray value="SCBW_CasterNotStunned"/>
+  <RemoveValidatorArray value="CasterIsNotAnnexed"/>
+  <RemoveValidatorArray value="CasterIsNotBlindedByProwler"/>
+  <RemoveValidatorArray value="CasterHasNoStagnatingBileBuff"/>
+  <RemoveValidatorArray value="CasterHasNoNaniteGrenadeBuff"/>
+</CBehaviorBuff>
+<CBehaviorBuff id="RavenScramblerMissile">
+  <BehaviorCategories index="Restorable" value="1"/>
+  <Modification>
+    <WeaponDisableArray value="CarrierSCBWWeapon"/>
+  </Modification>
+  <RemoveValidatorArray value="SCBW_NoStasisCategory"/>
+  <EditorCategories value="AbilityorEffectType:Units,Race:Terr"/>
+</CBehaviorBuff>
+<CBehaviorBuff id="RavenScramblerMissileCarrier">
+  <BehaviorCategories index="Restorable" value="1"/>
+  <InitialEffect value="RavenScramblerMissileCarrierRecallSet"/>
+  <Modification>
+    <WeaponDisableArray value="CarrierSCBWWeapon"/>
+  </Modification>
+  <RemoveValidatorArray value="SCBW_NoStasisCategory"/>
+  <EditorCategories value="AbilityorEffectType:Units,Race:Terr"/>
+</CBehaviorBuff>
+<CBehaviorBuff id="RavenShredderMissileArmorReduction">
+  <BehaviorCategories index="Restorable" value="1"/>
+  <RemoveValidatorArray value="SCBW_NoStasisCategory"/>
+  <TechAliasArray value="_Transfer"/>
+</CBehaviorBuff>
+<CBehaviorBuff id="RavenShredderMissileArmorReductionUIAdd">
+  <BehaviorCategories index="Restorable" value="1"/>
+  <RemoveValidatorArray value="SCBW_NoStasisCategory"/>
+  <TechAliasArray value="_Transfer"/>
+</CBehaviorBuff>
+<CBehaviorBuff id="RavenShredderMissileArmorReductionUISubtruct">
+  <BehaviorCategories index="Restorable" value="1"/>
+  <RemoveValidatorArray value="SCBW_NoStasisCategory"/>
+  <TechAliasArray value="_Transfer"/>
+</CBehaviorBuff>
+<CBehaviorBuff id="Transfusion">
+  <TechAliasArray value="_Transfer"/>
 </CBehaviorBuff>
 <CBehaviorBuff id="VolcanicHarbingerOverload0">
   <InfoIcon value="Assets\Textures\btn-border-queue-trainingslot01.dds"/>
@@ -6992,9 +7047,6 @@
   </Modification>
   <EditorCategories value="Race:UED,AbilityorEffectType:Units"/>
 </CBehaviorBuff>
-<CBehaviorAttackModifier id="CheckMinerals">
-  <EditorCategories value="AbilityorEffectType:Units,Race:Neut"/>
-</CBehaviorAttackModifier>
 <CBehaviorBuff id="UmojanAloeHealSoloAutocastSecondary">
   <BehaviorFlags index="Permanent" value="1"/>
   <EditorCategories value="Race:TerU,AbilityorEffectType:Units"/>
@@ -9794,15 +9846,6 @@
 <CBehaviorBuff id="Grabbed">
   <EditorCategories value="AbilityorEffectType:Units,Race:Neut"/>
 </CBehaviorBuff>
-<CBehaviorResource id="HarvestableRichVespeneGeyserGas">
-  <EditorCategories value="Race:Neut,AbilityorEffectType:Units"/>
-</CBehaviorResource>
-<CBehaviorResource id="HarvestableRichVespeneGeyserGasProtoss">
-  <EditorCategories value="Race:Neut,AbilityorEffectType:Units"/>
-</CBehaviorResource>
-<CBehaviorResource id="HarvestableRichVespeneGeyserGasZerg">
-  <EditorCategories value="Race:Neut,AbilityorEffectType:Units"/>
-</CBehaviorResource>
 <CBehaviorResource id="HarvestableTerrazineGeyserGas">
   <EditorCategories value="Race:Neut,AbilityorEffectType:Units"/>
 </CBehaviorResource>

@@ -91,18 +91,6 @@
   <Tooltip value="Button/Tooltip/##originButton##"/>
   <AlertTooltip value="Button/Tooltip/##originButton##"/>
 </CButton>
-<CButton id="AttackGhost">
-  <HidesForSimpleText value="1"/>
-</CButton>
-<CButton id="LurkerCancelHoldFire">
-  <HidesForSimpleText value="0"/>
-</CButton>
-<CButton id="LurkerHoldFire">
-  <HidesForSimpleText value="0"/>
-</CButton>
-<CButton id="CaduceusReactor">
-  <HotkeyAlias value=""/>
-</CButton>
 <CButton id="BurrowUpSCBW" parent="BurrowUp">
   <Hotkey value="Button/Hotkey/BurrowUpSCBW"/>
   <HotkeyAlias value="BurrowUpSCBW"/>
@@ -115,11 +103,20 @@
   <HotkeySet value="BurrowUnburrowModes"/>
   <HidesForSimpleText value="0"/>
 </CButton>
+<CButton id="AttackGhost">
+  <HidesForSimpleText value="1"/>
+</CButton>
 <CButton id="DetectorSCBW@Detector">
   <Icon value="Assets\Textures\BTN-Status-Detector.dds"/>
   <EditorCategories value="Race:Neutral"/>
   <TintRacially value="1"/>
   <HotkeyAlias value="Detector"/>
+</CButton>
+<CButton id="LurkerCancelHoldFire">
+  <HidesForSimpleText value="0"/>
+</CButton>
+<CButton id="LurkerHoldFire">
+  <HidesForSimpleText value="0"/>
 </CButton>
 <CButton id="SalvageRedirect">
   <Icon value="Assets\Textures\btn-ability-terran-salvage.dds"/>
@@ -2480,6 +2477,9 @@
   <AlertIcon value="Assets\Textures\btn-unit-terran-stinger@scbw.dds"/>
   <EditorCategories value="Race:Terran"/>
   <DefaultButtonLayout Column="3"/>
+</CButton>
+<CButton id="CaduceusReactor">
+  <HotkeyAlias value=""/>
 </CButton>
 <CButton id="ArkwyrmTerritorialDive">
   <Icon value="Assets\Textures\btn-ability-zeratul-topbar-directlegions.dds"/>
@@ -5238,6 +5238,7 @@
 <CButton id="UEDButtonCitadelAbility">
   <Icon value="Assets\Textures\UEDMagneticWaveAccelerator.dds"/>
   <AlertIcon value="Assets\Textures\UEDMagneticWaveAccelerator.dds"/>
+  <EditorCategories value="Race:UED"/>
 </CButton>
 <CButton id="UEDButtonCitadelUpgrade">
   <Icon value="Assets\Textures\UEDAuthorizationRequestCitadelMagneticWaveAccelerator.dds"/>
@@ -5352,6 +5353,7 @@
 <CButton id="ButtonDrakkarFireMode">
   <Icon value="Assets\Textures\UEDMotionStablizer.dds"/>
   <AlertIcon value="Assets\Textures\UEDMotionStablizer.dds"/>
+  <EditorCategories value="Race:UED"/>
 </CButton>
 <CButton id="ButtonUpgraideHurrakan">
   <Icon value="Assets\Textures\btn-ability-mengsk-medivac-igniteafterburners.dds"/>
@@ -5507,6 +5509,7 @@
 <CButton id="OnwardComrades">
   <Icon value="Assets\Textures\btn-ability-mengsk-commandcenter-drafttroopers.dds"/>
   <AlertIcon value="Assets\Textures\btn-ability-mengsk-commandcenter-drafttroopers.dds"/>
+  <EditorCategories value="Race:UED"/>
 </CButton>
 <CButton id="StrikeGrenade">
   <Icon value="Assets\Textures\btn-ability-tychus-tychus-shreddergrenade.dds"/>
@@ -5636,6 +5639,7 @@
   <AlertIcon value="Assets\Textures\btn-ability-terran-load.dds"/>
   <TintRacially value="1"/>
   <Universal value="1"/>
+  <EditorCategories value="Race:UED"/>
 </CButton>
 <CButton id="TransportShuttleUnloadAll">
   <Icon value="Assets\Textures\btn-ability-terran-unloadall.dds"/>
@@ -5649,6 +5653,7 @@
   <AlertIcon value="Assets\Textures\btn-ability-terran-unloadall.dds"/>
   <TintRacially value="1"/>
   <Universal value="1"/>
+  <EditorCategories value="Race:UED"/>
 </CButton>
 <CButton id="ResourceDoublingFieldBuild">
   <Icon value="Assets\Textures\btn-building-terran-sensordome.dds"/>
@@ -5679,6 +5684,7 @@
   <AlertIcon value="Assets\Textures\BTN-UED-Shieldwall.dds"/>
   <Tooltip value="Button/Tooltip/HonorguardCruiser"/>
   <AlertTooltip value="Button/Tooltip/HonorguardCruiser"/>
+  <EditorCategories value="Race:UED"/>
 </CButton>
 <CButton id="MainBattleTank">
   <Icon value="Assets\Textures\btn-unit-object188bronze.dds"/>
@@ -8057,6 +8063,10 @@
   <AlertIcon value="Assets\Textures\btn-ability-terran-unloadall.dds"/>
   <EditorCategories value="Race:UPL"/>
   <TintRacially value="1"/>
+</CButton>
+<CButton id="UPLTrainStinger">
+  <Icon value="Assets\Textures\btn-unit-terran-stinger@scbw.dds"/>
+  <EditorCategories value="Race:UPL"/>
 </CButton>
 <CButton id="UPLGuardianFlashGrenade">
   <Icon value="Assets\Textures\btn-ability-UPL-FlashGrenade.dds"/>

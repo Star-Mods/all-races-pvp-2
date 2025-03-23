@@ -12,6 +12,8 @@ include "TriggerLibs/Protoss/ProtossVyHd"
 include "TriggerLibs/Protoss/ProtossChVi"
 include "TriggerLibs/Protoss/ProtossChRe"
 include "TriggerLibs/Protoss/ProtossChIn"
+include "TriggerLibs/terran/terran"
+include "TriggerLibs/zerg/zerg"
 
 //--------------------------------------------------------------------------------------------------
 //  Counter-Attack Units
@@ -98,16 +100,21 @@ void DebugCallbackProt (int player) {
 void AINewUnitProt (int player, unit u) {
     string type = UnitGetType(u);
 
-    if (PlayerRace(player) == "Gen") {    AINewUnitGen(player, u);    return;}
-    if (PlayerRace(player) == "Xayi") {    AINewUnitXayi(player, u);    return;}
-	if (PlayerRace(player) == "Keir") {    AINewUnitKeir(player, u);    return;}
-	if (PlayerRace(player) == "Drag") { AINewUnitDrag(player, u); return;}
-	if (PlayerRace(player) == "NHbr") { AINewUnitNHbr(player, u); return;}
-	if (PlayerRace(player) == "UED")  { AINewUnitUED(player, u);  return;}
-	if (PlayerRace(player) == "UPL")  { AINewUnitUPL(player, u);  return;}
-    if (PlayerRace(player) == "BWTe") {  AINewUnitBWTe(player, u);   return;}
-    if (PlayerRace(player) == "BWZe") {    AINewUnitBWZe(player, u);    return;}
-    if (PlayerRace(player) == "BWPr") {     AINewUnitBWPr(player, u);     return; }
+    if (PlayerRace(player) == "Gen") {
+        AINewUnitGen(player, u);
+        return;
+    }
+
+    if (PlayerRace(player) == "Xayi") {
+        AINewUnitXayi(player, u);
+        return;
+    }
+	
+	
+	if (PlayerRace(player) == "Keir") {
+        AINewUnitKeir(player, u);
+        return;
+    }
 
     // ignored units
     //
@@ -153,16 +160,18 @@ unit AIGetScoutProt (int player, int index, unit prev, bool allowWorkers) {
     unit obs;
     string prevType = UnitGetType(prev);
 
-    if (PlayerRace(player) == "Gen") {  return AIGetScoutGen(player, index, prev, allowWorkers);}
-    if (PlayerRace(player) == "Xayi") { return AIGetScoutXayi(player, index, prev, allowWorkers); }
-    if (PlayerRace(player) == "Keir") { return AIGetScoutKeir(player, index, prev, allowWorkers);}
-	if (PlayerRace(player) == "Drag") { return AIGetScoutDrag(player, index, prev, allowWorkers);}
-	if (PlayerRace(player) == "NHbr") { return AIGetScoutNHbr(player, index, prev, allowWorkers);}
-	if (PlayerRace(player) == "UED")  { return AIGetScoutUED(player, index, prev, allowWorkers);}
-	if (PlayerRace(player) == "UPL")  { return AIGetScoutUPL(player, index, prev, allowWorkers);}
-    if (PlayerRace(player) == "BWTe") {    return AIGetScoutBWTe(player, index, prev, allowWorkers);}
-    if (PlayerRace(player) == "BWZe") {     return AIGetScoutBWZe(player, index, prev, allowWorkers); }
-    if (PlayerRace(player) == "BWPr") {    return AIGetScoutBWPr(player, index, prev, allowWorkers);}
+    if (PlayerRace(player) == "Gen") {
+        return AIGetScoutGen(player, index, prev, allowWorkers);
+    }
+
+    if (PlayerRace(player) == "Xayi") {
+        return AIGetScoutXayi(player, index, prev, allowWorkers);
+    }
+	
+	
+    if (PlayerRace(player) == "Keir") {
+        return AIGetScoutKeir(player, index, prev, allowWorkers);
+    }
 
     if (!PlayerBeaconIsSet(player, c_beaconScout) &&
         !AIGetFlag(player, e_flagsScouting)) {
@@ -208,17 +217,18 @@ unit AIEarlyDefScoutProt (int player, unit prev, bool allowWorkers) {
     unit obs;
     string prevType;
 
-    if (PlayerRace(player) == "Gen") {  return AIEarlyDefScoutGen(player, prev, allowWorkers); }
-    if (PlayerRace(player) == "Xayi") { return AIEarlyDefScoutGen(player, prev, allowWorkers); }
-	if (PlayerRace(player) == "Keir") { return AIEarlyDefScoutKeir(player, prev, allowWorkers); }
-	if (PlayerRace(player) == "Drag") { return AIEarlyDefScoutDrag(player, prev, allowWorkers);}
-	if (PlayerRace(player) == "NHbr") { return AIEarlyDefScoutNHbr(player, prev, allowWorkers);}
-	if (PlayerRace(player) == "UED")  { return AIEarlyDefScoutUED(player, prev, allowWorkers);}
-	if (PlayerRace(player) == "UPL")  { return AIEarlyDefScoutUPL(player, prev, allowWorkers);}
-    if (PlayerRace(player) == "BWTe") {     return AIEarlyDefScoutBWTe(player, prev, allowWorkers); }
-    if (PlayerRace(player) == "BWZe") {      return AIEarlyDefScoutBWZe(player, prev, allowWorkers);  }
-    if (PlayerRace(player) == "BWPr") {     return AIEarlyDefScoutBWPr(player, prev, allowWorkers); }
+    if (PlayerRace(player) == "Gen") {
+        return AIEarlyDefScoutGen(player, prev, allowWorkers);
+    }
 
+    if (PlayerRace(player) == "Xayi") {
+        return AIEarlyDefScoutGen(player, prev, allowWorkers);
+    }
+	
+	if (PlayerRace(player) == "Keir") {
+        return AIEarlyDefScoutKeir(player, prev, allowWorkers);
+    }
+    
     if (!AIGetFlag(player, e_flagsEarlyDefScout)) {
         return c_nullUnit;
     }
@@ -281,16 +291,20 @@ void ProtossLate (int player);
 void AIMeleeProt (int player) {    
     int mainState = AIState(player, e_mainState);
 
-    if (PlayerRace(player) == "Gen")  { AIMeleeGen(player); return;}
-    if (PlayerRace(player) == "Xayi") { AIMeleeXayi(player); return;}
-    if (PlayerRace(player) == "Keir") { AIMeleeKeir(player); return;}
-	if (PlayerRace(player) == "Drag") { AIMeleeDrag(player); return;}
-	if (PlayerRace(player) == "NHbr") { AIMeleeNHbr(player); return;}
-	if (PlayerRace(player) == "UED")  { AIMeleeUED(player); return;}
-	if (PlayerRace(player) == "UPL")  { AIMeleeUPL(player); return;}
-    if (PlayerRace(player) == "BWTe") {     AIMeleeBWTe(player);     return; }
-    if (PlayerRace(player) == "BWZe") {     AIMeleeBWZe(player);     return; }
-    if (PlayerRace(player) == "BWPr") {     AIMeleeBWPr(player);     return; }
+    if (PlayerRace(player) == "Gen") {
+        AIMeleeGen(player);
+        return;
+    }
+
+    if (PlayerRace(player) == "Xayi") {
+        AIMeleeXayi(player);
+        return;
+    }
+	
+    if (PlayerRace(player) == "Keir") {
+        AIMeleeKeir(player);
+        return;
+    }
 
     if (AIPlayerDifficulty(player) >= c_skirChMoney) {
         AIMeleeCheatResources(player);

@@ -20,157 +20,6 @@
   <TargetFilters value="Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
   <AllowedMovement value="Slowing"/>
 </CWeaponLegacy>
-<CWeaponLegacy id="HydraliskMelee">
-  <Options index="NeverMiss" value="0"/>
-</CWeaponLegacy>
-<CWeaponLegacy id="RoachMelee">
-  <Options index="NeverMiss" value="0"/>
-</CWeaponLegacy>
-<CWeaponLegacy id="TwinIbiksCannon">
-  <Effect value="PlanetaryFortressWeapon@MissCheck"/>
-</CWeaponLegacy>
-<CWeaponLegacy id="PsionicShockwave">
-  <Effect value="ArchonWeapon@InitialSet"/>
-</CWeaponLegacy>
-<CWeaponLegacy id="GuassRifle">
-  <Options index="NeverMiss" value="0"/>
-</CWeaponLegacy>
-<CWeaponLegacy id="ThorsHammer">
-  <Options index="NeverMiss" value="0"/>
-</CWeaponLegacy>
-<CWeaponLegacy id="90mmCannons">
-  <Options index="NeverMiss" value="0"/>
-</CWeaponLegacy>
-<CWeaponLegacy id="PunisherGrenades">
-  <Effect value="MarauderWeapon@MissCheck"/>
-</CWeaponLegacy>
-<CWeaponLegacy id="CrucioShockCannon">
-  <Effect value="SiegeTankSiegedWeapon@InitialSet"/>
-</CWeaponLegacy>
-<CWeaponLegacy id="AutoTurret">
-  <Options index="NeverMiss" value="0"/>
-</CWeaponLegacy>
-<CWeaponLegacy id="P38ScytheGuassPistol">
-  <Options index="NeverMiss" value="0"/>
-</CWeaponLegacy>
-<CWeaponLegacy id="AcidSaliva">
-  <Options index="NeverMiss" value="0"/>
-</CWeaponLegacy>
-<CWeaponLegacy id="ImpalerTentacle">
-  <Options index="NeverMiss" value="0"/>
-</CWeaponLegacy>
-<CWeaponLegacy id="NeedleSpines">
-  <Options index="NeverMiss" value="0"/>
-</CWeaponLegacy>
-<CWeaponLegacy id="GlaiveWurm">
-  <AttackType value="Chaos"/>
-  <Effect value="GlaiveWurm@InitialSet"/>
-</CWeaponLegacy>
-<CWeaponLegacy id="BroodlingEscort">
-  <Effect value="BroodlordEscort@MissCheck"/>
-</CWeaponLegacy>
-<CWeaponLegacy id="TwinGatlingCannon">
-  <Options index="NeverMiss" value="0"/>
-</CWeaponLegacy>
-<CWeaponLegacy id="Talons">
-  <Options index="NeverMiss" value="0"/>
-</CWeaponLegacy>
-<CWeaponLegacy id="ParticleDisruptors">
-  <Options index="NeverMiss" value="0"/>
-</CWeaponLegacy>
-<CWeaponLegacy id="ThermalLances">
-  <AttackType value="Chaos"/>
-  <Tip value="Weapon/Tip/PierceWeapon"/>
-</CWeaponLegacy>
-<CWeaponLegacy id="PhaseDisruptors">
-  <Options index="NeverMiss" value="0"/>
-</CWeaponLegacy>
-<CWeaponLegacy id="MothershipBeam">
-  <Tip value="Weapon/Tip/PierceWeapon"/>
-  <AttackType value="Chaos"/>
-</CWeaponLegacy>
-<CWeaponLegacy id="PhotonCannon">
-  <Options index="NeverMiss" value="0"/>
-</CWeaponLegacy>
-<CWeaponLegacy id="DisruptionBeam">
-  <Tip value="Weapon/Tip/PierceWeapon"/>
-  <AttackType value="Chaos"/>
-</CWeaponLegacy>
-<CWeaponLegacy id="BacklashRockets">
-  <Options index="NeverMiss" value="0"/>
-</CWeaponLegacy>
-<CWeaponLegacy id="C10CanisterRifle">
-  <Options index="NeverMiss" value="0"/>
-</CWeaponLegacy>
-<CWeaponLegacy id="InfernalFlameThrower">
-  <AttackType value="Chaos"/>
-  <Tip value="Weapon/Tip/PierceWeapon"/>
-</CWeaponLegacy>
-<CWeaponStrafe id="InterceptorBeam">
-  <Options index="NeverMiss" value="0"/>
-</CWeaponStrafe>
-<CWeaponLegacy id="WidowMineDummy">
-  <AttackType value="Chaos"/>
-</CWeaponLegacy>
-<CWeaponLegacy id="LocustMPMelee">
-  <Options index="NeverMiss" value="0"/>
-</CWeaponLegacy>
-<CWeaponLegacy id="LocustMP">
-  <Options index="NeverMiss" value="0"/>
-</CWeaponLegacy>
-<CWeaponLegacy id="HellionTank">
-  <AttackType value="Chaos"/>
-  <Tip value="Weapon/Tip/PierceWeapon"/>
-</CWeaponLegacy>
-<CWeaponLegacy id="LurkerMP">
-  <Tip value="Weapon/Tip/PierceWeapon"/>
-  <AttackType value="Chaos"/>
-</CWeaponLegacy>
-<CWeaponLegacy id="TalonsMissile">
-  <Options index="NeverMiss" value="0"/>
-</CWeaponLegacy>
-<CWeaponLegacy id="TyphoonMissilePod">
-  <Options index="NeverMiss" value="0"/>
-</CWeaponLegacy>
-<CWeaponLegacy id="TempestGround">
-  <Options index="NeverMiss" value="0"/>
-</CWeaponLegacy>
-<CWeaponLegacy id="Oracle">
-  <Tip value="Weapon/Tip/PierceWeapon"/>
-</CWeaponLegacy>
-<CWeaponLegacy id="RavagerWeapon">
-  <Options index="NeverMiss" value="0"/>
-</CWeaponLegacy>
-<CWeaponLegacy id="VoidRaySwarm">
-  <Tip value="Weapon/Tip/PierceWeapon"/>
-  <AttackType value="Chaos"/>
-</CWeaponLegacy>
-<CWeaponLegacy id="Adept">
-  <Options index="NeverMiss" value="0"/>
-</CWeaponLegacy>
-<CWeaponLegacy id="LiberatorAGWeapon">
-  <Options index="NeverMiss" value="0"/>
-</CWeaponLegacy>
-<CWeaponLegacy id="BattlecruiserWeaponSwitch">
-  <Options index="NeverMiss" value="0"/>
-</CWeaponLegacy>
-<CWeaponLegacy id="DisruptionBeamDisplayDummy">
-  <Tip value="Weapon/Tip/PierceWeapon"/>
-  <AttackType value="Chaos"/>
-</CWeaponLegacy>
-<CWeaponLegacy id="ThermalBeam">
-  <AttackType value="Chaos"/>
-  <Tip value="Weapon/Tip/PierceWeapon"/>
-</CWeaponLegacy>
-<CWeaponLegacy id="HighTemplarWeapon">
-  <Options index="NeverMiss" value="0"/>
-</CWeaponLegacy>
-<CWeaponLegacy id="VoidRaySwarmDisplayDummy">
-  <Tip value="Weapon/Tip/PierceWeapon"/>
-</CWeaponLegacy>
-<CWeaponLegacy id="Spinesdisabled">
-  <Tip value="Weapon/Tip/PierceWeapon"/>
-</CWeaponLegacy>
 <CWeaponLegacy id="CarrierSCBWWeapon@Dummy">
   <EditorCategories value="Race:Protoss"/>
   <Icon value="Assets\Textures\btn-unit-protoss-interceptor.dds"/>
@@ -991,6 +840,157 @@
   <Range value="6"/>
   <Period value="1.04"/>
   <Effect value="FakeWeaponDummy"/>
+</CWeaponLegacy>
+<CWeaponLegacy id="LurkerMP">
+  <Tip value="Weapon/Tip/PierceWeapon"/>
+  <AttackType value="Chaos"/>
+</CWeaponLegacy>
+<CWeaponLegacy id="Oracle">
+  <Tip value="Weapon/Tip/PierceWeapon"/>
+</CWeaponLegacy>
+<CWeaponLegacy id="Spinesdisabled">
+  <Tip value="Weapon/Tip/PierceWeapon"/>
+</CWeaponLegacy>
+<CWeaponLegacy id="VoidRaySwarmDisplayDummy">
+  <Tip value="Weapon/Tip/PierceWeapon"/>
+</CWeaponLegacy>
+<CWeaponLegacy id="DisruptionBeam">
+  <Tip value="Weapon/Tip/PierceWeapon"/>
+  <AttackType value="Chaos"/>
+</CWeaponLegacy>
+<CWeaponLegacy id="MothershipBeam">
+  <Tip value="Weapon/Tip/PierceWeapon"/>
+  <AttackType value="Chaos"/>
+</CWeaponLegacy>
+<CWeaponLegacy id="VoidRaySwarm">
+  <Tip value="Weapon/Tip/PierceWeapon"/>
+  <AttackType value="Chaos"/>
+</CWeaponLegacy>
+<CWeaponLegacy id="CrucioShockCannon">
+  <Effect value="SiegeTankSiegedWeapon@InitialSet"/>
+</CWeaponLegacy>
+<CWeaponLegacy id="GlaiveWurm">
+  <AttackType value="Chaos"/>
+  <Effect value="GlaiveWurm@InitialSet"/>
+</CWeaponLegacy>
+<CWeaponLegacy id="BattlecruiserWeaponSwitch">
+  <Options index="NeverMiss" value="0"/>
+</CWeaponLegacy>
+<CWeaponLegacy id="BroodlingEscort">
+  <Effect value="BroodlordEscort@MissCheck"/>
+</CWeaponLegacy>
+<CWeaponLegacy id="ImpalerTentacle">
+  <Options index="NeverMiss" value="0"/>
+</CWeaponLegacy>
+<CWeaponLegacy id="PsionicShockwave">
+  <Effect value="ArchonWeapon@InitialSet"/>
+</CWeaponLegacy>
+<CWeaponLegacy id="TalonsMissile">
+  <Options index="NeverMiss" value="0"/>
+</CWeaponLegacy>
+<CWeaponLegacy id="TwinIbiksCannon">
+  <Effect value="PlanetaryFortressWeapon@MissCheck"/>
+</CWeaponLegacy>
+<CWeaponLegacy id="AcidSaliva">
+  <Options index="NeverMiss" value="0"/>
+</CWeaponLegacy>
+<CWeaponLegacy id="Adept">
+  <Options index="NeverMiss" value="0"/>
+</CWeaponLegacy>
+<CWeaponLegacy id="BacklashRockets">
+  <Options index="NeverMiss" value="0"/>
+</CWeaponLegacy>
+<CWeaponLegacy id="HellionTank">
+  <AttackType value="Chaos"/>
+  <Tip value="Weapon/Tip/PierceWeapon"/>
+</CWeaponLegacy>
+<CWeaponLegacy id="HighTemplarWeapon">
+  <Options index="NeverMiss" value="0"/>
+</CWeaponLegacy>
+<CWeaponLegacy id="HydraliskMelee">
+  <Options index="NeverMiss" value="0"/>
+</CWeaponLegacy>
+<CWeaponLegacy id="InfernalFlameThrower">
+  <AttackType value="Chaos"/>
+  <Tip value="Weapon/Tip/PierceWeapon"/>
+</CWeaponLegacy>
+<CWeaponStrafe id="InterceptorBeam">
+  <Options index="NeverMiss" value="0"/>
+</CWeaponStrafe>
+<CWeaponLegacy id="LocustMP">
+  <Options index="NeverMiss" value="0"/>
+</CWeaponLegacy>
+<CWeaponLegacy id="LocustMPMelee">
+  <Options index="NeverMiss" value="0"/>
+</CWeaponLegacy>
+<CWeaponLegacy id="NeedleSpines">
+  <Options index="NeverMiss" value="0"/>
+</CWeaponLegacy>
+<CWeaponLegacy id="P38ScytheGuassPistol">
+  <Options index="NeverMiss" value="0"/>
+</CWeaponLegacy>
+<CWeaponLegacy id="ParticleDisruptors">
+  <Options index="NeverMiss" value="0"/>
+</CWeaponLegacy>
+<CWeaponLegacy id="PhaseDisruptors">
+  <Options index="NeverMiss" value="0"/>
+</CWeaponLegacy>
+<CWeaponLegacy id="PhotonCannon">
+  <Options index="NeverMiss" value="0"/>
+</CWeaponLegacy>
+<CWeaponLegacy id="RavagerWeapon">
+  <Options index="NeverMiss" value="0"/>
+</CWeaponLegacy>
+<CWeaponLegacy id="RoachMelee">
+  <Options index="NeverMiss" value="0"/>
+</CWeaponLegacy>
+<CWeaponLegacy id="Talons">
+  <Options index="NeverMiss" value="0"/>
+</CWeaponLegacy>
+<CWeaponLegacy id="TempestGround">
+  <Options index="NeverMiss" value="0"/>
+</CWeaponLegacy>
+<CWeaponLegacy id="ThermalBeam">
+  <AttackType value="Chaos"/>
+  <Tip value="Weapon/Tip/PierceWeapon"/>
+</CWeaponLegacy>
+<CWeaponLegacy id="ThermalLances">
+  <AttackType value="Chaos"/>
+  <Tip value="Weapon/Tip/PierceWeapon"/>
+</CWeaponLegacy>
+<CWeaponLegacy id="WidowMineDummy">
+  <AttackType value="Chaos"/>
+</CWeaponLegacy>
+<CWeaponLegacy id="90mmCannons">
+  <Options index="NeverMiss" value="0"/>
+</CWeaponLegacy>
+<CWeaponLegacy id="AutoTurret">
+  <Options index="NeverMiss" value="0"/>
+</CWeaponLegacy>
+<CWeaponLegacy id="C10CanisterRifle">
+  <Options index="NeverMiss" value="0"/>
+</CWeaponLegacy>
+<CWeaponLegacy id="GuassRifle">
+  <Options index="NeverMiss" value="0"/>
+</CWeaponLegacy>
+<CWeaponLegacy id="LiberatorAGWeapon">
+  <Options index="NeverMiss" value="0"/>
+</CWeaponLegacy>
+<CWeaponLegacy id="PunisherGrenades">
+  <Effect value="MarauderWeapon@MissCheck"/>
+</CWeaponLegacy>
+<CWeaponLegacy id="ThorsHammer">
+  <Options index="NeverMiss" value="0"/>
+</CWeaponLegacy>
+<CWeaponLegacy id="TwinGatlingCannon">
+  <Options index="NeverMiss" value="0"/>
+</CWeaponLegacy>
+<CWeaponLegacy id="TyphoonMissilePod">
+  <Options index="NeverMiss" value="0"/>
+</CWeaponLegacy>
+<CWeaponLegacy id="DisruptionBeamDisplayDummy">
+  <Tip value="Weapon/Tip/PierceWeapon"/>
+  <AttackType value="Chaos"/>
 </CWeaponLegacy>
 <CWeaponLegacy id="GrimGliderEmaciate">
   <EditorCategories value="Race:Dragon"/>

@@ -423,7 +423,6 @@ void AILDStockWorkers (int player, int count, string worker) {
     AISetStockUnitNext( player, count, worker, c_stockAlways );
 }
 
-
 //--------------------------------------------------------------------------------------------------
 //  GenetronBasicEconomy
 //--------------------------------------------------------------------------------------------------
@@ -466,7 +465,7 @@ bool GenetronMacroExpand (int player) {
     if (AITechCount(player, c_GB_ProcessingCore, c_techCountQueuedOrBetter) >= 2) {
         return false;
     }
-
+    
     defenseEval = AISelfDefenseThreatEval(c_dtRealSelfThreat, player);
     if (defenseEval >= 120) {
         // don't expand if currently under attack
@@ -600,7 +599,7 @@ bool XayidMacroExpand (int player) {
     if (AITechCount(player, c_XB_ScavengerNest, c_techCountQueuedOrBetter) >= 2) {
         return false;
     }
-
+    
     defenseEval = AISelfDefenseThreatEval(c_dtRealSelfThreat, player);
     if (defenseEval >= 120) {
         // don't expand if currently under attack
@@ -729,7 +728,7 @@ bool KeironMacroExpand (int player) {
     if (AITechCount(player, c_KB_Citadel_Alias, c_techCountQueuedOrBetter) >= 2) {
         return false;
     }
-
+    
     defenseEval = AISelfDefenseThreatEval(c_dtRealSelfThreat, player);
     if (defenseEval >= 120) {
         // don't expand if currently under attack

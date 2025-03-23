@@ -25,7 +25,6 @@ void libARMP_InitVariables () {
 
     libARMP_gv_startMinerals = 50;
     libARMP_gv_resourceType = libARMP_ge_PreplacedResourceType_Default;
-    libARMP_gv_supplyCap = 200;
     libARMP_gv_mineralWallsGlobalMineralWalls = UnitGroupEmpty();
     libARMP_gv_mineralWallsTimer = TimerCreate();
     for (init_i = 0; init_i <= libARMP_gv_mAX_PLAYERS; init_i += 1) {
@@ -58,6 +57,21 @@ string libARMP_gf_GetResourceUserData (string lp_unit) {
 
     }
     return null;
+}
+
+void libARMP_gf_ApplySupplyCap (int lp_value) {
+    // Automatic Variable Declarations
+    playergroup auto3DD72507_g;
+    int auto3DD72507_var;
+
+    // Implementation
+    auto3DD72507_g = PlayerGroupAll();
+    auto3DD72507_var = -1;
+    while (true) {
+        auto3DD72507_var = PlayerGroupNextPlayer(auto3DD72507_g, auto3DD72507_var);
+        if (auto3DD72507_var < 0) { break; }
+        PlayerModifyPropertyInt(auto3DD72507_var, c_playerPropSuppliesLimit, c_playerPropOperSetTo, lp_value);
+    }
 }
 
 void libARMP_gf_DisableClassicSkins (int lp_player) {
@@ -319,6 +333,7 @@ bool libARMP_gt_OfflineGameAttributesInitialisation_Func (bool testConds, bool r
     }
 
     GameSetSpeedValue(c_gameSpeedFaster);
+    PlayerSetRace(2, "Zerg");
     autoE39754B4_g = PlayerGroupAll();
     autoE39754B4_var = -1;
     while (true) {
@@ -381,6 +396,7 @@ bool libARMP_gt_OnlineGameAttributesInitialisation_Func (bool testConds, bool ru
     while (true) {
         lv_player = PlayerGroupNextPlayer(autoAC3DF856_g, lv_player);
         if (lv_player < 0) { break; }
+        libARMP_gf_DisableClassicSkins(lv_player);
         PlayerOptionOverride(lv_player, "simplecommandcard", "0");
     }
     autoB6F80194_g = PlayerGroupAll();
@@ -518,19 +534,19 @@ bool libARMP_gt_OnlineGameAttributesInitialisation_Func (bool testConds, bool ru
     }
     auto89A30B7A_val = lv_aG_Supplies;
     if (auto89A30B7A_val == "0001") {
-        libARMP_gv_supplyCap = 100;
+        libARMP_gf_ApplySupplyCap(100);
     }
     else if (auto89A30B7A_val == "0003") {
-        libARMP_gv_supplyCap = 300;
+        libARMP_gf_ApplySupplyCap(300);
     }
     else if (auto89A30B7A_val == "0005") {
-        libARMP_gv_supplyCap = 400;
+        libARMP_gf_ApplySupplyCap(400);
     }
     else if (auto89A30B7A_val == "0004") {
-        libARMP_gv_supplyCap = 500;
+        libARMP_gf_ApplySupplyCap(500);
     }
     else if (auto89A30B7A_val == "0006") {
-        libARMP_gv_supplyCap = 1000;
+        libARMP_gf_ApplySupplyCap(1000);
     }
     else {
     }
@@ -538,7 +554,6 @@ bool libARMP_gt_OnlineGameAttributesInitialisation_Func (bool testConds, bool ru
     TriggerExecute(libARMP_gt_SprayUpgrades, true, false);
     TriggerExecute(libARMP_gt_ApplyInitialResources, true, false);
     TriggerExecute(libARMP_gt_ApplyHarvestableResources, true, false);
-    TriggerExecute(libARMP_gt_ApplySupplyCap, true, false);
     TriggerExecute(libARMP_gt_FactionTriggers, true, false);
     return true;
 }
@@ -710,15 +725,13 @@ bool libARMP_gt_ApplyHarvestableResources_Func (bool testConds, bool runActions)
     unitgroup autoAF6B57F5_g;
     int autoAF6B57F5_u;
     unit autoAF6B57F5_var;
-    string auto54832AD7_val;
-    string autoCEA67A5D_val;
+    unitgroup auto0308609E_g;
+    int auto0308609E_u;
+    unit auto0308609E_var;
     unitgroup auto6A446791_g;
     int auto6A446791_u;
     unit auto6A446791_var;
     string auto6A2EC427_val;
-    unitgroup auto0308609E_g;
-    int auto0308609E_u;
-    unit auto0308609E_var;
     unitgroup auto38B0BDBC_g;
     int auto38B0BDBC_u;
     unit auto38B0BDBC_var;
@@ -750,16 +763,24 @@ bool libARMP_gt_ApplyHarvestableResources_Func (bool testConds, bool runActions)
             else {
                 libNtve_gf_ReplaceUnit(autoAF6B57F5_var, "RichMineralField", libNtve_ge_ReplaceUnitOptions_OldUnitsRelative);
             }
-            auto54832AD7_val = UnitGetType(autoAF6B57F5_var);
-            {
-                autoCEA67A5D_val = UnitBehaviorGet(autoAF6B57F5_var, 1);
-                if (autoCEA67A5D_val == "MineralFieldMinerals") {
-                }
-                else if (autoCEA67A5D_val == "RawVespeneGeyserGas") {
-                    libNtve_gf_ReplaceUnit(autoAF6B57F5_var, "RichVespeneGeyser", libNtve_ge_ReplaceUnitOptions_OldUnitsRelative);
-                }
-                else {
-                }
+        }
+        auto0308609E_g = UnitGroup(null, 0, RegionEntireMap(), UnitFilter((1 << c_targetFilterRawResource), 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0);
+        auto0308609E_u = UnitGroupCount(auto0308609E_g, c_unitCountAll);
+        for (;; auto0308609E_u -= 1) {
+            auto0308609E_var = UnitGroupUnitFromEnd(auto0308609E_g, auto0308609E_u);
+            if (auto0308609E_var == null) { break; }
+            lv_unitData = libARMP_gf_GetResourceUserData(UnitGetType(auto0308609E_var));
+            if ((lv_unitData != null)) {
+                lv_replacementUnitType = UserDataGetGameLink("ResourcesData", lv_unitData, "RichUnit", 1);
+            }
+            else {
+                lv_replacementUnitType = null;
+            }
+            if ((lv_replacementUnitType != null)) {
+                libNtve_gf_ReplaceUnit(auto0308609E_var, lv_replacementUnitType, libNtve_ge_ReplaceUnitOptions_OldUnitsRelative);
+            }
+            else {
+                libNtve_gf_ReplaceUnit(auto0308609E_var, "RichVespeneGeyser", libNtve_ge_ReplaceUnitOptions_OldUnitsRelative);
             }
         }
     }
@@ -790,31 +811,6 @@ bool libARMP_gt_ApplyHarvestableResources_Func (bool testConds, bool runActions)
             else {
             }
         }
-    }
-
-    if ((libARMP_gv_resourceType == libARMP_ge_PreplacedResourceType_Rich) && (libARMP_gv_resourceType == libARMP_ge_PreplacedResourceType_RichBGH)) {
-        auto0308609E_g = UnitGroup(null, 0, RegionEntireMap(), UnitFilter((1 << c_targetFilterRawResource), 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0);
-        auto0308609E_u = UnitGroupCount(auto0308609E_g, c_unitCountAll);
-        for (;; auto0308609E_u -= 1) {
-            auto0308609E_var = UnitGroupUnitFromEnd(auto0308609E_g, auto0308609E_u);
-            if (auto0308609E_var == null) { break; }
-            lv_unitData = libARMP_gf_GetResourceUserData(UnitGetType(auto0308609E_var));
-            if ((lv_unitData != null)) {
-                lv_replacementUnitType = UserDataGetGameLink("ResourcesData", lv_unitData, "RichUnit", 1);
-            }
-            else {
-                lv_replacementUnitType = null;
-            }
-            if ((lv_replacementUnitType != null)) {
-                libNtve_gf_ReplaceUnit(auto0308609E_var, lv_replacementUnitType, libNtve_ge_ReplaceUnitOptions_OldUnitsRelative);
-            }
-            else {
-                libNtve_gf_ReplaceUnit(auto0308609E_var, "RichVespeneGeyser", libNtve_ge_ReplaceUnitOptions_OldUnitsRelative);
-            }
-        }
-    }
-
-    if ((libARMP_gv_resourceType == libARMP_ge_PreplacedResourceType_BGH) && (libARMP_gv_resourceType == libARMP_ge_PreplacedResourceType_RichBGH)) {
         auto38B0BDBC_g = UnitGroup(null, 0, RegionEntireMap(), UnitFilter((1 << c_targetFilterRawResource), 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0);
         auto38B0BDBC_u = UnitGroupCount(auto38B0BDBC_g, c_unitCountAll);
         for (;; auto38B0BDBC_u -= 1) {
@@ -840,34 +836,6 @@ bool libARMP_gt_ApplyHarvestableResources_Func (bool testConds, bool runActions)
 //--------------------------------------------------------------------------------------------------
 void libARMP_gt_ApplyHarvestableResources_Init () {
     libARMP_gt_ApplyHarvestableResources = TriggerCreate("libARMP_gt_ApplyHarvestableResources_Func");
-}
-
-//--------------------------------------------------------------------------------------------------
-// Trigger: Apply Supply Cap
-//--------------------------------------------------------------------------------------------------
-bool libARMP_gt_ApplySupplyCap_Func (bool testConds, bool runActions) {
-    // Automatic Variable Declarations
-    playergroup autoE750B4CE_g;
-    int autoE750B4CE_var;
-
-    // Actions
-    if (!runActions) {
-        return true;
-    }
-
-    autoE750B4CE_g = PlayerGroupAll();
-    autoE750B4CE_var = -1;
-    while (true) {
-        autoE750B4CE_var = PlayerGroupNextPlayer(autoE750B4CE_g, autoE750B4CE_var);
-        if (autoE750B4CE_var < 0) { break; }
-        PlayerModifyPropertyInt(autoE750B4CE_var, c_playerPropSuppliesLimit, c_playerPropOperSetTo, libARMP_gv_supplyCap);
-    }
-    return true;
-}
-
-//--------------------------------------------------------------------------------------------------
-void libARMP_gt_ApplySupplyCap_Init () {
-    libARMP_gt_ApplySupplyCap = TriggerCreate("libARMP_gt_ApplySupplyCap_Func");
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -1123,7 +1091,6 @@ void libARMP_InitTriggers () {
     libARMP_gt_SprayUpgrades_Init();
     libARMP_gt_ApplyInitialResources_Init();
     libARMP_gt_ApplyHarvestableResources_Init();
-    libARMP_gt_ApplySupplyCap_Init();
     libARMP_gt_MineralWallsUpdate_Init();
     libARMP_gt_MinimapAllyViewCameraSnap_Init();
     libARMP_gt_MinimapAllyViewCameraUpdate_Init();

@@ -14,4 +14,5 @@
     <Include path="UI/Layout/UEDFL_TechGlossaryPanel.SC2Layout"/>
     <Include path="UI/Layout/UI/UnitStatus.SC2Layout"/>
     <Include path="UI/Layout/UI/GameUI_ZCR.SC2Layout"/>
+    <Include path="UI/Layout/ArmyButton2.SC2Layout"/>
 </Desc>

@@ -57,129 +57,6 @@
 <CValidatorEffectTreeUserData default="1" id="ZCRValidatorEffectTreeUserData">
   <CheckExistence value="0"/>
 </CValidatorEffectTreeUserData>
-<CValidatorCombine id="HasAntiGravProtoss">
-  <CombineArray index="1" value="IsProtossSCBW"/>
-</CValidatorCombine>
-<CValidatorCombine id="HasAntiGravTerran">
-  <CombineArray index="1" value="IsTerranSCBW"/>
-</CValidatorCombine>
-<CValidatorCombine id="HasAntiGravZerg">
-  <CombineArray index="1" value="IsZergSCBW"/>
-</CValidatorCombine>
-<CValidatorCombine id="IsProtossUnit">
-  <CombineArray index="1" value="IsProtossSCBW"/>
-</CValidatorCombine>
-<CValidatorCombine id="IsTerranUnit">
-  <CombineArray index="1" value="IsTerranSCBW"/>
-</CValidatorCombine>
-<CValidatorCombine id="IsZergUnit">
-  <CombineArray index="1" value="IsZergSCBW"/>
-</CValidatorCombine>
-<CValidatorUnitCompareBehaviorCount id="IsHallucination">
-  <Behavior value=""/>
-  <Categories index="Temporary" value="1"/>
-</CValidatorUnitCompareBehaviorCount>
-<CValidatorUnitType id="CasterIsCommandCenter" parent="CasterIsTemplate" unitName="CommandCenter"/>
-<CValidatorUnitType id="IsSCV" parent="IsTemplate" unitName="SCV"/>
-<CValidatorUnitType id="IsLarva" parent="IsTemplate" unitName="Larva"/>
-<CValidatorUnitType id="IsEngineeringBay" parent="IsTemplate" unitName="EngineeringBay"/>
-<CValidatorUnitType id="IsArmory" parent="IsTemplate" unitName="Armory"/>
-<CValidatorUnitType id="IsFusionCore" parent="IsTemplate" unitName="FusionCore"/>
-<CValidatorUnitType id="IsInfestationPit" parent="IsTemplate" unitName="InfestationPit"/>
-<CValidatorUnitType id="IsSpawningPool" parent="IsTemplate" unitName="SpawningPool"/>
-<CValidatorUnitType id="IsEvolutionChamber" parent="IsTemplate" unitName="EvolutionChamber"/>
-<CValidatorUnitType id="IsHydraliskDen" parent="IsTemplate" unitName="HydraliskDen"/>
-<CValidatorUnitType id="IsUltraliskCavern" parent="IsTemplate" unitName="UltraliskCavern"/>
-<CValidatorUnitType id="IsMissileTurret" parent="IsTemplate" unitName="MissileTurret"/>
-<CValidatorUnitType id="IsSpire" parent="IsTemplate" unitName="Spire"/>
-<CValidatorUnitType id="IsBarracks" parent="IsTemplate" unitName="Barracks"/>
-<CValidatorUnitType id="IsStarport" parent="IsTemplate" unitName="Starport"/>
-<CValidatorUnitType id="IsFactory" parent="IsTemplate" unitName="Factory"/>
-<CValidatorUnitType id="IsCommandCenter" parent="IsTemplate" unitName="CommandCenter"/>
-<CValidatorUnitType id="IsCommandCenterFlying" parent="IsTemplate" unitName="CommandCenterFlying"/>
-<CValidatorUnitType id="IsOrbitalCommand" parent="IsTemplate" unitName="OrbitalCommand"/>
-<CValidatorUnitType id="IsNexus" parent="IsTemplate" unitName="Nexus"/>
-<CValidatorUnitType id="IsFleetBeacon" parent="IsTemplate" unitName="FleetBeacon"/>
-<CValidatorUnitType id="IsTwilightCouncil" parent="IsTemplate" unitName="TwilightCouncil"/>
-<CValidatorUnitType id="IsCyberneticsCore" parent="IsTemplate" unitName="CyberneticsCore"/>
-<CValidatorUnitType id="IsForge" parent="IsTemplate" unitName="Forge"/>
-<CValidatorUnitType id="IsRoboticsBay" parent="IsTemplate" unitName="RoboticsBay"/>
-<CValidatorUnitType id="IsRoboticsFacility" parent="IsTemplate" unitName="RoboticsFacility"/>
-<CValidatorUnitType id="IsDrone" parent="IsTemplate" unitName="Drone"/>
-<CValidatorUnitType id="IsProbe" parent="IsTemplate" unitName="Probe"/>
-<CValidatorUnitType id="IsUltralisk" parent="IsTemplate" unitName="Ultralisk"/>
-<CValidatorUnitType id="IsMutalisk" parent="IsTemplate" unitName="Mutalisk"/>
-<CValidatorUnitType id="IsOverlord" parent="IsTemplate" unitName="Overlord"/>
-<CValidatorUnitType id="IsZergling" parent="IsTemplate" unitName="Zergling"/>
-<CValidatorUnitType id="IsHydralisk" parent="IsTemplate" unitName="Hydralisk"/>
-<CValidatorUnitType id="IsGateway" parent="IsTemplate" unitName="Gateway"/>
-<CValidatorUnitType id="IsLair" parent="IsTemplate" unitName="Lair"/>
-<CValidatorUnitType id="IsHive" parent="IsTemplate" unitName="Hive"/>
-<CValidatorUnitType id="IsHatchery" parent="IsTemplate" unitName="Hatchery"/>
-<CValidatorUnitCompareBehaviorCount id="IsNotHallucination">
-  <Behavior value=""/>
-  <Categories index="Temporary" value="1"/>
-</CValidatorUnitCompareBehaviorCount>
-<CValidatorCombine id="ZergBleedNormal">
-  <CombineArray value="HatcherySCBW@NotMorphing"/>
-  <CombineArray value="LairSCBW@NotMorphing"/>
-</CValidatorCombine>
-<CValidatorCombine id="ZergBleedLight">
-  <CombineArray value="HatcherySCBW@NotMorphing"/>
-  <CombineArray value="LairSCBW@NotMorphing"/>
-</CValidatorCombine>
-<CValidatorCombine id="ZergBleedHeavy">
-  <CombineArray value="HatcherySCBW@NotMorphing"/>
-  <CombineArray value="LairSCBW@NotMorphing"/>
-</CValidatorCombine>
-<CValidatorCombine id="ZergBleedProfusely">
-  <CombineArray value="HatcherySCBW@NotMorphing"/>
-  <CombineArray value="LairSCBW@NotMorphing"/>
-</CValidatorCombine>
-<CValidatorCombine id="IsNotEggUnit">
-  <CombineArray value="NotDevourerSCBWEgg"/>
-  <CombineArray value="NotGuardianSCBWEgg"/>
-  <CombineArray value="NotLurkerSCBWEgg"/>
-  <CombineArray value="NotEggSCBW"/>
-</CValidatorCombine>
-<CValidatorUnitType id="IsSiegeTank" parent="IsTemplate" unitName="SiegeTank"/>
-<CValidatorUnitType id="IsInfestedTerran" parent="IsTemplate" unitName="InfestedTerran"/>
-<CValidatorUnitType id="IsCarrier" parent="IsTemplate" unitName="Carrier"/>
-<CValidatorUnitType id="IsObserver" parent="IsTemplate" unitName="Observer"/>
-<CValidatorUnitType id="IsWarpPrism" parent="IsTemplate" unitName="WarpPrism"/>
-<CValidatorUnitType id="IsHighTemplar" parent="IsTemplate" unitName="HighTemplar"/>
-<CValidatorUnitType id="IsDarkTemplar" parent="IsTemplate" unitName="DarkTemplar"/>
-<CValidatorUnitType id="IsBattlecruiser" parent="IsTemplate" unitName="Battlecruiser"/>
-<CValidatorUnitType id="IsPhotonCannon" parent="IsTemplate" unitName="PhotonCannon"/>
-<CValidatorUnitType id="IsZealot" parent="IsTemplate" unitName="Zealot"/>
-<CValidatorUnitType id="IsArchon" parent="IsTemplate" unitName="Archon"/>
-<CValidatorUnitType id="IsPylon" parent="IsTemplate" unitName="Pylon"/>
-<CValidatorUnitType id="IsAssimilator" parent="IsTemplate" unitName="Assimilator"/>
-<CValidatorUnitType id="IsMedivac" parent="IsTemplate" unitName="Medivac"/>
-<CValidatorUnitType id="IsBunker" parent="IsTemplate" unitName="Bunker"/>
-<CValidatorUnitType id="IsExtractor" parent="IsTemplate" unitName="Extractor"/>
-<CValidatorUnitType id="IsSpineCrawler" parent="IsTemplate" unitName="SpineCrawler"/>
-<CValidatorUnitType id="IsSporeCrawler" parent="IsTemplate" unitName="SporeCrawler"/>
-<CValidatorUnitType id="IsMarine" parent="IsTemplate" unitName="Marine"/>
-<CValidatorCombine id="YoinkCancelOrder">
-  <CombineArray value="NotSiegeTankSCBW"/>
-</CValidatorCombine>
-<CValidatorCombine id="IsNotRecallingCombine">
-  <CombineArray value="SCBW_NoMassTransport"/>
-</CValidatorCombine>
-<CValidatorCombine id="ActivateStasisWardValidators">
-  <CombineArray value="NotLarvaSCBW"/>
-  <CombineArray value="NotEggSCBW"/>
-  <CombineArray value="NotLurkerSCBWEgg"/>
-  <CombineArray value="SCBW_NoMassTransport"/>
-</CValidatorCombine>
-<CValidatorCombine id="IsDefensiveStructure">
-  <CombineArray value="SCBW_IsDefensiveStructure"/>
-  <CombineArray value="IsBilePit"/>
-  <CombineArray value="IsInterdictor"/>
-  <CombineArray value="IsRepulsor"/>
-</CValidatorCombine>
-<CValidatorUnitType id="IsShieldBattery" parent="IsTemplate" unitName="ShieldBattery"/>
 <CValidatorUnitCompareBehaviorCount id="SCBW_HasDetector7">
   <Compare value="GT"/>
   <Behavior value="Detector7"/>
@@ -434,12 +311,30 @@
   <WhichUnit Value="Caster"/>
   <Filters value="Hallucination;-"/>
 </CValidatorUnitFilters>
+<CValidatorCombine id="HasAntiGravProtoss">
+  <CombineArray index="1" value="IsProtossSCBW"/>
+</CValidatorCombine>
+<CValidatorCombine id="HasAntiGravTerran">
+  <CombineArray index="1" value="IsTerranSCBW"/>
+</CValidatorCombine>
+<CValidatorCombine id="HasAntiGravZerg">
+  <CombineArray index="1" value="IsZergSCBW"/>
+</CValidatorCombine>
+<CValidatorCombine id="IsProtossUnit">
+  <CombineArray index="1" value="IsProtossSCBW"/>
+</CValidatorCombine>
 <CValidatorUnitState id="NotInsideTransport">
   <State value="InsideUnitTransport"/>
 </CValidatorUnitState>
 <CValidatorCombine id="CasterAttackingTargetORFirebatSCBW@DamageFilters">
   <CombineArray value="CasterAttackingTargetSCBW"/>
   <CombineArray value="FirebatSCBW@DamageFilters"/>
+</CValidatorCombine>
+<CValidatorCombine id="IsNotEggUnit">
+  <CombineArray value="NotDevourerSCBWEgg"/>
+  <CombineArray value="NotGuardianSCBWEgg"/>
+  <CombineArray value="NotLurkerSCBWEgg"/>
+  <CombineArray value="NotEggSCBW"/>
 </CValidatorCombine>
 <CValidatorCombine id="SCBW_MissCheckPrimary">
   <Type value="And"/>
@@ -513,6 +408,12 @@
   <Enabled value="1"/>
   <State value="Morphing"/>
 </CValidatorUnitState>
+<CValidatorCombine id="IsTerranUnit">
+  <CombineArray index="1" value="IsTerranSCBW"/>
+</CValidatorCombine>
+<CValidatorCombine id="IsZergUnit">
+  <CombineArray index="1" value="IsZergSCBW"/>
+</CValidatorCombine>
 <CValidatorCombine id="GeyserNotExhausted">
   <CombineArray value="GeyserExhaustedRaw"/>
   <CombineArray value="GeyserExhaustedHarvestable"/>
@@ -755,6 +656,22 @@
   <OtherLocation Value="OriginUnit"/>
   <Compare value="NE"/>
 </CValidatorLocationCompareCliffLevel>
+<CValidatorCombine id="ZergBleedLight">
+  <CombineArray value="HatcherySCBW@NotMorphing"/>
+  <CombineArray value="LairSCBW@NotMorphing"/>
+</CValidatorCombine>
+<CValidatorCombine id="ZergBleedNormal">
+  <CombineArray value="HatcherySCBW@NotMorphing"/>
+  <CombineArray value="LairSCBW@NotMorphing"/>
+</CValidatorCombine>
+<CValidatorCombine id="ZergBleedHeavy">
+  <CombineArray value="HatcherySCBW@NotMorphing"/>
+  <CombineArray value="LairSCBW@NotMorphing"/>
+</CValidatorCombine>
+<CValidatorCombine id="ZergBleedProfusely">
+  <CombineArray value="HatcherySCBW@NotMorphing"/>
+  <CombineArray value="LairSCBW@NotMorphing"/>
+</CValidatorCombine>
 <CValidatorCombine id="UnitOrAttackingStructureSCBW">
   <CombineArray value="NotStructure"/>
   <CombineArray value="TargetCanAttack"/>
@@ -906,19 +823,52 @@
   <WhichPlayer Value="Target"/>
 </CValidatorPlayerRequirement>
 <CValidatorCombine id="IsNotSpiderMineSCBW" parent="SCBW_Not" x="IsSpiderMineSCBW"/>
+<CValidatorUnitType id="IsNexus" parent="IsTemplate" unitName="Nexus"/>
+<CValidatorUnitType id="IsPylon" parent="IsTemplate" unitName="Pylon"/>
+<CValidatorUnitType id="IsAssimilator" parent="IsTemplate" unitName="Assimilator"/>
 <CValidatorUnitType id="IsAssimilatorRich" parent="IsTemplate" unitName="AssimilatorRich"/>
 <CValidatorUnitType id="IsAssimilatorProtossGeyser" parent="IsTemplate" unitName="AssimilatorProtossGeyser"/>
+<CValidatorUnitType id="IsGateway" parent="IsTemplate" unitName="Gateway"/>
+<CValidatorUnitType id="IsForge" parent="IsTemplate" unitName="Forge"/>
+<CValidatorUnitType id="IsPhotonCannon" parent="IsTemplate" unitName="PhotonCannon"/>
+<CValidatorUnitType id="IsShieldBattery" parent="IsTemplate" unitName="ShieldBattery"/>
+<CValidatorUnitType id="IsCyberneticsCore" parent="IsTemplate" unitName="CyberneticsCore"/>
+<CValidatorUnitType id="IsRoboticsFacility" parent="IsTemplate" unitName="RoboticsFacility"/>
+<CValidatorUnitType id="IsRoboticsBay" parent="IsTemplate" unitName="RoboticsBay"/>
+<CValidatorUnitType id="IsTwilightCouncil" parent="IsTemplate" unitName="TwilightCouncil"/>
 <CValidatorUnitType id="IsTemplarArchive" parent="IsTemplate" unitName="TemplarArchive"/>
 <CValidatorUnitType id="IsStargate" parent="IsTemplate" unitName="Stargate"/>
+<CValidatorUnitType id="IsFleetBeacon" parent="IsTemplate" unitName="FleetBeacon"/>
+<CValidatorUnitType id="IsProbe" parent="IsTemplate" unitName="Probe"/>
+<CValidatorUnitType id="IsZealot" parent="IsTemplate" unitName="Zealot"/>
 <CValidatorUnitType id="IsDragoon" parent="IsTemplate" unitName="Dragoon"/>
+<CValidatorUnitType id="IsHighTemplar" parent="IsTemplate" unitName="HighTemplar"/>
+<CValidatorUnitType id="IsDarkTemplar" parent="IsTemplate" unitName="DarkTemplar"/>
+<CValidatorUnitType id="IsArchon" parent="IsTemplate" unitName="Archon"/>
 <CValidatorUnitType id="IsDarkArchon" parent="IsTemplate" unitName="DarkArchon"/>
+<CValidatorUnitType id="IsWarpPrism" parent="IsTemplate" unitName="WarpPrism"/>
 <CValidatorUnitType id="IsReaver" parent="IsTemplate" unitName="Reaver"/>
+<CValidatorUnitType id="IsObserver" parent="IsTemplate" unitName="Observer"/>
 <CValidatorUnitType id="IsScout" parent="IsTemplate" unitName="Scout"/>
 <CValidatorUnitType id="IsCorsairMP" parent="IsTemplate" unitName="CorsairMP"/>
+<CValidatorUnitType id="IsCarrier" parent="IsTemplate" unitName="Carrier"/>
 <CValidatorUnitType id="IsArbiterMP" parent="IsTemplate" unitName="ArbiterMP"/>
+<CValidatorUnitType id="IsCommandCenter" parent="IsTemplate" unitName="CommandCenter"/>
+<CValidatorUnitType id="IsCommandCenterFlying" parent="IsTemplate" unitName="CommandCenterFlying"/>
+<CValidatorUnitType id="IsOrbitalCommand" parent="IsTemplate" unitName="OrbitalCommand"/>
 <CValidatorUnitType id="IsOrbitalCommandFlying" parent="IsTemplate" unitName="OrbitalCommandFlying"/>
 <CValidatorUnitType id="IsSupplyDepot" parent="IsTemplate" unitName="SupplyDepot"/>
 <CValidatorUnitType id="IsRefinery" parent="IsTemplate" unitName="Refinery"/>
+<CValidatorUnitType id="IsMissileTurret" parent="IsTemplate" unitName="MissileTurret"/>
+<CValidatorUnitType id="IsBarracks" parent="IsTemplate" unitName="Barracks"/>
+<CValidatorUnitType id="IsEngineeringBay" parent="IsTemplate" unitName="EngineeringBay"/>
+<CValidatorUnitType id="IsBunker" parent="IsTemplate" unitName="Bunker"/>
+<CValidatorUnitType id="IsFactory" parent="IsTemplate" unitName="Factory"/>
+<CValidatorUnitType id="IsStarport" parent="IsTemplate" unitName="Starport"/>
+<CValidatorUnitType id="IsArmory" parent="IsTemplate" unitName="Armory"/>
+<CValidatorUnitType id="IsFusionCore" parent="IsTemplate" unitName="FusionCore"/>
+<CValidatorUnitType id="IsSCV" parent="IsTemplate" unitName="SCV"/>
+<CValidatorUnitType id="IsMarine" parent="IsTemplate" unitName="Marine"/>
 <CValidatorUnitType id="IsFirebat" parent="IsTemplate" unitName="Firebat"/>
 <CValidatorUnitType id="IsMedic" parent="IsTemplate" unitName="Medic"/>
 <CValidatorUnitType id="IsGhost" parent="IsTemplate" unitName="Ghost">
@@ -926,14 +876,37 @@
 </CValidatorUnitType>
 <CValidatorUnitType id="IsVulture" parent="IsTemplate" unitName="Vulture"/>
 <CValidatorUnitType id="IsGoliath" parent="IsTemplate" unitName="Goliath"/>
+<CValidatorUnitType id="IsSiegeTank" parent="IsTemplate" unitName="SiegeTank"/>
 <CValidatorUnitType id="IsWraith" parent="IsTemplate" unitName="Wraith"/>
+<CValidatorUnitType id="IsMedivac" parent="IsTemplate" unitName="Medivac"/>
 <CValidatorUnitType id="IsScienceVessel" parent="IsTemplate" unitName="ScienceVessel"/>
+<CValidatorUnitType id="IsBattlecruiser" parent="IsTemplate" unitName="Battlecruiser"/>
 <CValidatorUnitType id="IsCyclone" parent="IsTemplate" unitName="Cyclone"/>
+<CValidatorUnitType id="IsHatchery" parent="IsTemplate" unitName="Hatchery"/>
+<CValidatorUnitType id="IsLair" parent="IsTemplate" unitName="Lair"/>
+<CValidatorUnitType id="IsHive" parent="IsTemplate" unitName="Hive"/>
+<CValidatorUnitType id="IsSporeCrawler" parent="IsTemplate" unitName="SporeCrawler"/>
+<CValidatorUnitType id="IsSpineCrawler" parent="IsTemplate" unitName="SpineCrawler"/>
+<CValidatorUnitType id="IsExtractor" parent="IsTemplate" unitName="Extractor"/>
+<CValidatorUnitType id="IsSpawningPool" parent="IsTemplate" unitName="SpawningPool"/>
+<CValidatorUnitType id="IsEvolutionChamber" parent="IsTemplate" unitName="EvolutionChamber"/>
+<CValidatorUnitType id="IsHydraliskDen" parent="IsTemplate" unitName="HydraliskDen"/>
+<CValidatorUnitType id="IsSpire" parent="IsTemplate" unitName="Spire"/>
+<CValidatorUnitType id="IsInfestationPit" parent="IsTemplate" unitName="InfestationPit"/>
 <CValidatorUnitType id="IsNydusCanal" parent="IsTemplate" unitName="NydusCanal"/>
+<CValidatorUnitType id="IsUltraliskCavern" parent="IsTemplate" unitName="UltraliskCavern"/>
+<CValidatorUnitType id="IsLarva" parent="IsTemplate" unitName="Larva"/>
+<CValidatorUnitType id="IsDrone" parent="IsTemplate" unitName="Drone"/>
+<CValidatorUnitType id="IsZergling" parent="IsTemplate" unitName="Zergling"/>
+<CValidatorUnitType id="IsOverlord" parent="IsTemplate" unitName="Overlord"/>
+<CValidatorUnitType id="IsHydralisk" parent="IsTemplate" unitName="Hydralisk"/>
+<CValidatorUnitType id="IsMutalisk" parent="IsTemplate" unitName="Mutalisk"/>
 <CValidatorUnitType id="IsScourge" parent="IsTemplate" unitName="Scourge"/>
 <CValidatorUnitType id="IsQueenMP" parent="IsTemplate" unitName="QueenMP"/>
+<CValidatorUnitType id="IsUltralisk" parent="IsTemplate" unitName="Ultralisk"/>
 <CValidatorUnitType id="IsDefilerMP" parent="IsTemplate" unitName="DefilerMP"/>
 <CValidatorUnitType id="IsBroodling" parent="IsTemplate" unitName="Broodling"/>
+<CValidatorUnitType id="IsInfestedTerran" parent="IsTemplate" unitName="InfestedTerran"/>
 <CValidatorUnitType id="IsNexusSCBW" parent="IsTemplate" unitName="NexusSCBW"/>
 <CValidatorUnitType id="IsPylonSCBW" parent="IsTemplate" unitName="PylonSCBW"/>
 <CValidatorUnitType id="IsAssimilatorSCBW" parent="IsTemplate" unitName="AssimilatorSCBW"/>
@@ -1209,6 +1182,7 @@
 <CValidatorUnitType id="CasterIsCorsairMP" parent="CasterIsTemplate" unitName="CorsairMP"/>
 <CValidatorUnitType id="CasterIsCarrier" parent="CasterIsTemplate" unitName="Carrier"/>
 <CValidatorUnitType id="CasterIsArbiterMP" parent="CasterIsTemplate" unitName="ArbiterMP"/>
+<CValidatorUnitType id="CasterIsCommandCenter" parent="CasterIsTemplate" unitName="CommandCenter"/>
 <CValidatorUnitType id="CasterIsSupplyDepot" parent="CasterIsTemplate" unitName="SupplyDepot"/>
 <CValidatorUnitType id="CasterIsRefinery" parent="CasterIsTemplate" unitName="Refinery"/>
 <CValidatorUnitType id="CasterIsRefineryRich" parent="CasterIsTemplate" unitName="RefineryRich"/>
@@ -2788,6 +2762,12 @@
   <Compare value="GT"/>
   <Behavior value="Detector13p75"/>
 </CValidatorUnitCompareBehaviorCount>
+<CValidatorCombine id="IsDefensiveStructure">
+  <CombineArray value="SCBW_IsDefensiveStructure"/>
+  <CombineArray value="IsBilePit"/>
+  <CombineArray value="IsInterdictor"/>
+  <CombineArray value="IsRepulsor"/>
+</CValidatorCombine>
 <CValidatorCombine id="SCBW_IsDefensiveStructure">
   <CombineArray value="NotStructure"/>
   <CombineArray value="IsPhotonCannonSCBW"/>
@@ -2818,6 +2798,15 @@
 <CValidatorUnitCompareOrderCount id="WorkerChannelNoQueuedOrders">
   <Value value="1"/>
 </CValidatorUnitCompareOrderCount>
+<CValidatorCombine id="ActivateStasisWardValidators">
+  <CombineArray value="NotLarvaSCBW"/>
+  <CombineArray value="NotEggSCBW"/>
+  <CombineArray value="NotLurkerSCBWEgg"/>
+  <CombineArray value="SCBW_NoMassTransport"/>
+</CValidatorCombine>
+<CValidatorCombine id="IsNotRecallingCombine">
+  <CombineArray value="SCBW_NoMassTransport"/>
+</CValidatorCombine>
 <CValidatorCombine id="BroodlordEscort@MissCheck">
   <Type value="And"/>
   <CombineArray value="SCBW_HasMissChance"/>
@@ -2831,6 +2820,14 @@
   <CombineArray value="IsCarrier"/>
   <CombineArray value="IsCarrierSCBW"/>
 </CValidatorCombine>
+<CValidatorUnitCompareBehaviorCount id="IsHallucination">
+  <Behavior value=""/>
+  <Categories index="Temporary" value="1"/>
+</CValidatorUnitCompareBehaviorCount>
+<CValidatorUnitCompareBehaviorCount id="IsNotHallucination">
+  <Behavior value=""/>
+  <Categories index="Temporary" value="1"/>
+</CValidatorUnitCompareBehaviorCount>
 <CValidatorUnitMover id="ReaperKD8KnockbackNotInMotion">
   <Value value="UnitKnockbackMover3"/>
 </CValidatorUnitMover>
@@ -2838,6 +2835,9 @@
   <Type value="And"/>
   <CombineArray value="IsUnderConstruction"/>
   <CombineArray value="WorkerChannelNoQueuedOrders"/>
+</CValidatorCombine>
+<CValidatorCombine id="YoinkCancelOrder">
+  <CombineArray value="NotSiegeTankSCBW"/>
 </CValidatorCombine>
 <CValidatorUnitCompareBehaviorCount id="ArkwyrmUnload">
   <Compare value="GT"/>

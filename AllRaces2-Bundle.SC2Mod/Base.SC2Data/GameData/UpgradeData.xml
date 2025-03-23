@@ -2385,51 +2385,6 @@
   <AffectedUnitArray value="ZHBRStrider"/>
   <AffectedUnitArray value="ZHBRMinion"/>
 </CUpgrade>
-<CUpgrade id="BattlecruiserBehemothReactor">
-  <Flags index="TechTreeCheat" value="0"/>
-</CUpgrade>
-<CUpgrade id="CarrierLaunchSpeedUpgrade">
-  <Flags index="TechTreeCheat" value="0"/>
-</CUpgrade>
-<CUpgrade id="GhostMoebiusReactor">
-  <Flags index="TechTreeCheat" value="0"/>
-</CUpgrade>
-<CUpgrade id="RavenCorvidReactor">
-  <Flags index="TechTreeCheat" value="0"/>
-</CUpgrade>
-<CUpgrade id="ReaperSpeed">
-  <Flags index="TechTreeCheat" value="0"/>
-</CUpgrade>
-<CUpgrade id="DurableMaterials">
-  <Flags index="TechTreeCheat" value="0"/>
-</CUpgrade>
-<CUpgrade id="hydraliskspeed">
-  <Flags index="TechTreeCheat" value="0"/>
-</CUpgrade>
-<CUpgrade id="OracleEnergyUpgrade">
-  <Flags index="TechTreeCheat" value="0"/>
-</CUpgrade>
-<CUpgrade id="RestoreShields">
-  <Flags index="TechTreeCheat" value="0"/>
-</CUpgrade>
-<CUpgrade id="CycloneLockOnRangeUpgrade">
-  <Flags index="TechTreeCheat" value="0"/>
-</CUpgrade>
-<CUpgrade id="SecretedCoating">
-  <Flags index="TechTreeCheat" value="0"/>
-</CUpgrade>
-<CUpgrade id="ArmorPiercingRockets">
-  <Flags index="TechTreeCheat" value="0"/>
-</CUpgrade>
-<CUpgrade id="CycloneRapidFireLaunchers">
-  <Flags index="TechTreeCheat" value="0"/>
-</CUpgrade>
-<CUpgrade id="CarrierCarrierCapacity">
-  <Flags index="TechTreeCheat" value="0"/>
-</CUpgrade>
-<CUpgrade id="CarrierLeashRangeUpgrade">
-  <Flags index="TechTreeCheat" value="0"/>
-</CUpgrade>
 <CUpgrade id="GatewaySCBWResonantMatrixResearch">
   <Flags index="UpgradeCheat" value="0"/>
   <Icon value="Assets\Textures\btn-ability-spearofadun-chronomancy.dds"/>
@@ -3347,6 +3302,51 @@
   <EffectArrayTemplate Operation="Set" Reference="Weapon,^ParamId^WeaponGround,AllowedMovement" Value="Moving"/>
   <EditorCategories value="Race:Terran,UpgradeType:Talents"/>
   <AffectedUnitArray value="StingerSCBW"/>
+</CUpgrade>
+<CUpgrade id="ArmorPiercingRockets">
+  <Flags index="TechTreeCheat" value="0"/>
+</CUpgrade>
+<CUpgrade id="BattlecruiserBehemothReactor">
+  <Flags index="TechTreeCheat" value="0"/>
+</CUpgrade>
+<CUpgrade id="CarrierCarrierCapacity">
+  <Flags index="TechTreeCheat" value="0"/>
+</CUpgrade>
+<CUpgrade id="CarrierLaunchSpeedUpgrade">
+  <Flags index="TechTreeCheat" value="0"/>
+</CUpgrade>
+<CUpgrade id="CarrierLeashRangeUpgrade">
+  <Flags index="TechTreeCheat" value="0"/>
+</CUpgrade>
+<CUpgrade id="CycloneLockOnRangeUpgrade">
+  <Flags index="TechTreeCheat" value="0"/>
+</CUpgrade>
+<CUpgrade id="CycloneRapidFireLaunchers">
+  <Flags index="TechTreeCheat" value="0"/>
+</CUpgrade>
+<CUpgrade id="DurableMaterials">
+  <Flags index="TechTreeCheat" value="0"/>
+</CUpgrade>
+<CUpgrade id="GhostMoebiusReactor">
+  <Flags index="TechTreeCheat" value="0"/>
+</CUpgrade>
+<CUpgrade id="OracleEnergyUpgrade">
+  <Flags index="TechTreeCheat" value="0"/>
+</CUpgrade>
+<CUpgrade id="RavenCorvidReactor">
+  <Flags index="TechTreeCheat" value="0"/>
+</CUpgrade>
+<CUpgrade id="ReaperSpeed">
+  <Flags index="TechTreeCheat" value="0"/>
+</CUpgrade>
+<CUpgrade id="RestoreShields">
+  <Flags index="TechTreeCheat" value="0"/>
+</CUpgrade>
+<CUpgrade id="SecretedCoating">
+  <Flags index="TechTreeCheat" value="0"/>
+</CUpgrade>
+<CUpgrade id="hydraliskspeed">
+  <Flags index="TechTreeCheat" value="0"/>
 </CUpgrade>
 <CUpgrade id="AuroraConduitConduction" parent="Research">
   <InfoTooltipPriority value="0"/>
@@ -6087,8 +6087,8 @@
   <EffectArray Operation="Set" Reference="Actor,PeenemundeMRLS,LifeArmorIcon" Value="Assets\textures\btn-upgrade-ued-armor-level1.dds"/>
   <EffectArray Operation="Set" Reference="Actor,Strikefighter,LifeArmorIcon" Value="Assets\textures\btn-upgrade-ued-armor-level1.dds"/>
   <EffectArray Operation="Set" Reference="Actor,Valkyrie,LifeArmorIcon" Value="Assets\textures\btn-upgrade-ued-armor-level1.dds"/>
-  <EffectArray Operation="Set" Reference="Actor,Medivac3,LifeArmorIcon" Value="Assets\textures\btn-upgrade-ued-armor-level1.dds"/>
-  <EffectArray Operation="Set" Reference="Actor,Medivac2,LifeArmorIcon" Value="Assets\textures\btn-upgrade-ued-armor-level1.dds"/>
+  <EffectArray Operation="Set" Reference="Actor,SupportShuttle,LifeArmorIcon" Value="Assets\textures\btn-upgrade-ued-armor-level1.dds"/>
+  <EffectArray Operation="Set" Reference="Actor,TransportShuttle,LifeArmorIcon" Value="Assets\textures\btn-upgrade-ued-armor-level1.dds"/>
   <EffectArray Reference="Unit,CitadelAAT,LifeArmor" Value="1"/>
   <EffectArray Reference="Unit,CrimsonEye,LifeArmorLevel" Value="1"/>
   <EffectArray Reference="Unit,Typhoon,LifeArmor" Value="1"/>
@@ -6157,8 +6157,8 @@
   <EffectArray Operation="Set" Reference="Actor,PeenemundeMRLS,LifeArmorIcon" Value="Assets\textures\btn-upgrade-ued-armor-level2.dds"/>
   <EffectArray Operation="Set" Reference="Actor,Strikefighter,LifeArmorIcon" Value="Assets\textures\btn-upgrade-ued-armor-level2.dds"/>
   <EffectArray Operation="Set" Reference="Actor,Valkyrie,LifeArmorIcon" Value="Assets\textures\btn-upgrade-ued-armor-level2.dds"/>
-  <EffectArray Operation="Set" Reference="Actor,Medivac3,LifeArmorIcon" Value="Assets\textures\btn-upgrade-ued-armor-level2.dds"/>
-  <EffectArray Operation="Set" Reference="Actor,Medivac2,LifeArmorIcon" Value="Assets\textures\btn-upgrade-ued-armor-level2.dds"/>
+  <EffectArray Operation="Set" Reference="Actor,SupportShuttle,LifeArmorIcon" Value="Assets\textures\btn-upgrade-ued-armor-level2.dds"/>
+  <EffectArray Operation="Set" Reference="Actor,TransportShuttle,LifeArmorIcon" Value="Assets\textures\btn-upgrade-ued-armor-level2.dds"/>
   <EffectArray Reference="Unit,CitadelAAT,LifeArmor" Value="1"/>
   <EffectArray Reference="Unit,CrimsonEye,LifeArmorLevel" Value="1"/>
   <EffectArray Reference="Unit,Typhoon,LifeArmor" Value="1"/>
@@ -6225,8 +6225,8 @@
   <EffectArray Operation="Set" Reference="Actor,PeenemundeMRLS,LifeArmorIcon" Value="Assets\textures\btn-upgrade-ued-armor-level3.dds"/>
   <EffectArray Operation="Set" Reference="Actor,Strikefighter,LifeArmorIcon" Value="Assets\textures\btn-upgrade-ued-armor-level3.dds"/>
   <EffectArray Operation="Set" Reference="Actor,Valkyrie,LifeArmorIcon" Value="Assets\textures\btn-upgrade-ued-armor-level3.dds"/>
-  <EffectArray Operation="Set" Reference="Actor,Medivac3,LifeArmorIcon" Value="Assets\textures\btn-upgrade-ued-armor-level3.dds"/>
-  <EffectArray Operation="Set" Reference="Actor,Medivac2,LifeArmorIcon" Value="Assets\textures\btn-upgrade-ued-armor-level3.dds"/>
+  <EffectArray Operation="Set" Reference="Actor,SupportShuttle,LifeArmorIcon" Value="Assets\textures\btn-upgrade-ued-armor-level3.dds"/>
+  <EffectArray Operation="Set" Reference="Actor,TransportShuttle,LifeArmorIcon" Value="Assets\textures\btn-upgrade-ued-armor-level3.dds"/>
   <EffectArray Reference="Unit,CitadelAAT,LifeArmor" Value="1"/>
   <EffectArray Reference="Unit,CrimsonEye,LifeArmorLevel" Value="1"/>
   <EffectArray Reference="Unit,Typhoon,LifeArmor" Value="1"/>

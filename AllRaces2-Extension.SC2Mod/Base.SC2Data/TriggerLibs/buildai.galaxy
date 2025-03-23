@@ -197,7 +197,7 @@ int AIGetDefaultBuildFlags (int player, string objType) {
     if (objType == c_ZB_Extractor) {
         return c_makeCollector;
     }
-
+    
 	// special broodwar protoss units
     if (objType == c_BWPB_Nexus) {
         return c_makeCenter;

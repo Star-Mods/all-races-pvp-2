@@ -18,7 +18,6 @@ const int libARMP_gv_mAX_PLAYERS = 15;
 int libARMP_gv_startMinerals;
 int libARMP_gv_startVespene;
 int libARMP_gv_resourceType;
-int libARMP_gv_supplyCap;
 int libARMP_gv_mineralWallsHarvesterAmount;
 unitgroup libARMP_gv_mineralWallsGlobalMineralWalls;
 timer libARMP_gv_mineralWallsTimer;
@@ -29,6 +28,7 @@ int[libARMP_gv_mAX_PLAYERS + 1][libARMP_gv_mAX_PLAYERS + 1] libARMP_gv_minimapAl
 
 // Function Declarations
 string libARMP_gf_GetResourceUserData (string lp_unit);
+void libARMP_gf_ApplySupplyCap (int lp_value);
 void libARMP_gf_DisableClassicSkins (int lp_player);
 void libARMP_gf_SCEvoEnableAIOption (bool lp_activateDeactivate, int lp_option);
 void libARMP_gf_MineralWallsActivate (bool lp_onOff);
@@ -47,7 +47,6 @@ trigger libARMP_gt_SupportWorkerOnlyPathsForSomeCustomMaps;
 trigger libARMP_gt_SprayUpgrades;
 trigger libARMP_gt_ApplyInitialResources;
 trigger libARMP_gt_ApplyHarvestableResources;
-trigger libARMP_gt_ApplySupplyCap;
 trigger libARMP_gt_MineralWallsUpdate;
 trigger libARMP_gt_MinimapAllyViewCameraSnap;
 trigger libARMP_gt_MinimapAllyViewCameraUpdate;

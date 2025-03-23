@@ -11,32 +11,31 @@
             <Id Value="1"/>
             <Name Value="Attribute016/Value001/Name"/>
             <Description Value="Attribute016/Value001/Desc"/>
-            <Icon Value="Assets\Textures\decalspacearrow03_diffuse.dds"/>
         </Value>
         <Value>
             <Id Value="2"/>
             <Name Value="Attribute016/Value002/Name"/>
-            <Icon Value="Assets\Lobby\lobby-genetron.dds"/>
+            <Icon Value="Assets\icons\genetron-color.dds"/>
         </Value>
         <Value>
             <Id Value="3"/>
             <Name Value="Attribute016/Value003/Name"/>
-            <Icon Value="assets\Lobby\lobby-xayid.dds"/>
+            <Icon Value="Assets\icons\xayid-color.dds"/>
         </Value>
         <Value>
             <Id Value="4"/>
             <Name Value="Attribute016/Value004/Name"/>
-            <Icon Value="Assets\Lobby\lobby-keiron.dds"/>
+            <Icon Value="Assets\icons\keiron-color.dds"/>
         </Value>
         <Value>
             <Id Value="5"/>
             <Name Value="Attribute016/Value005/Name"/>
-            <Icon Value="Assets\Lobby\lobby-ued.dds"/>
+            <Icon Value="Assets\Icons\ueds.dds"/>
         </Value>
         <Value>
             <Id Value="6"/>
             <Name Value="Attribute016/Value006/Name"/>
-            <Icon Value="Assets\Lobby\lobby-hybrid.dds"/>
+            <Icon Value="Assets\icons\hybrid-color.dds"/>
         </Value>
         <Value>
             <Id Value="18"/>
@@ -56,12 +55,12 @@
         <Value>
             <Id Value="9"/>
             <Name Value="Attribute016/Value009/Name"/>
-            <Icon Value="Assets\Lobby\lobby-umojan.dds"/>
+            <Icon Value="Assets\Textures\decal_terran_0050_02.dds"/>
         </Value>
         <Value>
             <Id Value="10"/>
             <Name Value="Attribute016/Value010/Name"/>
-            <Icon Value="Assets\Icons\taldarim.dds"/>
+            <Icon Value="Assets\Icons\taldarim-color.dds"/>
         </Value>
         <Value>
             <Id Value="11"/>
@@ -81,22 +80,22 @@
         <Value>
             <Id Value="14"/>
             <Name Value="Attribute016/Value014/Name"/>
-            <Icon Value="Assets\Lobby\lobby-terran.dds"/>
+            <Icon Value="Assets\Textures\ui_glues_help_armyicon_terran.dds"/>
         </Value>
         <Value>
             <Id Value="15"/>
             <Name Value="Attribute016/Value015/Name"/>
-            <Icon Value="Assets\Lobby\lobby-zerg.dds"/>
+            <Icon Value="Assets\Textures\ui_glues_help_armyicon_zerg.dds"/>
         </Value>
         <Value>
             <Id Value="16"/>
             <Name Value="Attribute016/Value016/Name"/>
-            <Icon Value="Assets\Lobby\lobby-protoss.dds"/>
+            <Icon Value="Assets\Textures\ui_glues_help_armyicon_protoss.dds"/>
         </Value>
         <Value>
             <Id Value="17"/>
             <Name Value="Attribute016/Value017/Name"/>
-            <Icon Value="Assets\Lobby\lobby-random.dds"/>
+            <Icon Value="Assets\Textures\sc2_ui_loadingscreen_playercard_raceindicator_random.dds"/>
         </Value>
         <Default>
             <Slot Id="0"/>

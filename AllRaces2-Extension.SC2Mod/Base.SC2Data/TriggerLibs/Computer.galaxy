@@ -1,6 +1,5 @@
 include "TriggerLibs/DebugAI"
 include "TriggerLibs/RequirementsAI"
-include "TriggerLibs/RequirementsAISCBW"
 include "TriggerLibs/BuildAI"
 include "TriggerLibs/SharedAI"
 include "TriggerLibs/Tactical/TacticalAI"

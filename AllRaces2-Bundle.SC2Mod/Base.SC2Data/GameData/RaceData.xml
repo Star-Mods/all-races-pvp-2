@@ -446,7 +446,7 @@
   <Icon value="Assets\Icons\Synoid.dds"/>
 </CRace>
 <CRace id="PrTD" parent="Prot">
-  <Icon value="Assets\Icons\taldarim-color.dds"/>
+  <Icon value="Assets\Icons\taldarim.dds"/>
   <Name value="Race/Name/PrTD"/>
   <AttributeId value="PrTD"/>
   <RaceIcon value="@UI/RaceIcon/PrTD"/>

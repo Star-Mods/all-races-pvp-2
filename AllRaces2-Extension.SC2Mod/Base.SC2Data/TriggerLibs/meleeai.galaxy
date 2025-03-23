@@ -220,7 +220,7 @@ void AISetMainState (int player, int mainState, int mainSubState) {
 void EndMeleeScript (int player) {
     string msg = "Reached end of script for player " + IntToString(player) + "-" + 
         PlayerRace(player) + " : More AI code coming soon.";
-    // UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, StringToText(msg));
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, StringToText(msg));
     DebugAI(msg);
     AISetMainState(player, e_mainState_Disabled, e_mainSubState_Unset);
 }
@@ -231,7 +231,7 @@ void EndMeleeScript (int player) {
 void ErrorMeleeScript (int player, string error) {
     string msg = "A script logic error occurred for player " + IntToString(player) +
         "-" + PlayerRace(player) + " : " + error;
-    // UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, StringToText(msg));
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, StringToText(msg));
     DebugAI(msg);
     AISetMainState(player, e_mainState_Disabled, e_mainSubState_Unset);
 }
@@ -548,7 +548,7 @@ void XayidBasicDefenseStock (int player) {
     if (!AINeedsDefending(player)) {
         return;
     }
-
+    
     AISetStockFarms( player, c_XB_FeedingPool, c_stockNormalFarms);
     AISetStock( player, 1, c_XB_Siphoner );
     AIAddEmergencyDefenseStock(player, 6, c_XU_Xayidling, false);
@@ -565,7 +565,7 @@ void KeironBasicDefenseStock (int player) {
   if (!AINeedsDefending(player)) {
       return;
   }
-
+  
   AISetStockFarms( player, c_KB_Edifice, c_stockNormalFarms);
   AIAddEmergencyDefenseStock(player, 8, c_KU_Volt, false);
   AISetStock( player, 1, c_KB_Formulator);
@@ -582,7 +582,7 @@ void TerranBasicDefenseStock (int player) {
     if (!AINeedsDefending(player)) {
         return;
     }
-    
+
     AISetStockFarms( player, c_TB_SupplyDepot, c_stockNormalFarms);
     AIAddEmergencyDefenseStock(player, 8, c_TU_Marine, false);
     AISetStock( player, 1, c_TB_Refinery );
@@ -667,16 +667,19 @@ include "TriggerLibs/Genetron/Genetron"
 include "TriggerLibs/Xayid/Xayid"
 include "TriggerLibs/Keiron/Keiron"
 
-include "TriggerLibs/ARC/Dragon"
-include "TriggerLibs/ARC/UED"
-include "TriggerLibs/ARC/UPL"
-include "TriggerLibs/ARC/Hybrid"
+include "TriggerLibs/ARC/dragon"
+include "TriggerLibs/ARC/hybrid"
+include "TriggerLibs/ARC/Synoid"
+include "TriggerLibs/ARC/Taldarim"
+include "TriggerLibs/ARC/ued"
+include "TriggerLibs/ARC/Umojan"
+include "TriggerLibs/ARC/upl"
+
 //BW AI Libs
 include "TriggerLibs/BWTerran/BWTerran"
 include "TriggerLibs/BWProtoss/BWProtoss"
 include "TriggerLibs/BWZerg/BWZerg"
 //Vanilla AI Libs
-
 include "TriggerLibs/Terran/Terran"
 include "TriggerLibs/Protoss/Protoss"
 include "TriggerLibs/Zerg/Zerg"

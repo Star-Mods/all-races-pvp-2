@@ -169,139 +169,6 @@
   <Radius value="1"/>
   <RestrictToCircumference value="1"/>
 </CEffectRandomPointInCircle>
-<CEffectSet id="InstantUnburrow">
-  <EffectArray index="0" value="InstantUnburrowLegacy"/>
-  <EffectArray index="1" value="InstantUnburrowMore"/>
-  <EffectArray index="2" value="HunterRegenesisRemoveBehavior"/>
-  <EffectArray index="3" value="MoleUnburrowSet"/>
-  <EffectArray index="4" removed="1"/>
-  <EffectArray index="5" removed="1"/>
-  <EffectArray index="6" removed="1"/>
-  <EffectArray index="7" removed="1"/>
-</CEffectSet>
-<CEffectSet id="GravitonBeamUnburrowTake2Set">
-  <EffectArray value="InstantUnburrowMore"/>
-</CEffectSet>
-<CEffectApplyBehavior id="InstantMorphUnburrowAB">
-  <ValidatorArray value="NotSiegeTankSCBW"/>
-</CEffectApplyBehavior>
-<CEffectApplyBehavior id="NeuralParasiteDroneCheck">
-  <ValidatorArray index="0" value="IsDroneOrDroneSCBW"/>
-</CEffectApplyBehavior>
-<CEffectDamage id="PsionicShockwaveDamage">
-  <ImpactUnitValidator value="NotUnderDarkSwarmCombine"/>
-  <AreaArray index="0" Validator="ArchonSCBWWeapon@SplashInnerValidator"/>
-  <AreaArray index="1" Validator="ArchonSCBWWeapon@SplashValidator"/>
-  <AreaArray index="2" Validator="ArchonSCBWWeapon@SplashValidator"/>
-  <SearchFilters value="-;Self,Missile,Stasis,Dead,Hidden,Invulnerable"/>
-</CEffectDamage>
-<CEffectSet id="PunisherGrenadesSet">
-  <ValidatorArray value="SCBWWeapon@NotMissed"/>
-</CEffectSet>
-<CEffectTeleport id="Blink">
-  <TeleportEffect value="ReaverSCBWWeapon@TeleportRemoveBehaviorSelf"/>
-</CEffectTeleport>
-<CEffectDamage id="TwinIbiksCannon">
-  <ImpactUnitValidator value="NotUnderDarkSwarmCombine"/>
-  <AreaArray index="0" Validator="ArchonSCBWWeapon@SplashInnerValidator"/>
-  <AreaArray index="1" Validator="ArchonSCBWWeapon@SplashValidator"/>
-  <AreaArray index="2" Validator="ArchonSCBWWeapon@SplashValidator"/>
-  <SearchFilters value="Ground;Self,Missile,Stasis,Dead,Hidden,Invulnerable"/>
-</CEffectDamage>
-<CEffectDamage id="BroodlingEscortDamageUnit">
-  <ImpactUnitValidator value="SCBWWeapon@NotMissedTarget"/>
-</CEffectDamage>
-<CEffectSwitch id="DisguiseEx3">
-  <CaseArray Validator="DisguiseAsMarineSCBW" Effect="DisguiseAsMarineSCBWCU"/>
-  <CaseArray Validator="DisguiseAsZealotSCBW" Effect="DisguiseAsZealotSCBWCU"/>
-  <CaseArray Validator="DisguiseAsZerglingSCBW" Effect="DisguiseAsZerglingSCBWCU"/>
-  <CaseArray Validator="DisguiseAsFlamespitter" Effect="DisguiseAsFlamespitterCU"/>
-  <CaseArray Validator="DisguiseAsSpitfire" Effect="DisguiseAsSpitfireCU"/>
-  <CaseArray Validator="DisguiseAsXayidling" Effect="DisguiseAsXayidlingCU"/>
-  <CaseArray Validator="DisguiseAsVolt" Effect="DisguiseAsVoltCU"/>
-  <CaseArray Validator="DisguiseAsServitor" Effect="DisguiseAsServitorCU"/>
-  <CaseArray Validator="ZerDarimDisguiseAsSupplicant" Effect="ZerDarimDisguiseAsSupplicantCU"/>
-  <CaseArray index="0" Effect="DisguiseAsZealot"/>
-  <CaseArray index="1" Effect="DisguiseAsMarineWithShield"/>
-  <CaseArray index="2" Effect="DisguiseAsMarineWithoutShield"/>
-  <CaseArray index="3" Effect="DisguiseAsZerglingWithWings"/>
-  <CaseArray index="4" Effect="DisguiseAsZerglingWithoutWings"/>
-  <CaseArray Validator="DisguiseAsStrikeTrooper" Effect="DisguiseAsStrikeTrooperCU"/>
-  <CaseArray Validator="ZerojanDisguiseAsMarineWithShield" Effect="ZerojanDisguiseAsPretorianWithShieldCU"/>
-  <CaseArray Validator="ZerojanDisguiseAsMarineWithoutShield" Effect="ZerojanDisguiseAsPretorianWithoutShieldCU"/>
-  <CaseArray Validator="DisguiseAsInfantryRifle" Effect="DisguiseAsInfantryRifleCU"/>
-  <CaseArray Validator="ZHBRCommon@TargetIsVoidForcesRace" Effect="DisguiseAsWarriorCU"/>
-</CEffectSwitch>
-<CEffectCreateUnit id="YoinkStartCreatePlaceholder">
-  <ValidatorArray value="NotLarvaSCBW"/>
-</CEffectCreateUnit>
-<CEffectSet id="YoinkSet">
-  <EffectArray value="ReaverSCBWWeapon@TeleportRemoveBehaviorTarget"/>
-  <EffectArray value="YoinkImpactSpiderMine"/>
-  <ValidatorArray value="UmojanTargetNotTacticalJumping"/>
-</CEffectSet>
-<CEffectSet id="WidowMineAttack">
-  <ValidatorArray value="NotLarvaSCBW"/>
-</CEffectSet>
-<CEffectTeleport id="AdeptPhaseShiftTeleport">
-  <TeleportEffect value="ReaverSCBWWeapon@TeleportRemoveBehaviorSelf"/>
-</CEffectTeleport>
-<CEffectSet id="AdeptPhaseShiftTeleportSet">
-  <EffectArray index="1" value="AdeptPhaseShiftRemoveDisablesSCBW"/>
-  <EffectArray index="2" value="AdeptPhaseShiftSelect"/>
-  <EffectArray index="3" value="AdeptPhaseShiftKillDummy"/>
-  <EffectArray index="4" value="AdeptPhaseShiftTeleport"/>
-  <EffectArray value="AdeptPhaseUnitOrderQueue"/>
-</CEffectSet>
-<CEffectSet id="OracleStasisTrapSearchSet">
-  <EffectArray index="1" value="ArbiterSCBWStasisField@HaltIssueOrder"/>
-</CEffectSet>
-<CEffectApplyBehavior id="OracleStasisTrapActivateAB">
-  <ValidatorArray value="NotLarvaSCBW"/>
-  <ValidatorArray value="NotEggSCBW"/>
-  <ValidatorArray value="NotLurkerSCBWEgg"/>
-</CEffectApplyBehavior>
-<CEffectLaunchMissile id="ParasiticBombLM">
-  <ValidatorArray value="IsNotInterceptor"/>
-  <ValidatorArray value="NotInterceptorSCBW"/>
-</CEffectLaunchMissile>
-<CEffectCreateUnit id="ReaperKD8Knockback">
-  <ValidatorArray value="SCBW_NotBurrowedUnit"/>
-  <ValidatorArray value="IsNotMoleRooted"/>
-  <ValidatorArray value="IsNotMoleBurrowed"/>
-</CEffectCreateUnit>
-<CEffectCreateUnit id="LurkerMPCU">
-  <SpawnUnit index="0" value="SCBW_InvulnerableDummy"/>
-</CEffectCreateUnit>
-<CEffectTeleport id="DarkTemplarBlink">
-  <TeleportEffect value="BlinkBehaviors"/>
-</CEffectTeleport>
-<CEffectSwitch id="RavenScramblerMissileABswitch">
-  <CaseArray index="0" Validator="IsCarrierOrCarrierSCBW"/>
-</CEffectSwitch>
-<CEffectTeleport id="NexusMassRecallTeleport">
-  <TeleportEffect value="ReaverSCBWWeapon@TeleportRemoveBehaviorTarget"/>
-</CEffectTeleport>
-<CEffectTeleport id="MothershipStrategicRecallTeleport">
-  <TeleportEffect value="ReaverSCBWWeapon@TeleportRemoveBehaviorTarget"/>
-</CEffectTeleport>
-<CEffectIssueOrder id="CommandStructureOrderAutoRally">
-  <ValidatorArray value="CasterNotHatcherySCBW"/>
-</CEffectIssueOrder>
-<CEffectIssueOrder id="CommandStructureOrderAutoRally2">
-  <Abil value=""/>
-  <AbilTechAlias value="_HatchRally"/>
-</CEffectIssueOrder>
-<CEffectSet id="WorkerRemoveGatherOrderSet">
-  <EffectArray value="WorkerRemoveGatherOrderGeneric"/>
-</CEffectSet>
-<CEffectCreatePersistent id="WorkerChannelStopIdle">
-  <PeriodicValidator value="WorkerChannelStopIdlePeriodicValidator"/>
-</CEffectCreatePersistent>
-<CEffectSet id="WorkerIssueGatherOrderSet">
-  <EffectArray index="3" value="WorkerIssueGatherOrderGeneric"/>
-  <EffectArray value="WorkerVespeneWalkRemoveBehavior"/>
-</CEffectSet>
 <CEffectUserData id="SCBW_SplashFactor_Step">
   <Key value="SplashFactor"/>
   <SourceKey value="SplashFactor"/>
@@ -342,6 +209,35 @@
   <RevealFlags index="LoS" value="1"/>
   <ExpireDelay value="6.25"/>
 </CEffectCreatePersistent>
+<CEffectCreateUnit id="ReaperKD8Knockback">
+  <ValidatorArray value="SCBW_NotBurrowedUnit"/>
+  <ValidatorArray value="IsNotMoleRooted"/>
+  <ValidatorArray value="IsNotMoleBurrowed"/>
+</CEffectCreateUnit>
+<CEffectApplyBehavior id="NeuralParasiteDroneCheck">
+  <ValidatorArray index="0" value="IsDroneOrDroneSCBW"/>
+</CEffectApplyBehavior>
+<CEffectSwitch id="DisguiseEx3">
+  <CaseArray Validator="DisguiseAsMarineSCBW" Effect="DisguiseAsMarineSCBWCU"/>
+  <CaseArray Validator="DisguiseAsZealotSCBW" Effect="DisguiseAsZealotSCBWCU"/>
+  <CaseArray Validator="DisguiseAsZerglingSCBW" Effect="DisguiseAsZerglingSCBWCU"/>
+  <CaseArray Validator="DisguiseAsFlamespitter" Effect="DisguiseAsFlamespitterCU"/>
+  <CaseArray Validator="DisguiseAsSpitfire" Effect="DisguiseAsSpitfireCU"/>
+  <CaseArray Validator="DisguiseAsXayidling" Effect="DisguiseAsXayidlingCU"/>
+  <CaseArray Validator="DisguiseAsVolt" Effect="DisguiseAsVoltCU"/>
+  <CaseArray Validator="DisguiseAsServitor" Effect="DisguiseAsServitorCU"/>
+  <CaseArray Validator="ZerDarimDisguiseAsSupplicant" Effect="ZerDarimDisguiseAsSupplicantCU"/>
+  <CaseArray index="0" Effect="DisguiseAsZealot"/>
+  <CaseArray index="1" Effect="DisguiseAsMarineWithShield"/>
+  <CaseArray index="2" Effect="DisguiseAsMarineWithoutShield"/>
+  <CaseArray index="3" Effect="DisguiseAsZerglingWithWings"/>
+  <CaseArray index="4" Effect="DisguiseAsZerglingWithoutWings"/>
+  <CaseArray Validator="DisguiseAsStrikeTrooper" Effect="DisguiseAsStrikeTrooperCU"/>
+  <CaseArray Validator="ZerojanDisguiseAsMarineWithShield" Effect="ZerojanDisguiseAsPretorianWithShieldCU"/>
+  <CaseArray Validator="ZerojanDisguiseAsMarineWithoutShield" Effect="ZerojanDisguiseAsPretorianWithoutShieldCU"/>
+  <CaseArray Validator="DisguiseAsInfantryRifle" Effect="DisguiseAsInfantryRifleCU"/>
+  <CaseArray Validator="ZHBRCommon@TargetIsVoidForcesRace" Effect="DisguiseAsWarriorCU"/>
+</CEffectSwitch>
 <CEffectSet id="CarryHarvestableVespeneGeyserGasInitial">
   <EffectArray value="CarryHarvestableVespeneGeyserGasSearchForGeyser"/>
 </CEffectSet>
@@ -3865,7 +3761,7 @@
 <CEffectEnumArea id="DefilerSCBWPlague@Search">
   <EditorCategories value="Race:Zerg"/>
   <ImpactLocation Value="TargetPoint"/>
-  <SearchFilters value="-;Self,Player,Ally,RawResource,HarvestableResource,Missile,Destructible,Stasis,Dead,Hidden,Invulnerable"/>
+  <SearchFilters value="-;Self,Player,Ally,RawResource,Missile,Destructible,Stasis,Dead,Hidden,Invulnerable"/>
   <AreaArray Radius="2" Effect="DefilerSCBWPlague@Set"/>
   <AreaArray index="0" Radius="2.2"/>
   <AINotifyFlags index="HurtFriend" value="1"/>
@@ -4253,17 +4149,36 @@
   <CaseDefault value="GhostSCBWNuclearStrike@CP"/>
   <TargetLocationType value="Point"/>
 </CEffectSwitch>
+<CEffectApplyBehavior id="InstantMorphUnburrowAB">
+  <ValidatorArray value="NotSiegeTankSCBW"/>
+</CEffectApplyBehavior>
+<CEffectTeleport id="MothershipStrategicRecallTeleport">
+  <TeleportEffect value="ReaverSCBWWeapon@TeleportRemoveBehaviorTarget"/>
+</CEffectTeleport>
+<CEffectTeleport id="NexusMassRecallTeleport">
+  <TeleportEffect value="ReaverSCBWWeapon@TeleportRemoveBehaviorTarget"/>
+</CEffectTeleport>
 <CEffectDamage id="SpiderMineSCBWWeapon@KillSpiderMines">
   <ValidatorArray value="SpiderMineSCBWWeapon@KillSpiderMines"/>
   <EditorCategories value="Race:Terran"/>
   <ImpactLocation Value="TargetUnit"/>
   <Amount value="25"/>
 </CEffectDamage>
+<CEffectCreatePersistent id="WorkerChannelStopIdle">
+  <PeriodicValidator value="WorkerChannelStopIdlePeriodicValidator"/>
+</CEffectCreatePersistent>
 <CEffectRemoveBehavior id="ReaperKD8KnockbackClear">
   <ValidatorArray index="0" value="ReaperKD8KnockbackNotInMotion"/>
   <BehaviorLink value="ReaperKD8Knockback"/>
   <Count value="1"/>
 </CEffectRemoveBehavior>
+<CEffectIssueOrder id="CommandStructureOrderAutoRally">
+  <ValidatorArray value="CasterNotHatcherySCBW"/>
+</CEffectIssueOrder>
+<CEffectIssueOrder id="CommandStructureOrderAutoRally2">
+  <Abil value=""/>
+  <AbilTechAlias value="_HatchRally"/>
+</CEffectIssueOrder>
 <CEffectIssueOrder id="WorkerIssueGatherOrderGeneric">
   <ValidatorArray value="NotUnderConstruction"/>
   <WhichUnit Value="Caster"/>
@@ -4278,6 +4193,15 @@
   <CmdFlags index="Preempt" value="1"/>
   <CmdFlags index="AutoQueued" value="1"/>
 </CEffectIssueOrder>
+<CEffectSet id="WorkerRemoveGatherOrderSet">
+  <EffectArray value="WorkerRemoveGatherOrderGeneric"/>
+</CEffectSet>
+<CEffectSet id="WidowMineAttack">
+  <ValidatorArray value="NotLarvaSCBW"/>
+</CEffectSet>
+<CEffectSet id="PunisherGrenadesSet">
+  <ValidatorArray value="SCBWWeapon@NotMissed"/>
+</CEffectSet>
 <CEffectLaunchMissile id="MarauderWeapon@MissLM" parent="PunisherGrenadesLM">
   <Name value="Effect/Name/MarauderWeapon@MissLM"/>
   <ImpactLocation Value="TargetPoint"/>
@@ -4303,6 +4227,16 @@
   <CaseArray Validator="SCBWWeapon@Missed" Effect="MarauderWeapon@Miss"/>
   <CaseDefault value="PunisherGrenadesLM"/>
 </CEffectSwitch>
+<CEffectCreateUnit id="LurkerMPCU">
+  <SpawnUnit index="0" value="SCBW_InvulnerableDummy"/>
+</CEffectCreateUnit>
+<CEffectDamage id="PsionicShockwaveDamage">
+  <ImpactUnitValidator value="NotUnderDarkSwarmCombine"/>
+  <AreaArray index="0" Validator="ArchonSCBWWeapon@SplashInnerValidator"/>
+  <AreaArray index="1" Validator="ArchonSCBWWeapon@SplashValidator"/>
+  <AreaArray index="2" Validator="ArchonSCBWWeapon@SplashValidator"/>
+  <SearchFilters value="-;Self,Missile,Stasis,Dead,Hidden,Invulnerable"/>
+</CEffectDamage>
 <CEffectSet id="SiegeTankSiegedWeapon@InitialSet">
   <EditorCategories value="Race:Terran"/>
   <EffectArray value="SiegeTankSiegedWeapon@MissChance"/>
@@ -4412,14 +4346,52 @@
   <BehaviorCategories index="User7" value="1"/>
   <MatchesAll value="0"/>
 </CEffectRemoveBehavior>
+<CEffectSet id="AdeptPhaseShiftTeleportSet">
+  <EffectArray index="1" value="AdeptPhaseShiftRemoveDisablesSCBW"/>
+  <EffectArray index="2" value="AdeptPhaseShiftSelect"/>
+  <EffectArray index="3" value="AdeptPhaseShiftKillDummy"/>
+  <EffectArray index="4" value="AdeptPhaseShiftTeleport"/>
+  <EffectArray value="AdeptPhaseUnitOrderQueue"/>
+</CEffectSet>
+<CEffectApplyBehavior id="OracleStasisTrapActivateAB">
+  <ValidatorArray value="NotLarvaSCBW"/>
+  <ValidatorArray value="NotEggSCBW"/>
+  <ValidatorArray value="NotLurkerSCBWEgg"/>
+</CEffectApplyBehavior>
+<CEffectSet id="OracleStasisTrapSearchSet">
+  <EffectArray index="1" value="ArbiterSCBWStasisField@HaltIssueOrder"/>
+</CEffectSet>
+<CEffectSwitch id="RavenScramblerMissileABswitch">
+  <CaseArray index="0" Validator="IsCarrierOrCarrierSCBW"/>
+</CEffectSwitch>
 <CEffectSet id="RavenScramblerMissileCarrierRecallSet">
   <EffectArray value="SCBW_CarrierRecall"/>
   <SetSource value="1"/>
 </CEffectSet>
+<CEffectDamage id="TwinIbiksCannon">
+  <ImpactUnitValidator value="NotUnderDarkSwarmCombine"/>
+  <AreaArray index="0" Validator="ArchonSCBWWeapon@SplashInnerValidator"/>
+  <AreaArray index="1" Validator="ArchonSCBWWeapon@SplashValidator"/>
+  <AreaArray index="2" Validator="ArchonSCBWWeapon@SplashValidator"/>
+  <SearchFilters value="Ground;Self,Missile,Stasis,Dead,Hidden,Invulnerable"/>
+</CEffectDamage>
 <CEffectSet id="YoinkImpactSpiderMine">
   <ValidatorArray value="IsSpiderMineSCBW"/>
   <EffectArray value="SpiderMineSCBWWeapon@Impact"/>
   <SetSource value="1"/>
+</CEffectSet>
+<CEffectCreateUnit id="YoinkStartCreatePlaceholder">
+  <ValidatorArray value="NotLarvaSCBW"/>
+</CEffectCreateUnit>
+<CEffectSet id="InstantUnburrow">
+  <EffectArray index="0" value="InstantUnburrowLegacy"/>
+  <EffectArray index="1" value="InstantUnburrowMore"/>
+  <EffectArray index="2" value="HunterRegenesisRemoveBehavior"/>
+  <EffectArray index="3" value="MoleUnburrowSet"/>
+  <EffectArray index="4" removed="1"/>
+  <EffectArray index="5" removed="1"/>
+  <EffectArray index="6" removed="1"/>
+  <EffectArray index="7" removed="1"/>
 </CEffectSet>
 <CEffectSet id="InstantUnburrowMore" parent="DisguiseSetDefault">
   <EditorCategories value="Race:Neutral"/>
@@ -4429,11 +4401,35 @@
   <EffectArray value="ZergSCBW@Unburrow"/>
   <EffectArray value="SpiderMineSCBW@BurrowClearMorph"/>
 </CEffectSet>
+<CEffectSet id="GravitonBeamUnburrowTake2Set">
+  <EffectArray value="InstantUnburrowMore"/>
+</CEffectSet>
+<CEffectLaunchMissile id="ParasiticBombLM">
+  <ValidatorArray value="IsNotInterceptor"/>
+  <ValidatorArray value="NotInterceptorSCBW"/>
+</CEffectLaunchMissile>
+<CEffectTeleport id="DarkTemplarBlink">
+  <TeleportEffect value="BlinkBehaviors"/>
+</CEffectTeleport>
 <CEffectSet id="BlinkBehaviors">
   <EditorCategories value="Race:Protoss"/>
   <EffectArray value="ReaverSCBWWeapon@TeleportRemoveBehaviorSelf"/>
   <EffectArray value="DarkTemplarBlinkAB"/>
 </CEffectSet>
+<CEffectSet id="YoinkSet">
+  <EffectArray value="ReaverSCBWWeapon@TeleportRemoveBehaviorTarget"/>
+  <EffectArray value="YoinkImpactSpiderMine"/>
+  <ValidatorArray value="UmojanTargetNotTacticalJumping"/>
+</CEffectSet>
+<CEffectTeleport id="AdeptPhaseShiftTeleport">
+  <TeleportEffect value="ReaverSCBWWeapon@TeleportRemoveBehaviorSelf"/>
+</CEffectTeleport>
+<CEffectTeleport id="Blink">
+  <TeleportEffect value="ReaverSCBWWeapon@TeleportRemoveBehaviorSelf"/>
+</CEffectTeleport>
+<CEffectDamage id="BroodlingEscortDamageUnit">
+  <ImpactUnitValidator value="SCBWWeapon@NotMissedTarget"/>
+</CEffectDamage>
 <CEffectUserData id="BroodlordEscort@MissChance" parent="SCBW_MissChance">
   <Name value="Effect/Name/BroodlordEscort@MissChance"/>
   <ValidatorArray index="0" value="BroodlordEscort@MissCheck"/>
@@ -4560,6 +4556,10 @@
   <CaseDefault value="PlanetaryFortressWeapon@Miss"/>
   <CaseArray Validator="SCBW_DistanceLessThanDot5" Effect="PlanetaryFortressWeapon@MissAlt"/>
 </CEffectSwitch>
+<CEffectSet id="WorkerIssueGatherOrderSet">
+  <EffectArray index="3" value="WorkerIssueGatherOrderGeneric"/>
+  <EffectArray value="WorkerVespeneWalkRemoveBehavior"/>
+</CEffectSet>
 <CEffectApplyBehavior id="ArkwyrmTerritorialDiveApplyBehavior">
   <EditorCategories value="Race:Dragon"/>
   <WhichUnit Value="Caster"/>
@@ -17507,7 +17507,7 @@
   </VitalArray>
 </CEffectModifyUnit>
 <CEffectSwitch id="UEDLazarusResurrectionEnergyCostSwitch">
-  <EditorCategories value=""/>
+  <EditorCategories value="Race:UED"/>
   <CaseArray Validator="ValidateStrikeTrooperUED" Effect="UEDLazarusResurrectStrikeTrooperSet"/>
   <CaseArray Validator="ValidateTaranisUED" Effect="UEDLazarusResurrectTaranisSet"/>
   <CaseArray Validator="ValidateLazarusUED" Effect="UEDLazarusResurrectLazarusSet"/>
