@@ -626,10 +626,55 @@ void AIHighSetLateGameArmy (int player, int buildIndex) {
 }
 
 //--------------------------------------------------------------------------------------------------
+//  Rush Utils
+//--------------------------------------------------------------------------------------------------
+
+const int c_rushTechVeryEarly = 0;
+const int c_rushTechEarly = 1;
+const int c_rushTechLate = 2;
+string[3] rushTech;
+string rushCounterTech = "";
+
+void AIAddRushTech(string rushTechUnit,int count , int rushState){
+    rushTech[rushState] += IntToString(count) + " " + rushTechUnit + " ";
+}
+void AIAddRushCounterTech(string rushTechUnit,int count){
+    rushCounterTech += IntToString(count) + " " + rushTechUnit + " ";
+}
+
+bool AIHigeCheckTechCount (int player,string techString) {
+    string tech;
+    int count;
+    int index;
+    tech = StringWord(techString, index);
+    while(tech){
+        index+=1; count = StringToInt(StringWord(techString, index));
+        if (AIKnownUnitCount(player, c_maxPlayers, tech) >= count) {return true;}
+        index+=1; tech = StringWord(techString, index);
+    }
+    return false;
+}
+
+bool AIHighOpponentHasRushTech (int player) {
+    fixed time = AIGetTime();
+    if (time > 180) {return false;}
+    if(AIHigeCheckTechCount(player, rushTech[c_rushTechLate])){return true;}
+    if (time > 105) {return false;}
+    if(AIHigeCheckTechCount(player, rushTech[c_rushTechEarly])){return true;}
+    if (time > 75) {return false;}
+    if(AIHigeCheckTechCount(player, rushTech[c_rushTechVeryEarly])){return true;}
+    return false;
+}
+
+bool AIHighOpponentHasRushCounterTech (int player) {
+    if(AIHigeCheckTechCount(player, rushCounterTech)){return true;}
+    return false;
+}
+
+//--------------------------------------------------------------------------------------------------
 //  AIHighOpponentLikelyRushing
 //--------------------------------------------------------------------------------------------------
 bool AIHighOpponentLikelyRushing (int player) {
-    fixed time = AIGetTime();
     fixed selfArmySize;
     fixed enemyArmySize;
 
@@ -638,33 +683,8 @@ bool AIHighOpponentLikelyRushing (int player) {
         return false;
     }
 
-    if (time < 180) {
-        if (AIKnownUnitCount(player, c_maxPlayers, c_ZB_RoachWarren) > 0 ||
-            AIKnownUnitCount(player, c_maxPlayers, c_ZB_BanelingNest) > 0 ||
-            AIKnownUnitCount(player, c_maxPlayers, c_PB_Gateway) >= 3 ||
-            AIKnownUnitCount(player, c_maxPlayers, c_TB_Barracks) >= 3 ||
-            AIKnownUnitCount(player, c_maxPlayers, c_BWZB_HydraliskDen) > 0 ||
-            AIKnownUnitCount(player, c_maxPlayers, c_BWZB_Lair) > 0 ||
-            AIKnownUnitCount(player, c_maxPlayers, c_BWPB_Gateway) >= 3 ||
-            AIKnownUnitCount(player, c_maxPlayers, c_BWTB_Barracks) >= 3) {
-            return true;
-        }
-
-        if (time < 105) {
-            if (AIKnownUnitCount(player, c_maxPlayers, c_PB_Gateway) >= 2 ||
-                AIKnownUnitCount(player, c_maxPlayers, c_TB_Barracks) >= 2 ||
-                AIKnownUnitCount(player, c_maxPlayers, c_BWPB_Gateway) >= 2 ||
-                AIKnownUnitCount(player, c_maxPlayers, c_BWTB_Barracks) >= 2) {
-                return true;
-            }
-
-            if (time < 75) {
-                if (AIKnownUnitCount(player, c_maxPlayers, c_ZB_SpawningPool) > 0 ||
-                AIKnownUnitCount(player, c_maxPlayers, c_BWZB_SpawningPool) > 0) {
-                    return true;
-                }
-            }
-        }
+    if(AIHighOpponentHasRushTech(player)){
+        return true;
     }
 
     // TODO add logic for spotting proxy buildings since that is almost always a rush (though may be hidden tech)
@@ -700,39 +720,15 @@ bool AIHighEnemyArmyLarger (int player) {
 //--------------------------------------------------------------------------------------------------
 //  AIHighDontRush
 //--------------------------------------------------------------------------------------------------
+
 bool AIHighDontRush (int player) {
 
     //logic limited to only 1v1 games
     if (AIGetNumEnemies(player) > 1) {
         return false;
     }
-
-    if (AIKnownUnitCount(player, c_maxPlayers, c_TB_Bunker) > 0 ||
-        AIKnownUnitCount(player, c_maxPlayers, c_PB_PhotonCannon) > 0 ||
-        AIKnownUnitCount(player, c_maxPlayers, c_ZB_SpineCrawler) > 0 ||
-        AIKnownUnitCount(player, c_maxPlayers, c_BWTB_Bunker) > 0 ||
-        AIKnownUnitCount(player, c_maxPlayers, c_BWPB_PhotonCannon) > 0 ||
-        AIKnownUnitCount(player, c_maxPlayers, c_BWZB_SunkenColony) > 0)
-    {
-        return true;
-    }
-    if (AIKnownUnitCount(player, c_maxPlayers, c_PB_Gateway) >= 3 ||
-        AIKnownUnitCount(player, c_maxPlayers, c_TB_Barracks) >= 3 ||
-        AIKnownUnitCount(player, c_maxPlayers, c_BWPB_Gateway) >= 3 ||
-        AIKnownUnitCount(player, c_maxPlayers, c_BWTB_Barracks) >= 3)
-    {
-        return true;
-    }
-    if (AIKnownUnitCount(player, c_maxPlayers, c_PU_Zealot) >= 3 ||
-        AIKnownUnitCount(player, c_maxPlayers, c_PU_Stalker) >= 3 ||
-        AIKnownUnitCount(player, c_maxPlayers, c_TU_Marine) >= 6 ||
-        AIKnownUnitCount(player, c_maxPlayers, c_ZU_Zergling) >= 11 ||
-        AIKnownUnitCount(player, c_maxPlayers, c_BWPU_Zealot) >= 3 ||
-        AIKnownUnitCount(player, c_maxPlayers, c_BWPU_Dragoon) >= 3 ||
-        AIKnownUnitCount(player, c_maxPlayers, c_BWTU_Marine) >= 6 ||
-        AIKnownUnitCount(player, c_maxPlayers, c_BWTU_Firebat) >= 6 ||
-        AIKnownUnitCount(player, c_maxPlayers, c_BWZU_Zergling) >= 11)
-    {
+    
+    if(AIHighOpponentHasRushCounterTech(player)){
         return true;
     }
 
@@ -783,10 +779,3 @@ bool AIHighLateGameUnderHeavyAttack (int player) {
 
     return false;
 }
-
-include "TriggerLibs/BWProtoss/BWProtossHigh"
-include "TriggerLibs/BWTerran/BWTerranHigh"
-include "TriggerLibs/BWZerg/BWZergHigh"
-include "TriggerLibs/Protoss/ProtossHigh"
-include "TriggerLibs/Terran/TerranHigh"
-include "TriggerLibs/Zerg/ZergHigh"

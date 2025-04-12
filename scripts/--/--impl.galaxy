@@ -1,0 +1,120 @@
+
+void Build (int player) {
+    int lateLoop = AIGetUserInt(player, c_ldNumLateLoops);
+    int mainState = AIState(player, e_mainState);               //e_mainState_Open | e_mainState_Mid | e_mainState_Late
+    int buildType = GetBuildType(player);
+    int timeOut = AIGetUserInt(player, c_nextArmyTime);
+    bool nextState = false;
+    string unitWorker = aiData[player].unitWorker;
+    string unitSupply = aiData[player].unitSupply;
+    string unitTownHall = aiData[player].unitTownhall;
+    string unitRefinery = aiData[player].unitRefinery;
+    string unitDetector = aiData[player].unitDetector;
+
+    if (AIHasPlayerChangedCurrentOpening(player)) {AISetMainState(player, mainState, e_mainSubState_Init); return; }
+    AIClearStock(player);
+
+    ExecuteAIBuildOrder(player,bo_build);
+    
+    AIEnableStock(player);
+    AILDGeneralSharedLogic(player);
+
+    if (mainState == e_mainState_Open)     {
+        //Initial
+       //if (buildType == e_buildType_Macro || buildType == e_buildType_Air) { if (MacroExpand(player)) { return; }}
+       ////AfterExpand
+       //if (buildType == e_buildType_Macro) {AISetStockFarms( player, unitSupply, c_stockNormalFarms);}
+       //if (buildType == e_buildType_Macro || buildType == e_buildType_Air) { AISetStockUnitNext( player, 30, unitWorker, c_stockIdle );}
+       //else { AISetStockUnitNext( player, 20, unitWorker, c_stockIdle ); }
+       //if (buildType != e_buildType_Macro) { AISetStockFarms( player, unitSupply, c_stockNormalFarms);}
+       ////AfterFarms
+       //
+       //Defend(player);
+       //
+       //AISetStockArmyScale(player, 0.35);
+       //AISetStockArmyScale(player, 0.70);
+       //Upgrades(player);
+       //AISetStockArmyScale(player, 1.00);
+       //AILDStockWorkers( player, 30, unitWorker);
+       //TechUp(player);
+       ////AfterTechup
+       //AIEnableStock(player);
+       //AILDGeneralSharedLogic(player);
+        nextState = AITestTimeout(player, timeOut, e_mainState_Mid, e_mainSubState_Init);
+    }
+    else  if (mainState == e_mainState_Mid)     {
+       // AIDefaultEconomy(player, aliasDropOff, unitRefinery, unitSupply, unitWorker, minWorkers, c_stockAlways);
+       // //Initial
+       // AIDefaultExpansion(player, unitTownHall, 5500, 1500, c_expandDefault);
+       // Defend(player);
+       // AISetStockArmyScale(player, 0.35);
+       // if (PlayerBeaconIsSet(player, c_beaconDetect)) {
+       //     //build default detector
+       //     AISetStock( player, 1, unitDetector );
+       // }
+       // AILDStockWorkers( player, 30, unitWorker);
+       // //ArmyScale35
+       // if (buildType == e_buildType_Power || buildType == e_buildType_Macro || buildType == e_buildType_Air) {
+       //     if (MacroExpand(player)) { return; }
+       // }
+       // //AfterExpand
+       // if (AINeedsDetection(player)) {
+       //     //NeedsDetection
+       // }
+       // AISetStockArmyScale(player, 0.70);
+       // AILDStockWorkers( player, 60, unitWorker);
+       // Upgrades(player);
+       // AISetStockArmyScale(player, 1.00);
+       // //ArmyScale100
+       // TechUp(player);
+       // AIEnableStock(player);
+       // AILDGeneralSharedLogic(player);
+        nextState = AITestTimeout(player, timeOut, e_mainState_Late, e_mainSubState_Init);
+    }
+    else if (mainState == e_mainState_Late)     {
+      // AIDefaultEconomy(player, aliasDropOff, unitRefinery, unitSupply, unitWorker, minWorkers, c_stockAlways);
+      // //Initial
+      // AIDefaultExpansion(player, unitTownHall,14000, 4500, c_expandDefault);
+      // Defend(player);
+      // 
+      // AISetStockArmyScale(player, 0.35);
+      // if (PlayerBeaconIsSet(player, c_beaconDetect)) {
+      //     //build default detector
+      //     AISetStock( player, 1, unitDetectorExpanPower);
+      // }
+      // AILDStockWorkers( player, 30, unitWorker);
+      // //ArmyScale35
+      // if (MacroExpand(player)) { return; }
+      // //AfterExpand
+      // AISetStockArmyScale(player, 0.70);
+      // //ArmyScale70
+      // AISetStockArmyScale(player, 1.00);
+      // AILDStockWorkers( player, 60, unitWorker);
+      // Upgrades(player);
+      // TechUp(player);
+       // AIEnableStock(player);
+       // AILDGeneralSharedLogic(player);
+        nextState = AITestTimeout(player, timeOut, e_mainState_Late, e_mainSubState_Init);
+        lateLoop = AIGetUserInt(player, c_ldNumLateLoops);
+        if (nextState) {lateLoop += 1;AISetUserInt(player, c_ldNumLateLoops, lateLoop);}
+    }
+}
+
+bool Defend (int player) {
+    if (AINeedsDefending(player)) {
+        ExecuteAIBuildOrder(player,bo_defense);
+       // AISetStockFarms( player, unitSupply, c_stockNormalFarms);
+       // //Build DefenseInitial   //AIAddEmergencyDefenseStock(player, 6, c_PU_Stalker, false);
+       // AISetStock( player, 1, unitRefinery );
+       // //Build DefenseLate    //AIAddEmergencyDefenseStock(player, 4, c_PU_VoidRay, true);
+       // AIAddEmergencyDefenseStock(player, 20, unitWorker, true);
+    }
+}
+int ArmyInit (int player, int buildType) {
+    //int armyRoll = 0; // calculate using chances
+    //int duration = 0; // get from data
+    ExecuteAIBuildOrder(player,bo_army);
+    // army tier         // AIAddToStockArmy(player, c_PU_Zealot, 4); //  AIAddToStockArmyPickFrom2Count(player, c_TU_Marauder, 1, c_TU_Reaper, 2);
+    //AISetUserInt(player, c_ldNextArmyRoll, armyRoll);
+    return aiData[player].armyDuration;
+}

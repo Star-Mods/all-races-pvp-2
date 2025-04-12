@@ -351,96 +351,6 @@ void AINewDetector (int player, unit u, bool offerToScout) {
 }
 
 //--------------------------------------------------------------------------------------------------
-//  AIAddDetectionDangerUnits
-//--------------------------------------------------------------------------------------------------
-void AIAddDetectionDangerUnits (int player) {
-    //BWTerran
-    AIAddDetectionDanger(player, c_BWTU_Wraith);
-    AIAddDetectionDanger(player, c_BWTU_Ghost);
-    AIAddDetectionDanger(player, c_BWTU_SpiderMine);
-    AIAddDetectionDanger(player, c_BWTU_Vulture);
-    AIAddDetectionDanger(player, c_BWTB_ControlTower);
-    AIAddDetectionDanger(player, c_BWTB_CovertOps);
-    //BWProtoss
-    AIAddDetectionDanger(player, c_BWPU_DarkTemplar);
-    AIAddDetectionDanger(player, c_BWPU_DarkArchon);
-    AIAddDetectionDanger(player, c_BWPU_Observer);
-    AIAddDetectionDanger(player, c_BWPU_Arbiter);
-    AIAddDetectionDanger(player, c_BWPB_TemplarArchives);
-    AIAddDetectionDanger(player, c_BWPB_Observatory);
-    AIAddDetectionDanger(player, c_BWPB_ArbiterTribunal);
-    //BWZerg
-    AIAddDetectionDanger(player, c_BWZU_Lurker);
-    AIAddDetectionDanger(player, c_BWZB_HydraliskDen);
-    //Standard
-    AIAddDetectionDanger(player, c_GU_Courier);
-    AIAddDetectionDanger(player, c_GU_Tesla);
-    //AIAddDetectionDanger(player, c_XU_Casnolisk);
-    AIAddDetectionDanger(player, c_TU_WidowMine);
-    AIAddDetectionDanger(player, c_TU_Ghost);
-    AIAddDetectionDanger(player, c_TU_Banshee);
-    AIAddDetectionDanger(player, c_TB_GhostAcademy);
-    AIAddDetectionDanger(player, c_TB_StarportTechLab);
-    AIAddDetectionDanger(player, c_PU_DarkTemplar);
-    AIAddDetectionDanger(player, c_PB_DarkShrine);
-    AIAddDetectionDanger(player, c_ZU_SwarmHost);
-    AIAddDetectionDanger(player, c_ZU_Locust);
-    AIAddDetectionDanger(player, c_ZU_Lurker);
-    AIAddDetectionDanger(player, c_ZB_LurkerDen);
-}
-
-//--------------------------------------------------------------------------------------------------
-//  AIAddAirDangerUnits
-//--------------------------------------------------------------------------------------------------
-void AIAddAirDangerUnits (int player) {
-    //BWTerran
-    AIAddAirDanger(player, c_BWTU_Wraith);
-    AIAddAirDanger(player, c_BWTU_Valkyrie);
-    AIAddAirDanger(player, c_BWTU_Battlecruiser);
-    AIAddAirDanger(player, c_BWTB_Starport);
-    AIAddAirDanger(player, c_BWTB_PhysicsLab);
-    AIAddAirDanger(player, c_BWTB_ControlTower);
-    //BWProtoss
-    AIAddAirDanger(player, c_BWPU_Scout);
-    AIAddAirDanger(player, c_BWPU_Carrier);
-    AIAddAirDanger(player, c_BWPU_Corsair);
-    AIAddAirDanger(player, c_BWPU_Arbiter);
-    AIAddAirDanger(player, c_BWPB_Stargate);
-    AIAddAirDanger(player, c_BWPB_FleetBeacon);
-    AIAddAirDanger(player, c_BWPB_ArbiterTribunal);
-    //BWZerg
-    AIAddAirDanger(player, c_BWZU_Mutalisk);
-    AIAddAirDanger(player, c_BWZU_Guardian);
-    AIAddAirDanger(player, c_BWZU_Scourge);
-    AIAddAirDanger(player, c_BWZU_Devourer);
-    AIAddAirDanger(player, c_BWZB_Spire);
-    AIAddAirDanger(player, c_BWZB_GreaterSpire);
-    AIAddAirDanger(player, c_BWZB_QueensNest);
-    //Standard
-    AIAddAirDanger(player, c_GU_Hornet);
-    AIAddAirDanger(player, c_GU_Boar);
-    AIAddAirDanger(player, c_GU_Jupiter);
-    AIAddAirDanger(player, c_GU_Badger);
-    AIAddAirDanger(player, c_GB_AssemblyArray);
-    AIAddAirDanger(player, c_TU_Banshee);
-    AIAddAirDanger(player, c_TU_Liberator);
-    AIAddAirDanger(player, c_TU_Battlecruiser);
-    AIAddAirDanger(player, c_TB_StarportTechLab);
-    AIAddAirDanger(player, c_TB_FusionCore);
-    AIAddAirDanger(player, c_PU_VoidRay);
-    AIAddAirDanger(player, c_PU_Carrier);
-    AIAddAirDanger(player, c_PU_Tempest);
-    AIAddAirDanger(player, c_PU_Mothership);
-    AIAddAirDanger(player, c_PB_Stargate);
-    AIAddAirDanger(player, c_PB_FleetBeacon);
-    AIAddAirDanger(player, c_ZU_Mutalisk);
-    AIAddAirDanger(player, c_ZU_Viper);
-    AIAddAirDanger(player, c_ZU_BroodLord);
-    AIAddAirDanger(player, c_ZB_Spire);
-    AIAddAirDanger(player, c_ZB_GreaterSpire);
-}
-
-//--------------------------------------------------------------------------------------------------
 //  AIAddEmergencyDefenseStock
 //--------------------------------------------------------------------------------------------------
 void AIAddEmergencyDefenseStock (int player, int count, string what, bool onlyIfTechInPlace) {
@@ -468,174 +378,13 @@ void AIAddEmergencyDefenseStock (int player, int count, string what, bool onlyIf
 bool AINeedsDefending (int player);
 
 
-
-//--------------------------------------------------------------------------------------------------
-//  BroodWarTerranBasicDefenseStock
-//--------------------------------------------------------------------------------------------------
-void BWTerranBasicDefenseStock (int player) {
-    if (!AINeedsDefending(player)) {
-        return;
-    }
-
-    AISetStockFarms( player, c_BWTB_SupplyDepot, c_stockNormalFarms);
-    AIAddEmergencyDefenseStock(player, 12, c_BWTU_Marine, false);
-    AISetStock( player, 1, c_BWTB_Refinery );
-    AIAddEmergencyDefenseStock(player, 4, c_BWTU_Wraith, true);
-    AIAddEmergencyDefenseStock(player, 4, c_BWTU_Vulture, true);
-    AIAddEmergencyDefenseStock(player, 4, c_BWTU_Medic, true);
-    AIAddEmergencyDefenseStock(player, 4, c_BWTU_Firebat, true);
-    AIAddEmergencyDefenseStock(player, 20, c_BWTU_SCV, true);
-}
-
-//--------------------------------------------------------------------------------------------------
-//  BWZergBasicDefenseStock
-//--------------------------------------------------------------------------------------------------
-void BWZergBasicDefenseStock (int player) {
-    if (!AINeedsDefending(player)) {
-        return;
-    }
-
-    AISetStockFarms( player, c_BWZU_Overlord, c_stockNormalFarms);
-    AIAddEmergencyDefenseStock(player, 18, c_BWZU_Hydralisk, true);
-    AIAddEmergencyDefenseStock(player, 20, c_BWZU_Zergling, false);
-    AISetStock( player, 1, c_BWZB_Extractor );
-    AIAddEmergencyDefenseStock(player, 9, c_BWZU_Mutalisk, true);
-    AIAddEmergencyDefenseStock(player, 20, c_BWZU_Drone, true);
-}
-
-//--------------------------------------------------------------------------------------------------
-//  BWProtossBasicDefenseStock
-//--------------------------------------------------------------------------------------------------
-void BWProtossBasicDefenseStock (int player) {
-    if (!AINeedsDefending(player)) {
-        return;
-    }
-
-    AISetStockFarms( player, c_BWPB_Pylon, c_stockNormalFarms);
-    AIAddEmergencyDefenseStock(player, 8, c_BWPU_Dragoon, false);
-    AIAddEmergencyDefenseStock(player, 8, c_BWPU_Zealot, false);
-    if (AIPlayerDifficulty(player) >= c_skirHard) {
-        AISetStock( player, 1, c_BWPU_Arbiter );
-    }
-    AISetStock( player, 1, c_BWPB_Assimilator );
-    AIAddEmergencyDefenseStock(player, 4, c_BWPU_Scout, true);
-    AIAddEmergencyDefenseStock(player, 3, c_BWPU_Corsair, true);
-    AIAddEmergencyDefenseStock(player, 4, c_BWPU_Reaver, true);
-    AIAddEmergencyDefenseStock(player, 20, c_BWPU_Probe, true);
-}
-
-//--------------------------------------------------------------------------------------------------
-//  GenetronBasicDefenseStock
-//--------------------------------------------------------------------------------------------------
-void GenetronBasicDefenseStock (int player) {
-    if (!AINeedsDefending(player)) {
-        return;
-    }
-    
-    AISetStockFarms( player, c_GB_Node, c_stockNormalFarms);
-    AIAddEmergencyDefenseStock(player, 4, c_GU_Spitfire, false);
-    AISetStock( player, 1, c_GB_FilteringPlant );
-    AIAddEmergencyDefenseStock(player, 4, c_GU_Hornet, true);
-    AIAddEmergencyDefenseStock(player, 2, c_GU_Torrent, true);
-    AIAddEmergencyDefenseStock(player, 4, c_GU_Blitzer, true);
-    AIAddEmergencyDefenseStock(player, 20, c_GU_ACR, true);
-}
-
-//--------------------------------------------------------------------------------------------------
-//  XayidBasicDefenseStock
-//--------------------------------------------------------------------------------------------------
-void XayidBasicDefenseStock (int player) {
-    if (!AINeedsDefending(player)) {
-        return;
-    }
-    
-    AISetStockFarms( player, c_XB_FeedingPool, c_stockNormalFarms);
-    AISetStock( player, 1, c_XB_Siphoner );
-    AIAddEmergencyDefenseStock(player, 6, c_XU_Xayidling, false);
-    AIAddEmergencyDefenseStock(player, 2, c_XU_Assailant, true);
-    AIAddEmergencyDefenseStock(player, 2, c_XU_Reviler, true);
-    AIAddEmergencyDefenseStock(player, 4, c_XU_Scorpalisk, true);
-    AIAddEmergencyDefenseStock(player, 20, c_XU_Scavenger, true);
-}
-
-//--------------------------------------------------------------------------------------------------
-//  KeironBasicDefenseStock
-//--------------------------------------------------------------------------------------------------
-void KeironBasicDefenseStock (int player) {
-  if (!AINeedsDefending(player)) {
-      return;
-  }
-  
-  AISetStockFarms( player, c_KB_Edifice, c_stockNormalFarms);
-  AIAddEmergencyDefenseStock(player, 8, c_KU_Volt, false);
-  AISetStock( player, 1, c_KB_Formulator);
-  AIAddEmergencyDefenseStock(player, 4, c_KU_Aurora, true);
-  AIAddEmergencyDefenseStock(player, 4, c_KU_Umbra, true);
-  AIAddEmergencyDefenseStock(player, 4, c_KU_Cataract, true);
-  AIAddEmergencyDefenseStock(player, 20, c_KU_Converter, true);
-}
-
-//--------------------------------------------------------------------------------------------------
-//  TerranBasicDefenseStock
-//--------------------------------------------------------------------------------------------------
-void TerranBasicDefenseStock (int player) {
-    if (!AINeedsDefending(player)) {
-        return;
-    }
-
-    AISetStockFarms( player, c_TB_SupplyDepot, c_stockNormalFarms);
-    AIAddEmergencyDefenseStock(player, 8, c_TU_Marine, false);
-    AISetStock( player, 1, c_TB_Refinery );
-    AIAddEmergencyDefenseStock(player, 4, c_TU_Viking, true);
-    AIAddEmergencyDefenseStock(player, 4, c_TU_Hellion, true);
-    AIAddEmergencyDefenseStock(player, 4, c_TU_Marauder, true);
-    AIAddEmergencyDefenseStock(player, 20, c_TU_SCV, true);
-}
-
-//--------------------------------------------------------------------------------------------------
-//  ZergBasicDefenseStock
-//--------------------------------------------------------------------------------------------------
-void ZergBasicDefenseStock (int player) {
-    if (!AINeedsDefending(player)) {
-        return;
-    }
-    
-    AISetStockFarms( player, c_ZU_Overlord_Alias, c_stockNormalFarms);
-    AISetStock( player, 1, c_ZU_Queen );
-    AIAddEmergencyDefenseStock(player, 6, c_ZU_Hydralisk, true);
-    AIAddEmergencyDefenseStock(player, 12, c_ZU_Zergling, false);
-    AISetStock( player, 1, c_ZB_Extractor );
-    AIAddEmergencyDefenseStock(player, 6, c_ZU_Roach, true);
-    AIAddEmergencyDefenseStock(player, 6, c_ZU_Mutalisk, true);
-    AIAddEmergencyDefenseStock(player, 20, c_ZU_Drone, true);
-}
-
-//--------------------------------------------------------------------------------------------------
-//  ProtossBasicDefenseStock
-//--------------------------------------------------------------------------------------------------
-void ProtossBasicDefenseStock (int player) {
-    if (!AINeedsDefending(player)) {
-        return;
-    }
-    
-    AISetStockFarms( player, c_PB_Pylon, c_stockNormalFarms);
-    AIAddEmergencyDefenseStock(player, 6, c_PU_Stalker, false);
-    if (AIPlayerDifficulty(player) >= c_skirHard) {
-        AISetStock( player, 1, c_PU_MothershipCore );
-    }
-    AIAddEmergencyDefenseStock(player, 4, c_PU_Zealot, false);
-    AISetStock( player, 1, c_PB_Assimilator );
-    AIAddEmergencyDefenseStock(player, 4, c_PU_VoidRay, true);
-    AIAddEmergencyDefenseStock(player, 4, c_PU_Immortal, true);
-    AIAddEmergencyDefenseStock(player, 20, c_PU_Probe, true);
-}
-
 //--------------------------------------------------------------------------------------------------
 // helper functions defined in MeleeBuildAI.galaxy
 //--------------------------------------------------------------------------------------------------
 void AISetupGenericCustomBuildMenusAll ();
 void AIChooseNextOpeningBuild (int player);
 void AIChooseNextLateGameBuild (int player);
+void AISharedConfig (int player);
 
 //--------------------------------------------------------------------------------------------------
 //  AIMeleeSharedInit
@@ -644,8 +393,7 @@ void AILowDifficultyInit (int player);
 
 void AIMeleeSharedInit (int player) {
     AISetUserInt(player, c_ldNumLateLoops, 0);
-    AIAddDetectionDangerUnits(player);
-    AIAddAirDangerUnits(player);
+    AISharedConfig(player);
     AISetupGenericCustomBuildMenusAll();
     AIForceTacticalDelay(player, AIMeleeDiffSelect(player, 0, 10, 7, 5, 3, 2, 1, 0, 0, 0, 0));
     AILowDifficultyInit(player);
@@ -659,27 +407,8 @@ void AIMeleeSharedInit (int player) {
     AIChooseNextLateGameBuild(player);
 }
 
+
 include "TriggerLibs/MeleeBuildAI"
 include "TriggerLibs/MeleeWaveAI"
 include "TriggerLibs/MeleeHighAI"
 include "TriggerLibs/MeleeLowAI"
-include "TriggerLibs/Genetron/Genetron"
-include "TriggerLibs/Xayid/Xayid"
-include "TriggerLibs/Keiron/Keiron"
-
-include "TriggerLibs/ARC/dragon"
-include "TriggerLibs/ARC/hybrid"
-include "TriggerLibs/ARC/Synoid"
-include "TriggerLibs/ARC/Taldarim"
-include "TriggerLibs/ARC/ued"
-include "TriggerLibs/ARC/Umojan"
-include "TriggerLibs/ARC/upl"
-
-//BW AI Libs
-include "TriggerLibs/BWTerran/BWTerran"
-include "TriggerLibs/BWProtoss/BWProtoss"
-include "TriggerLibs/BWZerg/BWZerg"
-//Vanilla AI Libs
-include "TriggerLibs/Terran/Terran"
-include "TriggerLibs/Protoss/Protoss"
-include "TriggerLibs/Zerg/Zerg"

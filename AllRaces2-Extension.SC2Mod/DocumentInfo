@@ -8,6 +8,5 @@
     </Icon>
     <Dependencies>
         <Value>bnet:[AR2] AllRaces2-Bundle/0.0/465412,file:Mods\all-races-pvp-2\AllRaces2-Bundle.SC2Mod</Value>
-        <!--Value>bnet:[AR2] AllRaces2-Bundle/0.0/465412,file:Mods\all-races-pvp-2\AllRaces2-Data.SC2Mod</Value-->
     </Dependencies>
 </DocInfo>

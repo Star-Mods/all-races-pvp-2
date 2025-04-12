@@ -2,6 +2,8 @@
 //  Swarm Terran Melee AI
 //==================================================================================================
 
+include "TriggerLibs/BWTerran/BWTerranLow"
+include "TriggerLibs/BWTerran/BWTerranHigh"
 include "TriggerLibs/BWTerran/BWTerranVyEy" //Very Easy
 include "TriggerLibs/BWTerran/BWTerranEasy" //Easy
 include "TriggerLibs/BWTerran/BWTerranMedi" //Medium
@@ -12,6 +14,7 @@ include "TriggerLibs/BWTerran/BWTerranVyHd" //Elite
 include "TriggerLibs/BWTerran/BWTerranChVi" //CH Vision
 include "TriggerLibs/BWTerran/BWTerranChRe" //CH Resources
 include "TriggerLibs/BWTerran/BWTerranChIn" //CH Insane
+include "TriggerLibs/BWTerran/TactBWTerrAI"
 
 //--------------------------------------------------------------------------------------------------
 //  Counter-Attack Units
@@ -255,7 +258,17 @@ static void BWTerranInit (int player) {
     //AITechCountFixupEither(player, c_TB_CommandCenter, c_TB_OrbitalCommand, c_TB_PlanetaryFortress);  // done in BaseAI now
     AISetDefaultArmyUnit(player, c_BWTU_Marine);
     AISetDefaultTownHall(player, c_BWTB_CommandCenter);
-    BWAISetNukeConstants(player);
+
+    AISetNukeConstantsARC (player,
+        c_BWTU_Ghost,  //unitCaster
+        c_BWEF_GhostSCBWNuclearStrike_Damage,  //effectCalldown
+        c_BWEF_GhostSCBWNuclearStrike_Damage,  //effectDamage
+        c_BWAB_GhostSCBWNuclearStrike,  //abilityNuke
+        c_BWTR_GhostSCBWCloakResearch,  //upgradeCloak
+        c_BWAB_GhostSCBWCloak,  //abilityCloak
+        c_BWBF_GhostSCBWCloak,  //behaviorCloak
+    20);
+
     AIReqAddSpecialMaker(c_BWTU_Nuke, c_BWTB_NuclearSilo, "NukeSCBWArm", 0);
 
     AISetMainState(player, e_mainState_Open, e_mainSubState_Init);
@@ -339,17 +352,51 @@ void BWTerranLate (int player) {
     else                              { BWTerranLateChIn(player); } //CH Insane
 }
 
-//void TerranOpen (int player) {
-//    int diff = AIPlayerDifficulty(player);
-//
-//    if (diff == c_skirVeryEasy)       { TerranOpenVyEy(player); } //Very Easy
-//    else if (diff == c_skirEasy)      { TerranOpenEasy(player); } //Easy
-//    else if (diff == c_skirMedium)    { TerranOpenMedi(player); } //Medium
-//    else if (diff == c_skirMed_Hard)  { TerranOpenMdHd(player); } //Hard
-//    else if (diff == c_skirHard)      { TerranOpenHard(player); } //Harder
-//    else if (diff == c_skirHard_VH)   { TerranOpenHdVH(player); } //Very Hard
-//    else if (diff == c_skirVeryHard)  { TerranOpenVyHd(player); } //Elite
-//    else if (diff == c_skirChVision)  { TerranOpenChVi(player); } //CH Vision
-//    else if (diff == c_skirChMoney)   { TerranOpenChRe(player); } //CH Resources
-//    else                              { TerranOpenChIn(player); } //CH Insane
-//}
+//--------------------------------------------------------------------------------------------------
+//  AISharedConfig
+//--------------------------------------------------------------------------------------------------
+void AISharedConfigBWTerran (int player) {
+    AIAddDetectionDanger(player, c_BWTU_Wraith);
+    AIAddDetectionDanger(player, c_BWTU_Ghost);
+    AIAddDetectionDanger(player, c_BWTU_SpiderMine);
+    AIAddDetectionDanger(player, c_BWTU_Vulture);
+    AIAddDetectionDanger(player, c_BWTB_ControlTower);
+    AIAddDetectionDanger(player, c_BWTB_CovertOps);
+    AIAddAirDanger(player, c_BWTU_Wraith);
+    AIAddAirDanger(player, c_BWTU_Valkyrie);
+    AIAddAirDanger(player, c_BWTU_Battlecruiser);
+    AIAddAirDanger(player, c_BWTB_Starport);
+    AIAddAirDanger(player, c_BWTB_PhysicsLab);
+    AIAddAirDanger(player, c_BWTB_ControlTower);
+}
+
+//--------------------------------------------------------------------------------------------------
+//  AI Building Functions
+//--------------------------------------------------------------------------------------------------
+int AIGetDefaultBuildFlagsBWTerran (int player, string objType) {
+    if (objType == c_BWTB_CommandCenter) {
+        return c_makeCenter;
+    }
+    if (objType == c_BWTB_Bunker) {
+        return c_makeDefense;
+    }
+    if (objType == c_BWTB_MissileTurret) {
+        return c_makeResourceDefense;
+    }
+    if (objType == c_BWTB_Refinery) {
+        return c_makeCollector;
+    }
+    return c_makeNoFlags;
+}
+
+//--------------------------------------------------------------------------------------------------
+//  AIGlobalConfig
+//--------------------------------------------------------------------------------------------------
+
+void AIGlobalConfigBWTerran () {
+    AIAddRushTech(c_BWTB_Barracks,2,c_rushTechEarly);
+    AIAddRushCounterTech(c_BWTB_Bunker, 1);
+    AIAddRushCounterTech(c_BWTB_Barracks, 3);
+    AIAddRushCounterTech(c_BWTU_Marine, 6);
+    AIAddRushCounterTech(c_BWTU_Firebat, 6);
+}

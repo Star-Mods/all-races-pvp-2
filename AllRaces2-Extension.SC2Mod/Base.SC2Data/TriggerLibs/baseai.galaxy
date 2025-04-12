@@ -2,6 +2,8 @@
 //  Minimal AI Functions, only those needed to link start calls
 //--------------------------------------------------------------------------------------------------
 
+include "TriggerLibs/switchbaseai"
+
 //--------------------------------------------------------------------------------------------------
 //  Melee Flags
 //--------------------------------------------------------------------------------------------------
@@ -83,21 +85,7 @@ void AISetDefaultCombatFlags (int player, bool isMelee) {
 }
 
 //--------------------------------------------------------------------------------------------------
-//  AISpecifiedHealers
-//--------------------------------------------------------------------------------------------------
-void AISpecifiedHealers (int player) {
-    AIAddHealer(player, "ACR", "MULERepair", 0);
-    AIAddHealer(player, "SCV", "Repair", 0);
-    AIAddHealer(player, "MULE", "MULERepair", 0);
-    AIAddHealer(player, "Medivac", "MedivacHeal", 0);
-    AIAddHealer(player, "Medic", "heal", 0);
-    AIAddHealer(player, "ScienceVessel", "NanoRepair", 0);
-    AIAddHealer(player, "SCVSCBW", "SCVSCBW@Repair", 0);
-    AIAddHealer(player, "MedicSCBW", "MedicSCBWHeal", 0);
-}
-
-//--------------------------------------------------------------------------------------------------
-//  Melee default startup routine
+//  AIMeleeStart
 //--------------------------------------------------------------------------------------------------
 void AIMeleeStart (int player) {
     int diff = AIPlayerDifficulty(player);
@@ -190,8 +178,8 @@ void AIMeleeStart (int player) {
     attackersLimit = 1 << diff;
     AISetMaxBestAttackersLimit(player, attackersLimit);
 
-    AITransportIgnore(player, "VikingAssault");
-    AITransportIgnore(player, "BroodlingSCBW");
+    AIBaseConfig(player,false);
+
     AITransportSetPanic(player, 0.6);
     AITransportSetReturn(player, targDPoint);
 
@@ -215,7 +203,6 @@ void AIMeleeStart (int player) {
     AISetUserInt(player, c_numAirStartLocs, AIGetAirStartLocs(PlayerStartLocation(player)));
     AISetUserInt(player, c_delayNextAttack, 0);
 
-    AISpecifiedHealers(player);
     AISetDefaultCombatFlags(player, true);
 }
 
@@ -298,48 +285,13 @@ void AICampaignStart (int player) {
 
     AISetMaxBestAttackersLimit(player, AICampaignDiffSelect(player, 1, 2, 4, 6));
 
-    AITransportIgnore(player, "InfestedCivilian");
-    AITransportIgnore(player, "InfestedTerranCampaign");
-    AITransportIgnore(player, "InfestedAbomination");
-    AITransportIgnore(player, "VikingAssault");
-    //BW
-    AITransportIgnore(player, "BroodlingSCBW");
+    AIBaseConfig(player,true);
+
+    AISetSpawnerTargettingDelay(player, "SpawnerActive", AICampaignDiffSelect(player, 8, 6, 4, 2));
+
     AITransportSetPanic(player, 0.6);
     AITransportSetReturn(player, PlayerStartLocation(player));
 
     AISetDefenseRadii(player, 6.0, 7.0, 9.0);
-
-    AIReqCountAsBuiltObject(player, "Larva");
-    AITechCountFixupSingle(player, "Overlord", "Overseer");
-    AITechCountFixupSingle(player, "Overlord", "OverlordTransport");
-    AITechCountFixupSingle(player, "Spire", "GreaterSpire");
-    AITechCountFixupSingle(player, "HydraliskDen", "LurkerDen");
-    AITechCountFixupSingle(player, "HydraliskDen", "LurkerDenMP");
-    AITechCountFixupInOrder(player, "Hatchery", "Lair", "Hive");
-    AITechCountFixupEither(player, "CommandCenter", "OrbitalCommand", "PlanetaryFortress");
-    AIReqAddSpecialMaker("Nuke", "GhostAcademy", "ArmSiloWithNuke", 0);
-    AIReqAddSpecialMaker("CreepTumorBurrowed", "CreepTumor", "BurrowCreepTumorDown", 0);
-    AIReqAddSpecialMaker("CreepTumorBurrowed", "Queen", "QueenBuild", 0);
-	AIReqAddSpecialMaker("CreepTumorBurrowed", "QueenClassic", "QueenBuild", 0);
-    //BW
-    AIReqCountAsBuiltObject(player, "LarvaSCBW");
-    AITechCountFixupSingle(player, "SpireSCBW", "GreaterSpireSCBW");
-    AITechCountFixupInOrder(player, "HatcherySCBW", "LairSCBW", "HiveSCBW");
-    //AITechCountFixupSingle(player, "CreepColonySCBW", "SporeColonySCBW");
-    //AITechCountFixupSingle(player, "CreepColonySCBW", "SunkenColonySCBW");
-    AITechCountFixupSingle(player, "MutaliskSCBW", "DevourerSCBW");
-    AITechCountFixupSingle(player, "MutaliskSCBW", "GuardianSCBW");
-    AITechCountFixupSingle(player, "HydraliskSCBW", "LurkerSCBW");
-    AITechCountFixupEither(player, "CreepColonySCBW", "SporeColonySCBW", "SunkenColonySCBW");
-    AIReqAddSpecialMaker("NukeSCBW", "NuclearSiloSCBW", "NukeSCBWArm", 0);
-    AIReqAddSpecialMaker("ComsatStationSCBW", "CommandCenterSCBW", "CommandCenterSCBW@AddOns", 0);
-    AIReqAddSpecialMaker("NuclearSiloSCBW", "CommandCenterSCBW", "CommandCenterSCBW@AddOns", 1);
-    //AIReqAddSpecialMaker("SunkenColonySCBW", "CreepColonySCBW", "SunkenColonySCBW@Morph", 0);
-    //AIReqAddSpecialMaker("SporeColonySCBW", "CreepColonySCBW", "SporeColonySCBW@Morph", 0);
-    AITechCountFixupEither(player, "CommandCenterSCBW", "ComsatStationSCBW", "NuclearSiloSCBW");
-
-    AISetSpawnerTargettingDelay(player, "SpawnerActive", AICampaignDiffSelect(player, 8, 6, 4, 2));
-
-    AISpecifiedHealers(player);
     AISetDefaultCombatFlags(player, false);
 }

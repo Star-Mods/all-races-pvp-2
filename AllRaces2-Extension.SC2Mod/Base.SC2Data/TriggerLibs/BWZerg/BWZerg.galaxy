@@ -2,6 +2,8 @@
 //  SCBW Zerg Melee AI
 //==================================================================================================
 
+include "TriggerLibs/BWZerg/BWZergLow"
+include "TriggerLibs/BWZerg/BWZergHigh"
 include "TriggerLibs/BWZerg/BWZergVyEy"  //Very Easy
 include "TriggerLibs/BWZerg/BWZergEasy"  //Easy
 include "TriggerLibs/BWZerg/BWZergMedi"  //Medium
@@ -12,6 +14,7 @@ include "TriggerLibs/BWZerg/BWZergVyHd"  //Elite
 include "TriggerLibs/BWZerg/BWZergChVi"  //CH Vision
 include "TriggerLibs/BWZerg/BWZergChRe"  //CH Resources
 include "TriggerLibs/BWZerg/BWZergChIn"  //CH Insane
+include "TriggerLibs/BWZerg/TactBWZergAI"
 
 //--------------------------------------------------------------------------------------------------
 //  Counter-Attack Units
@@ -333,4 +336,66 @@ void BWZergLate (int player) {
     else if (diff == c_skirChVision)  { BWZergLateChVi(player); }
     else if (diff == c_skirChMoney)   { BWZergLateChRe(player); }
     else                              { BWZergLateChIn(player); }
+}
+
+//--------------------------------------------------------------------------------------------------
+//  AISharedConfig
+//--------------------------------------------------------------------------------------------------
+void AISharedConfigBWZerg (int player) {
+    AIAddDetectionDanger(player, c_BWZU_Lurker);
+    AIAddDetectionDanger(player, c_BWZB_HydraliskDen);
+    AIAddAirDanger(player, c_BWZU_Mutalisk);
+    AIAddAirDanger(player, c_BWZU_Guardian);
+    AIAddAirDanger(player, c_BWZU_Scourge);
+    AIAddAirDanger(player, c_BWZU_Devourer);
+    AIAddAirDanger(player, c_BWZB_Spire);
+    AIAddAirDanger(player, c_BWZB_GreaterSpire);
+    AIAddAirDanger(player, c_BWZB_QueensNest);
+}
+
+//--------------------------------------------------------------------------------------------------
+//  AI Building Functions
+//--------------------------------------------------------------------------------------------------
+int AIGetDefaultBuildFlagsBWZerg (int player, string objType) {
+    if (objType == c_BWZB_Hatchery_Alias) {
+        return c_makeCenter;
+    }
+    if (objType == c_BWZB_Hatchery) {
+        return c_makeCenter;
+    }
+    if (objType == c_BWZB_Lair) {
+        return c_makeCenter;
+    }
+    if (objType == c_BWZB_Hive) {
+        return c_makeCenter;
+    }
+    if (objType == c_BWZB_CreepColony) {
+        return c_makeCreep;
+    }
+    if (objType == c_BWZB_CreepColony_Alias) {
+        return c_makeCreep;
+    }
+    if (objType == c_BWZB_SunkenColony) {
+        return c_makeDefense;
+    }
+    if (objType == c_BWZB_SporeColony) {
+        return c_makeResourceDefense;
+    }
+    if (objType == c_BWZB_Extractor) {
+        return c_makeCollector;
+    }
+    return c_makeNoFlags;
+}
+
+
+//--------------------------------------------------------------------------------------------------
+//  AIGlobalConfig
+//--------------------------------------------------------------------------------------------------
+
+void AIGlobalConfigBWZerg () {
+    AIAddRushTech(c_BWZB_HydraliskDen,1,c_rushTechLate);
+    AIAddRushTech(c_BWZB_Lair,1,c_rushTechLate);
+    AIAddRushTech(c_BWZB_SpawningPool,1,c_rushTechVeryEarly);
+    AIAddRushCounterTech(c_BWZB_SunkenColony, 1);
+    AIAddRushCounterTech(c_BWZU_Zergling, 11);
 }

@@ -1,7 +1,9 @@
 //==================================================================================================
-//  Scion Protoss Melee AI
+//  Liberty Protoss Melee AI
 //==================================================================================================
 
+include "TriggerLibs/Protoss/ProtossLow"
+include "TriggerLibs/Protoss/ProtossHigh"
 include "TriggerLibs/Protoss/ProtossVyEy"
 include "TriggerLibs/Protoss/ProtossEasy"
 include "TriggerLibs/Protoss/ProtossMedi"
@@ -12,9 +14,7 @@ include "TriggerLibs/Protoss/ProtossVyHd"
 include "TriggerLibs/Protoss/ProtossChVi"
 include "TriggerLibs/Protoss/ProtossChRe"
 include "TriggerLibs/Protoss/ProtossChIn"
-include "TriggerLibs/terran/terran"
-include "TriggerLibs/zerg/zerg"
-
+include "TriggerLibs/Protoss/TactProtAI"
 //--------------------------------------------------------------------------------------------------
 //  Counter-Attack Units
 //--------------------------------------------------------------------------------------------------
@@ -29,15 +29,10 @@ static void InitCounters (int player) {
     AICounterUnitSetup(player, c_PU_Immortal,           2.00, c_PU_Zealot,      2.00, c_PU_Zealot);
     AICounterUnitSetup(player, c_PU_Colossus,           1.20, c_PU_Immortal,    1.00, c_PU_Colossus);
     AICounterUnitSetup(player, c_PU_Phoenix,            1.00, c_PU_Stalker,     1.00, c_PU_Stalker);
-    AICounterUnitSetup(player, c_PU_VoidRay,            1.10, c_PU_Phoenix,     1.10, c_PU_Phoenix);
+    AICounterUnitSetup(player, c_PU_VoidRay,            2.00, c_PU_Stalker,     2.25, c_PU_Stalker);
     AICounterUnitSetup(player, c_PU_Carrier,            2.00, c_PU_VoidRay,     2.00, c_PU_VoidRay);
     AICounterUnitSetup(player, c_PB_PhotonCannon,       3.00, c_PU_Zealot,      0.40, c_PU_Colossus);
     AICounterUnitSetup(player, c_PU_Mothership,         4.00, c_PU_VoidRay,     4.00, c_PU_VoidRay);
-    AICounterUnitSetup(player, c_PU_MothershipCore,     1.00, c_PU_Stalker,     1.00, c_PU_Phoenix);
-    AICounterUnitSetup(player, c_PU_Oracle,             1.00, c_PU_Stalker,     1.00, c_PU_Phoenix);
-    AICounterUnitSetup(player, c_PU_Tempest,            2.00, c_PU_VoidRay,     2.00, c_PU_VoidRay);
-    AICounterUnitSetup(player, c_PU_Adept,              1.00, c_PU_Stalker,     1.00, c_PU_Stalker);
-    AICounterUnitSetup(player, c_PU_Disruptor,          1.00, c_PU_Immortal,    1.00, c_PU_Immortal);
 
     // versus Terran
     AICounterUnitSetup(player, c_TU_Marine,             0.50, c_PU_Zealot,      0.10, c_PU_Colossus);
@@ -50,12 +45,9 @@ static void InitCounters (int player) {
     AICounterUnitSetup(player, c_TU_Viking_Alias,       1.00, c_PU_Stalker,     1.00, c_PU_Stalker);
     AICounterUnitSetup(player, c_TU_Medivac,            1.00, c_PU_Stalker,     1.00, c_PU_Stalker);
     AICounterUnitSetup(player, c_TU_Raven,              1.00, c_PU_Stalker,     1.00, c_PU_Stalker);
-    AICounterUnitSetup(player, c_TU_Banshee,            1.50, c_PU_Stalker,     0.50, c_PU_Phoenix);
+    AICounterUnitSetup(player, c_TU_Banshee,            0.50, c_PU_Phoenix,     0.50, c_PU_Phoenix);
     AICounterUnitSetup(player, c_TU_Battlecruiser,      1.75, c_PU_VoidRay,     1.75, c_PU_VoidRay);
     AICounterUnitSetup(player, c_TB_Bunker,             4.00, c_PU_Zealot,      0.40, c_PU_Colossus);
-    AICounterUnitSetup(player, c_TU_WidowMine,          0.50, c_PU_Stalker,     0.50, c_PU_Stalker);
-    AICounterUnitSetup(player, c_TU_Cyclone,            2.00, c_PU_Zealot,      2.00, c_PU_Zealot);
-    AICounterUnitSetup(player, c_TU_Liberator_Alias,    1.50, c_PU_Phoenix,     0.50, c_PU_Carrier);
 
     // versus Zerg
     AICounterUnitSetup(player, c_ZU_Zergling,           0.30, c_PU_Zealot,      0.30, c_PU_Zealot);
@@ -68,10 +60,6 @@ static void InitCounters (int player) {
     AICounterUnitSetup(player, c_ZU_Ultralisk,          1.25, c_PU_Immortal,    1.25, c_PU_Immortal);
     AICounterUnitSetup(player, c_ZU_BroodLord,          1.00, c_PU_VoidRay,     1.00, c_PU_VoidRay);
     AICounterUnitSetup(player, c_ZB_SpineCrawler,       3.00, c_PU_Zealot,      0.50, c_PU_VoidRay);
-    AICounterUnitSetup(player, c_ZU_SwarmHost,          3.00, c_PU_Zealot,      1.00, c_PU_VoidRay);
-    AICounterUnitSetup(player, c_ZU_Viper,              2.00, c_PU_Stalker,     1.00, c_PU_VoidRay);
-    AICounterUnitSetup(player, c_ZU_Ravager,            1.25, c_PU_Zealot,      0.30, c_PU_Immortal);
-    AICounterUnitSetup(player, c_ZU_Lurker,             2.00, c_PU_Stalker,     0.50, c_PU_Disruptor);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -85,7 +73,7 @@ string ProtossSubStateName (int state) {
 //--------------------------------------------------------------------------------------------------
 //  DebugCallbackProt
 //--------------------------------------------------------------------------------------------------
-void DebugCallbackProt (int player) {
+void DebugCallbackProtLegacy (int player) {
     DebugAI("=====PROTOSS=====\n");
     DebugMelee(player);
     DebugAI("e_mainState = "        + MainStateName(AIState(player, e_mainState))           +
@@ -97,24 +85,8 @@ void DebugCallbackProt (int player) {
 //--------------------------------------------------------------------------------------------------
 //  AINewUnitProt
 //--------------------------------------------------------------------------------------------------
-void AINewUnitProt (int player, unit u) {
+void AINewUnitProtLegacy (int player, unit u) {
     string type = UnitGetType(u);
-
-    if (PlayerRace(player) == "Gen") {
-        AINewUnitGen(player, u);
-        return;
-    }
-
-    if (PlayerRace(player) == "Xayi") {
-        AINewUnitXayi(player, u);
-        return;
-    }
-	
-	
-	if (PlayerRace(player) == "Keir") {
-        AINewUnitKeir(player, u);
-        return;
-    }
 
     // ignored units
     //
@@ -156,23 +128,10 @@ void AINewUnitProt (int player, unit u) {
 //--------------------------------------------------------------------------------------------------
 //  AIGetScoutProt
 //--------------------------------------------------------------------------------------------------
-unit AIGetScoutProt (int player, int index, unit prev, bool allowWorkers) {
+unit AIGetScoutProtLegacy (int player, int index, unit prev, bool allowWorkers) {
     unit obs;
     string prevType = UnitGetType(prev);
-
-    if (PlayerRace(player) == "Gen") {
-        return AIGetScoutGen(player, index, prev, allowWorkers);
-    }
-
-    if (PlayerRace(player) == "Xayi") {
-        return AIGetScoutXayi(player, index, prev, allowWorkers);
-    }
-	
-	
-    if (PlayerRace(player) == "Keir") {
-        return AIGetScoutKeir(player, index, prev, allowWorkers);
-    }
-
+    
     if (!PlayerBeaconIsSet(player, c_beaconScout) &&
         !AIGetFlag(player, e_flagsScouting)) {
         // if no scouting beacons are set and we're not ready to scout, don't return a unit
@@ -213,21 +172,9 @@ unit AIGetScoutProt (int player, int index, unit prev, bool allowWorkers) {
 //--------------------------------------------------------------------------------------------------
 //  AIEarlyDefScoutProt
 //--------------------------------------------------------------------------------------------------
-unit AIEarlyDefScoutProt (int player, unit prev, bool allowWorkers) {
+unit AIEarlyDefScoutProtLegacy (int player, unit prev, bool allowWorkers) {
     unit obs;
     string prevType;
-
-    if (PlayerRace(player) == "Gen") {
-        return AIEarlyDefScoutGen(player, prev, allowWorkers);
-    }
-
-    if (PlayerRace(player) == "Xayi") {
-        return AIEarlyDefScoutGen(player, prev, allowWorkers);
-    }
-	
-	if (PlayerRace(player) == "Keir") {
-        return AIEarlyDefScoutKeir(player, prev, allowWorkers);
-    }
     
     if (!AIGetFlag(player, e_flagsEarlyDefScout)) {
         return c_nullUnit;
@@ -259,7 +206,7 @@ unit AIEarlyDefScoutProt (int player, unit prev, bool allowWorkers) {
 //--------------------------------------------------------------------------------------------------
 //  AIWaveThinkProt
 //--------------------------------------------------------------------------------------------------
-void AIWaveThinkProt (int player, wave w, int type) {
+void AIWaveThinkProtLegacy (int player, wave w, int type) {
     AIWaveThinkDefault(player, w, type);
 }
 
@@ -288,23 +235,8 @@ void ProtossLate (int player);
 //--------------------------------------------------------------------------------------------------
 //  AIMeleeProt
 //--------------------------------------------------------------------------------------------------
-void AIMeleeProt (int player) {    
+void AIMeleeProtLegacy (int player) {    
     int mainState = AIState(player, e_mainState);
-
-    if (PlayerRace(player) == "Gen") {
-        AIMeleeGen(player);
-        return;
-    }
-
-    if (PlayerRace(player) == "Xayi") {
-        AIMeleeXayi(player);
-        return;
-    }
-	
-    if (PlayerRace(player) == "Keir") {
-        AIMeleeKeir(player);
-        return;
-    }
 
     if (AIPlayerDifficulty(player) >= c_skirChMoney) {
         AIMeleeCheatResources(player);
@@ -360,4 +292,52 @@ void ProtossLate (int player) {
     else if (diff == c_skirChVision)  { ProtossLateChVi(player); }
     else if (diff == c_skirChMoney)   { ProtossLateChRe(player); }
     else                              { ProtossLateChIn(player); }
+}
+
+//--------------------------------------------------------------------------------------------------
+//  AIAddAirDangerUnits
+//--------------------------------------------------------------------------------------------------
+void AISharedConfigProtoss (int player) {
+    AIAddDetectionDanger(player, c_PB_DarkShrine);
+    AIAddDetectionDanger(player, c_PU_DarkTemplar);
+    AIAddAirDanger(player, c_PU_VoidRay);
+    AIAddAirDanger(player, c_PU_Carrier);
+    AIAddAirDanger(player, c_PU_Tempest);
+    AIAddAirDanger(player, c_PU_Mothership);
+    AIAddAirDanger(player, c_PB_Stargate);
+    AIAddAirDanger(player, c_PB_FleetBeacon);
+}
+
+//--------------------------------------------------------------------------------------------------
+//  AI Building Functions
+//--------------------------------------------------------------------------------------------------
+int AIGetDefaultBuildFlagsProtoss (int player, string objType) {
+    if (objType == c_PB_Nexus) {
+        return c_makeCenter;
+    }
+    if (objType == c_PB_Pylon) {
+        return c_makePower;
+    }
+    if (objType == c_PB_Obelisk) {
+        return c_makeDarkPower;
+    }
+    if (objType == c_PB_PhotonCannon) {
+        return c_makeDefense;
+    }
+    if (objType == c_PB_Assimilator) {
+        return c_makeCollector;
+    }
+    return c_makeNoFlags;
+}
+
+//--------------------------------------------------------------------------------------------------
+//  AIGlobalConfig
+//--------------------------------------------------------------------------------------------------
+void AIGlobalConfigProtoss () {
+    AIAddRushTech(c_PB_Gateway,3,c_rushTechLate);
+    AIAddRushTech(c_PB_Gateway,2,c_rushTechEarly);
+    AIAddRushCounterTech(c_PB_PhotonCannon,1);
+    AIAddRushCounterTech(c_PB_Gateway, 3);
+    AIAddRushCounterTech(c_PU_Zealot, 3);
+    AIAddRushCounterTech(c_PU_Stalker, 3);
 }

@@ -2,6 +2,8 @@
 //  Swarm BWProtoss Melee AI
 //==================================================================================================
 
+include "TriggerLibs/BWProtoss/BWProtossLow"
+include "TriggerLibs/BWProtoss/BWProtossHigh"
 include "TriggerLibs/BWProtoss/BWProtossVyEy"  //Very Easy
 include "TriggerLibs/BWProtoss/BWProtossEasy"  //Easy
 include "TriggerLibs/BWProtoss/BWProtossMedi"  //Medium
@@ -12,6 +14,7 @@ include "TriggerLibs/BWProtoss/BWProtossVyHd"  //Elite
 include "TriggerLibs/BWProtoss/BWProtossChVi"  //CH Vision
 include "TriggerLibs/BWProtoss/BWProtossChRe"  //CH Resources
 include "TriggerLibs/BWProtoss/BWProtossChIn"  //CH Insane
+include "TriggerLibs/BWProtoss/TactBWProtAI"
 
 //--------------------------------------------------------------------------------------------------
 //  Counter-Attack Units
@@ -319,4 +322,60 @@ void BWProtossLate (int player) {
     else if (diff == c_skirChVision)  { BWProtossLateChVi(player); }
     else if (diff == c_skirChMoney)   { BWProtossLateChRe(player); }
     else                              { BWProtossLateChIn(player); }
+}
+
+//--------------------------------------------------------------------------------------------------
+//  AISharedConfig
+//--------------------------------------------------------------------------------------------------
+void AISharedConfigBWProtoss (int player) {
+    AIAddDetectionDanger(player, c_BWPU_DarkTemplar);
+    AIAddDetectionDanger(player, c_BWPU_DarkArchon);
+    AIAddDetectionDanger(player, c_BWPU_Observer);
+    AIAddDetectionDanger(player, c_BWPU_Arbiter);
+    AIAddDetectionDanger(player, c_BWPB_TemplarArchives);
+    AIAddDetectionDanger(player, c_BWPB_Observatory);
+    AIAddDetectionDanger(player, c_BWPB_ArbiterTribunal);
+    AIAddAirDanger(player, c_BWPU_Scout);
+    AIAddAirDanger(player, c_BWPU_Carrier);
+    AIAddAirDanger(player, c_BWPU_Corsair);
+    AIAddAirDanger(player, c_BWPU_Arbiter);
+    AIAddAirDanger(player, c_BWPB_Stargate);
+    AIAddAirDanger(player, c_BWPB_FleetBeacon);
+    AIAddAirDanger(player, c_BWPB_ArbiterTribunal);
+}
+
+
+//--------------------------------------------------------------------------------------------------
+//  AI Building Functions
+//--------------------------------------------------------------------------------------------------
+int AIGetDefaultBuildFlagsBWProtoss (int player, string objType) {
+    if (objType == c_BWPB_Nexus) {
+        return c_makeCenter;
+    }
+    if (objType == c_BWPB_Pylon) {
+        return c_makePower;
+    }
+    if (objType == c_BWPB_PhotonCannon) {
+        return c_makeDefense;
+    }
+    if (objType == c_BWPB_ShieldBattery) {
+        return c_nearDefense;
+    }
+    if (objType == c_BWPB_Assimilator) {
+        return c_makeCollector;
+    }
+    return c_makeNoFlags;
+}
+
+//--------------------------------------------------------------------------------------------------
+//  AIBaseConfig
+//--------------------------------------------------------------------------------------------------
+
+void AIGlobalConfigBWProtoss () {
+    AIAddRushTech(c_BWPB_Gateway,3,c_rushTechLate);
+    AIAddRushTech(c_BWPB_Gateway,2,c_rushTechEarly);
+    AIAddRushCounterTech(c_BWPB_PhotonCannon, 1);
+    AIAddRushCounterTech(c_BWPB_Gateway, 3);
+    AIAddRushCounterTech(c_BWPU_Zealot, 3);
+    AIAddRushCounterTech(c_BWPU_Dragoon, 3);
 }

@@ -94,7 +94,7 @@ Behavior/Name/death_zone_protection_permanent=death zone protection permanent
 Behavior/Name/death_zone_protection_permanent_queen=death zone protection queen
 Behavior/Tooltip/Monobattle=Monobattle mod: This unit cant attack or use offensive abilities
 Button/Tooltip/koth_hill=
-DocInfo/DescLong=New playable Factions:<n/>- Keiron,Genetron,Xayid (Scion Custom Races)<n/>- Void Forces (Zero Custom Races)<n/>- BroodWar Zerg,Protoss,Terran (SC:Evo)<n/>- UPL (UEDFL Campaign)<n/>- UED, Dragons, Synoid, Umojan, Taldaim <n/>Discord: https://discord.gg/2RbcjRkddw <n/>COOP mod with custom races: "ALL RACES COOP"
+DocInfo/DescLong=New playable Factions:<n/>- Keiron,Genetron,Xayid (Scion Custom Races)<n/>- Void Forces (Zero Custom Races)<n/>- BroodWar Zerg,Protoss,Terran (SC:Evo)<n/>- UPL (UEDFL Campaign)<n/>- UED, Dragons, Synoid, Umojan, Taldaim <n/>Discord: https://discord.gg/2RbcjRkddw <n/>COOP mod with custom races: "ALL RACES COOP" 
 DocInfo/Name=ALL RACES PVP 2 TEST
 Join Our Discord SC2 Alll Races Coop - https://discord.gg/2RbcjRkddw=
 LoadingScreen/Help1=<s val="CenterJustified">There is also <s val="AICoopTitle"><c val="FFFFFF">ALL RACES COOP</c></s> for 1-3 Players with commanders and all custom races. Join our discord server (link in the mod info)
@@ -355,11 +355,10 @@ Param/Value/lib_Lbty_67146A4F=On My Way
 Param/Value/lib_Lbty_83E22934=<c val="ff0000">You have pinged too much.  Please wait a while before pinging again.</c>
 Param/Value/lib_Lbty_B2C30E86=Retreat
 Param/Value/lib_Lbty_CF62ED5B=Attack
-Race/Name/_Default_=<Default>
-Race/Name/_None_=-
-Race/Name/_Random_=<Random>
 UI/MenuBar/DiscordButton=All Races Discord Link (Opens a new Window)
 Unit/Name/InfestedCaster=Overseer
 Unit/Name/KothActor=Warp Prism
 Unit/Name/MonobattlePlayer=MonobattlePlayer
+Unit/Name/NULL=-
 Unit/Name/koth_hill=KOTH - hill
+Upgrade/Name/NULL=-

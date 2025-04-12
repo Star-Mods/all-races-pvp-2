@@ -2,6 +2,7 @@
 //  Scion Xayid Melee AI
 //==================================================================================================
 
+include "TriggerLibs/Xayid/XayidLow"
 include "TriggerLibs/Xayid/XayidVyEy"
 include "TriggerLibs/Xayid/XayidEasy"
 include "TriggerLibs/Xayid/XayidMedi"
@@ -301,4 +302,30 @@ void XayidLate (int player) {
     //else if (diff == c_skirVeryHard) { XayidLateVyHd(player); }
     else                             { XayidLateHard(player); }
 
+}
+
+//--------------------------------------------------------------------------------------------------
+//  AISharedConfig
+//--------------------------------------------------------------------------------------------------
+void AISharedConfigXayid (int player) {
+    //AIAddDetectionDanger(player, c_XU_Casnolisk);
+}
+
+//--------------------------------------------------------------------------------------------------
+//  AI Building Functions
+//--------------------------------------------------------------------------------------------------
+int AIGetDefaultBuildFlagsXayid (int player, string objType) {
+    if (objType == c_XB_ScavengerNest) {
+        return c_makeCenter;
+    }
+    if (objType == c_XB_FeedingPool) {
+        return c_nearFactory;
+    }
+    if (objType == c_XB_BilePit) {
+        return c_makeDefense;
+    }
+    if (objType == c_XB_Siphoner) {
+        return c_makeCollector;
+    }
+    return c_makeNoFlags;
 }

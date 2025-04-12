@@ -69,9 +69,8 @@
         <Element Type="Trigger" Id="39EFF5B0">
             <Event Type="FunctionCall" Library="ARMP" Id="8A0D178B"/>
             <Condition Type="FunctionCall" Library="ARMP" Id="CC4CD05A"/>
+            <Action Type="FunctionCall" Library="ARMP" Id="D9C36FD2"/>
             <Action Type="FunctionCall" Library="ARMP" Id="C568B0F3"/>
-            <Action Type="FunctionCall" Library="ARMP" Id="3DAFF73F"/>
-            <Action Type="FunctionCall" Library="ARMP" Id="9AB10853"/>
             <Action Type="FunctionCall" Library="ARMP" Id="E39754B4"/>
             <Action Type="FunctionCall" Library="ARMP" Id="11E71383"/>
             <Action Type="FunctionCall" Library="ARMP" Id="E05AFCBB"/>
@@ -107,6 +106,22 @@
             <Value>true</Value>
             <ValueType Type="bool"/>
         </Element>
+        <Element Type="FunctionCall" Id="D9C36FD2">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="63385694"/>
+            <Parameter Type="Param" Library="ARMP" Id="3F7DC6D5"/>
+            <Parameter Type="Param" Library="ARMP" Id="DD16033D"/>
+        </Element>
+        <Element Type="Param" Id="3F7DC6D5">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="A66AF510"/>
+            <Value>2</Value>
+            <ValueType Type="int"/>
+        </Element>
+        <Element Type="Param" Id="DD16033D">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="3ADD60A0"/>
+            <Value>BWTe</Value>
+            <ValueType Type="gamelink"/>
+            <ValueGameType Type="Race"/>
+        </Element>
         <Element Type="FunctionCall" Id="C568B0F3">
             <FunctionDef Type="FunctionDef" Library="Ntve" Id="EEFB5A8F"/>
             <Parameter Type="Param" Library="ARMP" Id="3E027294"/>
@@ -114,39 +129,6 @@
         <Element Type="Param" Id="3E027294">
             <ParameterDef Type="ParamDef" Library="Ntve" Id="60713155"/>
             <Preset Type="PresetValue" Library="Ntve" Id="D85EAE19"/>
-        </Element>
-        <Element Type="FunctionCall" Id="3DAFF73F">
-            <Disabled/>
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="63385694"/>
-            <Parameter Type="Param" Library="ARMP" Id="901BDC89"/>
-            <Parameter Type="Param" Library="ARMP" Id="59282EA1"/>
-        </Element>
-        <Element Type="Param" Id="901BDC89">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="A66AF510"/>
-            <Value>1</Value>
-            <ValueType Type="int"/>
-        </Element>
-        <Element Type="Param" Id="59282EA1">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="3ADD60A0"/>
-            <Value>UED</Value>
-            <ValueType Type="gamelink"/>
-            <ValueGameType Type="Race"/>
-        </Element>
-        <Element Type="FunctionCall" Id="9AB10853">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="63385694"/>
-            <Parameter Type="Param" Library="ARMP" Id="6D7DE586"/>
-            <Parameter Type="Param" Library="ARMP" Id="E02C16C4"/>
-        </Element>
-        <Element Type="Param" Id="6D7DE586">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="A66AF510"/>
-            <Value>2</Value>
-            <ValueType Type="int"/>
-        </Element>
-        <Element Type="Param" Id="E02C16C4">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="3ADD60A0"/>
-            <Value>Zerg</Value>
-            <ValueType Type="gamelink"/>
-            <ValueGameType Type="Race"/>
         </Element>
         <Element Type="FunctionCall" Id="E39754B4">
             <FunctionDef Type="FunctionDef" Library="Ntve" Id="5084725D"/>
@@ -2010,6 +1992,7 @@
             <ValueType Type="int"/>
         </Element>
         <Element Type="Category" Id="81E5FD43">
+            <Item Type="CustomScript" Library="ARMP" Id="D23B2572"/>
             <Item Type="FunctionDef" Library="ARMP" Id="794E18B0"/>
             <Item Type="Trigger" Library="ARMP" Id="D2BA760B"/>
             <Item Type="Trigger" Library="ARMP" Id="79280516"/>
@@ -2017,6 +2000,20 @@
             <Item Type="Trigger" Library="ARMP" Id="46D159AF"/>
             <Item Type="FunctionDef" Library="ARMP" Id="0A6E73BC"/>
             <Item Type="FunctionDef" Library="ARMP" Id="C133582D"/>
+        </Element>
+        <Element Type="CustomScript" Id="D23B2572">
+            <Identifier>Test</Identifier>
+            <ScriptCode>
+                include &quot;TriggerLibs/DebugAI&quot;
+                include &quot;TriggerLibs/RequirementsAI&quot;
+                include &quot;TriggerLibs/BuildAI&quot;
+                include &quot;TriggerLibs/SharedAI&quot;
+                include &quot;TriggerLibs/Tactical/TacticalAI&quot;
+                include &quot;TriggerLibs/CampaignAI&quot;
+                include &quot;TriggerLibs/MeleeAI&quot;
+                include &quot;TriggerLibs/switchai&quot;
+                
+            </ScriptCode>
         </Element>
         <Element Type="FunctionDef" Id="794E18B0">
             <FlagCall/>

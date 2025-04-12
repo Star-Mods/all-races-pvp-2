@@ -2,6 +2,7 @@
 //  Scion Genetron Melee AI
 //==================================================================================================
 
+include "TriggerLibs/Genetron/GenetronLow"
 include "TriggerLibs/Genetron/GenetronVyEy"
 include "TriggerLibs/Genetron/GenetronEasy"
 include "TriggerLibs/Genetron/GenetronMedi"
@@ -325,4 +326,42 @@ void GenetronLate (int player) {
     else if (diff == c_skirHard)     { GenetronLateHard(player); }
     else                             { GenetronLateHard(player); }
 
+}
+
+//--------------------------------------------------------------------------------------------------
+//  AISharedConfig
+//--------------------------------------------------------------------------------------------------
+void AISharedConfigGenetron (int player) {
+    AIAddDetectionDanger(player, c_GU_Courier);
+    AIAddDetectionDanger(player, c_GU_Tesla);
+    AIAddAirDanger(player, c_GU_Hornet);
+    AIAddAirDanger(player, c_GU_Boar);
+    AIAddAirDanger(player, c_GU_Jupiter);
+    AIAddAirDanger(player, c_GU_Badger);
+    AIAddAirDanger(player, c_GB_AssemblyArray);
+}
+
+//--------------------------------------------------------------------------------------------------
+//  AI Building Functions
+//--------------------------------------------------------------------------------------------------
+int AIGetDefaultBuildFlagsGenetron (int player, string objType) {
+    if (objType == c_GB_ProcessingCore) {
+        return c_makeCenter;
+    }
+    if (objType == c_GB_Node) {
+        return c_makePower;
+    }
+    if (objType == c_GB_Uploader) {
+        return c_nearFactory;
+    }
+    if (objType == c_GB_Interdictor) {
+        return c_makeResourceDefense;
+    }
+    if (objType == c_GB_Repulsor) {
+        return c_makeDefense;
+    }
+    if (objType == c_GB_FilteringPlant) {
+        return c_makeCollector;
+    }
+    return c_makeNoFlags;
 }

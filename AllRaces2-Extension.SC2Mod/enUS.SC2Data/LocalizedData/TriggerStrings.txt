@@ -6,6 +6,7 @@ Category/Name/lib_ARMP_9AF7BA58=SCEVO
 Category/Name/lib_ARMP_9D6C806E=Mineral Walls
 Category/Name/lib_ARMP_D773A0AF=AI
 Category/Name/lib_ARMP_FA4B8CC3=Variables
+CustomScript/Name/lib_ARMP_D23B2572=Test
 FunctionDef/Grammar/lib_ARMP_125EEC42=Rescale Minimap Ally View
 FunctionDef/Grammar/lib_ARMP_3F75DB0A=Human Players
 FunctionDef/Grammar/lib_ARMP_48D45033=Set the playable map area to ~region~ and update the Minimap Ally View system

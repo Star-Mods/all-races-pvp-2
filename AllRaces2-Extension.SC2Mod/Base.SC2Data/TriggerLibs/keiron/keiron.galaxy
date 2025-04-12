@@ -2,6 +2,7 @@
 //  Keiron Melee AI
 //==================================================================================================
 
+include "TriggerLibs/Keiron/KeironLow"
 include "TriggerLibs/Keiron/KeironVyEy"
 include "TriggerLibs/Keiron/KeironEasy"
 include "TriggerLibs/Keiron/KeironMedi"
@@ -335,4 +336,45 @@ void KeironLate (int player) {
     // else if (diff == c_skirChMoney)   { KeironLateChRe(player); }
     // else                              { KeironLateChIn(player); }
     else { KeironLateMdhd(player); }  // temp
+}
+
+
+//--------------------------------------------------------------------------------------------------
+//  AISharedConfig
+//--------------------------------------------------------------------------------------------------
+void AISharedConfigKeiron (int player) {
+}
+
+//--------------------------------------------------------------------------------------------------
+//  AI Building Functions
+//--------------------------------------------------------------------------------------------------
+int AIGetDefaultBuildFlagsKeiron (int player, string objType) {
+    if (objType == c_KB_Citadel) {
+        return c_makeCenter;
+    }
+    if (objType == c_KB_Nullifier) {
+        return c_makeDefense;
+    }
+    if (objType == c_KB_Stratus) {
+        return c_makeResourceDefense;
+    }
+    if (objType == c_KB_Oculus) {
+        return c_nearChokePoint;
+    }
+    if (objType == c_KB_Formulator) {
+        return c_makeCollector;
+    }
+    if (objType == c_KB_Conduit) {
+        return c_avoidFactory;
+    }
+    if (objType == c_KB_Outlet) {
+        return c_avoidFactory;
+    }
+    if (objType == c_KB_Empyrean) {
+        return c_avoidFactory;
+    }
+    if (objType == c_KB_Zenith) {
+        return c_avoidFactory;
+    }
+    return c_makeNoFlags;
 }

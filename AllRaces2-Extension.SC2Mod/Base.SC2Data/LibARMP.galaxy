@@ -34,6 +34,23 @@ void libARMP_InitVariables () {
     }
 }
 
+// Custom Script
+//--------------------------------------------------------------------------------------------------
+// Custom Script: Test
+//--------------------------------------------------------------------------------------------------
+include "TriggerLibs/DebugAI"
+include "TriggerLibs/RequirementsAI"
+include "TriggerLibs/BuildAI"
+include "TriggerLibs/SharedAI"
+include "TriggerLibs/Tactical/TacticalAI"
+include "TriggerLibs/CampaignAI"
+include "TriggerLibs/MeleeAI"
+include "TriggerLibs/switchai"
+
+
+void libARMP_InitCustomScript () {
+}
+
 // Presets
 // Functions
 string libARMP_gf_GetResourceUserData (string lp_unit) {
@@ -332,8 +349,8 @@ bool libARMP_gt_OfflineGameAttributesInitialisation_Func (bool testConds, bool r
         return true;
     }
 
+    PlayerSetRace(2, "BWTe");
     GameSetSpeedValue(c_gameSpeedFaster);
-    PlayerSetRace(2, "Zerg");
     autoE39754B4_g = PlayerGroupAll();
     autoE39754B4_var = -1;
     while (true) {
@@ -1112,6 +1129,7 @@ void libARMP_InitLib () {
 
     libARMP_InitLibraries();
     libARMP_InitVariables();
+    libARMP_InitCustomScript();
     libARMP_InitTriggers();
 }
 
