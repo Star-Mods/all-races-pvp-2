@@ -14,12 +14,11 @@ include "TriggerLibs/Zerg/ZergVyHd"
 include "TriggerLibs/Zerg/ZergChVi"
 include "TriggerLibs/Zerg/ZergChRe"
 include "TriggerLibs/Zerg/ZergChIn"
-include "TriggerLibs/Zerg/TactZergAI"
 
 //--------------------------------------------------------------------------------------------------
 //  Counter-Attack Units
 //--------------------------------------------------------------------------------------------------
-static void InitCounters (int player) {
+static void InitCountersZerg (int player) {
     // versus Protoss
     AICounterUnitSetup(player, c_PU_Zealot,             1.10, c_ZU_Roach,       1.10, c_ZU_Roach);
     AICounterUnitSetup(player, c_PU_Stalker,            3.00, c_ZU_Zergling,    0.25, c_ZU_Ultralisk);
@@ -251,7 +250,7 @@ void AIWaveThinkZergLegacy (int player, wave w, int type) {
 //--------------------------------------------------------------------------------------------------
 static void ZergInit (int player) {
 
-    InitCounters(player);
+    InitCountersZerg(player);
     AIMeleeSharedInit(player);
     AISetFlag(player, e_flagsScouting, false);
     AISetFlag(player, e_flagsEarlyDefScout, false);
@@ -262,8 +261,6 @@ static void ZergInit (int player) {
     AISetCreepBuilding(player, c_ZB_CreepTumor, "ZergBuildingNotOnCreep");
     AISetDefaultArmyUnit(player, c_ZU_Zergling);
     AISetDefaultTownHall(player, c_ZB_Hatchery);
-    AIReqAddSpecialMaker( c_ZB_CreepTumorBurrowed, c_ZB_CreepTumor, "BurrowCreepTumorDown", 0);
-    AIReqAddSpecialMaker( c_ZB_CreepTumorBurrowed, c_ZU_Queen, c_AB_QueenBuild, 0);
 
     AISetMainState(player, e_mainState_Open, e_mainSubState_Init);
 }
@@ -351,37 +348,19 @@ void AISharedConfigZerg(int player) {
 }
 
 //--------------------------------------------------------------------------------------------------
-//  AI Building Functions
-//--------------------------------------------------------------------------------------------------
-int AIGetDefaultBuildFlagsZerg (int player, string objType) {
-    if (objType == c_ZB_Hatchery) {
-        return c_makeCenter;
-    }
-    if (objType == c_ZB_Lair) {
-        return c_makeCenter;
-    }
-    if (objType == c_ZB_Hive) {
-        return c_makeCenter;
-    }
-    if (objType == c_ZB_CreepTumor || objType == c_ZB_CreepTumorBurrowed) {
-        return c_makeCreep;
-    }
-    if (objType == c_ZB_SpineCrawler) {
-        return c_makeDefense;
-    }
-    if (objType == c_ZB_SporeCrawler) {
-        return c_makeResourceDefense;
-    }
-    if (objType == c_ZB_Extractor) {
-        return c_makeCollector;
-    }
-    return c_makeNoFlags;
-}
-
-//--------------------------------------------------------------------------------------------------
 //  AIGlobalConfig
 //--------------------------------------------------------------------------------------------------
 void AIGlobalConfigZerg () {
+    AIReqAddSpecialMaker( c_ZB_CreepTumorBurrowed, c_ZB_CreepTumor, "BurrowCreepTumorDown", 0);
+    AIReqAddSpecialMaker( c_ZB_CreepTumorBurrowed, c_ZU_Queen, c_AB_QueenBuild, 0);
+    AISetBuildFlag(c_ZB_Hatchery,c_makeCenter);
+    AISetBuildFlag(c_ZB_Lair,c_makeCenter);
+    AISetBuildFlag(c_ZB_Hive,c_makeCenter);
+    AISetBuildFlag(c_ZB_CreepTumor,c_makeCreep);
+    AISetBuildFlag(c_ZB_CreepTumorBurrowed,c_makeCreep);
+    AISetBuildFlag(c_ZB_SpineCrawler,c_makeDefense);
+    AISetBuildFlag(c_ZB_SporeCrawler,c_makeResourceDefense);
+    AISetBuildFlag(c_ZB_Extractor,c_makeCollector);
     AIAddRushTech(c_ZB_RoachWarren,1,c_rushTechLate);
     AIAddRushTech(c_ZB_BanelingNest,1,c_rushTechLate);
     AIAddRushTech(c_ZB_SpawningPool,1,c_rushTechVeryEarly);

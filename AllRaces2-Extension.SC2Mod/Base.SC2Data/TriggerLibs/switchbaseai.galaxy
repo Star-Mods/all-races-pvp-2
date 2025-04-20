@@ -9,32 +9,56 @@ include "TriggerLibs/BWProtoss/baseai"
 include "TriggerLibs/BWZerg/baseai"
 include "TriggerLibs/allrace/baseai"
 
+
 //--------------------------------------------------------------------------------------------------
 //  Melee default startup routine
 //--------------------------------------------------------------------------------------------------
+
+
 void AIBaseConfigMain(int player, bool campaign){
     string race = PlayerRace(player);
-    if(!forceARCAI){
-        if (race == "Zerg"){AIBaseConfigZerg(player,campaign);return;}
-        if (race == "Terr"){AIBaseConfigTerran(player,campaign);return;}
-        if (race == "Prot"){AIBaseConfigProtoss(player,campaign);return;}
-        if (race == "Gen" ){AIBaseConfigGenetron(player,campaign);return;}
-        if (race == "Xayi"){AIBaseConfigXayid(player,campaign);return;}
-        if (race == "Keir"){AIBaseConfigKeiron (player,campaign);return;}
-        if (race == "BWTe"){AIBaseConfigBWTerran(player,campaign);return;}
-        if (race == "BWZe"){AIBaseConfigBWZerg(player,campaign);return;}
-        if (race == "BWrP"){AIBaseConfigBWProtoss(player,campaign);return;}
-    }
+    // if(!forceARCAI){
+    if (race == "Zerg"){AIBaseConfigZerg(player,campaign);return;}
+    if (race == "Terr"){AIBaseConfigTerran(player,campaign);return;}
+    if (race == "Prot"){AIBaseConfigProtoss(player,campaign);return;}
+    
+    if (race == "Gen" ){AIBaseConfigGenetron(player,campaign);return;}
+    if (race == "Xayi"){AIBaseConfigXayid(player,campaign);return;}
+    if (race == "Keir"){AIBaseConfigKeiron (player,campaign);return;}
+
+    if (race == "BWTe"){AIBaseConfigBWTerran(player,campaign);return;}
+    if (race == "BWZe"){AIBaseConfigBWZerg(player,campaign);return;}
+    if (race == "BWrP"){AIBaseConfigBWProtoss(player,campaign);return;}
+    
     AIBaseConfigARC(player,campaign);
 }
 
+
 void AIBaseConfig(int player, bool campaign){
     AIBaseConfigMain(player,campaign);
+    // }
+    //todo not working with ARC AI
+    AIAddHealer(player, "ACR", "MULERepair", 0);
+    AIAddHealer(player, "MULE", "MULERepair", 0);
+    AIAddHealer(player, "Medivac", "MedivacHeal", 0);
+    AIAddHealer(player, "Medic", "heal", 0);
+    AIAddHealer(player, "ScienceVessel", "NanoRepair", 0);
+    AIAddHealer(player, "SCVSCBW", "SCVSCBW@Repair", 0);
+    AIAddHealer(player, "MedicSCBW", "MedicSCBWHeal", 0);
     
 //todo not working with ARC AI, not sorted
     AITransportIgnore(player, "VikingAssault");
     //BW
     AITransportIgnore(player, "BroodlingSCBW");
+
+    AITechCountFixupSingle(player, "ToweringDeepOneNoFootprint", "ToweringDeepOne");
+    AITechCountFixupSingle(player, "DenizenoftheDeepNoFootprint", "DenizenoftheDeep");
+    AITechCountFixupSingle(player, "GreaterDeepOneNoFootprint", "GreaterDeepOne");
+    AITechCountFixupSingle(player, "LesserDeepOneNoFootprint", "LesserDeepOne");
+    AITechCountFixupSingle(player, "RazorbackNoFootprint", "Razorback");
+    // AITechCountFixupInOrder(player, "Hatchery", "Lair", "Hive");
+    // AITechCountFixupEither(player, "CommandCenter", "OrbitalCommand", "PlanetaryFortress");
+
 
     if(campaign){
         AITransportIgnore(player, "InfestedCivilian");

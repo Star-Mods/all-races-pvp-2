@@ -358,3 +358,12 @@ void AISetNukeConstantsARC (
     AISetNukeRadiusMedium(player, AIEffectFixed(player, effectDamage, c_fieldAreaRadius1), AIEffectFixed(player, effectDamage, c_fieldAreaFraction1));
     AISetNukeRadiusFar(player, AIEffectFixed(player, effectDamage, c_fieldAreaRadius2), AIEffectFixed(player, effectDamage, c_fieldAreaFraction2));
 }
+
+
+include "TriggerLibs/Tactical/TactZergAI"
+include "TriggerLibs/Tactical/TactTerrAI"
+include "TriggerLibs/Tactical/TactTerrAI"
+include "TriggerLibs/Tactical/TactProtAI"
+include "TriggerLibs/Tactical/TactBWZergAI"
+include "TriggerLibs/Tactical/TactBWProtAI"
+include "TriggerLibs/Tactical/TactBWTerrAI"

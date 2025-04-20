@@ -17,7 +17,7 @@ include "TriggerLibs/Genetron/GenetronHard"
 //--------------------------------------------------------------------------------------------------
 //  Counter-Attack Units
 //--------------------------------------------------------------------------------------------------
-static void InitCounters (int player) {
+static void InitCountersGenetron (int player) {
     // versus Protoss
     AICounterUnitSetup(player, c_PU_Zealot,             1.00, c_GU_Fixer,       1.00, c_GU_Fixer);
     AICounterUnitSetup(player, c_PU_Stalker,            1.00, c_GU_Equalizer,   1.00, c_GU_Equalizer);
@@ -254,7 +254,7 @@ void AIWaveThinkGen (int player, wave w, int type) {
 //--------------------------------------------------------------------------------------------------
 static void GenetronInit (int player) {
 
-    InitCounters(player);
+    InitCountersGenetron(player);
     AIMeleeSharedInit(player);
     AISetFlag(player, e_flagsScouting, false);
     AISetFlag(player, e_flagsEarlyDefScout, false);
@@ -344,24 +344,11 @@ void AISharedConfigGenetron (int player) {
 //--------------------------------------------------------------------------------------------------
 //  AI Building Functions
 //--------------------------------------------------------------------------------------------------
-int AIGetDefaultBuildFlagsGenetron (int player, string objType) {
-    if (objType == c_GB_ProcessingCore) {
-        return c_makeCenter;
-    }
-    if (objType == c_GB_Node) {
-        return c_makePower;
-    }
-    if (objType == c_GB_Uploader) {
-        return c_nearFactory;
-    }
-    if (objType == c_GB_Interdictor) {
-        return c_makeResourceDefense;
-    }
-    if (objType == c_GB_Repulsor) {
-        return c_makeDefense;
-    }
-    if (objType == c_GB_FilteringPlant) {
-        return c_makeCollector;
-    }
-    return c_makeNoFlags;
+void AIGlobalConfigGenetron () {
+    AISetBuildFlag(c_GB_ProcessingCore,c_makeCenter);
+    AISetBuildFlag(c_GB_Node,c_makePower);
+    AISetBuildFlag(c_GB_Uploader,c_nearFactory);
+    AISetBuildFlag(c_GB_Interdictor,c_makeResourceDefense);
+    AISetBuildFlag(c_GB_Repulsor,c_makeDefense);
+    AISetBuildFlag(c_GB_FilteringPlant,c_makeCollector);
 }

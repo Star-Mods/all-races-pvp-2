@@ -1,5 +1,5 @@
 
-## Build Hard    
+## Build Core    
 
 Open Rush:     order Initial,                            stockFarms, order AfterFarms, defend, stockArmyScale 35, stockArmyScale 70, upgrades, stockArmyScale 100, stockWorkersLD 30, techUp, order AfterTechup
 Open Timing:   order Initial,                            stockFarms, order AfterFarms, defend, stockArmyScale 35, stockArmyScale 70, upgrades, stockArmyScale 100, stockWorkersLD 30, techUp, order AfterTechup
@@ -16,25 +16,22 @@ Late HighTech: defaultEconomy, order Initial, defaultExpansion 14000 4500, defen
 Late Special:  defaultEconomy, order Initial, defaultExpansion 14000 4500, defend, stockArmyScale 35, detectionBeaconCheck, stockWorkersLD 30, order ArmyScale35, macroExpand, order AfterExpand, stockArmyScale 70, order ArmyScale70, stockArmyScale 100, stockWorkersLD 60, upgrades, techUp
 Late Mixed:    defaultEconomy, order Initial, defaultExpansion 14000 4500, defend, stockArmyScale 35, detectionBeaconCheck, stockWorkersLD 30, order ArmyScale35, macroExpand, order AfterExpand, stockArmyScale 70, order ArmyScale70, stockArmyScale 100, stockWorkersLD 60, upgrades, techUp
 Late Air:      defaultEconomy, order Initial, defaultExpansion 14000 4500, defend, stockArmyScale 35, detectionBeaconCheck, stockWorkersLD 30, order ArmyScale35, macroExpand, order AfterExpand, stockArmyScale 70, order ArmyScale70, stockArmyScale 100, stockWorkersLD 60, upgrades, techUp
-
 Defense:       stockFarms, order DefenseInitial, stock 1 $Refinery, order DefenseLate, stockEmergency 20 $Worker
-Open Techup:   2 $Refinery, order TechupOpen
-Mid Techup:    2 $Refinery, order TechupOpen, order AtEachTown, order TechupMid
-Late Techup:   2 $Refinery, order TechupOpen, order AtEachTown, order TechupMid, order TechupLate
 
 ## Build Order Parts 
+
 DefenseInitial:                                stock 1 $Guard, stockEmergencySkipCheck $Combat 600 
 DefenseLate:                                   stockEmergency $Combat 1600
 Detection:                                     1 $Detector, 1 $SpecialDetector, 2 $StaticDetector
 AtEachTown:                                    if $Power ExpanPower $Power, if $Power $Power, 2 $StaticDefense
 
-Open Rush Initial:                             $TownHall, 10 $Worker, $Supply, 12 $Worker, $Production, 14 $Worker, $Refinery, 16 $Worker, $Warrior, $MacroTech, 2 $Supply, $Warrior, stockNext 20 $Worker
-Open Power Initial:                            $TownHall, 10 $Worker, $Supply, 12 $Worker, $Production, 14 $Worker, $Refinery, 16 $Worker, $Warrior, $MacroTech, 2 $Supply, $Warrior, stockNext 20 $Worker
-Open Timing Initial:                           $TownHall, 10 $Worker, $Supply, 12 $Worker, $Production, 14 $Worker, $Refinery, 16 $Worker, $Warrior, $MacroTech, 2 $Supply, $Warrior, stockNext 20 $Worker
+Open Rush Initial:                             $TownHall, 10 $Worker, $Supply, 12 $Worker, $Production, 14 $Worker, $Refinery, 16 $Worker, $Warrior, $Macro, 2 $Supply, $Warrior, stockNext 20 $Worker
+Open Power Initial:                            $TownHall, 10 $Worker, $Supply, 12 $Worker, $Production, 14 $Worker, $Refinery, 16 $Worker, $Warrior, $Macro, 2 $Supply, $Warrior, stockNext 20 $Worker
+Open Timing Initial:                           $TownHall, 10 $Worker, $Supply, 12 $Worker, $Production, 14 $Worker, $Refinery, 16 $Worker, $Warrior, $Macro, 2 $Supply, $Warrior, stockNext 20 $Worker
 Open Macro Initial:                            $TownHall, 10 $Worker, $Supply, 12 $Worker, $Production, 16 $Worker
 Open Air Initial:                              $TownHall, 10 $Worker, $Supply, 15 $Worker
-Open Macro AfterExpand:                        $Warrior, 17 $Worker, $Guard, $MacroTech, 2 $Supply, 2 $Warrior, $Refinery
-Open Air AfterExpand:                          16 $Worker, $Guard, $Refinery, 17 $Worker, $Production, 18 $Worker, 2 $Refinery, 19 $Worker, 2 $Supply, $ProductionAdvanced, $MacroTech, stockNext 30 $Worker
+Open Macro AfterExpand:                        $Warrior, 17 $Worker, $Guard, $Macro, 2 $Supply, 2 $Warrior, $Refinery
+Open Air AfterExpand:                          16 $Worker, $Guard, $Refinery, 17 $Worker, $Production, 18 $Worker, 2 $Refinery, 19 $Worker, 2 $Supply, $ProductionAdvanced, $Macro, stockNext 30 $Worker
 Open Rush AfterFarms:      
 Open Timing AfterFarms:                        2 $Production, $Tech
 Open Power AfterFarms:                         2 $Production, $Tech
@@ -50,14 +47,14 @@ Mid Rush|Timing|Power|Macro|Air ArmyScale100:  2 $Detector, 1 $SpecialDetector
 Late Rush|Timing|Power|Macro Initial:          -
 Late Air    Initial:                           1 $Support
 Late Rush|Timing|Power|Macro|Air ArmyScale35:  $Guard
-Late Rush|Timing|Power|Macro|Air AfterExpand:  3 $Production, 2 $Tech, 3 $ProductionAdvanced, 3 $TechAdvanced, 3 $ProductionAir, 2 $TechAir, 2 $Detector, 1 $MacroTech
+Late Rush|Timing|Power|Macro|Air AfterExpand:  3 $Production, 2 $Tech, 3 $ProductionAdvanced, 3 $TechAdvanced, 3 $ProductionAir, 2 $TechAir, 2 $Detector, 1 $Macro
 Late Rush|Timing|Power|Macro|Air ArmyScale70:  3 $Support, 1 $Transport, 3 $Detector, 2 $StaticDetector
 TechupOpen:                                    $Production, $Tech
 TechupMid:                                     $ProductionAdvanced, $TechAdvanced, $Radar, $ProductionAir, $TechAir, 3 $Production
 TechupLate:                                    $Tech,2 $ProductionAdvanced, 2 $TechAir
 
 
-## Army Hard
+## Army Core
 
 VyEy Open Rush 1:       weight 1, duration 420, delay 42, cost 160
 VyEy Open Timing 1:     weight 1, duration 480, delay 48, cost 170

@@ -124,5 +124,7 @@ int AIGetFullMakeTime (int player, string objType) {
 
 
 void Debug (string msg) {
-    TriggerDebugOutput(1, StringToText(msg), true);
+    if (GameIsTestMap(false) == true) {
+        TriggerDebugOutput(1, StringToText(msg), false);
+    }
 }

@@ -14,7 +14,6 @@ include "TriggerLibs/BWProtoss/BWProtossVyHd"  //Elite
 include "TriggerLibs/BWProtoss/BWProtossChVi"  //CH Vision
 include "TriggerLibs/BWProtoss/BWProtossChRe"  //CH Resources
 include "TriggerLibs/BWProtoss/BWProtossChIn"  //CH Insane
-include "TriggerLibs/BWProtoss/TactBWProtAI"
 
 //--------------------------------------------------------------------------------------------------
 //  Counter-Attack Units
@@ -344,34 +343,16 @@ void AISharedConfigBWProtoss (int player) {
     AIAddAirDanger(player, c_BWPB_ArbiterTribunal);
 }
 
-
-//--------------------------------------------------------------------------------------------------
-//  AI Building Functions
-//--------------------------------------------------------------------------------------------------
-int AIGetDefaultBuildFlagsBWProtoss (int player, string objType) {
-    if (objType == c_BWPB_Nexus) {
-        return c_makeCenter;
-    }
-    if (objType == c_BWPB_Pylon) {
-        return c_makePower;
-    }
-    if (objType == c_BWPB_PhotonCannon) {
-        return c_makeDefense;
-    }
-    if (objType == c_BWPB_ShieldBattery) {
-        return c_nearDefense;
-    }
-    if (objType == c_BWPB_Assimilator) {
-        return c_makeCollector;
-    }
-    return c_makeNoFlags;
-}
-
 //--------------------------------------------------------------------------------------------------
 //  AIBaseConfig
 //--------------------------------------------------------------------------------------------------
 
 void AIGlobalConfigBWProtoss () {
+    AISetBuildFlag(c_BWPB_Nexus,c_makeCenter);
+    AISetBuildFlag(c_BWPB_Pylon,c_makePower);
+    AISetBuildFlag(c_BWPB_PhotonCannon,c_makeDefense);
+    AISetBuildFlag(c_BWPB_ShieldBattery,c_nearDefense);
+    AISetBuildFlag(c_BWPB_Assimilator,c_makeCollector);
     AIAddRushTech(c_BWPB_Gateway,3,c_rushTechLate);
     AIAddRushTech(c_BWPB_Gateway,2,c_rushTechEarly);
     AIAddRushCounterTech(c_BWPB_PhotonCannon, 1);

@@ -14,7 +14,6 @@ include "TriggerLibs/BWZerg/BWZergVyHd"  //Elite
 include "TriggerLibs/BWZerg/BWZergChVi"  //CH Vision
 include "TriggerLibs/BWZerg/BWZergChRe"  //CH Resources
 include "TriggerLibs/BWZerg/BWZergChIn"  //CH Insane
-include "TriggerLibs/BWZerg/TactBWZergAI"
 
 //--------------------------------------------------------------------------------------------------
 //  Counter-Attack Units
@@ -254,9 +253,6 @@ static void BWZergInit (int player) {
     AISetCreepBuilding(player, c_BWZB_CreepColony, "ZergBuildingNotOnCreep");
     AISetDefaultArmyUnit(player, c_BWZU_Zergling);
     AISetDefaultTownHall(player, c_BWZB_Hatchery);
-    AIReqAddSpecialMaker(c_BWZB_CreepColony, c_BWZU_Drone, c_BWAB_DroneBuildSCBW, 1);
-    AIReqAddSpecialMaker(c_BWZB_SunkenColony, c_BWZB_CreepColony, "SunkenColonySCBW@Morph", 0);
-    AIReqAddSpecialMaker(c_BWZB_SporeColony, c_BWZB_CreepColony, "SporeColonySCBW@Morph", 0);
 
     AISetMainState(player, e_mainState_Open, e_mainSubState_Init);
 
@@ -353,46 +349,25 @@ void AISharedConfigBWZerg (int player) {
     AIAddAirDanger(player, c_BWZB_QueensNest);
 }
 
-//--------------------------------------------------------------------------------------------------
-//  AI Building Functions
-//--------------------------------------------------------------------------------------------------
-int AIGetDefaultBuildFlagsBWZerg (int player, string objType) {
-    if (objType == c_BWZB_Hatchery_Alias) {
-        return c_makeCenter;
-    }
-    if (objType == c_BWZB_Hatchery) {
-        return c_makeCenter;
-    }
-    if (objType == c_BWZB_Lair) {
-        return c_makeCenter;
-    }
-    if (objType == c_BWZB_Hive) {
-        return c_makeCenter;
-    }
-    if (objType == c_BWZB_CreepColony) {
-        return c_makeCreep;
-    }
-    if (objType == c_BWZB_CreepColony_Alias) {
-        return c_makeCreep;
-    }
-    if (objType == c_BWZB_SunkenColony) {
-        return c_makeDefense;
-    }
-    if (objType == c_BWZB_SporeColony) {
-        return c_makeResourceDefense;
-    }
-    if (objType == c_BWZB_Extractor) {
-        return c_makeCollector;
-    }
-    return c_makeNoFlags;
-}
-
 
 //--------------------------------------------------------------------------------------------------
 //  AIGlobalConfig
 //--------------------------------------------------------------------------------------------------
 
 void AIGlobalConfigBWZerg () {
+    AIReqAddSpecialMaker(c_BWZB_CreepColony, c_BWZU_Drone, c_BWAB_DroneBuildSCBW, 1);
+    AIReqAddSpecialMaker(c_BWZB_SunkenColony, c_BWZB_CreepColony, "SunkenColonySCBW@Morph", 0);
+    AIReqAddSpecialMaker(c_BWZB_SporeColony, c_BWZB_CreepColony, "SporeColonySCBW@Morph", 0);
+
+    AISetBuildFlag(c_BWZB_Hatchery_Alias,c_makeCenter);
+    AISetBuildFlag(c_BWZB_Hatchery,c_makeCenter);
+    AISetBuildFlag(c_BWZB_Lair,c_makeCenter);
+    AISetBuildFlag(c_BWZB_Hive,c_makeCenter);
+    AISetBuildFlag(c_BWZB_CreepColony,c_makeCreep);
+    AISetBuildFlag(c_BWZB_CreepColony_Alias,c_makeCreep);
+    AISetBuildFlag(c_BWZB_SunkenColony,c_makeDefense);
+    AISetBuildFlag(c_BWZB_SporeColony,c_makeResourceDefense);
+    AISetBuildFlag(c_BWZB_Extractor,c_makeCollector);
     AIAddRushTech(c_BWZB_HydraliskDen,1,c_rushTechLate);
     AIAddRushTech(c_BWZB_Lair,1,c_rushTechLate);
     AIAddRushTech(c_BWZB_SpawningPool,1,c_rushTechVeryEarly);

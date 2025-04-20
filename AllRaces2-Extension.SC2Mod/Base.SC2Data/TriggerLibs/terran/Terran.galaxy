@@ -14,11 +14,10 @@ include "TriggerLibs/Terran/TerranVyHd"
 include "TriggerLibs/Terran/TerranChVi"
 include "TriggerLibs/Terran/TerranChRe"
 include "TriggerLibs/Terran/TerranChIn"
-include "TriggerLibs/Terran/TactTerrAI"
 //--------------------------------------------------------------------------------------------------
 //  Counter-Attack Units
 //--------------------------------------------------------------------------------------------------
-static void InitCounters (int player) {
+static void InitCountersTerran (int player) {
     // versus Protoss
     AICounterUnitSetup(player, c_PU_Zealot,             1.00, c_TU_Marauder,    1.00, c_TU_Marauder);
     AICounterUnitSetup(player, c_PU_Stalker,            1.00, c_TU_Marauder,    1.00, c_TU_Marauder);
@@ -240,7 +239,7 @@ void AIWaveThinkTerrLegacy(int player, wave w, int type) {
 //--------------------------------------------------------------------------------------------------
 static void TerranInit (int player) {
 
-    InitCounters(player);
+    InitCountersTerran(player);
     AIMeleeSharedInit(player);
     AISetFlag(player, e_flagsScouting, false);
     AISetFlag(player, e_flagsEarlyDefScout, false);
@@ -259,7 +258,6 @@ static void TerranInit (int player) {
     20);
 
 
-    AIReqAddSpecialMaker( c_TU_Nuke, c_TB_GhostAcademy, "ArmSiloWithNuke", 0);
 
     AISetMainState(player, e_mainState_Open, e_mainSubState_Init);
 }
@@ -331,36 +329,6 @@ void TerranLate (int player) {
     else if (diff == c_skirChMoney)   { TerranLateChRe(player); }
     else                              { TerranLateChIn(player); }
 }
-
-
-//--------------------------------------------------------------------------------------------------
-//  AI Building Functions
-//--------------------------------------------------------------------------------------------------
-int AIGetDefaultBuildFlagsTerran (int player, string objType) {
-    if (objType == c_TB_CommandCenter) {
-        return c_makeCenter;
-    }
-    if (objType == c_TB_Bunker) {
-        return c_makeDefense;
-    }
-    if (objType == c_TB_MissileTurret) {
-        return c_makeResourceDefense;
-    }
-    if (objType == c_TB_SensorTower) {
-        return c_nearChokePoint;
-    }
-    if (objType == c_TB_PlanetaryFortress) {
-        return c_makeDefense;
-    }
-    if (objType == c_TB_Refinery) {
-        return c_makeCollector;
-    }
-    if (objType == c_TB_SupplyDepot) {
-        return c_makeLowerable;
-    }
-    return c_makeNoFlags;
-}
-
 //--------------------------------------------------------------------------------------------------
 //  AISharedConfig
 //--------------------------------------------------------------------------------------------------
@@ -381,6 +349,15 @@ void AISharedConfigTerran (int player) {
 //  AIGlobalConfig
 //--------------------------------------------------------------------------------------------------
 void AIGlobalConfigTerran () {
+    AIReqAddSpecialMaker( c_TU_Nuke, c_TB_GhostAcademy, "ArmSiloWithNuke", 0);
+
+    AISetBuildFlag(c_TB_CommandCenter,c_makeCenter);
+    AISetBuildFlag(c_TB_Bunker,c_makeDefense);
+    AISetBuildFlag(c_TB_MissileTurret,c_makeResourceDefense);
+    AISetBuildFlag(c_TB_SensorTower,c_nearChokePoint);
+    AISetBuildFlag(c_TB_PlanetaryFortress,c_makeDefense);
+    AISetBuildFlag(c_TB_Refinery,c_makeCollector);
+    AISetBuildFlag(c_TB_SupplyDepot,c_makeLowerable);
     AIAddRushTech(c_TB_Barracks,3,c_rushTechLate);
     AIAddRushTech(c_TB_Barracks,2,c_rushTechEarly);
     AIAddRushCounterTech(c_TB_Bunker, 1);

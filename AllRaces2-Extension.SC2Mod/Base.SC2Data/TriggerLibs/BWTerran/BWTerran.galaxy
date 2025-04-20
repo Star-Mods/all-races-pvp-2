@@ -14,7 +14,6 @@ include "TriggerLibs/BWTerran/BWTerranVyHd" //Elite
 include "TriggerLibs/BWTerran/BWTerranChVi" //CH Vision
 include "TriggerLibs/BWTerran/BWTerranChRe" //CH Resources
 include "TriggerLibs/BWTerran/BWTerranChIn" //CH Insane
-include "TriggerLibs/BWTerran/TactBWTerrAI"
 
 //--------------------------------------------------------------------------------------------------
 //  Counter-Attack Units
@@ -252,8 +251,6 @@ static void BWTerranInit (int player) {
     AIMeleeSharedInit(player);
     AISetFlag(player, e_flagsScouting, false);
     AISetFlag(player, e_flagsEarlyDefScout, false);
-    AIReqAddSpecialMaker("ComsatStationSCBW", "CommandCenterSCBW", "CommandCenterSCBW@AddOns", 0);
-    AIReqAddSpecialMaker("NuclearSiloSCBW", "CommandCenterSCBW", "CommandCenterSCBW@AddOns", 1);
     AITechCountFixupEither(player, "CommandCenterSCBW", "ComsatStationSCBW", "NuclearSiloSCBW");
     //AITechCountFixupEither(player, c_TB_CommandCenter, c_TB_OrbitalCommand, c_TB_PlanetaryFortress);  // done in BaseAI now
     AISetDefaultArmyUnit(player, c_BWTU_Marine);
@@ -269,7 +266,6 @@ static void BWTerranInit (int player) {
         c_BWBF_GhostSCBWCloak,  //behaviorCloak
     20);
 
-    AIReqAddSpecialMaker(c_BWTU_Nuke, c_BWTB_NuclearSilo, "NukeSCBWArm", 0);
 
     AISetMainState(player, e_mainState_Open, e_mainSubState_Init);
 
@@ -369,31 +365,18 @@ void AISharedConfigBWTerran (int player) {
     AIAddAirDanger(player, c_BWTB_PhysicsLab);
     AIAddAirDanger(player, c_BWTB_ControlTower);
 }
-
-//--------------------------------------------------------------------------------------------------
-//  AI Building Functions
-//--------------------------------------------------------------------------------------------------
-int AIGetDefaultBuildFlagsBWTerran (int player, string objType) {
-    if (objType == c_BWTB_CommandCenter) {
-        return c_makeCenter;
-    }
-    if (objType == c_BWTB_Bunker) {
-        return c_makeDefense;
-    }
-    if (objType == c_BWTB_MissileTurret) {
-        return c_makeResourceDefense;
-    }
-    if (objType == c_BWTB_Refinery) {
-        return c_makeCollector;
-    }
-    return c_makeNoFlags;
-}
-
 //--------------------------------------------------------------------------------------------------
 //  AIGlobalConfig
 //--------------------------------------------------------------------------------------------------
 
 void AIGlobalConfigBWTerran () {
+    AIReqAddSpecialMaker(c_BWTU_Nuke, c_BWTB_NuclearSilo, "NukeSCBWArm", 0);
+    AIReqAddSpecialMaker("ComsatStationSCBW", "CommandCenterSCBW", "CommandCenterSCBW@AddOns", 0);
+    AIReqAddSpecialMaker("NuclearSiloSCBW", "CommandCenterSCBW", "CommandCenterSCBW@AddOns", 1);
+    AISetBuildFlag(c_BWTB_CommandCenter,c_makeCenter);
+    AISetBuildFlag(c_BWTB_Bunker,c_makeDefense);
+    AISetBuildFlag(c_BWTB_MissileTurret,c_makeResourceDefense);
+    AISetBuildFlag(c_BWTB_Refinery,c_makeCollector);
     AIAddRushTech(c_BWTB_Barracks,2,c_rushTechEarly);
     AIAddRushCounterTech(c_BWTB_Bunker, 1);
     AIAddRushCounterTech(c_BWTB_Barracks, 3);

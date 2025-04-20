@@ -18,6 +18,7 @@ const int libARMP_gv_mAX_PLAYERS = 15;
 int libARMP_gv_startMinerals;
 int libARMP_gv_startVespene;
 int libARMP_gv_resourceType;
+int libARMP_gv_pickedAIPlayer;
 int libARMP_gv_mineralWallsHarvesterAmount;
 unitgroup libARMP_gv_mineralWallsGlobalMineralWalls;
 timer libARMP_gv_mineralWallsTimer;
@@ -42,7 +43,9 @@ void libARMP_gf_RegisterCameraMoveEvent (trigger lp_trigger, int lp_playerId, in
 // Trigger Declarations
 trigger libARMP_gt_OfflineGameAttributesInitialisation;
 trigger libARMP_gt_OnlineGameAttributesInitialisation;
-trigger libARMP_gt_FactionTriggers;
+trigger libARMP_gt_CommonTriggers;
+trigger libARMP_gt_RunAI;
+trigger libARMP_gt_UEDAIController;
 trigger libARMP_gt_SupportWorkerOnlyPathsForSomeCustomMaps;
 trigger libARMP_gt_SprayUpgrades;
 trigger libARMP_gt_ApplyInitialResources;

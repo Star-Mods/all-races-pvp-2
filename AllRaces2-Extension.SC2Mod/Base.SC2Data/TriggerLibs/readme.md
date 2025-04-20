@@ -59,7 +59,6 @@ include "TriggerLibs/Terran/TerranVyHd"
 include "TriggerLibs/Terran/TerranChVi"
 include "TriggerLibs/Terran/TerranChRe"
 include "TriggerLibs/Terran/TerranChIn"
-include "TriggerLibs/Terran/TactTerrAI"
 ```
 ## Integration 
 

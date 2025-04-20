@@ -1,8 +1,7 @@
-﻿DocInfo/Name=[AR2] AllRaces-Data
-Effect/Name/InstantUnburrow3=Instant Unburrow Copy
-UI/HelpMenuDialogTechLoomings=All RACES TECH
+﻿DocInfo/DescLong= 
 DocInfo/HowToPlayBasic00=Standard melee play.
 DocInfo/HowToPlayBasic01=Includes custom races.
+DocInfo/Name=[AR2] Data
 DocInfo/PatchNote001=
 DocInfo/PatchNote002=
 DocInfo/PatchNote003=
@@ -105,3 +104,5 @@ DocInfo/Screenshot01=
 DocInfo/Screenshot02=
 DocInfo/Screenshot03=
 DocInfo/Screenshot04=
+Effect/Name/InstantUnburrow3=Instant Unburrow Copy
+UI/HelpMenuDialogTechLoomings=All RACES TECH

@@ -103,11 +103,10 @@
         <AbilArray index="1" Link="stopProtossBuilding"/>
         <AbilArray index="2" Link="DarkShrineResearch"/>
         <AbilArray Link="que5"/>
-        <EditorCategories value="ObjectType:Structure"/>
     </CUnit>
     <CUnit id="ProtossSnakeSegmentDemo">
         <Race value="Prot"/>
-        <EditorCategories value="ObjectType:Unit"/>
+        <EditorCategories value="ObjectType:Unit,ObjectFamily:Campaign"/>
     </CUnit>
     <CUnit id="Sentry"/>
     <CUnit id="OracleStasisTrap">
@@ -124,6 +123,7 @@
     </CUnit>
     <CUnit id="Replicant">
         <Attributes index="Hover" value="1"/>
+        <EditorCategories value="ObjectType:Unit,ObjectFamily:Campaign"/>
     </CUnit>
     <CBehaviorBuff id="InvulnerabilityShield">
         <EditorCategories value="Race:Prot,AbilityorEffectType:Units"/>

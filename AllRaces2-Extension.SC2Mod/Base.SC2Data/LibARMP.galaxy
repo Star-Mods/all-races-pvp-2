@@ -36,7 +36,7 @@ void libARMP_InitVariables () {
 
 // Custom Script
 //--------------------------------------------------------------------------------------------------
-// Custom Script: Test
+// Custom Script: Includes
 //--------------------------------------------------------------------------------------------------
 include "TriggerLibs/DebugAI"
 include "TriggerLibs/RequirementsAI"
@@ -46,7 +46,6 @@ include "TriggerLibs/Tactical/TacticalAI"
 include "TriggerLibs/CampaignAI"
 include "TriggerLibs/MeleeAI"
 include "TriggerLibs/switchai"
-
 
 void libARMP_InitCustomScript () {
 }
@@ -333,9 +332,14 @@ void libARMP_gf_RegisterCameraMoveEvent (trigger lp_trigger, int lp_playerId, in
 // Trigger: Offline Game Attributes Initialisation
 //--------------------------------------------------------------------------------------------------
 bool libARMP_gt_OfflineGameAttributesInitialisation_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    string lv_unit;
+
     // Automatic Variable Declarations
     playergroup autoE39754B4_g;
     int autoE39754B4_var;
+
+    // Variable Initialization
 
     // Conditions
     if (testConds) {
@@ -349,18 +353,45 @@ bool libARMP_gt_OfflineGameAttributesInitialisation_Func (bool testConds, bool r
         return true;
     }
 
-    PlayerSetRace(2, "BWTe");
+    PlayerSetDifficulty(1, 7);
+    PlayerSetDifficulty(2, 7);
+    PlayerSetDifficulty(3, 7);
+    PlayerSetDifficulty(4, 7);
+    PlayerSetDifficulty(5, 7);
+    PlayerSetDifficulty(6, 7);
+    PlayerSetDifficulty(7, 7);
+    PlayerSetDifficulty(8, 7);
+    PlayerSetDifficulty(9, 7);
+    PlayerSetDifficulty(10, 7);
+    PlayerSetDifficulty(11, 7);
+    PlayerSetDifficulty(12, 7);
+    PlayerSetDifficulty(13, 7);
+    PlayerSetDifficulty(14, 7);
+    PlayerSetRace(1, "PrTD");
+    PlayerSetRace(2, "TerU");
+    PlayerSetRace(3, "Dragon");
+    PlayerSetRace(4, "Synd");
+    PlayerSetRace(5, "PrTD");
+    PlayerSetRace(6, "UPLL");
+    PlayerSetRace(7, "ZHBR");
+    PlayerSetRace(8, "UED");
+    PlayerSetRace(9, "Gen");
+    PlayerSetRace(10, "Xayi");
+    PlayerSetRace(11, "Keir");
+    PlayerSetRace(12, "Terr");
+    PlayerSetRace(13, "Prot");
+    PlayerSetRace(14, "Zerg");
     GameSetSpeedValue(c_gameSpeedFaster);
     autoE39754B4_g = PlayerGroupAll();
     autoE39754B4_var = -1;
     while (true) {
         autoE39754B4_var = PlayerGroupNextPlayer(autoE39754B4_g, autoE39754B4_var);
         if (autoE39754B4_var < 0) { break; }
+        libNtve_gf_SetAlliance(autoE39754B4_var, 15, libNtve_ge_AllianceSetting_AllyWithSharedVisionControlAndSpending);
+        UISetResourceVisible(PlayerGroupSingle(autoE39754B4_var), c_resourceTypeCustom, false);
         PlayerOptionOverride(autoE39754B4_var, "simplecommandcard", "0");
     }
-    TriggerExecute(libARMP_gt_SupportWorkerOnlyPathsForSomeCustomMaps, true, false);
-    TriggerExecute(libARMP_gt_SprayUpgrades, true, false);
-    TriggerExecute(libARMP_gt_FactionTriggers, true, false);
+    TriggerExecute(libARMP_gt_CommonTriggers, true, false);
     return true;
 }
 
@@ -408,6 +439,7 @@ bool libARMP_gt_OnlineGameAttributesInitialisation_Func (bool testConds, bool ru
         return true;
     }
 
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, StringExternal("Param/Value/lib_ARMP_5940ACD0"));
     autoAC3DF856_g = PlayerGroupAll();
     lv_player = -1;
     while (true) {
@@ -462,7 +494,7 @@ bool libARMP_gt_OnlineGameAttributesInitialisation_Func (bool testConds, bool ru
             PlayerSetRace(lv_player, "TerU");
         }
         else if (auto4D5F20F8_val == "0007") {
-            PlayerSetRace(lv_player, "UPL");
+            PlayerSetRace(lv_player, "UPLL");
         }
         else if (auto4D5F20F8_val == "0003") {
             PlayerSetRace(lv_player, "Xayi");
@@ -512,7 +544,7 @@ bool libARMP_gt_OnlineGameAttributesInitialisation_Func (bool testConds, bool ru
                 PlayerSetRace(lv_player, "TerU");
             }
             else if (auto39EA3E3C_val == 14) {
-                PlayerSetRace(lv_player, "UPL");
+                PlayerSetRace(lv_player, "UPLL");
             }
             else if (auto39EA3E3C_val == 15) {
                 PlayerSetRace(lv_player, "Xayi");
@@ -567,11 +599,9 @@ bool libARMP_gt_OnlineGameAttributesInitialisation_Func (bool testConds, bool ru
     }
     else {
     }
-    TriggerExecute(libARMP_gt_SupportWorkerOnlyPathsForSomeCustomMaps, true, false);
-    TriggerExecute(libARMP_gt_SprayUpgrades, true, false);
     TriggerExecute(libARMP_gt_ApplyInitialResources, true, false);
     TriggerExecute(libARMP_gt_ApplyHarvestableResources, true, false);
-    TriggerExecute(libARMP_gt_FactionTriggers, true, false);
+    TriggerExecute(libARMP_gt_CommonTriggers, true, false);
     return true;
 }
 
@@ -582,9 +612,9 @@ void libARMP_gt_OnlineGameAttributesInitialisation_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
-// Trigger: Faction Triggers
+// Trigger: Common Triggers
 //--------------------------------------------------------------------------------------------------
-bool libARMP_gt_FactionTriggers_Func (bool testConds, bool runActions) {
+bool libARMP_gt_CommonTriggers_Func (bool testConds, bool runActions) {
     // Variable Declarations
     string lv_races;
 
@@ -600,6 +630,9 @@ bool libARMP_gt_FactionTriggers_Func (bool testConds, bool runActions) {
         return true;
     }
 
+    TriggerExecute(libARMP_gt_RunAI, true, false);
+    TriggerExecute(libARMP_gt_SupportWorkerOnlyPathsForSomeCustomMaps, true, false);
+    TriggerExecute(libARMP_gt_SprayUpgrades, true, false);
     TriggerSendEvent("GAME START");
     autoCC589DF4_g = PlayerGroupAll();
     autoCC589DF4_var = -1;
@@ -616,8 +649,96 @@ bool libARMP_gt_FactionTriggers_Func (bool testConds, bool runActions) {
 }
 
 //--------------------------------------------------------------------------------------------------
-void libARMP_gt_FactionTriggers_Init () {
-    libARMP_gt_FactionTriggers = TriggerCreate("libARMP_gt_FactionTriggers_Func");
+void libARMP_gt_CommonTriggers_Init () {
+    libARMP_gt_CommonTriggers = TriggerCreate("libARMP_gt_CommonTriggers_Func");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Run AI
+//--------------------------------------------------------------------------------------------------
+bool libARMP_gt_RunAI_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    playergroup auto3163F7A1_g;
+    int auto3163F7A1_var;
+    string autoEA9AF53E_val;
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    auto3163F7A1_g = PlayerGroupAll();
+    auto3163F7A1_var = -1;
+    while (true) {
+        auto3163F7A1_var = PlayerGroupNextPlayer(auto3163F7A1_g, auto3163F7A1_var);
+        if (auto3163F7A1_var < 0) { break; }
+        if ((PlayerType(auto3163F7A1_var) != c_playerTypeComputer)) {
+            continue;
+        }
+
+        libARMP_gv_pickedAIPlayer = auto3163F7A1_var;
+        autoEA9AF53E_val = PlayerRace(libARMP_gv_pickedAIPlayer);
+        if (autoEA9AF53E_val == "UED") {
+            TriggerExecute(libARMP_gt_UEDAIController, true, false);
+        }
+        else {
+        }
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libARMP_gt_RunAI_Init () {
+    libARMP_gt_RunAI = TriggerCreate("libARMP_gt_RunAI_Func");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: UED AI Controller
+//--------------------------------------------------------------------------------------------------
+bool libARMP_gt_UEDAIController_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unitgroup lv_headquarters;
+    unitgroup lv_beacons;
+    int lv_aIPlayer;
+
+    // Automatic Variable Declarations
+    unitgroup auto0C2ED70A_g;
+    int auto0C2ED70A_u;
+    unit auto0C2ED70A_var;
+
+    // Variable Initialization
+    lv_headquarters = UnitGroupEmpty();
+    lv_beacons = UnitGroupEmpty();
+    lv_aIPlayer = libARMP_gv_pickedAIPlayer;
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    Wait(2.0, c_timeAI);
+    while ((UnitGroupCount(UnitGroup(null, lv_aIPlayer, RegionEntireMap(), UnitFilter((1 << c_targetFilterPreventDefeat), 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 1), c_unitCountAlive) > 0)) {
+        Wait(4.0, c_timeAI);
+        lv_headquarters = UnitGroup("OperationHeadquarters", lv_aIPlayer, RegionEntireMap(), UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0);
+        auto0C2ED70A_g = lv_headquarters;
+        auto0C2ED70A_u = UnitGroupCount(auto0C2ED70A_g, c_unitCountAll);
+        for (;; auto0C2ED70A_u -= 1) {
+            auto0C2ED70A_var = UnitGroupUnitFromEnd(auto0C2ED70A_g, auto0C2ED70A_u);
+            if (auto0C2ED70A_var == null) { break; }
+            lv_beacons = UnitGroup("BeaconUED", lv_aIPlayer, RegionCircle(UnitGetPosition(auto0C2ED70A_var), 10.0), UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 1);
+            if ((UnitGroupCount(lv_beacons, c_unitCountAlive) == 0)) {
+                UnitIssueOrder(auto0C2ED70A_var, OrderTargetingPoint(AbilityCommand("WarpUEDBeacon", 0), RegionRandomPoint(RegionCircle(UnitGetPosition(auto0C2ED70A_var), 7.0))), c_orderQueueAddToFront);
+            }
+
+        }
+        AISetGroupScriptControlled(lv_headquarters, false);
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libARMP_gt_UEDAIController_Init () {
+    libARMP_gt_UEDAIController = TriggerCreate("libARMP_gt_UEDAIController_Func");
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -1103,7 +1224,9 @@ void libARMP_gt_MinimapAllyViewInit_Init () {
 void libARMP_InitTriggers () {
     libARMP_gt_OfflineGameAttributesInitialisation_Init();
     libARMP_gt_OnlineGameAttributesInitialisation_Init();
-    libARMP_gt_FactionTriggers_Init();
+    libARMP_gt_CommonTriggers_Init();
+    libARMP_gt_RunAI_Init();
+    libARMP_gt_UEDAIController_Init();
     libARMP_gt_SupportWorkerOnlyPathsForSomeCustomMaps_Init();
     libARMP_gt_SprayUpgrades_Init();
     libARMP_gt_ApplyInitialResources_Init();

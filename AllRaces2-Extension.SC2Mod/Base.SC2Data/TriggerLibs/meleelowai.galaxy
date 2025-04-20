@@ -206,6 +206,9 @@ string AIPickFrom3 (string a, string b, string c) {
     return c;
 }
 
+
+
+
 //--------------------------------------------------------------------------------------------------
 //  AIAddToStockArmyPickFrom2Count
 //--------------------------------------------------------------------------------------------------
@@ -282,10 +285,10 @@ int AIGetArmyDelay (int player, int duration, int phase) {
     int buildType = AIGetUserInt(player, c_openingBuildType);
     int timePerUnit;
 
-    if (armyCount == 0) {
-        ErrorMeleeScript(player, "AIGetArmyDelay no army?");
-        return 0;
-    }
+    //if (armyCount == 0) {
+    //    ErrorMeleeScript(player, "AIGetArmyDelay no army?");
+    //    return 0;
+    //}
 
     // Subtract off 150 seconds from the duration. This gives us time to build the initial tech 
     //   buildings we might need first and to ensure the last unit finishes in time.

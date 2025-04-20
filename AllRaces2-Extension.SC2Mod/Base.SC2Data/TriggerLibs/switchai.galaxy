@@ -127,16 +127,21 @@ unit AIGetScoutTerr (int player, int index, unit prev, bool allowWorkers) {retur
 //--------------------------------------------------------------------------------------------------
 void AIMelee (int player) {
     string race = PlayerRace(player);
+    int diff = AIPlayerDifficulty(player);
     if(!forceARCAI){
         if (race == "Zerg"){AIMeleeZergLegacy(player);return;}
         if (race == "Terr"){AIMeleeTerrLegacy(player);return;}
         if (race == "Prot"){AIMeleeProtLegacy(player);return;}
-        if (race == "Gen"){AIMeleeGen(player);return;}
-        if (race == "Xayi"){AIMeleeXayi(player);return;}
-        if (race == "Keir"){AIMeleeKeir (player);return;}
         if (race == "BWTe"){AIMeleeBWTe(player);return;}
         if (race == "BWZe"){AIMeleeBWZe(player);return;}
-        if (race == "BWrP"){AIMeleeBWPr(player);return;}
+        if (race == "BWPr"){AIMeleeBWPr(player);return;}
+
+        if(diff < c_skirHard || player == 1){
+            if (race == "Gen"){AIMeleeGen(player);return;}
+            if (race == "Xayi"){AIMeleeXayi(player);return;}
+            if (race == "Keir"){AIMeleeKeir (player);return;}
+        }
+        
         // if (race == "TerU"){AIMeleeTerU(player);return;}
         // if (race == "PrTD"){AIMeleePrTD(player);return;}
         // if (race == "Synd"){AIMeleeSynd(player);return;}
@@ -150,6 +155,16 @@ void AIMelee (int player) {
 void AIMeleeProt (int player) {AIMelee(player);}
 void AIMeleeZerg (int player) {AIMelee(player);}
 void AIMeleeTerr (int player) {AIMelee(player);}
+
+//--------------------------------------------------------------------------------------------------
+//  AIWaveThink
+//--------------------------------------------------------------------------------------------------
+void AIWaveThink(int player, wave w, int type){
+    AIWaveThinkDefault(player, w, type);
+}
+void AIWaveThinkZerg (int player, wave w, int type) {AIWaveThink(player, w, type);}
+void AIWaveThinkProt (int player, wave w, int type) {AIWaveThink(player, w, type);}
+void AIWaveThinkTerr (int player, wave w, int type) {AIWaveThink(player, w, type);}
 
 //--------------------------------------------------------------------------------------------------
 //  AIGlobalConfig
@@ -166,8 +181,10 @@ void AIGlobalConfig(){
         AIGlobalConfigBWTerran();
         AIGlobalConfigBWZerg();
         AIGlobalConfigBWProtoss();
+        AIGlobalConfigXayid () ;
+        AIGlobalConfigGenetron () ;
+        AIGlobalConfigKeiron () ;
     }
-    AIGlobalConfigARC();
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -189,28 +206,5 @@ void AISharedConfig (int player) {
     AISharedConfigARC(player);
 }
 
-//--------------------------------------------------------------------------------------------------
-//  AIWaveThink
-//--------------------------------------------------------------------------------------------------
-void AIWaveThinkZerg (int player, wave w, int type) {AIWaveThinkDefault(player, w, type);}
-void AIWaveThinkProt (int player, wave w, int type) {AIWaveThinkDefault(player, w, type);}
-void AIWaveThinkTerr (int player, wave w, int type) {AIWaveThinkDefault(player, w, type);}
 
-
-//--------------------------------------------------------------------------------------------------
-//  AI Get Default Build Flags Functions
-//--------------------------------------------------------------------------------------------------
-int AIGetDefaultBuildFlags (int player, string objType) {
-    int value;
-    value = AIGetDefaultBuildFlagsBWProtoss(player, objType); if(value){return value;}
-    value = AIGetDefaultBuildFlagsBWZerg(player, objType); if(value){return value;}
-    value = AIGetDefaultBuildFlagsBWTerran(player, objType); if(value){return value;}
-    value = AIGetDefaultBuildFlagsProtoss(player, objType); if(value){return value;}
-    value = AIGetDefaultBuildFlagsZerg(player, objType); if(value){return value;}
-    value = AIGetDefaultBuildFlagsTerran(player, objType); if(value){return value;}
-    value = AIGetDefaultBuildFlagsGenetron(player, objType); if(value){return value;}
-    value = AIGetDefaultBuildFlagsKeiron(player, objType); if(value){return value;}
-    value = AIGetDefaultBuildFlagsXayid(player, objType); if(value){return value;}
-    return c_makeStandard;
-}
 

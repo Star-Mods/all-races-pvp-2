@@ -408,6 +408,23 @@ void AIMeleeSharedInit (int player) {
 }
 
 
+void AISetBuildFlag(string tech,int flag){
+    DataTableSetInt(true,"BuildFlag_" + tech,flag);
+}
+
+int AIGetBuildFlag(string tech){
+    return DataTableGetInt(true,"BuildFlag_" + tech);
+}
+
+//--------------------------------------------------------------------------------------------------
+//  AI Get Default Build Flags Functions
+//--------------------------------------------------------------------------------------------------
+int AIGetDefaultBuildFlags (int player, string objType) {
+    int value = AIGetBuildFlag(objType);
+    if(value){return value;}
+    return c_makeStandard;
+}
+
 include "TriggerLibs/MeleeBuildAI"
 include "TriggerLibs/MeleeWaveAI"
 include "TriggerLibs/MeleeHighAI"

@@ -2,42 +2,115 @@
 //  ARC AI
 //--------------------------------------------------------------------------------------------------
 include "TriggerLibs/allrace/requirements"
-
+include "TriggerLibs/allrace/addtostockarmy"
+include "TriggerLibs/allrace/setup"
 //--------------------------------------------------------------------------------------------------
 //  Structures
 //--------------------------------------------------------------------------------------------------
+const int c_DU_Worker = 1;
+const int c_DU_TownHall = 2;
+const int c_DU_Creep = 3;
+const int c_DU_Power = 4;
+const int c_DU_Refinery = 5;
+const int c_DU_Supply = 6;
+const int c_DU_Detection = 7;
+const int c_DU_Radar = 8;
+const int c_DU_Transport = 9;
+const int c_DU_Support = 10;
+const int c_DU_Stealth = 11;
+const int c_DU_Healer = 12;
+const int c_DU_Ignored = 13;
+const int c_DU_Larva = 14;
+const int c_DU_Ground = 15;
+const int c_DU_Air = 16;
+const int c_DU_Production = 17;
+const int c_DU_Tech = 18;
+const int c_DU_PriorityStayHome = 19;
+const int c_DU_ExtraScout = 20;
+const int c_DU_ClearObstacles = 21;
+const int c_DU_DiversionAir = 22;
+const int c_DU_DiversionGround = 23;
+const int c_DU_Defense = 24;
+const int c_DU_ScoutAir = 25;
+const int c_DU_ScoutGround = 26;
+const int c_DU_ScoutEarlyDefense = 27;
+const int c_DU_SpecialDetector = 28;
+const int c_DU_StaticDetector = 29;
+const int c_DU_Combat1 = 30;
+const int c_DU_Combat2 = 31;
+const int c_DU_Combat3 = 32;
+const int c_DU_Combat4 = 33;
+const int c_DG_Upgrades1 = 34;
+const int c_DG_Upgrades2 = 35;
+const int c_DG_Upgrades3 = 36;
+const int c_DG_Upgrades4 = 37;
+const int c_DU_DropOff = 38;
+const int c_DU_Guard = 39;
+const int c_DU_DarkPower = 40;
+const int c_DU_Gate = 41;
+const int c_DU_Macro = 42;
+const int c_DU_Warrior = 43;
+const int c_DU_Builder = 44;
+
+const int c_DU_Combat = 45;
+const int c_DG_Upgrades = 46;
+const int c_DU_CombatAvailable = 47;
+const int c_DU_ProductionAvailable =48 ;
+const int c_DU_TechAvailable = 49;
+const int c_DU_SupportAvailable = 50;
+const int c_DG_UpgradesAvailable = 51 ;
+
 struct PlayerAIData {
+    string[60] lines;
     string userInstance;
     //units
-    string[5] unitPriorityIgnored;
     string[5] unitPriorityStayHome;
     string[5] unitPriorityGuard;
-    string[5] unitPriorityHealer;
     string[5] unitPriorityExtraScout;
     string[5] unitPriorityClearObstacles;
     string[5] unitPriorityDiversionAir;
     string[5] unitPriorityDiversionGround;
-    string[5] unitLarva;
+
     string unitWorker;
+    string unitDropOff;
+    string unitCreep;
+    string unitPower;
+    string unitSupply;
+    string unitRefinery;
+    string unitDetector;
+    string unitRadar;
+    string unitTransport;
+    string unitSupport;
+    string unitStealth;
+    string unitHealer; // unitPriorityHealer
+    string unitIgnored; // unitPriorityIgnored;
+    string unitLarva;
+    string unitGround;
+    string unitAir;
+    string unitProduction;
+    string unitTech;
+
+    string unitCombatTier1;
+    string unitCombatTier2;
+    string unitCombatTier3;
+    string unitCombatTier4;
+    string unitStaticDetector;
+    string unitStaticDefense;
+
     string unitScoutAir;
     string unitScoutGround;
     string unitScoutEarlyDefense;
-    string unitDetector;
-    string unitStaticDetector;
     string unitSpecialDetector;
-    string unitTownhall;
-    string unitCreep;
-    string unitPower;
+
+    string unitTownHall;
     string unitGuard;
-    string unitWarrior;
-    string unitSupply;
-    string unitRefinery;
-    string[5] unitStaticDefense;
     //orders
-    string[12][50] orders;  
+    string[12][100] orders;  
     //other
     int armyDuration;
+    int armyRoll;
 };
+
 
 //--------------------------------------------------------------------------------------------------
 //  Constants
@@ -54,17 +127,159 @@ const int bo_upgradesMid = 9;
 const int bo_upgradesLate = 10;
 const int bo_upgradesFinal = 11;
 
+
+
+// Preset Declarations
+const int ge_TgAIIncludeAlias_DontIncludeAlias = 0;
+const int ge_TgAIIncludeAlias_IncludeFirstAlias = 1;
+const int ge_TgAIIncludeAlias_IncludeLastAlias = 2;
+
+// Constants
+const int gv_realSelfThreat = 1;
+const int gv_realThreat = 1 | 2;
+const int gv_anySelfThreat = 1 | 4 | 8;
+const int gv_anyThreat = 1 | 2 | 4 | 8;
+const int gv_townInvalid = -2;
+const int gv_townMain = -1;
+const int gv_townMax = 32;
+const int gv_standard = 0;
+const int gv_townHall = 0x00040000;
+const int gv_creep = 0x00000001 | 0x00000010 | 0x00200000;
+const int gv_power = 0x00000001 | 0x00000010 | 0x00008000 | 0x00200000;
+const int gv_expandPower = 0x00000001 | 0x00000800 | 0x00008000 | 0x00040000;
+const int gv_darkPower = 0x00000800 | 0x00008000 | 0x00040000;
+const int gv_collector = 0x00000800 | 0x00008000 | 0x10000000;
+const int gv_defense = 0x00000004 | 0x00001000 | 0x00002000 | 0x00008000 | 0x00040000 | 0x00080000;
+const int gv_resourceDefense = 0x00000004 | 0x00040000;
+const int gv_lowerableSupplyDepot = 0x08000000;
+const int gv_wall = 0x00080000 | 0x0c000000;
+const int gv_default = -1;
+const int gv_techTg = 0x00000002 | 0x00000008 | 0x00000020 | 0x00000080 | 0x00010000 | 0x00020000;
+const int gv_productionTg = 0x00000002 | 0x00000008 | 0x00010000 | 0x00020000 | 0x00100000;
+const int gv_e_flagsRunScared = 4;
+const int gv_e_flagsLateScout = 8;
+const int gv_e_flagsClearObs = 9;
+const int gv_e_flagsAllowRetreat = 11;
+const int gv_e_flagsAllowDropAttack = 12;
+
 //--------------------------------------------------------------------------------------------------
 //  Variables
 //--------------------------------------------------------------------------------------------------
 PlayerAIData[15] aiData;
+trigger gt_ViscerousAI;
+int gv_pickedai;
+
+
+void PDebugLines(int p){
+    Debug("Worker " + aiData[p].lines[c_DU_Worker]);
+    Debug("TownHall " + aiData[p].lines[c_DU_TownHall]);
+    Debug("Creep " + aiData[p].lines[c_DU_Creep]);
+    Debug("Power " + aiData[p].lines[c_DU_Power]);
+    Debug("Refinery " + aiData[p].lines[c_DU_Refinery]);
+    Debug("Supply " + aiData[p].lines[c_DU_Supply]);
+    Debug("Detection " + aiData[p].lines[c_DU_Detection]);
+    Debug("Radar " + aiData[p].lines[c_DU_Radar]);
+    Debug("Transport " + aiData[p].lines[c_DU_Transport]);
+    Debug("Support " + aiData[p].lines[c_DU_Support]);
+    Debug("Stealth " + aiData[p].lines[c_DU_Stealth]);
+    Debug("Healer " + aiData[p].lines[c_DU_Healer]);
+    Debug("Ignored " + aiData[p].lines[c_DU_Ignored]);
+    Debug("Larva " + aiData[p].lines[c_DU_Larva]);
+    Debug("Ground " + aiData[p].lines[c_DU_Ground]);
+    Debug("Air " + aiData[p].lines[c_DU_Air]);
+    Debug("Production " + aiData[p].lines[c_DU_Production]);
+    Debug("Tech " + aiData[p].lines[c_DU_Tech]);
+    Debug("PriorityStayHome " + aiData[p].lines[c_DU_PriorityStayHome]);
+    Debug("ExtraScout " + aiData[p].lines[c_DU_ExtraScout]);
+    Debug("ClearObstacles " + aiData[p].lines[c_DU_ClearObstacles]);
+    Debug("DiversionAir " + aiData[p].lines[c_DU_DiversionAir]);
+    Debug("DiversionGround " + aiData[p].lines[c_DU_DiversionGround]);
+    Debug("Defense " + aiData[p].lines[c_DU_Defense]);
+    Debug("ScoutAir " + aiData[p].lines[c_DU_ScoutAir]);
+    Debug("ScoutGround " + aiData[p].lines[c_DU_ScoutGround]);
+    Debug("ScoutEarlyDefense " + aiData[p].lines[c_DU_ScoutEarlyDefense]);
+    Debug("SpecialDetector " + aiData[p].lines[c_DU_SpecialDetector]);
+    Debug("StaticDetector " + aiData[p].lines[c_DU_StaticDetector]);
+    Debug("Combat1 " + aiData[p].lines[c_DU_Combat1]);
+    Debug("Combat2 " + aiData[p].lines[c_DU_Combat2]);
+    Debug("Combat3 " + aiData[p].lines[c_DU_Combat3]);
+    Debug("Combat4 " + aiData[p].lines[c_DU_Combat4]);
+    Debug("Upgrades1 " + aiData[p].lines[c_DG_Upgrades1]);
+    Debug("Upgrades2 " + aiData[p].lines[c_DG_Upgrades2]);
+    Debug("Upgrades3 " + aiData[p].lines[c_DG_Upgrades3]);
+    Debug("Upgrades4 " + aiData[p].lines[c_DG_Upgrades4]);
+    Debug("DropOff " + aiData[p].lines[c_DU_DropOff]);
+    Debug("Guard " + aiData[p].lines[c_DU_Guard]);
+    Debug("DarkPower " + aiData[p].lines[c_DU_DarkPower]);
+    Debug("Gate " + aiData[p].lines[c_DU_Gate]);
+    Debug("Macro " + aiData[p].lines[c_DU_Macro]);
+    Debug("Warrior " + aiData[p].lines[c_DU_Warrior]);
+    Debug("Builder " + aiData[p].lines[c_DU_Builder]);
+    
+}
+
+
+
+bool PHas(int p, int line , string value){
+    if(StringWordFind(aiData[p].lines[line],value) > 0){  return true; }
+    return false;
+}
+int PCount(int p, int line){
+    return StringWordCount(aiData[p].lines[line]);
+}
+void PAdd(int p, int line , string value){
+    if(PHas(p,line , value)){return;}
+    if(aiData[p].lines[line] == ""){aiData[p].lines[line] += " ";}
+    aiData[p].lines[line]  += value + " ";
+}
+void PClone(int p, int lineTarget , int lineSource ){
+    aiData[p].lines[lineTarget] = lines[lineSource];
+}
+
+void PDel(int p, int line , string value){
+    if(aiData[p].lines[line] == ""){ return;}
+    aiData[p].lines[line] = StringReplaceWord(aiData[p].lines[line] , " " + value + " "," ", 1, c_stringCase);
+}
+string PGet(int p, int line){
+    if(aiData[p].lines[line] == ""){ return null;}
+    return StringWord(aiData[p].lines[line],1);
+}
+string PGetI(int p, int line,int i){
+    if(aiData[p].lines[line] == ""){ return null;}
+    return StringWord(aiData[p].lines[line],i);
+}
+void PClear(int p, int line){
+    aiData[p].lines[line] = "";
+}
+void PClearAll(int p){
+    int i;
+    for(i =0; i < 60; i+=1){ aiData[p].lines[i] = ""; }
+}
+//add word in random place
+void PAddR(int p, int line , string value){
+    string replace;
+    int index;
+    if(PHas(p,line , value)){return;}
+
+    if(aiData[p].lines[line] == ""){aiData[p].lines[line] += " ";}
+    index = RandomInt(0,PCount(p,line));
+    if(index == 0){
+        aiData[p].lines[line]  += value + " ";
+    }
+    else{
+        replace = PGetI(p,line,index);
+        aiData[p].lines[line] = StringReplaceWord(aiData[p].lines[line], " " + replace + " ", " " + value + " " + replace + " ",1, c_stringCase);
+    }
+}
+
+
+
 
 //--------------------------------------------------------------------------------------------------
 //  Strings Utilities
 //--------------------------------------------------------------------------------------------------
 bool IsFirstCharNumber(string input) {
     string firstChar = StringSub(input, 0, 1);
-    
     return (
         firstChar == "0" || firstChar == "1" || firstChar == "2" || 
         firstChar == "3" || firstChar == "4" || firstChar == "5" || 
@@ -82,7 +297,6 @@ int GetWordPositionByIndex(string input, int wordIndex) {
 
     while (i < length) {
         ch = StringSub(input, i, i + 1);
-
         if (ch != " " && !inWord) {
             // Found the start of a new word
             if (currentWord == wordIndex) {
@@ -100,15 +314,24 @@ int GetWordPositionByIndex(string input, int wordIndex) {
     return -1;
 }
 
-
 string UserDataGetUnit2(string inType,string inInstance, string field, int index ){
     string result;
     result = UserDataGetUnit(inType, inInstance, field, index);
-    if(result == "NULL"){
+    if(result == "$Null"){
         return "";
     }
     return result;
 }
+string UserDataGetUpgrade2(string inType,string inInstance, string field, int index ){
+    string result;
+    result = UserDataGetUpgrade(inType, inInstance, field, index);
+    if(result == "$Null"){
+        return "";
+    }
+    return result;
+}
+
+
 
 //--------------------------------------------------------------------------------------------------
 //  AI Utilities
@@ -171,34 +394,56 @@ string getDiffString(int lp_diff){
     return null;
 }
 
-string getUnitAlias2(int player,string orderUnit){
+int GetAIUnitLine(int player,string u){
+    if(StringSub(u,1,1) != "$"){return 0;}
     //replace special units with real units of the specific player
-    if(orderUnit == "$Townhall"){orderUnit = aiData[player].unitTownhall;}
-    if(orderUnit == "$Worker"){orderUnit = aiData[player].unitWorker;}
-    if(orderUnit == "$ScoutAir"){orderUnit = aiData[player].unitScoutAir;}
-    if(orderUnit == "$ScoutGround"){orderUnit = aiData[player].unitScoutGround;}
-    if(orderUnit == "$ScoutEarlyDefense"){orderUnit = aiData[player].unitScoutEarlyDefense;}
-    if(orderUnit == "$StaticDetector"){orderUnit = aiData[player].unitStaticDetector;}
-    if(orderUnit == "$SpecialDetector"){orderUnit = aiData[player].unitSpecialDetector;}
-    if(orderUnit == "$Detector"){orderUnit = aiData[player].unitDetector;}
-    if(orderUnit == "$Supply"){orderUnit = aiData[player].unitSupply;}
-    if(orderUnit == "$Refinery"){orderUnit = aiData[player].unitRefinery;}
-    if(orderUnit == "$Creep"){orderUnit = aiData[player].unitCreep;}
-    if(orderUnit == "$Power"){orderUnit = aiData[player].unitPower;}
-    if(orderUnit == "$Warrior"){orderUnit = aiData[player].unitWarrior;}
-    if(orderUnit == "$Guard"){orderUnit = aiData[player].unitGuard;}
-    return orderUnit;
+    if(u == "$TownHall"){return c_DU_TownHall;}
+    if(u == "$Radar"){return c_DU_Radar;}
+    if(u == "$DropOff"){return c_DU_DropOff;}
+    if(u == "$Worker"){return c_DU_Worker;}
+    if(u == "$ScoutAir"){return c_DU_ScoutAir;}
+    if(u == "$ScoutGround"){return c_DU_ScoutGround;}
+    if(u == "$ScoutEarlyDefense"){return c_DU_ScoutEarlyDefense;}
+    if(u == "$StaticDetector"){return c_DU_StaticDetector;}
+    if(u == "$SpecialDetector"){return c_DU_SpecialDetector;}
+    if(u == "$Detector"){return c_DU_Detection;}
+    if(u == "$Supply"){return c_DU_Supply;}
+    if(u == "$Refinery"){return c_DU_Refinery;}
+    if(u == "$Creep"){return c_DU_Creep;}
+    if(u == "$Power"){return c_DU_Power;}
+    if(u == "$Warrior"){return c_DU_Warrior;}
+    if(u == "$Guard"){return c_DU_Guard;}
+    if(u == "$Support"){return c_DU_Support;}
+    if(u == "$Transport"){return c_DU_Transport;}
+    if(u == "$Macro"){return c_DU_Macro;}
+    if(u == "$Builder"){return c_DU_Builder;}
+    
+    
+    if(u == "$Transport"){return c_DU_Transport;}
+    if(u == "$Defense"){return c_DU_Defense;}
+    if(u == "$Production"){return c_DU_Production;}
+    if(u == "$Tech"){return c_DU_Tech;}
+    //todo
+    if(u == "$ProductionLight"){return c_DU_Production;}
+    if(u == "$ProductionHeavy"){return c_DU_Production;}
+    if(u == "$ProductionAir"){return c_DU_Production;}
+    if(u == "$TechLight"){return c_DU_Tech;}
+    if(u == "$TechHeavy"){return c_DU_Tech;}
+    if(u == "$TechAir"){return c_DU_Tech;}
+
+
+    return 0;
 }
 
-string getUnitAlias(int player,string orderUnit){
+string getUnitAlias(string orderUnit){
     int aliasCount;
 
     //skip if invalid
     if((orderUnit == "") || (!CatalogEntryIsValid(c_gameCatalogUnit,orderUnit))){return "";}
     //use last tech alias of unit if defined
-    aliasCount = CatalogFieldValueCount(c_gameCatalogUnit, orderUnit,"TechAliasArray",player);
+    aliasCount = CatalogFieldValueCount(c_gameCatalogUnit, orderUnit,"TechAliasArray",c_playerAny);
     if(aliasCount > 0){
-        orderUnit = CatalogFieldValueGet(c_gameCatalogUnit, orderUnit,"TechAliasArray[" + IntToString(aliasCount - 1) + "]",player);
+        orderUnit = CatalogFieldValueGet(c_gameCatalogUnit, orderUnit,"TechAliasArray[" + IntToString(aliasCount - 1) + "]",c_playerAny);
     }
     return orderUnit;
 }
@@ -223,7 +468,7 @@ bool IsBuildOrderInstanceValid (string lv_instance, string userDataName,int lp_s
     
     if(race){
         instanceRace = UserDataGetGameLink(userDataName, lv_instance, "Race", 1);
-        if (instanceRace != race && instanceRace != "Neut") {return false;}
+        if (instanceRace != race) {return false;}
     }
 
     if(state){
@@ -233,7 +478,10 @@ bool IsBuildOrderInstanceValid (string lv_instance, string userDataName,int lp_s
 
     if(build){
         instanceBuild = UserDataGetString(userDataName, lv_instance, "Build", 1);
-        if ((build != "Air" && StringFind(instanceBuild, "Ground",c_stringNoCase) <= 0) && StringFind(instanceBuild, build, c_stringNoCase) <= 0 && StringFind(instanceBuild, "Any", c_stringNoCase) <= 0 ) {return false;}                    
+        if (
+            (build != "Air" && StringFind(instanceBuild, "Ground",c_stringNoCase) <= 0) && 
+                StringFind(instanceBuild, build, c_stringNoCase) <= 0 &&
+                StringFind(instanceBuild, "Any", c_stringNoCase) <= 0 ) {return false;}                    
     }
     if(diff){
         instanceDiff = UserDataGetString(userDataName, lv_instance, "Diff", 1);
@@ -243,10 +491,28 @@ bool IsBuildOrderInstanceValid (string lv_instance, string userDataName,int lp_s
     return true;
 }
 
+bool CheckBuildOrders (string userDataName, string race) {
+    string lv_instance;
+    int count = UserDataInstanceCount(userDataName);
+    int i;
+    for ( i = count; i >0; i -= 1 ) {
+        lv_instance = UserDataInstance(userDataName, i);
+        if(IsBuildOrderInstanceValid(lv_instance, userDataName, 0, 0, 0, race, "")){
+            return true;
+        }
+    }
+    return false;
+}
+
 string GetBuildOrderInstance (string userDataName,int lp_state, int lp_build, int lp_diff, string race, string stage) {
     string lv_instance;
     int count = UserDataInstanceCount(userDataName);
     int i;
+
+    if(!CheckBuildOrders(userDataName, race)){
+        race = "Neut";
+    }
+
     for ( i = count; i >0; i -= 1 ) {
         lv_instance = UserDataInstance(userDataName, i);
         if(IsBuildOrderInstanceValid(lv_instance,userDataName, lp_state, lp_build, lp_diff, race, stage)){
@@ -255,6 +521,7 @@ string GetBuildOrderInstance (string userDataName,int lp_state, int lp_build, in
     }
     return null;
 }
+
 
 string GetArmyOrderInstance (string userDataName,int lp_state, int lp_build, int lp_diff, string race, int player) {
     string lv_instance;
@@ -276,8 +543,102 @@ string GetArmyOrderInstance (string userDataName,int lp_state, int lp_build, int
         }
     }
     armyRoll = RandomInt(1,totalRolls);
-    AISetUserInt(player, c_ldNextArmyRoll, armyRoll);
+    aiData[player].armyRoll = armyRoll;
     return rolls[armyRoll];
+}
+
+
+
+int AIInitSubBuildOrder(int p, string coreInstance, int orderIndex, int commandIndexStart){
+    string u;
+    int orderCount;
+    string orderUpgrade;
+    int ifCount;
+    string ifUnit;
+    string orderCommand;
+    string command;
+    string operator;
+    int commandIndex = commandIndexStart;
+    int count;
+    int i;
+    int j;
+    string commandCondition;
+    int line;
+    int techCountMin;
+    int techCount;
+    string techCountMinTech;
+    
+    count = UserDataFieldValueCount("AIBuildOrders", "Unit");
+    for (  i = 1; i <= count; i += 1 ) {
+        u = UserDataGetUnit2("AIBuildOrders", coreInstance, "Unit", i);
+        orderUpgrade = UserDataGetUpgrade2("AIBuildOrders", coreInstance, "Upgrade", i);
+        orderCount = UserDataGetInt("AIBuildOrders", coreInstance, "Count", i);
+        ifUnit = UserDataGetUnit2("AIBuildOrders", coreInstance, "If", i);
+        ifCount = UserDataGetInt("AIBuildOrders", coreInstance, "IfCount", i);
+        orderCommand = UserDataGetString("AIBuildOrders", coreInstance, "Command", i);
+
+        if(ifUnit != "" && ifCount > 0){
+            commandCondition =  "If " + IntToString(ifCount) + " " + ifUnit + " ";
+        } 
+        else{commandCondition = ""; }
+
+        if(u != "" && orderCount > 0){
+            line = GetAIUnitLine(p,u);
+
+            
+            //choose tech to build
+            if(u == "$Tech" || u == "$TechLight" || u == "$TechHeavy" || u == "$TechAir"){   
+                for ( j = 1; j <= PCount(p,line) ; j += 1 ) { 
+                    u = getUnitAlias(PGetI(p,line,j)) ;
+                    //build tech if not built yet
+                    // it would require making some other tech building/unit first,
+                    if (AITechCount(p, u, c_techCountInProgressOrBetter) > 0) { continue; }
+                    // we only want to build defense available now
+                    // if (AIGetFirstUnfinishedReq(P, u) != null) {continue; }
+                    break;
+                }
+                line = 0;
+                // Debug(u);
+            }
+            // //choose production to build
+            // else if(u == "$Production" || u == "$ProductionLight" || u == "$ProductionHeavy" || u == "$ProductionAir"){
+            //     techCountMin = 999;
+            //     for ( j = 1; j <= PCount(p,line) ; j += 1 ) { u = PGetI(p,line,j) ;
+            //         // if (AIGetFirstUnfinishedReq(P, u) != null) {continue; }
+            //         techCount = AITechCount(p, u, c_techCountInProgressOrBetter);
+            //         if(techCount < techCountMin){
+            //             techCountMin = techCount;
+            //             techCountMinTech = u;
+            //         }
+            //     }
+            //     u = techCountMinTech;
+            //     line = 0;
+            //     Debug(u);
+            // }
+            // Debug(u + " " + IntToString(line) + " " + aiData[p].lines[line]);
+            if(line) {
+                for ( j = 1; j <= PCount(p,line) ; j += 1 ) {  u = getUnitAlias(PGetI(p,line,j)) ;
+                    aiData[p].orders[orderIndex][commandIndex] = commandCondition + orderCommand + " " + IntToString(orderCount) + " " + u;
+                    commandIndex+= 1;
+                }
+            }
+            else{
+                u = getUnitAlias(u);
+                aiData[p].orders[orderIndex][commandIndex] = commandCondition + orderCommand + " " + IntToString(orderCount) + " " + u;
+                commandIndex+= 1;
+            }
+        }
+        if(orderUpgrade){
+            aiData[p].orders[orderIndex][commandIndex] = commandCondition + orderCommand + " 1 " + orderUpgrade;
+            commandIndex+= 1;
+        }
+    }
+    //empty order = end of build order
+    if(commandIndex < 100){
+        aiData[p].orders[orderIndex][commandIndex] = "";
+    }
+
+    return commandIndex;
 }
 
 void AIInitCoreBuildOrder(int player,int mainState,int buildType,int diff,string race, string coreInstance, int orderIndex){
@@ -294,63 +655,39 @@ void AIInitCoreBuildOrder(int player,int mainState,int buildType,int diff,string
     int count2;
     int i;
     int j;
+    string subBuildOrder;
     count = UserDataFieldValueCount("AIBuildCore", "Command");
     for (  i = 1; i <= count; i += 1 ) {
         command = UserDataGetString("AIBuildCore", coreInstance, "Command", i);
         if(command == ""){ break; }
         operator = StringWord(command, 1);
         if(operator == "order"){
-            boSub = GetBuildOrderInstance ("AIBuildOrders",mainState, buildType, diff,race, StringWord(command, 2));
-            count2 = UserDataFieldValueCount("AIBuildOrders", "Unit");
-            for (  j = 1; j <= count2; j += 1 ) {
-                orderUnit = UserDataGetUnit2("AIBuildOrders", boSub, "Unit", j);
-                if(orderUnit == ""){ break; }
-                orderCount = UserDataGetInt("AIBuildOrders", boSub, "Count", j);
-                orderCommand = UserDataGetString("AIBuildOrders", boSub, "Command", j);
-                orderUnit = getUnitAlias2(player,orderUnit);
-                if(orderUnit == ""){ break; }
-                aiData[player].orders[orderIndex][commandIndex] = orderCommand + " " + IntToString(orderCount) + " " + orderUnit ;
-                commandIndex+= 1;
-            }
+            subBuildOrder = StringWord(command, 2);
+            boSub = GetBuildOrderInstance ("AIBuildOrders",mainState, buildType, diff,race, subBuildOrder);
+            commandIndex = AIInitSubBuildOrder(player, boSub, orderIndex, commandIndex);
+           //count2 = UserDataFieldValueCount("AIBuildOrders", "Unit");
+           //for (  j = 1; j <= count2; j += 1 ) {
+           //    orderUnit = UserDataGetUnit2("AIBuildOrders", boSub, "Unit", j);
+           //    if(orderUnit == ""){ break; }
+           //    orderCount = UserDataGetInt("AIBuildOrders", boSub, "Count", j);
+           //    orderCommand = UserDataGetString("AIBuildOrders", boSub, "Command", j);
+
+
+           //    aiData[player].orders[orderIndex][commandIndex] = orderCommand + " " + IntToString(orderCount) + " " + orderUnit ;
+
+
+           //    commandIndex+= 1;
+           //}
         }
         else{
             aiData[player].orders[orderIndex][commandIndex] = command;
             commandIndex+= 1;
         }
         //empty order = end of build order
-        if(commandIndex < 50){
+        if(commandIndex < 100){
             aiData[player].orders[orderIndex][commandIndex] = "";
         }
     }
-
-}
-
-void AIInitSubBuildOrder(int player, string coreInstance, int orderIndex){
-    string orderUnit;
-    int orderCount;
-    string orderCommand;
-    string command;
-    string operator;
-    int commandIndex = 0;
-    int count;
-    int i;
-    
-    count = UserDataFieldValueCount("AIBuildOrders", "Unit");
-    for (  i = 1; i <= count; i += 1 ) {
-        orderUnit = UserDataGetUnit2("AIBuildOrders", coreInstance, "Unit", i);
-        if(orderUnit == ""){ break; }
-        orderCount = UserDataGetInt("AIBuildOrders", coreInstance, "Count", i);
-        orderCommand = UserDataGetString("AIBuildOrders", coreInstance, "Command", i);
-        orderUnit = getUnitAlias2(player,orderUnit);
-        if(orderUnit == ""){ break; }
-        aiData[player].orders[orderIndex][commandIndex] = orderCommand + " " + IntToString(orderCount) + " " + orderUnit  ;
-        commandIndex+= 1;
-    }
-    //empty order = end of build order
-    if(commandIndex < 50){
-        aiData[player].orders[orderIndex][commandIndex] = "";
-    }
-
 }
 
 void AIInitArmyBuildOrder(int player, string coreInstance, int orderIndex){
@@ -371,15 +708,9 @@ void AIInitArmyBuildOrder(int player, string coreInstance, int orderIndex){
         orderCount = UserDataGetInt("AIBuildArmy", coreInstance, "Count", i);
         if(orderUnit == "" || orderCount == 0){ break; }
         
-        orderUnit = getUnitAlias2(player,orderUnit);
-        if(orderUnit == ""){ break; }
-
         orderUnitAlt = UserDataGetUnit2("AIBuildArmy", coreInstance, "UnitAlt", i);
         orderCountAlt = UserDataGetInt("AIBuildArmy", coreInstance, "CountAlt", i);
 
-        if(orderUnit != ""){
-            orderUnitAlt = getUnitAlias2(player,orderUnitAlt);
-        }
         if(orderUnitAlt != "" && orderCountAlt > 0 && RandomInt(1,2) == 2){
             orderUnit = orderUnitAlt;
             orderCount = orderCountAlt;
@@ -391,54 +722,22 @@ void AIInitArmyBuildOrder(int player, string coreInstance, int orderIndex){
         commandIndex+= 1;
     }
     //empty order = end of build order
-    if(commandIndex < 50){
+    if(commandIndex < 100){
         aiData[player].orders[orderIndex][commandIndex] = "";
     }
 }
 
-void AIInitUpgradesResearchOrder(int player, string coreInstance, int orderIndex){
-    string orderUpgrade;
-    int ifCount;
-    string ifUnit;
-    int commandIndex = 0;
-    int count;
-    int i;
-
-    count = UserDataFieldValueCount("AIBuildUpgrades", "Upgrade");
-    for (  i = 1; i <= count; i += 1 ) {
-        orderUpgrade = UserDataGetUpgrade("AIBuildUpgrades", coreInstance, "Upgrade", i);
-        if(orderUpgrade == ""){ break; }
-
-        ifUnit = UserDataGetUnit2("AIBuildUpgrades", coreInstance, "If", i);
-        if(ifUnit){
-            ifUnit = getUnitAlias2(player,ifUnit);
-            ifCount = UserDataGetInt("AIBuildUpgrades", coreInstance, "IfCount", i);
-        }
-        
-        if(ifUnit != "" && ifCount > 0){
-            aiData[player].orders[orderIndex][commandIndex] = "If " + IntToString(ifCount) + " " + ifUnit + " stock 1 " + orderUpgrade;
-        }
-        else{
-            aiData[player].orders[orderIndex][commandIndex] = "stock 1 " + orderUpgrade;
-        }
-        commandIndex+= 1;
-    }
-    //empty order = end of build order
-    if(commandIndex < 50){
-        aiData[player].orders[orderIndex][commandIndex] = "";
-    }
-}
 
 string BuildOrderToString (int player, int orderIndex) {
     int i;
     string command;
     string result = "";
-    for(i = 0; i< 50; i+=1){
+    for(i = 0; i< 100; i+=1){
+        command = aiData[player].orders[orderIndex][i];
+        if(command == ""){return result;}
         if(result != ""){
             result+=",";
         }
-        command = aiData[player].orders[orderIndex][i];
-        if(command == ""){return result;}
         result += command;
     }
     return result;
@@ -452,10 +751,10 @@ void AIInitCommonBuildOrders(int player){
     
     string boDefense = GetBuildOrderInstance ("AIBuildCore",e_mainState_Open, buildType, diff, race,"Defense");
     
-    string boUpgradesOpen = GetBuildOrderInstance ("AIBuildUpgrades",e_mainState_Open, buildType, 0, race,"");
-    string boUpgradesMid = GetBuildOrderInstance ("AIBuildUpgrades",e_mainState_Mid, buildType, 0, race,"");
-    string boUpgradesLate = GetBuildOrderInstance ("AIBuildUpgrades",e_mainState_Late, buildType, 0, race,"");
-    string boUpgradesFinal = GetBuildOrderInstance ("AIBuildUpgrades",e_mainState_Late + 1, buildType, 0, race,"");
+    string boUpgradesOpen = GetBuildOrderInstance ("AIBuildOrders",e_mainState_Open, buildType, 0, race,"Upgrades");
+    string boUpgradesMid = GetBuildOrderInstance ("AIBuildOrders",e_mainState_Mid, buildType, 0, race,"Upgrades");
+    string boUpgradesLate = GetBuildOrderInstance ("AIBuildOrders",e_mainState_Late, buildType, 0, race,"Upgrades");
+    string boUpgradesFinal = GetBuildOrderInstance ("AIBuildOrders",e_mainState_Late + 1, buildType, 0, race,"Upgrades");
 
     string boTechupOpen = GetBuildOrderInstance ("AIBuildOrders",e_mainState_Open, buildType, diff, race,"Techup");
     string boTechupMid = GetBuildOrderInstance ("AIBuildOrders",e_mainState_Mid, buildType, diff, race,"Techup");
@@ -464,15 +763,14 @@ void AIInitCommonBuildOrders(int player){
 
     AIInitCoreBuildOrder(player,e_mainState_Late, buildType, diff, race, boDefense, bo_defense);
 
-    AIInitUpgradesResearchOrder(player,boUpgradesOpen,bo_upgradesOpen);
-    AIInitUpgradesResearchOrder(player,boUpgradesMid,bo_upgradesMid);
-    AIInitUpgradesResearchOrder(player,boUpgradesLate,bo_upgradesLate);
-    AIInitUpgradesResearchOrder(player,boUpgradesFinal,bo_upgradesFinal);
-
-    AIInitSubBuildOrder(player,boTechupOpen,bo_techupOpen);
-    AIInitSubBuildOrder(player,boTechupMid,bo_techupMid);
-    AIInitSubBuildOrder(player,boTechupLate,bo_techupLate);
-    AIInitSubBuildOrder(player,boTechupFinal,bo_techupFinal);
+    AIInitSubBuildOrder(player,boUpgradesOpen,bo_upgradesOpen,0);
+    AIInitSubBuildOrder(player,boUpgradesMid,bo_upgradesMid,0);
+    AIInitSubBuildOrder(player,boUpgradesLate,bo_upgradesLate,0);
+    AIInitSubBuildOrder(player,boUpgradesFinal,bo_upgradesFinal,0);
+    AIInitSubBuildOrder(player,boTechupOpen,bo_techupOpen,0);
+    AIInitSubBuildOrder(player,boTechupMid,bo_techupMid,0);
+    AIInitSubBuildOrder(player,boTechupLate,bo_techupLate,0);
+    AIInitSubBuildOrder(player,boTechupFinal,bo_techupFinal,0);
 
     Debug("Defense " + boDefense + ": " + BuildOrderToString(player,bo_defense));
     Debug("UpgradesOpen " + boUpgradesOpen + ": " + BuildOrderToString(player,bo_upgradesOpen));
@@ -485,22 +783,559 @@ void AIInitCommonBuildOrders(int player){
     Debug("TechupFinal " + boTechupFinal + ": " + BuildOrderToString(player,bo_techupFinal));
 }
 
-void AIInitBuildOrders(int player){
-    int mainState = AIState(player, e_mainState);  
-    int buildType = GetBuildType(player);
-    int diff = AIPlayerDifficulty(player);
-    int lateLoop = AIGetUserInt(player, c_ldNumLateLoops);
-    int state = mainState + lateLoop;
-    string race = PlayerRace(player);
-    string boBuild = GetBuildOrderInstance ("AIBuildCore",mainState, buildType, diff, race,"Build");
-    string boArmy  = GetArmyOrderInstance ("AIBuildArmy",state, buildType, diff, race, player);
+//--------------------------------------------------------------------------------------------------
+// Trigger: Viscerous AI
+//--------------------------------------------------------------------------------------------------
+bool PlayerIsAlive(int p){
+    if((UnitGroupCount(UnitGroup(null, p, RegionEntireMap(), UnitFilter((1 << c_targetFilterPreventDefeat), 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 1), c_unitCountAlive) > 0)){
+        return true;
+    }else{
+        return false;
+    }
+}
 
-    AIInitCoreBuildOrder(player,mainState, buildType, diff, race, boBuild, bo_build);
-    AIInitArmyBuildOrder(player,boArmy,bo_army);
-    aiData[player].armyDuration = UserDataGetInt("AIBuildArmy", boArmy, "Duration", 1);
-    Debug("Duration" + IntToString(aiData[player].armyDuration));
-    Debug("Army " + boArmy + ": " + BuildOrderToString(player,bo_army));
-    Debug("Build " + boBuild + ": " + BuildOrderToString(player,bo_build));
+string gf_GetUnitAliasGameLink (string lp_unittype, int lp_alias_index) {
+    // Variable Declarations
+    string lv_alias;
+    int count;
+
+    if(!CatalogEntryIsValid(c_gameCatalogUnit, lp_unittype)){
+        return lp_unittype;
+    }
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_alias = "";
+    count = CatalogFieldValueCount(c_gameCatalogUnit, lp_unittype, "TechAliasArray", c_playerAny);
+
+    // Implementation
+    if ((count == 0)) {
+        return lp_unittype;
+    }
+    else {
+        return CatalogFieldValueGet(c_gameCatalogUnit, lp_unittype, "TechAliasArray[" + IntToString(MinI((count - 1), lp_alias_index)) + "]", c_playerAny);
+    }
+}
+
+void gf_TrainUnitIfNotInQueue (int p, string lp_unitType, int lp_includeAlias, int lp_count, string lp_requiredTech, int lp_requiredTechAlias, int lp_town, int lp_maxqueue) {
+    // Variable Declarations
+    int queued;
+
+    if (lp_includeAlias == ge_TgAIIncludeAlias_DontIncludeAlias) {
+        queued = AITechCount(p, lp_unitType, c_techCountQueuedOrBetter);
+    }
+    else if (lp_includeAlias == ge_TgAIIncludeAlias_IncludeFirstAlias) {
+        queued = AITechCount(p, gf_GetUnitAliasGameLink(lp_unitType, 0), c_techCountQueuedOrBetter);
+    }
+    else {
+        queued = AITechCount(p, gf_GetUnitAliasGameLink(lp_unitType, 255), c_techCountQueuedOrBetter);
+    }
+    if ((lp_requiredTech != null)) {
+        if (lp_requiredTechAlias == ge_TgAIIncludeAlias_IncludeFirstAlias) {
+            lp_requiredTech = gf_GetUnitAliasGameLink(lp_requiredTech, 0);
+        }
+        else if (lp_requiredTechAlias == ge_TgAIIncludeAlias_IncludeLastAlias) {
+            lp_requiredTech = gf_GetUnitAliasGameLink(lp_requiredTech, 255);
+        }
+        else {
+        }
+    }
+
+    if (((lp_requiredTech == null) || (AITechCount(p, lp_requiredTech, c_techCountCompleteOnly) != 0)) && (queued < lp_count)) {
+        AITrain(p, 2, lp_town, lp_unitType, MinI((lp_count - queued), lp_maxqueue));
+    }
+
+}
+
+void gf_BuildIfNotInQueue (int p, string lp_unitType, int lp_includeAlias, int lp_count, string lp_requiredTech, int lp_requiredTechAlias, int lp_town, int lp_buildFlags, int lp_maxqueue) {
+
+    int queued = AITechCount(p, gf_GetUnitAliasGameLink(lp_unitType, 0), c_techCountQueuedOrBetter);
+    if ((lp_requiredTech != null)) {
+        if (lp_requiredTechAlias == ge_TgAIIncludeAlias_IncludeFirstAlias) {
+            lp_requiredTech = gf_GetUnitAliasGameLink(lp_requiredTech, 0);
+        }
+        else if (lp_requiredTechAlias == ge_TgAIIncludeAlias_IncludeLastAlias) {
+            lp_requiredTech = gf_GetUnitAliasGameLink(lp_requiredTech, 255);
+        }
+    }
+    if(p == 2){
+        Debug(S(2) + "Build " + lp_unitType  + " count: " + S(lp_count) + " queued: " + S(queued));
+    }
+    if (((lp_requiredTech == null) || (AITechCount(p, lp_requiredTech, c_techCountCompleteOnly) != 0)) && (queued < lp_count)) {
+        AIBuild(p, 6, lp_town, lp_unitType, MinI((lp_count - queued), lp_maxqueue), lp_buildFlags);
+    }
+
+}
+
+void gf_ResearchIfNotInQueue (int p, string lp_upgrade, int lp_count, string lp_requiredTech, int lp_requiredTechAlias) {
+    int queued= TechTreeUpgradeCount(p, lp_upgrade, c_techCountQueuedOrBetter);
+    if ((lp_requiredTech != null)) {
+        if (lp_requiredTechAlias == ge_TgAIIncludeAlias_IncludeFirstAlias) {
+            lp_requiredTech = gf_GetUnitAliasGameLink(lp_requiredTech, 0);
+        }
+        else if (lp_requiredTechAlias == ge_TgAIIncludeAlias_IncludeLastAlias) {
+            lp_requiredTech = gf_GetUnitAliasGameLink(lp_requiredTech, 255);
+        }
+    }
+    if (((lp_requiredTech == null) || (AITechCount(p, lp_requiredTech, c_techCountCompleteOnly) != 0)) && (queued < lp_count)) {
+        AIResearch(p, 0, -1, lp_upgrade);
+    }
+
+}
+
+bool gf_IsCurrentlyExpansing (int p) {
+    // Automatic Variable Declarations
+    int autoF1C77B91_player;
+    int autoF1C77B91_state;
+    int autoF1C77B91_var;
+    int autoF1C77B91_statevar;
+
+    // Implementation
+    autoF1C77B91_player = p;
+    autoF1C77B91_state = 1;
+    autoF1C77B91_var = 0;
+    for ( ; autoF1C77B91_var < c_townMax; autoF1C77B91_var += 1 ) {
+        autoF1C77B91_statevar = AIGetTownState(autoF1C77B91_player,autoF1C77B91_var);
+        if (autoF1C77B91_statevar >= autoF1C77B91_state) {
+            if ((AIGetTownState(p, autoF1C77B91_var) == 1)) {
+                return true;
+            }
+
+        }
+    }
+    return false;
+}
+
+void Make(int p ,string u, int count,int type){
+    if ((UnitTypeTestAttribute(u, c_unitAttributeStructure) == true)) {
+        gf_BuildIfNotInQueue(p, u, ge_TgAIIncludeAlias_IncludeFirstAlias, count, null, ge_TgAIIncludeAlias_DontIncludeAlias, 0, type, 1);
+    }
+    else {
+        gf_TrainUnitIfNotInQueue(p, u, ge_TgAIIncludeAlias_IncludeFirstAlias, count, null, ge_TgAIIncludeAlias_DontIncludeAlias, 0, 1);
+    }
+}
+
+
+unitfilter gv_alive = UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32)));    
+wave[16] gv_aIWaves;
+void gf_Attack (int p) {
+    bool lv_wavemerge;
+    unitgroup ug;
+    string u ;
+    unit attackUnit;
+    int i;
+    int j;
+
+    if ((AIWaveUnitCount(gv_aIWaves[p]) > 0)) {
+        AIAttackWaveSetTargetMerge(p, gv_aIWaves[p]);
+        lv_wavemerge = true;
+    }
+    else {
+        AIAttackWaveSetTargetMelee(p);
+        lv_wavemerge = false;
+    }
+
+
+    for ( i = 1; i <= PCount(p,c_DU_Combat) ; i += 1 ) {
+        u = PGetI(p,c_DU_Combat,i);
+        ug = UnitGroup(u,p,(RegionEntireMap()),gv_alive,50);
+        for (j = 0; j < UnitGroupCount(ug, c_unitCountAll); j += 1) {
+            attackUnit = UnitGroupUnitFromEnd(ug, j);
+            if(AIUnitGetWave(attackUnit) == null){
+                AIAttackWaveUseUnit(p,attackUnit);
+            }
+        }
+    }
+    for ( i = 1; i <= PCount(p,c_DU_Support) ; i += 1 ) { 
+        u = PGetI(p,c_DU_Support,i);
+        ug = UnitGroup(u,p,(RegionEntireMap()),gv_alive,50);
+        for (j = 0; j < UnitGroupCount(ug, c_unitCountAll); j += 1) {
+            attackUnit = UnitGroupUnitFromEnd(ug, j);
+            if(AIUnitGetWave(attackUnit) == null){
+                AIAttackWaveUseUnit(p,attackUnit);
+            }
+        }
+    }
+
+    AIWaveMerge(p, c_waveMain, c_waveAttack);
+    AISetAttackState(p, e_attackState_Attack);
+
+    AIAttackWaveSend(p, 20, false);
+    if ((lv_wavemerge == false)) {
+        gv_aIWaves[p] = WaveLastCreated();
+    }
+}
+
+
+
+timer[15] gv_aIExpandTimer;
+timer[15] gv_aIAttackTimer;
+
+bool [15]readyToExpand;
+int [15]townsCount;
+
+void DebugP(int p,string message){
+    Debug("Player " + S(p) + ": " + message);
+}
+
+void BTUpdate(int p){
+    string missing;
+    int i;
+    string u;
+
+    AIClearTrainQueue(p);
+    AIClearBuildQueue(p);
+    AIClearStock(p);
+    AIClearResearchQueue(p);
+    
+    PClear(p,c_DU_CombatAvailable);
+    PClear(p,c_DU_ProductionAvailable);
+    PClear(p,c_DU_TechAvailable);
+    PClear(p,c_DU_SupportAvailable);
+    PClear(p,c_DG_UpgradesAvailable);
+
+    for ( i = 1; i <= PCount(p,c_DU_Combat) ; i += 1 ) { u = PGetI(p,c_DU_Combat,i);
+        missing = AIDefaultGetFirstMissingReq(p, u);
+        if(missing!= null) { PAddR(p,c_DU_TechAvailable,missing); }
+        else if (AIDefaultGetFirstUnfinishedReq(p, u) == null) { PAddR(p,c_DU_CombatAvailable,u);  }
+    }
+    for ( i = 1; i <= PCount(p,c_DU_Production) ; i += 1 ) { u = PGetI(p,c_DU_Production,i);
+        missing = AIDefaultGetFirstMissingReq(p, u);
+        if(missing!= null) { PAddR(p,c_DU_TechAvailable,missing); }
+        else if (AIDefaultGetFirstUnfinishedReq(p, u) == null) { PAddR(p,c_DU_ProductionAvailable,u);  }
+    }
+    for ( i = 1; i <= PCount(p,c_DU_Support) ; i += 1 ) { u = PGetI(p,c_DU_Support,i);
+        missing = AIDefaultGetFirstMissingReq(p, u);
+        if(missing!= null) { PAddR(p,c_DU_TechAvailable,missing); }
+        else if (AIDefaultGetFirstUnfinishedReq(p, u) == null) { PAddR(p,c_DU_SupportAvailable,u);  }
+    }
+    for ( i = 1; i <= PCount(p,c_DG_Upgrades) ; i += 1 ) { u = PGetI(p,c_DG_Upgrades,i);
+        missing = AIDefaultGetFirstMissingReq(p, u);
+        if(missing!= null) { PAddR(p,c_DU_TechAvailable,missing); }
+        else if (AIDefaultGetFirstUnfinishedReq(p, u) == null) { PAddR(p,c_DG_UpgradesAvailable,u);  }
+    }
+    for ( i = 1; i <= PCount(p,c_DU_Tech) ; i += 1 ) { u = PGetI(p,c_DU_Tech,i);
+        if(PHas(p, c_DU_TechAvailable, u)){continue;}
+        missing = AIDefaultGetFirstMissingReq(p, u);
+        if(missing!= null) { PAddR(p,c_DU_TechAvailable,missing); }
+        else if (AIDefaultGetFirstUnfinishedReq(p, u) == null) { PAddR(p,c_DU_TechAvailable,u);  }
+    }
+
+    //Debug("c_DU_Tech " + aiData[p].lines[c_DU_Tech]);
+    //Debug(S(p) + "====CombatAvailable " + aiData[p].lines[c_DU_CombatAvailable]);
+    //Debug(S(p) + "====ProductionAvailable " + aiData[p].lines[c_DU_ProductionAvailable]);
+    //Debug(S(p) + "====TechAvailable " + aiData[p].lines[c_DU_TechAvailable]);
+    //Debug("c_DU_SupportAvailable " + aiData[p].lines[c_DU_SupportAvailable]);
+    //Debug("c_DG_UpgradesAvailable " + aiData[p].lines[c_DG_UpgradesAvailable]);
+}
+
+void CheckSupplies(int p){
+    // int queued;
+    // string unitSupply = PGet(p,c_DU_Supply);
+    int i; string u;
+    int suppliesMade = PlayerGetPropertyInt(p, c_playerPropSuppliesMade);
+    int suppliesUsed = PlayerGetPropertyInt(p, c_playerPropSuppliesUsed);
+    int suppliesLimit = PlayerGetPropertyInt(p, c_playerPropSuppliesLimit);
+    int priority = 10;
+    // queued = AITechCount(p, gf_GetUnitAliasGameLink(unitSupply, 0), c_techCountQueuedOrBetter);
+
+    if ( suppliesMade - suppliesUsed < 0){
+        priority = 11;
+    } 
+
+    if (( suppliesMade - suppliesUsed < 6) && (suppliesMade < suppliesLimit)) {
+        //supply
+        for ( i = 1; i <= PCount(p,c_DU_Supply) ; i += 1 ) { u = PGetI(p,c_DU_Supply,i);
+            
+            // DebugP(p,"Need Supply " + u + "");
+            if ((UnitTypeTestAttribute(u, c_unitAttributeStructure) == true)) {
+                AIBuild(p, priority, c_townOne, u, 1, gv_power);
+            }
+            else{
+                AITrain(p, priority, c_townOne, u, 1);
+            }
+            // queued = AITechCount(p, gf_GetUnitAliasGameLink(u, 0), c_techCountQueuedOrBetter);
+            // Make(p,u,  (queued + 1),gv_power);
+        }
+    }
+}
+ 
+
+void CheckEconomy(int p){
+    int workersRequiredTotal = 0;
+    int workersMissingTotal = 0;
+    int workersMissing = 0;
+    int workersOptimal = 0;
+    int workersTotal = 0;
+    int workersLocal = 0;
+    int refineryCount = 0;
+    // int queued;
+    string unitRefinery = PGet(p,c_DU_Refinery);
+    //string unitWorker = PGet(p,c_DU_Worker);
+    string unitTownhall = PGet(p,c_DU_TownHall);
+    int i; int t; string u;
+    int priority;
+    
+    for ( t = 0; t < c_townMax; t += 1 ) {
+        if (AIGetTownState(p,t) >= c_townStateClaimed) {
+            refineryCount = AIGetBuildingCountInTown(p, t, gf_GetUnitAliasGameLink(unitRefinery, 0)  , c_techCountQueuedOrBetter) ;
+            workersOptimal = (AIGetMineralNumSpots(p, t) * 2) + (refineryCount * 3);
+            //up to 10 workers in not complete towns
+            if ((AIGetTownState(p, t) == 2) && workersOptimal > 10) {
+                workersOptimal = 10;
+            }
+            workersLocal = AIGetCurPeonCount(p, t);
+            workersTotal += workersLocal;
+            workersMissing = workersOptimal - workersLocal;
+            workersMissingTotal += workersMissing;
+            workersRequiredTotal += AIGetMaxPeonCount(p, t);
+            //set 60 workers cap
+            if (workersRequiredTotal > 60) {workersRequiredTotal = 60;}
+
+            //build refineries
+            // Debug("workersMissing town " + S(t) + " = " + S(workersMissing) );
+            // AISetMainTown(p,t);
+
+            if ((AIGetRawGasNumSpots(p, t) > 0) && (workersMissing < 6)) {
+                priority = 6;
+                if(workersMissing < 3){priority = 7;}
+                if(workersMissing < 0){ priority = 8;}
+
+                // DebugP(p,"need refinery! town " + S(t) + " "  + unitRefinery + " queued " + S(refineryCount) );
+                // Make(p,u,  (queued + 1),gv_collector);
+                AIBuild(p, 11, t, unitRefinery, 1, gv_collector);
+            }
+        }
+    }
+
+    //Worker
+    for ( t = 0; t < c_townMax; t += 1 ) {
+        if(workersTotal < workersRequiredTotal){
+            for ( i = 1; i <= PCount(p,c_DU_Worker) ; i += 1 ) { u = PGetI(p,c_DU_Worker,i);
+                // DebugP(p,"workers " + u + " " + S(workersTotal) + " req:" + S(workersRequiredTotal));
+                // Debug("Build worker");
+                // Make(p,u,  (queued + 1),gv_resourceDefense);
+                AITrain(p,5,t,u,1);
+            }
+        }
+    }
+    //AISelfDefenseThreatEval(gv_realSelfThreat, p) < 120 && 
+    readyToExpand[p] = false;
+    if((workersMissingTotal < 4)){
+        // if ( AIHasNearbyOpenExpansion(p)){
+        if(TimerGetRemaining(gv_aIExpandTimer[p]) <= 0.0){
+            readyToExpand[p] = true;
+            // DebugP(p,"Ready to expand!");
+        }
+        else{
+            // DebugP(p,"Expand timer set");
+        }
+        // }
+        // else{
+        //     DebugP(p,"No nearby expansion");
+        // }
+    }
+
+    if (readyToExpand[p]) {
+        AIClearTrainQueue(p);
+        AIClearBuildQueue(p);
+        AIClearResearchQueue(p);
+        // AIClearStock(p);
+        //if has money to expand
+        if ((AIHasRes(p, UnitTypeGetCost(unitTownhall, c_unitCostMinerals), UnitTypeGetCost(unitTownhall, c_unitCostVespene)) == true)) {
+            AIExpand(p, AIGetTownLocation(p, c_townMain), getUnitAlias(unitTownhall));
+            TimerStart(gv_aIExpandTimer[p], 60.0, false, c_timeAI);
+        }
+    }
+}
+
+void BTTechUp(int p){
+    int queued;
+    int count;
+    int i; string u; int priority;
+
+    //production
+    for ( i = 1; i <= PCount(p,c_DU_ProductionAvailable) ; i += 1 ) { u = PGetI(p,c_DU_ProductionAvailable,i);
+        count = (townsCount[p] * 1);
+        queued = AITechCount(p, u, c_techCountQueuedOrBetter);
+        priority = 4;
+        if(queued == 0){  priority = 9;}
+        if(queued == 1){  priority = 6;}
+        if (queued < count) { AIBuild(p, priority, c_townMain, u, count - queued, gv_techTg); }
+    }
+    //tech
+    for ( i = 1; i <= PCount(p,c_DU_TechAvailable) ; i += 1 ) { u = PGetI(p,c_DU_TechAvailable,i);
+        count = 1;
+        queued = AITechCount(p, u, c_techCountQueuedOrBetter);
+        priority = 8;
+        if (queued < count) { AIBuild(p, priority, c_townMain, u, count - queued, gv_techTg); }
+    }
+    //research
+    for ( i = 1; i <= PCount(p,c_DG_UpgradesAvailable) ; i += 1 ) { u = PGetI(p,c_DG_UpgradesAvailable,i);
+        queued= TechTreeUpgradeCount(p, u, c_techCountQueuedOrBetter);
+        if(queued == 0){ AIResearch(p, 0, c_townMain, u); }
+    }
+}
+bool gt_ViscerousAI_Func (bool testConds, bool runActions) {
+    int p = gv_pickedai;
+    string unitTownhall = PGet(p,c_DU_TownHall);
+    int lv_dangerLevel;
+    timer lv_aIAttackTimer = TimerCreate();
+    int i; int t; string u;
+    fixed food;
+    int queued;
+    int count;
+    int priority;
+
+    gv_aIExpandTimer[p] = TimerCreate();
+    gv_aIAttackTimer[p] = TimerCreate();
+
+    DebugP(p,"Viscerous AI");
+    TimerStart(gv_aIAttackTimer[p], RandomFixed(180,300.0), false, c_timeAI);
+    while (PlayerIsAlive(p)) {
+        Wait(5.0, c_timeAI);
+
+        lv_dangerLevel = AISelfDefenseThreatEval(gv_realSelfThreat, p);
+        townsCount[p] = 0;
+        //count towns
+        for ( t = 0; t < c_townMax; t += 1 ) {
+            if (AIGetTownState(p,t) >= 2) {townsCount[p] += 1; }
+        }
+
+        if ((lv_dangerLevel >= 120)) {
+            //endangered. need defenses? 
+        }
+        else if ((TimerGetRemaining(gv_aIAttackTimer[p]) <= 0.0)) {
+            gf_Attack(p);
+            TimerStart(gv_aIAttackTimer[p], RandomFixed(90.0,240.0), false, c_timeAI);
+        }
+        //todo?
+        if(TimerGetRemaining(gv_aIExpandTimer[p]) > 40){
+            continue;
+        }
+        // if ((gf_IsCurrentlyExpansing(p) == true)) {
+        //     continue;
+        // }
+
+        BTUpdate(p);
+
+        //no base?
+        if (AITechCount(p, gf_GetUnitAliasGameLink(unitTownhall, 0), c_techCountQueuedOrBetter) == 0) {
+            AIClearTrainQueue(p);
+            AIClearBuildQueue(p);
+            AIClearStock(p);
+            AIClearResearchQueue(p);
+            AIBuild(p, 12, -1, unitTownhall, 1, gv_townHall);
+            continue;
+        }
+        CheckSupplies(p);
+        CheckEconomy(p);
+        if (readyToExpand[p]) {continue;}
+    
+        if (lv_dangerLevel < 120) {
+            BTTechUp(p);
+        }   
+        
+        //army
+        for ( i = 1; i <= PCount(p,c_DU_CombatAvailable) ; i += 1 ) { u = PGetI(p,c_DU_CombatAvailable,i);
+            food = -UVGetReal(u,"Food");
+            if(food <= 0 ){ food = 1;}
+            count = FixedToInt(Ceiling((townsCount[p] * 10) / food));
+            if(count < 1){count = 1;}
+            priority = 6;
+            if (AITechCount(p, gf_GetUnitAliasGameLink(u, 0), c_techCountQueuedOrBetter) < (6 / food) ) {
+                priority = 10;
+            }
+            AITrain(p,priority,c_townOne,u,count);
+        }
+        //support
+        for ( i = 1; i <= PCount(p,c_DU_SupportAvailable) ; i += 1 ) { u = PGetI(p,c_DU_SupportAvailable,i);
+            count = (townsCount[p] * 1);
+            queued = AITechCount(p, u, c_techCountQueuedOrBetter);
+            priority = 5;
+            if (AITechCount(p, gf_GetUnitAliasGameLink(u, 0), c_techCountQueuedOrBetter) == 0) {
+                priority = 9;
+            }
+            if (queued < count) { AITrain(p, priority, c_townOne, u, count - queued); }
+        }
+        //defense
+        for ( t = 0; t < c_townMax; t += 1 ) { if (AIGetTownState(p,t) == 3) {
+            for ( i = 1; i <= PCount(p,c_DU_Defense) ; i += 1 ) { u = PGetI(p,c_DU_Defense,i);
+                queued = AIGetBuildingCountInTown(p, t, u, c_techCountQueuedOrBetter);
+                // Make(p,u,  (queued + 1),gv_collector);
+                // if(queued < 2){
+                AIBuild(p, 3, t, u, 1, gv_defense);
+                // AISetStockEx(p, t, 6, u, c_makeResourceDefense | c_nearDropoff, 0);
+                    // Debug("Defense? " + S(t) + " " + u  + " queued " + S(queued));
+                // }
+                // unitsExisted = UnitGroupCount(UnitGroup(u, p, RegionEntireMap(), gv_alive, 1), c_unitCountAlive);
+                // gf_BuildIfNotInQueue(p, u, ge_TgAIIncludeAlias_IncludeFirstAlias, unitsExisted + 2, null, ge_TgAIIncludeAlias_DontIncludeAlias, t, gv_defense, 1);
+                // AIBuild(p, 6, t, u, 1, gv_defense);
+            }
+        }}
+        AIEnableStock(p);
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Viscerous AI
+//--------------------------------------------------------------------------------------------------
+
+
+void AIInitBuildOrders(int p){
+    int mainState = AIState(p, e_mainState);  
+    int buildType = GetBuildType(p);
+    int diff = AIPlayerDifficulty(p);
+    int lateLoop = AIGetUserInt(p, c_ldNumLateLoops);
+    int state = mainState + lateLoop;
+    int cost;
+    string race = PlayerRace(p);
+    string boBuild = GetBuildOrderInstance ("AIBuildCore",mainState, buildType, diff, race,"Build");
+    string boArmy  = GetArmyOrderInstance ("AIBuildArmy",state, buildType, diff, race, p);
+    string combatUnits;
+    string u;
+    int combatUnitsCount;
+    fixed partCost;
+    int unitCost;
+    int unitCount;
+    int commandIndex;
+
+    AIInitCoreBuildOrder(p,mainState, buildType, diff, race, boBuild, bo_build);
+    
+    if(boArmy){
+        AIInitArmyBuildOrder(p,boArmy,bo_army);
+        aiData[p].armyDuration = UserDataGetInt("AIBuildArmy", boArmy, "Duration", 1);
+    }
+    else{
+        boBuild = GetBuildOrderInstance ("AIArmyCore", mainState, buildType, diff, null, null);
+        aiData[p].armyDuration = UserDataGetInt("AIArmyCore", boBuild, "Duration", 1);
+        aiData[p].armyDuration += RandomInt(0,UserDataGetInt("AIArmyCore", boBuild, "Delay", 1));
+        cost = UserDataGetInt("AIArmyCore", boBuild, "Cost", 1);
+
+        combatUnits = aiData[p].lines[c_DU_Combat1];
+        if(state >= e_mainState_Mid){combatUnits += aiData[p].lines[c_DU_Combat2];}
+        if(state >= e_mainState_Late){combatUnits += aiData[p].lines[c_DU_Combat3];}
+        if(state > e_mainState_Late){combatUnits += aiData[p].lines[c_DU_Combat4];}
+        combatUnitsCount = StringWordCount(combatUnits);
+        while(cost > 0){
+            u = StringWord(combatUnits, RandomInt(1,combatUnitsCount));
+            partCost = RandomFixed(200,500);
+            unitCost = UVGetInt(u,"CostResource[0]") + UVGetInt(u,"CostResource[1]");
+            if(unitCost <= 0){
+                unitCost = 50;
+                Debug("???");
+            }
+            unitCount = FixedToInt(Ceiling(partCost/ unitCost));
+            aiData[p].orders[bo_army][commandIndex] = IntToString(unitCount) + " " + u ;
+            commandIndex +=1;
+            cost -= unitCount * unitCost;
+        }
+        if(commandIndex < 100){
+            aiData[p].orders[bo_army][commandIndex] = "";
+        }
+    }
+    Debug("Army: " + boArmy + " " + IntToString(aiData[p].armyDuration ) + "s: " + BuildOrderToString(p,bo_army));
+    Debug("Build: " + boBuild + ": " + BuildOrderToString(p,bo_build));
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -508,155 +1343,130 @@ void AIInitBuildOrders(int player){
 //--------------------------------------------------------------------------------------------------
 void ExecuteAIBuildOrder (int player, int orderIndex);
 
-void DefaultEconomy (int player) {
+void BasicEconomy (int p) {
     int minWorkers = 20;
-    int econMin = AIGetMinPeonCount(player, c_townMax);
+    int econMin = AIGetMinPeonCount(p, c_townMax);
     if (minWorkers > econMin) {minWorkers = econMin;}
-    AIDefaultEconomy(player, aiData[player].unitTownhall, aiData[player].unitRefinery, aiData[player].unitSupply, aiData[player].unitWorker, minWorkers, c_stockAlways);
+    
+    AIDefaultEconomy(p, getUnitAlias( PGet(p,c_DU_TownHall)), getUnitAlias(PGet(p,c_DU_Refinery)), getUnitAlias(PGet(p,c_DU_Supply)), getUnitAlias(PGet(p,c_DU_Worker)), minWorkers, c_stockAlways);
 }
 
-void AtEachTown (int player, int tier) {
-    string aliasDropOff = aiData[player].unitTownhall;
-    string unitPower = aiData[player].unitPower;
-    string unitCreep = aiData[player].unitCreep;
+void AtEachTown (int p, int tier) {
+    string aliasDropOff = PGet(p,c_DU_DropOff);
+    string u;
     int i = 0;
-    int j = 0;
+    int t = 0;
     bool constructing = false;
     string unitDefense;
     int town;
     int numTowns = 0;
-    while (i < c_townMax) { town = i;  i = i + 1;
+    int count = 0;
+    while (t < c_townMax) { town = t;  t = t + 1;
         //for NOD need only 1 power before it established
-        if (AIGetTownState(player, town) != c_townStateEstablished) {continue;}
-        if (AIGetBuildingCountInTown(player, town, aliasDropOff, c_techCountCompleteOnly) < 1) {continue;}
+        if (AIGetTownState(p, town) != c_townStateEstablished) {continue;}
+        if (AIGetBuildingCountInTown(p, town, aliasDropOff, c_techCountCompleteOnly) < 1) {continue;}
         numTowns += 1;
 
-        if(unitPower){
+        for ( i = 1; i <= PCount(p,c_DU_Power) ; i += 1 ) {
+            u = PGetI(p,c_DU_Power,i);
             //make 2 pylons in each town
-            if (AIGetBuildingCountInTown(player, town, unitPower, c_techCountCompleteOnly) < 2) { //сумма всех пилонов в стоке
-                AISetStockEx(player, town, 1, unitPower, c_makeExpanPower, 0);
-                AISetStockEx(player, town, 2, unitPower, c_makeResourceDefense | c_nearDropoff, 0);
-                continue;
+            if (AIGetBuildingCountInTown(p, town, u, c_techCountCompleteOnly) < 2) { //сумма всех пилонов в стоке
+                AISetStockEx(p, town, 1, u, c_makeExpanPower, 0);
+                AISetStockEx(p, town, 2, u, c_makeResourceDefense | c_nearDropoff, 0);
+                constructing = true; break;
             }
         }
-        if(unitCreep){
+        if(constructing){ continue;}
+        
+        for ( i = 1; i <= PCount(p,c_DU_Creep) ; i += 1 ) {
+            u = PGetI(p,c_DU_Creep,i);
             //make 2 creep in each town
-            if (AIGetBuildingCountInTown(player, town, unitCreep, c_techCountCompleteOnly) < 2) { //сумма всех пилонов в стоке
-                AISetStockEx(player, town, 1, unitCreep, c_makeDefense | c_nearChokePoint, 0);
-                AISetStockEx(player, town, 2, unitCreep, c_makeResourceDefense | c_nearDropoff, 0);
-                continue;
+            if (AIGetBuildingCountInTown(p, town, u, c_techCountCompleteOnly) < 2) { //сумма всех пилонов в стоке
+                AISetStockEx(p, town, 1, u, c_makeDefense | c_nearChokePoint, 0);
+                AISetStockEx(p, town, 2, u, c_makeResourceDefense | c_nearDropoff, 0);
+                constructing = true; break;
+            }
+        } 
+        if(constructing){ continue;}
+
+        for ( i = 1; i <= PCount(p,c_DU_Defense) ; i += 1 ) {
+            u = PGetI(p,c_DU_Defense,i);
+            if (AIGetBuildingCountInTown(p, town, u, c_techCountCompleteOnly) < 2) {
+                AISetStockEx(p, town, 1, u, c_makeDefense | c_nearChokePoint, 0);
+                AISetStockEx(p, town, 2, u, c_makeResourceDefense | c_nearDropoff, 0);
+                constructing = true; break;
             }
         }
-        for ( j = 0; j < 5 ; j += 1 ) {
-            unitDefense = aiData[player].unitStaticDefense[j];
-            if(!unitDefense){break;}
-
-            if (AIGetBuildingCountInTown(player, town, unitDefense, c_techCountCompleteOnly) < 2) {
-                AISetStockEx(player, town, 1, unitDefense, c_makeDefense | c_nearChokePoint, 0);
-                AISetStockEx(player, town, 2, unitDefense, c_makeResourceDefense | c_nearDropoff, 0);
-                constructing = true;
-                break;
-            }
-        }
-        if(constructing){
-            continue;
-        }
+        if(constructing){ continue;}
     }
-    if(aiData[player].unitGuard){
-        AISetStockUnitNext( player, numTowns+1, aiData[player].unitGuard, c_stockAlways );
-    }
-    
-   //else if(StringSub(input, 0, 2) == "ex" ){
-   //    while (i < c_townMax) {
-   //        town = i; i = i + 1;
-   //        if (AIGetTownState(player, town) != c_townStateEstablished) { continue;}
-   //        if (AIGetBuildingCountInTown(player, town, aiData[player].unitTownhall, c_techCountCompleteOnly) < 1) { continue; }
 
-   //        if(operator == "exExpanPower"){
-   //            AISetStockEx(player, town, StringToInt(args[1]), args[2], c_makeExpanPower, 0);
-   //        }
-   //        else if(operator == "exResourceDefense"){
-   //            AISetStockEx(player, town, StringToInt(args[1]), args[2], c_makeResourceDefense | c_nearDropoff, 0);
-   //        }
-   //        else if(operator == "exDefense"){
-   //            AISetStockEx(player, town, StringToInt(args[1]), args[2], c_makeDefense | c_nearChokePoint, 0);
-   //        }
-   //        // make 2 pylons in each town
-   //        //if (AIGetBuildingCountInTown(player, town, c_BWPB_Pylon, c_techCountCompleteOnly) < 2) {
-   //        //    AISetStockEx(player, town, 1, c_BWPB_Pylon, c_makeExpanPower, 0);
-   //        //    AISetStockEx(player, town, 2, c_BWPB_Pylon, c_makeResourceDefense | c_nearDropoff, 0);
-   //        //    continue;
-   //        //}
-   //        //if (AIGetBuildingCountInTown(player, town, c_BWPB_PhotonCannon, c_techCountCompleteOnly) < 2) {
-   //        //    AISetStockEx(player, town, 2, c_BWPB_PhotonCannon, c_makeResourceDefense | c_nearDropoff, 0);
-   //        //    continue;
-   //        //}
-   //    }
-   //}
+    for ( i = 1; i <= PCount(p,c_DU_Guard) ; i += 1 ) {
+        u = PGetI(p,c_DU_Guard,i);
+        AISetStockUnitNext( p, numTowns+1, u, c_stockAlways );
+    }
+    //orbital command
+    for ( i = 1; i <= PCount(p,c_DU_Macro) ; i += 1 ) {
+        u = PGetI(p,c_DU_Macro,i);
+        AISetStockUnitNext( p, numTowns+1, u, c_stockAlways );
+    }
 }
 
-void TechUp (int player) {
-    int lateLoop = AIGetUserInt(player, c_ldNumLateLoops);
-    int tier = AIState(player, e_mainState) + lateLoop;
-    int diff = AIPlayerDifficulty(player);
+void TechUp (int p) {
+    int lateLoop = AIGetUserInt(p, c_ldNumLateLoops);
+    int tier = AIState(p, e_mainState) + lateLoop;
+    int diff = AIPlayerDifficulty(p);
     // don't build extra buildings below medium
     if (diff < c_skirMedium) {  return; }
-    AISetStock( player, 2, aiData[player].unitRefinery );
-    ExecuteAIBuildOrder(player,bo_techupOpen);
+    AISetStock( p, 2, PGet(p,c_DU_Refinery) );
+    ExecuteAIBuildOrder(p,bo_techupOpen);
     if (tier >= c_ldPhaseMid) {
-       AtEachTown(player, tier);
-       ExecuteAIBuildOrder(player,bo_techupMid);
+       AtEachTown(p, tier);
+       ExecuteAIBuildOrder(p,bo_techupMid);
        if (tier >= c_ldPhaseLate) {
-        ExecuteAIBuildOrder(player,bo_techupLate);
+        ExecuteAIBuildOrder(p,bo_techupLate);
            if (tier > c_ldPhaseLate) {
-            ExecuteAIBuildOrder(player,bo_techupFinal);
+            ExecuteAIBuildOrder(p,bo_techupFinal);
            }
        }
     }
 }
 
-void Upgrades (int player) {
-    int lateLoop = AIGetUserInt(player, c_ldNumLateLoops);
-    int tier = AIState(player, e_mainState) + lateLoop;
-    ExecuteAIBuildOrder(player,bo_upgradesOpen);
+void Upgrades (int p) {
+    int lateLoop = AIGetUserInt(p, c_ldNumLateLoops);
+    int tier = AIState(p, e_mainState) + lateLoop;
+    ExecuteAIBuildOrder(p,bo_upgradesOpen);
     if (tier >= c_ldPhaseMid) {
-        ExecuteAIBuildOrder(player,bo_upgradesMid);
+        ExecuteAIBuildOrder(p,bo_upgradesMid);
         if (tier >= c_ldPhaseLate) {
-            ExecuteAIBuildOrder(player,bo_upgradesLate);
+            ExecuteAIBuildOrder(p,bo_upgradesLate);
             if (tier > c_ldPhaseLate) {
-                ExecuteAIBuildOrder(player,bo_upgradesFinal);
+                ExecuteAIBuildOrder(p,bo_upgradesFinal);
             }
         }
     }
 }
 
-void Defend (int player) {
-    if (AINeedsDefending(player)) {
-        ExecuteAIBuildOrder(player,bo_defense);
+void Defend (int p) {
+    if (AINeedsDefending(p)) {
+        ExecuteAIBuildOrder(p,bo_defense);
     }
 }
 
-bool MacroExpand (int player) {
-    string unitWorker = aiData[player].unitWorker;
-    string unitSupply = aiData[player].unitSupply;
-    string unitTownHall = aiData[player].unitTownhall;
-    string unitRefinery = aiData[player].unitRefinery;
-    string unitDetector = aiData[player].unitDetector;
-
+bool MacroExpand (int p) {
     fixed defenseEval = 0;
-    if (AITechCount(player, unitWorker, c_techCountQueuedOrBetter) < 14) {return false; }
-    if (AITechCount(player, unitTownHall, c_techCountQueuedOrBetter) >= 2) {return false; }
-    defenseEval = AISelfDefenseThreatEval(c_dtRealSelfThreat, player);
+    if (AITechCount(p, PGet(p,c_DU_Worker), c_techCountQueuedOrBetter) < 14) {return false; }
+    if (AITechCount(p, PGet(p,c_DU_DropOff), c_techCountQueuedOrBetter) >= 2) {return false; }
+    defenseEval = AISelfDefenseThreatEval(c_dtRealSelfThreat, p);
     // don't expand if currently under attack
     if (defenseEval >= 120) {return false;}
-    if (!AIIsExpandingOrHasExpanded(player)) {
-        if (!AIHasNearbyOpenExpansion(player)) { return false;}
-        if (!AIHasRes(player,300,0)) {AIEnableStock(player); return true;}
+    if (!AIIsExpandingOrHasExpanded(p)) {
+        if (!AIHasNearbyOpenExpansion(p)) { return false;}
+        if (!AIHasRes(p,300,0)) {AIEnableStock(p); return true;}
         // we should try to expand
-        AIExpand(player, AIGetTownLocation(player, c_townMain), unitTownHall);
+        AIExpand(p, AIGetTownLocation(p, c_townMain), PGet(p,c_DU_DropOff));
     }
     // currently expanding see if we need to save minerals
-    if (!AIHasRes(player,500,0)) { AIEnableStock(player);return true;}
+    if (!AIHasRes(p,500,0)) { AIEnableStock(p);return true;}
     // already saved enough, we're allowed to continure the stock
     return false; 
 }
@@ -665,7 +1475,7 @@ bool MacroExpand (int player) {
 //--------------------------------------------------------------------------------------------------
 //  Execute Build Orders
 //--------------------------------------------------------------------------------------------------
-void ExecuteAIBuildOrderCommand (int player, string command) {
+void ExecuteAIBuildOrderCommand (int p, string command) {
     string operator;
     string ifUnit;
     int ifCount;
@@ -673,12 +1483,18 @@ void ExecuteAIBuildOrderCommand (int player, string command) {
     int i = 0;
     int town;
     string[5] args;
+    string u;
+    int line;
+    int count;
+    int techCount;
+    int techCountMin;
+    string techCountMinTech;
 
     operator = StringWord(command, 1);
     if(operator == "if"){
         ifCount = StringToInt(StringWord(command, 2));
         ifUnit = StringWord(command, 3);
-        if (AITechCount(player, ifUnit, c_techCountInProgressOrBetter) < ifCount) {
+        if (AITechCount(p, ifUnit, c_techCountInProgressOrBetter) < ifCount) {
             return;
         }
         wordIndex += 3;
@@ -686,248 +1502,269 @@ void ExecuteAIBuildOrderCommand (int player, string command) {
     
     operator = StringWord(command, wordIndex);
 
-    for(i = 1 ; i<= 5; i+=1){
+    for(i = 1 ; i< 5; i+=1){
         args[i] = StringWord(command, wordIndex + i);
         if(args[i] == ""){break;}
     }
 
-    if(operator == "stock"){
-        AISetStock( player, StringToInt(args[1]), args[2] );
-    }
-    else if(operator == "stockNext"){
-        AISetStockUnitNext( player, StringToInt(args[1]), args[2], c_stockIdle );
-    }
-    else if(operator == "stockEmergencySkipCheck"){
-        AIAddEmergencyDefenseStock(player, StringToInt(args[1]), args[2], false);
-    }
-    else if(operator == "stockEmergency"){
-        AIAddEmergencyDefenseStock(player, StringToInt(args[1]), args[2], true);
+    if(operator == "stock" || operator == "stockNext" || operator == "stockEmergencySkipCheck" || operator == "stockEmergency"){
+        u = args[2]; count = StringToInt(args[1]);
+        // line = GetAIUnitLine(p,u);
+
+        // //choose tech to build
+        // if(u == "$Tech" || u == "$TechLight" || u == "$TechHeavy" || u == "$TechAir"){   
+        //     u = PGetI(p,line,i) ;
+        //     for ( i = 1; i < PCount(p,line) ; i += 1 ) {
+        //         //build tech if not built yet
+        //     // it would require making some other tech building/unit first,
+        //         if (AITechCount(p, u, c_techCountInProgressOrBetter) > 0) { continue; }
+        //         // we only want to build defense available now
+        //         // if (AIGetFirstUnfinishedReq(P, u) != null) {continue; }
+        //         break;
+        //     }
+        //     line = 0;
+        // }
+        // //choose production to build
+        // else if(u == "$Production" || u == "$ProductionLight" || u == "$ProductionHeavy" || u == "$ProductionAir"){
+        //     techCountMin = 999;
+        //     for ( i = 1; i < PCount(p,line) ; i += 1 ) {
+        //         u = PGetI(p,line,i) ;
+        //         // if (AIGetFirstUnfinishedReq(P, u) != null) {continue; }
+        //         techCount = AITechCount(p, u, c_techCountInProgressOrBetter);
+        //         if(techCount < techCountMin){
+        //             techCountMin = techCount;
+        //             techCountMinTech = u;
+        //         }
+        //     }
+        //     u = techCountMinTech;
+        //     line = 0;
+        // }
+        
+        // if(line){ for ( i = 1; i < PCount(p,line) ; i += 1 ) {
+        //     u = PGetI(p,line,i) ;
+        //     Debug(operator + " " + u);
+        //     if(operator == "stock"){AISetStock( p, count, u); }
+        //     if(operator == "stockNext"){AISetStockUnitNext( p, count, u, c_stockIdle );}
+        //     if(operator == "stockEmergencySkipCheck"){ AIAddEmergencyDefenseStock(p,count, u, false);}
+        //     if(operator == "stockEmergency"){ AIAddEmergencyDefenseStock(p, count, u, true); }
+        // }}
+        // else{
+        //     Debug(operator + " " + u);
+        if(operator == "stock"){AISetStock( p, count, u); }
+        if(operator == "stockNext"){AISetStockUnitNext( p, count, u, c_stockIdle );}
+        if(operator == "stockEmergencySkipCheck"){ AIAddEmergencyDefenseStock(p,count, u, false);}
+        if(operator == "stockEmergency"){ AIAddEmergencyDefenseStock(p, count, u, true); }
+        // }
     }
     else if(operator == "stockWorkersLD"){
-        AILDStockWorkers( player, StringToInt(args[1]), aiData[player].unitWorker);
+        AILDStockWorkers( p, StringToInt(args[1]), PGet(p,c_DU_Worker));
     }
     else if(operator == "macroExpand"){
-        if (MacroExpand(player)) { return; }
+        if (MacroExpand(p)) { return; }
     }
     else if(operator == "defend"){
-        Defend(player);
+        Defend(p);
+    }
+    else if(operator == "stockFarms"){
+        AISetStockFarms(p, PGet(p,c_DU_Supply), c_stockNormalFarms);
     }
     else if(operator == "techUp"){
-        TechUp(player);
+        TechUp(p);
     }
     else if(operator == "upgrades"){
-        Upgrades(player);
+        Upgrades(p);
     }
     else if(operator == "stockArmyScale"){
-        AISetStockArmyScale(player, StringToFixed(args[1])/100);
+        AISetStockArmyScale(p, StringToFixed(args[1])/100);
     }
     else if(operator == "defaultEconomy"){
-        DefaultEconomy(player);
+        BasicEconomy(p);
     }
     else if(operator == "defaultExpansion"){
-        AIDefaultExpansion(player, aiData[player].unitTownhall, StringToInt(args[1]), StringToInt(args[2]), c_expandDefault);
+        AIDefaultExpansion(p, getUnitAlias( PGet(p,c_DU_TownHall)), StringToInt(args[1]), StringToInt(args[2]), c_expandDefault);
     }
     else if(operator == "detectionBeaconCheck"){
-        if (PlayerBeaconIsSet(player, c_beaconDetect)) {
-            AISetStock( player, 1, aiData[player].unitDetector );
-         }
-    }
-    else if(operator == "needsDetectionCheck"){
-        if (AINeedsDetection(player)) {
-            if(aiData[player].unitDetector){AISetStock( player, 1, aiData[player].unitDetector );}
-            if(aiData[player].unitStaticDetector){AISetStock( player, 2, aiData[player].unitStaticDetector );}
-            if(aiData[player].unitSpecialDetector){AISetStock( player, 1, aiData[player].unitSpecialDetector );}
+        if (PlayerBeaconIsSet(p, c_beaconDetect)) {
+            for ( i = 1; i <= PCount(p,c_DU_Detection) ; i += 1 ) {
+                AISetStock( p, 1, PGetI(p,c_DU_Detection,i) );
+            }
         }
     }
-}
-
-void ExecuteAIBuildOrder (int player, int orderIndex) {
-    int i;
-    string command;
-    for(i = 0; i< 50; i+=1){
-        command = aiData[player].orders[orderIndex][i];
-        if(command == ""){return;}
-        ExecuteAIBuildOrderCommand(player,command);
+    else if(operator == "needsDetectionCheck"){
+        if (AINeedsDetection(p)) {
+            for ( i = 1; i <= PCount(p,c_DU_Detection) ; i += 1 ) {
+                AISetStock( p, 1, PGetI(p,c_DU_Detection,i) );
+            }
+            for ( i = 1; i <= PCount(p,c_DU_StaticDetector) ; i += 1 ) {
+                AISetStock( p, 2, PGetI(p,c_DU_StaticDetector,i) );
+            }
+            for ( i = 1; i <= PCount(p,c_DU_SpecialDetector) ; i += 1 ) {
+                AISetStock( p, 1, PGetI(p,c_DU_SpecialDetector,i) );
+            }
+        }
+    }
+    else{
+        Debug("Unknown command " + command);
     }
 }
 
-void ExecuteAIArmyOrderCommand (int player, string command) {
-    int count = StringToInt(StringWord(command, 1));
-    string warrior = StringWord(command, 2);
-    Debug("AddToStockArmy: " + IntToString(count) + " " +  warrior );
-    AIAddToStockArmy(player, warrior, count );
-}
-
-void ExecuteAIArmyOrder (int player, int orderIndex) {
+void ExecuteAIBuildOrder (int p, int orderIndex) {
     int i;
     string command;
-    for(i = 0; i< 50; i+=1){
-        command = aiData[player].orders[orderIndex][i];
+    for(i = 0; i< 100; i+=1){
+        command = aiData[p].orders[orderIndex][i];
         if(command == ""){return;}
-        ExecuteAIArmyOrderCommand(player,command);
+        ExecuteAIBuildOrderCommand(p,command);
     }
 }
 
 //--------------------------------------------------------------------------------------------------
 //  AINewUnit
 //--------------------------------------------------------------------------------------------------
-
-void AINewUnitGuard (int player, unit u) {
+void AINewUnitGuard (int p, unit u) {
     string type = UnitGetType(u);
     wave w;
     unit drop;
-    drop = AIGetDropoffWithFewestGuards(player, type);
+    drop = AIGetDropoffWithFewestGuards(p, type);
     if (drop == c_nullUnit) {
-        AIWaveAddUnitPriority(AIWaveGet(player, c_waveHome), u, c_prioWavePeon);
+        AIWaveAddUnitPriority(AIWaveGet(p, c_waveHome), u, c_prioWavePeon);
     }
     else {
-        w = AIWaveCreate(AIWaveInfoCreate(), player, AIWaveTargetGatherDPoint(player, c_townMain));
+        w = AIWaveCreate(AIWaveInfoCreate(), p, AIWaveTargetGatherDPoint(p, c_townMain));
         AIWaveSetType(w, c_waveStateGuardHome, AIWaveTargetGuardHomeUnit(drop));
         AIWaveAddUnitPriority(w, u, c_prioWavePeon);
         AIWaveSetDeleteWhenEmpty(w, true);
     }
 }
 
-void AINewUnitARC (int player, unit u) {
-    string type = UnitGetType(u);
-    string unitDetector = aiData[player].unitDetector;
+bool PCheck(int p, int line, string u){
     int i;
-
+    int count = PCount(p,line);
+    for ( i = 1; i <= count ; i += 1 ) { 
+        if(PGetI(p,line,i) == u){ return true;}
+    }
+    return false;
+}
+void AINewUnitARC (int p, unit u) {
+    string type = UnitGetType(u);
     // ignored units
     if (UnitTypeTestAttribute(type, c_unitAttributeStructure)) { return;}
     if (UnitTypeTestFlag(type, c_unitFlagWorker)) { return; }
+    if (PCheck(p,c_DU_Ignored,type)){ return;}
 
-    if (type == unitDetector) { 
-        AINewDetector(player, u, false);
+    if(PCheck(p,c_DU_Detection,type)){
+        AINewDetector(p, u, false);
         return;
     }
-    
-    for ( i = 1 ; i <= 5; i += 1 ) {if(aiData[player].unitPriorityIgnored[i] == null){break;} if(aiData[player].unitPriorityIgnored[i] == type){
-        return;
-    }}
-
-    for ( i = 1 ; i <= 5; i += 1 ) {if(aiData[player].unitPriorityStayHome[i] == null){break;} if(aiData[player].unitPriorityStayHome[i] == type){
-        AIWaveAddUnitPriority(AIWaveGet(player, c_waveHome), u, c_prioWavePeon);
-    }}
-
-    for ( i = 1 ; i <= 5; i += 1 ) {if(aiData[player].unitPriorityGuard[i] == null){break;} if(aiData[player].unitPriorityGuard[i] == type){
-        AINewUnitGuard(player, u);
-        return;
-    }}
-
-    for ( i = 1 ; i <= 5; i += 1 ) {if(aiData[player].unitPriorityExtraScout[i] == null){break;} if(aiData[player].unitPriorityExtraScout[i] == type){
-        AIAddToExtraScoutGroup(player, u);
-        return;
-    }}
-
-    if (AIGetFlag(player, e_flagsDiversion)) {
-        for ( i = 1 ; i <= 5; i += 1 ) {if(aiData[player].unitPriorityDiversionGround[i] == null){break;} if(aiData[player].unitPriorityDiversionGround[i] == type){
-            AIMergeUnit(player, u, AIWaveGet(player, c_waveDivert1));
-            return;
-        }}
-        for ( i = 1 ; i <= 5; i += 1 ) {if(aiData[player].unitPriorityDiversionAir[i] == null){break;} if(aiData[player].unitPriorityDiversionAir[i] == type){
-            AIMergeUnit(player, u, AIWaveGet(player, c_waveDivert2));
-            return;
-        }}
+    if(PCheck(p,c_DU_PriorityStayHome,type)){
+        AIWaveAddUnitPriority(AIWaveGet(p, c_waveHome), u, c_prioWavePeon);
     }
-
-    for ( i = 1 ; i <= 5; i += 1 ) {if(aiData[player].unitPriorityHealer[i] == null){break;} if(aiData[player].unitPriorityHealer[i] == type){
-        if (AINumEnemyBuildings(player) == 0) {
-            if (AIOfferNewScout(player, u)) {
-                return;
-            }
+    if(PCheck(p,c_DU_Guard,type)){
+        AINewUnitGuard(p, u);
+        return;
+    }
+    if(PCheck(p,c_DU_ExtraScout,type)){
+        AIAddToExtraScoutGroup(p, u);
+        return;
+    }
+    if (AIGetFlag(p, e_flagsDiversion)) {
+        if(PCheck(p,c_DU_DiversionGround,type)){
+            AIMergeUnit(p, u, AIWaveGet(p, c_waveDivert1));
+            return;
         }
-        AIWaveAddUnitPriority(AIWaveGet(player, c_waveMain), u, c_prioWavePeon);
-        return;
-    }}
-
-    if (AIWaveNeedClearObsUnits(player)) {
-        for ( i = 1 ; i <= 5; i += 1 ) {if(aiData[player].unitPriorityClearObstacles[i] == null){break;} if(aiData[player].unitPriorityClearObstacles[i] == type){
-            AIMergeUnit(player, u, AIWaveGet(player, c_waveClearObs));
+        if(PCheck(p,c_DU_DiversionAir,type)){
+            AIMergeUnit(p, u, AIWaveGet(p, c_waveDivert2));
             return;
-        }}
+        }
+    }
+    if(PCheck(p,c_DU_Healer,type)){
+        if (AINumEnemyBuildings(p) == 0) {
+            if (AIOfferNewScout(p, u)) { return;}
+        }
+        AIWaveAddUnitPriority(AIWaveGet(p, c_waveMain), u, c_prioWavePeon);
+        return;
+    }
+    if (AIWaveNeedClearObsUnits(p)) {
+        if(PCheck(p,c_DU_ClearObstacles,type)){
+            AIMergeUnit(p, u, AIWaveGet(p, c_waveClearObs));
+            return;
+        }
     }
 
     // main wave units
-    AINewUnitDefault(player, u);
+    AINewUnitDefault(p, u);
 }
 
 //--------------------------------------------------------------------------------------------------
 //  AIEarlyDefScout
 //--------------------------------------------------------------------------------------------------
-unit AIEarlyDefScoutARC (int player, unit prev, bool allowWorkers) {
+unit AIEarlyDefScoutARC (int p, unit prev, bool allowWorkers) {
     unit obs;
     string prevType;
-    if (!AIGetFlag(player, e_flagsEarlyDefScout)) { return c_nullUnit;}
+    if (!AIGetFlag(p, e_flagsEarlyDefScout)) { return c_nullUnit;}
     prevType = UnitGetType(prev);
 
-    if (prevType == aiData[player].unitScoutAir ) {  return prev; } ////c_ZU_Overseer | c_PU_Observer | c_TU_Medivac
-    obs = AIGrabUnit(player, aiData[player].unitScoutAir, c_prioScout, null);
+    if(PCheck(p,c_DU_ScoutAir,prevType)){  return prev; } ////c_ZU_Overseer | c_PU_Observer | c_TU_Medivac
+    obs = AIGrabUnit(p,PGet(p,c_DU_ScoutAir), c_prioScout, null);
     if (obs) {  return obs; }
 
-    if (prevType == aiData[player].unitWarrior) {     return prev; } //  c_PU_Zealot c_ZU_Zergling c_TU_Marine
-    obs = AIGrabUnit(player, aiData[player].unitWarrior, c_prioScout, null);
+    if (PCheck(p,c_DU_Warrior,prevType)) {     return prev; } //  c_PU_Zealot c_ZU_Zergling c_TU_Marine
+    obs = AIGrabUnit(p, PGet(p,c_DU_Warrior), c_prioScout, null);
     if (obs) { return obs;}
 
     if (prev) { return prev; }
     if (!allowWorkers) {return c_nullUnit; }
-    return AIGrabUnit(player, aiData[player].unitWorker, c_prioScout, null);
+    return AIGrabUnit(p, aiData[p].unitWorker, c_prioScout, null);
 }
 
 //--------------------------------------------------------------------------------------------------
 //  AIGetScout
 //--------------------------------------------------------------------------------------------------
-unit AIGetScoutARC (int player, int index, unit prev, bool allowWorkers) {
+unit AIGetScoutARC (int p, int index, unit prev, bool allowWorkers) {
     unit scout;
     string prevType = UnitGetType(prev);
-    string unitGroundScout = aiData[player].unitScoutGround;
-    string unitWorker = aiData[player].unitWorker;
-    string unitEarlyDefScout = aiData[player].unitScoutEarlyDefense;
-    string unitScoutAir = aiData[player].unitScoutAir;
     
     // if no scouting beacons are set and we're not ready to scout, don't return a unit
-    if (!PlayerBeaconIsSet(player, c_beaconScout) && !AIGetFlag(player, e_flagsScouting)) { return c_nullUnit;}
+    if (!PlayerBeaconIsSet(p, c_beaconScout) && !AIGetFlag(p, e_flagsScouting)) { return c_nullUnit;}
 
 
-    if (index == 1 && PlayerBeaconIsSet(player, c_beaconScout)) {
-        AISetFlag(player, e_flagsScouting, true);
+    if (index == 1 && PlayerBeaconIsSet(p, c_beaconScout)) {
+        AISetFlag(p, e_flagsScouting, true);
         if (allowWorkers) {
-            //===GroundScout=== (only zergling here) zergling,
-            //check fastest cheapest unit before worker
-            if (prevType == unitGroundScout  ) {return prev; }
-            scout = AIGrabUnit(player, unitGroundScout, c_prioScout, null);
+            //check fastest cheapest unit before worker /  zergling,
+            if(PCheck(p,c_DU_ScoutGround,prevType)) {return prev; }
+            scout = AIGrabUnit(p, PGet(p,c_DU_ScoutGround), c_prioScout, null);
             if (scout) { return scout;}      
-
             // only return a worker, we want to claim a tower
-            if (prevType == unitWorker  ) {return prev; }
-            return AIGrabUnit(player, unitWorker, c_prioScout, null);
+            if(PCheck(p,c_DU_Worker,prevType)) {return prev; }
+            return AIGrabUnit(p, PGet(p,c_DU_Worker), c_prioScout, null);
         }
     }
 
-    if (AINumEnemyBuildings(player) == 0) {
+    if (AINumEnemyBuildings(p) == 0) {
         // only use medivac scouts if we don't know of any enemy buildings (ie we need a flying scout to check other islands etc).
-        if (prevType == unitEarlyDefScout) { return prev; }
-        scout = AIGrabUnit(player, unitEarlyDefScout, c_prioScout, null);
+        if(PCheck(p,c_DU_ScoutEarlyDefense,prevType)) {return prev; }
+        scout = AIGrabUnit(p, PGet(p,c_DU_ScoutEarlyDefense), c_prioScout, null);
         if (scout) { return scout;  }
     }
     
     // (detector , but not terran why?) c_ZU_Overseer c_PU_Observer
-    if (prevType == unitScoutAir) {  return prev;}
-    scout = AIGrabUnit(player, unitScoutAir, c_prioScout, null);
+    if(PCheck(p,c_DU_ScoutAir,prevType)) {return prev; }
+    scout = AIGrabUnit(p, PGet(p,c_DU_ScoutAir), c_prioScout, null);
     if (scout) {return scout;}
 
     //GroundScout (only zergling)
-    if (prevType == unitGroundScout) {    return prev;}
-    scout = AIGrabUnit(player, unitGroundScout, c_prioScout, null);
+    if(PCheck(p,c_DU_ScoutGround,prevType)) {return prev; }
+    scout = AIGrabUnit(p, PGet(p,c_DU_ScoutGround), c_prioScout, null);
     if (scout) {return scout;}
 
     if (prev) {return prev;}
 
     // back to allowing workers as late scouts
-    //if (AIGetFlag(player, e_flagsLateScout)) { return c_nullUnit;}
+    //if (AIGetFlag(p, e_flagsLateScout)) { return c_nullUnit;}
     if (!allowWorkers) { return c_nullUnit;}
     //use $worker (might not work for some custom races) 
-    return AIGrabUnit(player, unitWorker, c_prioScout, null);
+    return AIGrabUnit(p, PGet(p,c_DU_Worker), c_prioScout, null);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -941,10 +1778,10 @@ static void InitCounters (int player) {
     string lv_instanceRace;
     string race = PlayerRace(player);
     string lv_targetUnit;
-    string lv_counterUnit;
-    string lv_counterUnitAlt;
-    fixed lv_counterUnitCount;
-    fixed lv_counterUnitAltCount;
+    string counterUnit;
+    string counterUnitAlt;
+    fixed counterUnitCount;
+    fixed counterUnitAltCount;
     string races = " ";
     string units = " ";
     
@@ -958,18 +1795,18 @@ static void InitCounters (int player) {
         ud = UserDataInstance( "AICounter", i);
         if ((UserDataGetGameLink("AICounter", ud, "Race", 1) == race)) {
             lv_targetUnit = UserDataGetUnit2("AICounter", ud, "Unit", 1);
-            lv_counterUnit = UserDataGetUnit2("AICounter", ud, "Counter", 1);
-            lv_counterUnitAlt = UserDataGetUnit2("AICounter", ud, "CounterAlt", 1);
-            lv_counterUnitCount = UserDataGetFixed("AICounter", ud, "Count", 1);
-            lv_counterUnitAltCount = UserDataGetFixed("AICounter", ud, "CountAlt", 1);
-            if (lv_counterUnit == null || (lv_counterUnitCount == 0.0)) {
+            counterUnit = UserDataGetUnit2("AICounter", ud, "Counter", 1);
+            counterUnitAlt = UserDataGetUnit2("AICounter", ud, "CounterAlt", 1);
+            counterUnitCount = UserDataGetFixed("AICounter", ud, "Count", 1);
+            counterUnitAltCount = UserDataGetFixed("AICounter", ud, "CountAlt", 1);
+            if (counterUnit == null || (counterUnitCount == 0.0)) {
                 continue;
             }
-            if (lv_counterUnitAlt == null || (lv_counterUnitAltCount == 0.0)) {
-                lv_counterUnitAlt = lv_counterUnit;
-                lv_counterUnitAltCount = lv_counterUnitCount;
+            if (counterUnitAlt == null || (counterUnitAltCount == 0.0)) {
+                counterUnitAlt = counterUnit;
+                counterUnitAltCount = counterUnitCount;
             }
-            AICounterUnitSetup(player, lv_targetUnit, lv_counterUnitCount, lv_counterUnit, lv_counterUnitAltCount, lv_counterUnitAlt);
+            AICounterUnitSetup(player, lv_targetUnit, counterUnitCount, counterUnit, counterUnitAltCount, counterUnitAlt);
             units += lv_targetUnit + " ";
         }
     }
@@ -984,121 +1821,261 @@ static void InitCounters (int player) {
         }
         //search for counter-units
         //todo: search is not implemented, fake data
-        lv_counterUnit = aiData[player].unitWarrior;
-        lv_counterUnitAlt = aiData[player].unitWarrior;
-        lv_counterUnitCount = 1;
-        lv_counterUnitAltCount = 1;
-        AICounterUnitSetup(player, lv_targetUnit, lv_counterUnitCount, lv_counterUnit, lv_counterUnitAltCount, lv_counterUnitAlt);
+        counterUnit = PGet(player,c_DU_Warrior);
+        counterUnitAlt = PGet(player,c_DU_Warrior);
+        counterUnitCount = 1;
+        counterUnitAltCount = 1;
+        AICounterUnitSetup(player, lv_targetUnit, counterUnitCount, counterUnit, counterUnitAltCount, counterUnitAlt);
     }
 }
 
 
-void Init (int player) {
-    string race = PlayerRace(player);
+
+//--------------------------------------------------------------------------------------------------
+//  Main Setup
+//--------------------------------------------------------------------------------------------------
+
+void AISetup (int p) {
+    int i; string u; fixed food;
+    int j; string tier;
+    string specialMaker;
+    targetPlayer = p;
+    AnalyzeRace(PlayerRace(p));
+    Debug("c_SU_SpecialMakers " + Get(c_SU_SpecialMakers));
+    for(i = 1; i <= Count(c_SU_SpecialMakers); i+=1){
+        specialMaker = StringReplaceWord( GetI(c_SU_SpecialMakers,i),"."," ",c_stringReplaceAll,c_stringCase);
+        AIReqAddSpecialMaker(StringWord(specialMaker,1),StringWord(specialMaker,2),StringWord(specialMaker,3),0);
+    }
+
+    for(i = 1; i < 16; i+=1){
+        for(j = 1; j < Count(c_SU_Air);j+=1){
+            AIAddAirDanger(i, GetI(c_SU_Air,j));
+        }
+        for(j = 1; j < Count(c_SU_Stealth);j+=1){
+           AIAddDetectionDanger(i, GetI(c_SU_Stealth,j));
+        }
+        for(j = 1; j < Count(c_SU_Healer);j+=1){
+           AIAddHealer(i, GetI(c_SU_Healer,j), GetI(c_SA_Healer,j), 0);
+        }
+    }
+    //todo supportshuttle??? uDetection:  MissileTower CrimsonEye 
+
+    PClone(p,c_DU_TownHall,c_SU_DropOff);
+    PClone(p,c_DU_Worker,c_SU_Worker);
+    PClone(p,c_DU_Supply,c_SU_Supply);
+    PClone(p,c_DU_Refinery,c_SU_Refinery);
+    PClone(p,c_DU_Creep,c_SU_Creep);
+    PClone(p,c_DU_Power,c_SU_Power);
+    PClone(p,c_DU_Transport,c_SU_Transport);
+    PClone(p,c_DU_Radar,c_SU_Radar);
+    PClone(p,c_DU_Support,c_SU_Support);
+    PClone(p,c_DU_Guard,c_SU_Guard);
+    PClone(p,c_DU_Larva,c_SU_Larva);
+    PClone(p,c_DU_Healer,c_SU_Healer);
+    PClone(p,c_DU_Ignored,c_SU_Ignored);
+    PClone(p,c_DU_Production,c_SU_Production);
+    PClone(p,c_DU_Builder,c_SU_Builder);
+    
+
+    for(i = 1; i < Count(c_SS_Upgrades);i+=1){
+        u = GetI(c_SS_Upgrades,i);
+        PAdd(p,c_DG_Upgrades,u);
+        tier = StringSub(u,StringLength(u) - 1,StringLength(u));
+        if(tier == "1"){
+            PAdd(p,c_DG_Upgrades2,u);
+        }
+        else if(tier == "2"){
+            PAdd(p,c_DG_Upgrades3,u);
+        }
+        else if(tier== "3"){
+            PAdd(p,c_DG_Upgrades4,u);
+        }
+        else{
+            PAdd(p,c_DG_Upgrades1,u);
+        }
+    }
+    for(i = 1; i < Count(c_SS_Units);i+=1){
+        u = GetI(c_SS_Units,i);
+        if(Has(c_SU_Ignored, u)){continue;} //summoned, projectiles
+        if(Has(c_SU_Structure, u )){ //structure
+            if(Has(c_SU_DropOff, u)){continue;} // dropoff
+            if(Has(c_SU_Refinery, u)){continue;} // dropoff
+            if(Has(c_SU_Supply, u)){continue;} // dropoff
+            if(Has(c_SU_Detection, u )){ //detector
+                PAdd(p,c_DU_StaticDetector, u);
+            }
+            if(Has(c_SU_Production, u )){//production
+                PAdd(p,c_DU_Production, u);
+            }
+            else if(Has(c_SU_Combat, u )){//defense
+                PAdd(p,c_DU_Defense, u);
+            }
+            else{
+                PAdd(p,c_DU_Tech, u);
+            }
+        }
+        else{ // unit
+            if(Has(c_SU_Worker, u)){continue;} //worker
+            if(Has(c_SU_Detection, u ) && Has(c_SU_Air, u)){
+                PAdd(p,c_DU_Detection, u);
+            }
+            if(Has(c_SU_Transport, u) && Has(c_SU_Air, u)){ 
+                PAdd(p,c_DU_Transport, u);
+            }
+            if(Has(c_SU_Combat, u )){
+                PAdd(p,c_DU_Combat,u);
+                food = -UVGetReal(u,"Food");
+                if(food <= 2 ){
+                    PAdd(p,c_DU_Combat1, u);
+                }
+                else if (food <=4 ){
+                    PAdd(p,c_DU_Combat2, u);
+                }else  if (food <= 8 ){
+                    PAdd(p,c_DU_Combat3, u);
+                }else{
+                    PAdd(p,c_DU_Combat4, u);
+                }
+            }
+            else{
+                PAdd(p,c_DU_Support, u);
+            }
+        }
+        if(Has(c_SU_Research, u )){
+            PAdd(p,c_DU_Tech, u);
+        }
+    }
+
+    PDebugLines(p);
+
+    // if(Count(unitScoutAir)){aiData[p].unitScoutAir = unitScoutAir;}
+    // if(Count(unitScoutGround)){aiData[p].unitScoutGround = unitScoutGround;}
+    // if(Count(unitScoutEarlyDefense)){aiData[p].unitScoutEarlyDefense = unitScoutEarlyDefense;}
+    // if(Count(unitSpecialDetector)){aiData[p].unitSpecialDetector = unitSpecialDetector;}
+    
+    //aiData[p].unitPriorityStayHome
+    //aiData[p].unitPriorityExtraScout
+    //aiData[p].unitPriorityClearObstacles
+    //aiData[p].unitPriorityDiversionAir
+    //aiData[p].unitPriorityDiversionGround
+};
+
+void PRead(int p, string ud, int line, string field){
+    int count; string u; int i;
+    count = UserDataFieldValueCount( "AI", field);
+    for ( i = 1; i <= count ; i += 1 ) { 
+        u = UserDataGetUnit2( "AI", ud, field, i); if (u == "") {break;}
+        PAdd(p, line, u);
+    }
+}
+
+void Init (int p) {
+    string race = PlayerRace(p);
     string ud = GetAIRaceInstance(race);
-    string behaviorNoCreep = UserDataGetGameLink( "AI",ud, "Behavior NoCreep", 1);
-    string unitCreep = UserDataGetUnit2( "AI",ud, "Unit Creep", 1);
-    string unitWarrior = UserDataGetUnit2( "AI", ud, "Unit Combat Ground Tier1", 1);
-    string unitPower = UserDataGetUnit2( "AI",ud, "Unit Power", 1);
-    string unitGuard = UserDataGetUnit2( "AI",ud, "Unit Guard", 1);
-    string unitTownHall = UserDataGetUnit2( "AI",ud, "Unit Townhall", 1);
-    string unitWorker = UserDataGetUnit2( "AI",ud, "Unit Worker", 1);
-    string unitScoutAir = UserDataGetUnit2( "AI",ud, "Unit ScoutAir", 1);
-    string unitScoutGround = UserDataGetUnit2( "AI",ud, "Unit ScoutGround", 1);
-    string unitScoutEarlyDefense = UserDataGetUnit2( "AI",ud, "Unit ScoutEarlyDefense", 1);
-    string unitDetector = UserDataGetUnit2( "AI",ud, "Unit Detector", 1);
-    string unitStaticDetector = UserDataGetUnit2( "AI",ud, "Unit SpecialDetector", 1);
-    string unitSpecialDetector = UserDataGetUnit2( "AI",ud, "Unit StaticDetector", 1);
-    string unitSupply = UserDataGetUnit2( "AI",ud, "Unit Supply", 1);
-    string unitRefinery = UserDataGetUnit2( "AI",ud, "Unit Refinery", 1);
-    string nukeUnitCaster = UserDataGetUnit2( "AI",ud, "Nuke UnitCaster", 1);
-    fixed intTransportSetPanic = UserDataGetFixed("AI",ud, "TransportSetPanic" ,1);
+    string behaviorNoCreep;
+    string nukeUnitCaster;
+    fixed intTransportSetPanic;
     string field;
     string u;
     int count;
     int i;
+    int tier;
+
+    if(ud){
+        aiData[p].userInstance = ud;
+
+        behaviorNoCreep          = UserDataGetGameLink( "AI",ud, "Behavior NoCreep", 1);
+        nukeUnitCaster           = UserDataGetUnit2( "AI",ud, "Nuke UnitCaster", 1);
+        intTransportSetPanic     = UserDataGetFixed("AI",ud, "TransportSetPanic" ,1);
+        
+        PRead(p, ud, c_DU_Worker, "Unit Worker");
+        PRead(p, ud, c_DU_TownHall, "Unit TownHall");
+        PRead(p, ud, c_DU_Creep, "Unit Creep");
+        PRead(p, ud, c_DU_Power, "Unit Power");
+     // PRead(p, ud, c_DU_DarkPower, "Unit DarkPower");
+     // PRead(p, ud, c_DU_Gate, "Unit Gate");
+        PRead(p, ud, c_DU_Refinery, "Unit Refinery");
+        PRead(p, ud, c_DU_Supply, "Unit Supply");
+        PRead(p, ud, c_DU_Detection, "Unit Detector");
+        PRead(p, ud, c_DU_Radar, "Unit Radar");
+        PRead(p, ud, c_DU_Transport, "Unit Transport");
+        PRead(p, ud, c_DU_Support, "Unit Support");
+        PRead(p, ud, c_DU_Stealth, "Unit ");
+        PRead(p, ud, c_DU_Healer, "Unit Healer");
+        PRead(p, ud, c_DU_Ignored, "Unit Ignored");
+        PRead(p, ud, c_DU_Guard, "Unit Guard");
+        PRead(p, ud, c_DU_Larva, "Unit Larva");
+        PRead(p, ud, c_DU_Production, "Unit Production");
+        PRead(p, ud, c_DU_Tech, "Unit Tech");
+        PRead(p, ud, c_DU_PriorityStayHome, "Unit StayHome");
+        PRead(p, ud, c_DU_ExtraScout, "Unit ExtraScout");
+        PRead(p, ud, c_DU_ClearObstacles, "Unit ClearObstacles");
+        PRead(p, ud, c_DU_DiversionAir, "Unit DiversionAir");
+        PRead(p, ud, c_DU_DiversionGround, "Unit DiversionGround");
+        PRead(p, ud, c_DU_Defense, "Unit StaticDefense");
+        PRead(p, ud, c_DU_ScoutAir, "Unit ScoutAir");
+        PRead(p, ud, c_DU_ScoutGround, "Unit ScoutGround");
+        PRead(p, ud, c_DU_ScoutEarlyDefense, "Unit ScoutEarlyDefense");
+        PRead(p, ud, c_DU_SpecialDetector, "Unit SpecialDetector");
+        PRead(p, ud, c_DU_StaticDetector, "Unit StaticDetector");
+        PRead(p, ud, c_DU_Macro, "Unit Macro");
+        PRead(p, ud, c_DU_Builder, "Unit Builder");
+        
+
+        count = UserDataFieldValueCount( "AI", "Unit Combat");
+        for ( i = 1; i <= count ; i += 1 ) { 
+            u = UserDataGetUnit2( "AI", ud, "Unit Combat", i); if (u == "") {break;}
+            tier = UserDataGetInt( "AI", ud, "Unit Combat Tier", i);
+            if(tier == 1){    PAdd(p,c_DU_Combat1,u);}
+            else if(tier == 2){     PAdd(p,c_DU_Combat2,u); }
+            else if(tier == 3){     PAdd(p,c_DU_Combat3,u); }
+            else if(tier== 4){    PAdd(p,c_DU_Combat4,u);}
+        }
+
+        count = UserDataFieldValueCount( "AI", "Upgrade");
+        for ( i = 1; i <= count ; i += 1 ) { 
+            u = UserDataGetUpgrade2( "AI", ud, "Upgrade", i); if (u == "") {break;}
+            tier = UserDataGetInt( "AI", ud, "Upgrade Tier", i);
+            if(tier == 0){    PAdd(p,c_DG_Upgrades1,u);}
+            else if(tier == 1){     PAdd(p,c_DG_Upgrades2,u); }
+            else if(tier == 2){     PAdd(p,c_DG_Upgrades3,u); }
+            else if(tier== 3){    PAdd(p,c_DG_Upgrades4,u);}
+        }
+
+        // PRead(p, c_DU_Ground, "Unit ");
+        // PRead(p, c_DU_Air, "Unit ");
+    }
+    else{
+        AISetup(p);
+
+    }
+
+    if(PGet(p,c_DU_Larva)){
+        for ( i = 1; i <= PCount(p,c_DU_Larva) ; i += 1 ) {
+            u = PGetI(p,c_DU_Larva,i);
+            AILimitStockLarva(p, u);
+            AIReqCountAsBuiltObject(p, u);
+        }
+    }
+
+    if(!behaviorNoCreep){behaviorNoCreep = "ZergBuildingNotOnCreep";}
+    PAdd(p,c_DU_DropOff, getUnitAlias( PGet(p,c_DU_TownHall)));
+    PAdd(p,c_DU_Warrior, getUnitAlias( PGet(p,c_DU_Combat1)));
+
+    if(PGet(p,c_DU_Creep)){ AISetCreepBuilding(p, PGet(p,c_DU_Creep), behaviorNoCreep );}
+    if(intTransportSetPanic != 0){AITransportSetPanic(p, intTransportSetPanic);}// just below max shield threshold}
+    if(PGet(p,c_DU_Power)){AISetPowerBuilding(p, PGet(p,c_DU_Power)); }
     
-    aiData[player].userInstance = ud;
-    aiData[player].unitTownhall = getUnitAlias2(player,unitTownHall);
-    aiData[player].unitWorker = getUnitAlias2(player,unitWorker);
-    aiData[player].unitScoutAir = getUnitAlias2(player,unitScoutAir);
-    aiData[player].unitScoutGround = getUnitAlias2(player,unitScoutGround);
-    aiData[player].unitScoutEarlyDefense = getUnitAlias2(player,unitScoutEarlyDefense);
-    aiData[player].unitDetector = getUnitAlias2(player,unitDetector);
-    aiData[player].unitStaticDetector = getUnitAlias2(player,unitStaticDetector);
-    aiData[player].unitSpecialDetector = getUnitAlias2(player,unitSpecialDetector);
-    
-    aiData[player].unitSupply = getUnitAlias2(player,unitSupply);
-    aiData[player].unitRefinery = getUnitAlias2(player,unitRefinery);
-    aiData[player].unitCreep = getUnitAlias2(player,unitCreep);
-    aiData[player].unitPower = getUnitAlias2(player,unitPower);
-    aiData[player].unitGuard = getUnitAlias2(player,unitGuard);
-    aiData[player].unitWarrior = getUnitAlias2(player,unitWarrior);
-    
-    field = "Unit Priority Ignored"; count = UserDataFieldValueCount( "AI", field);
-    for ( i = 1; i <= count ; i += 1 ) { u = UserDataGetUnit2( "AI",ud,field, i); if (u == "") {break;}
-        aiData[player].unitPriorityIgnored[i - 1] = u;
-    }
 
-    field = "Unit Priority StayHome"; count = UserDataFieldValueCount( "AI", field);
-    for ( i = 1; i <= count ; i += 1 ) { u = UserDataGetUnit2( "AI",ud,field, i); if (u == "") {break;}
-        aiData[player].unitPriorityStayHome[i - 1] = u;
-    }
 
-    field = "Unit Priority Guard"; count = UserDataFieldValueCount( "AI", field);
-    for ( i = 1; i <= count ; i += 1 ) { u = UserDataGetUnit2( "AI",ud,field, i); if (u == "") {break;}
-        aiData[player].unitPriorityGuard[i - 1] = u;
-    }
-
-    field = "Unit Priority Healer"; count = UserDataFieldValueCount( "AI", field);
-    for ( i = 1; i <= count ; i += 1 ) { u = UserDataGetUnit2( "AI",ud,field, i); if (u == "") {break;}
-        aiData[player].unitPriorityHealer[i - 1] = u;
-    }
-
-    field = "Unit Priority ExtraScout"; count = UserDataFieldValueCount( "AI", field);
-    for ( i = 1; i <= count ; i += 1 ) { u = UserDataGetUnit2( "AI",ud,field, i);  if (u == "") {break;}
-        aiData[player].unitPriorityExtraScout[i - 1] = u;
-    }
-
-    field = "Unit Priority ClearObstacles"; count = UserDataFieldValueCount( "AI", field);
-    for ( i = 1; i <= count ; i += 1 ) { u = UserDataGetUnit2( "AI",ud,field, i);  if (u == "") {break;}
-        aiData[player].unitPriorityClearObstacles[i - 1] = u;
-    }
-
-    field = "Unit Priority DiversionAir"; count = UserDataFieldValueCount( "AI", field);
-    for ( i = 1; i <= count ; i += 1 ) {u = UserDataGetUnit2( "AI",ud,field, i);  if (u == "") {break;}
-        aiData[player].unitPriorityDiversionAir[i - 1] = u;
-    }
-
-    field = "Unit Priority DiversionGround"; count = UserDataFieldValueCount( "AI", field);
-    for ( i = 1; i <= count ; i += 1 ) {u = UserDataGetUnit2( "AI",ud,field, i);if (u == "") {break;}
-        aiData[player].unitPriorityDiversionGround[i - 1] = u;
-    }
-
-    field = "Unit Larva"; count = UserDataFieldValueCount( "AI", field);
-    for ( i = 1; i <= count ; i += 1 ) { u = UserDataGetUnit2( "AI",ud,field, i); if (u == "") {break;}
-        aiData[player].unitLarva[i - 1] = u;
-        AILimitStockLarva(player, u);   
-        AIReqCountAsBuiltObject(player, u);
-    }
-    
-    field = "Unit StaticDefense"; count = UserDataFieldValueCount( "AI", field);
-    for ( i = 1; i <= count ; i += 1 ) { u = UserDataGetUnit2( "AI",ud,field, i);  if (u == "") {break;}
-        aiData[player].unitStaticDefense[i - 1] = u;
-    }
-
-    if(unitCreep != null){ AISetCreepBuilding(player, unitCreep, behaviorNoCreep);}
-    if(intTransportSetPanic != 0){AITransportSetPanic(player, intTransportSetPanic);}// just below max shield threshold}
-    if(unitPower != null){AISetPowerBuilding(player, unitPower); }
-    AISetDefaultArmyUnit(player, unitWarrior);
-    InitCounters(player);
-    AIMeleeSharedInit(player);
-    AISetFlag(player, e_flagsScouting, false);
-    AISetFlag(player, e_flagsEarlyDefScout, false);
-    AISetDefaultTownHall(player, unitTownHall); 
+    InitCounters(p);
+    AIMeleeSharedInit(p);
+    AISetFlag(p, e_flagsScouting, false);
+    AISetFlag(p, e_flagsEarlyDefScout, false);
+    AISetDefaultArmyUnit(p, PGet(p,c_DU_Warrior));
+    AISetDefaultTownHall(p, PGet(p,c_DU_TownHall)); 
 
     if(nukeUnitCaster != null){
-        AISetNukeConstantsARC(player,
+        AISetNukeConstantsARC(p,
             nukeUnitCaster,
             UserDataGetGameLink( "AI",ud, "Nuke EffectCalldown" , 1),
             UserDataGetGameLink( "AI",ud, "Nuke EffectDamage" , 1),
@@ -1108,85 +2085,221 @@ void Init (int player) {
             UserDataGetGameLink( "AI",ud, "Nuke BehaviorCloak" , 1),
             UserDataGetFixed( "AI",ud, "Nuke CastTime", 1 )
         );
-
     }
 
+    AISetMainState(p, e_mainState_Open, e_mainSubState_Init);
 
-    AISetMainState(player, e_mainState_Open, e_mainSubState_Init);
+    
+
+    if(CheckBuildOrders("AIBuildOrders", race)){
+        AIInitCommonBuildOrders(p);
+    }
+    else{
+
+
+        
+        // Implementation
+        AISetDifficulty(p, c_diffAdvancedRetreatLogic, true);
+        AISetDifficulty(p, c_diffPressForward, true);
+        AISetDifficulty(p, c_diffAllowBuildInDanger, true);
+        AISetDifficulty(p, c_diffAllowKiting, true);
+        AISetDifficulty(p, c_diffAllowLongDistanceMining, true);
+        AISetDifficulty(p, c_diffAllowResourceReq, true);
+        AISetDifficulty(p, c_diffAllowTransportGather, true);
+        AISetDifficulty(p, c_diffAutoBuildPrereqs, true);
+        AISetDifficulty(p, c_diffAutoTransport, true);
+        AISetDifficulty(p, c_diffAutoLoadBunkers, true);
+        AISetDifficulty(p, c_diffAvoidMindControlled, true);
+        AISetDifficulty(p, c_diffBalancePeonsAcrossBases, true);
+        AISetDifficulty(p, c_diffDefendWithPeons, true);
+        AISetDifficulty(p, c_diffDelayAdvTargetting, true);
+        AISetDifficulty(p, c_diffEarlyDefenseScout, true);
+        AISetDifficulty(p, c_diffRepairDamage, true);
+        AISetDifficulty(p, c_diffFleeDamage, true);
+        AISetDifficulty(p, c_diffEnableDangerMap, true);
+        AISetDifficulty(p, c_diffHoldAtIdleChokes, true);
+        AISetDifficulty(p, c_diffFleeWorkers, true);
+        AISetDifficulty(p, c_diffFleeDanger, true);
+        AISetDifficulty(p, c_diffNormalVision, true);
+        AISetDifficulty(p, c_diffOptimizeGas, true);
+        AISetDifficulty(p, c_diffEarlyGameRepair, true);
+        AISetDifficulty(p, c_diffSetRallyPoints, true);
+        AISetDifficulty(p, c_diffSplitAttacking, true);
+        AISetDifficulty(p, c_diffSpotChangelings, true);
+        AISetDifficulty(p, c_diffSupportsBeacons, true);
+        AISetDifficulty(p, c_diffTargetSpawners, true);
+        AISetDifficulty(p, c_diffLimitAPM, true);
+        AISetDifficulty(p, c_diffLimitAPMCombat, true);
+        AISetDifficulty(p, c_diffTimeoutMakeRequests, true);
+        AISetDifficulty(p, c_diffUseExtraScouts, true);
+        AISetDifficulty(p, c_diffNormalTargetPrio, true);
+        AISetDifficulty(p, c_diffWaveLeashing, true);
+        AISetDifficulty(p, c_diffWaveAvoidDanger, true);
+        AISetFlag(p, gv_e_flagsAllowDropAttack, true);
+        AISetFlag(p, gv_e_flagsAllowRetreat, true);
+        AISetFlag(p, gv_e_flagsRunScared, false);
+        AISetFlag(p, gv_e_flagsLateScout, true);
+        AISetFlag(p, gv_e_flagsClearObs, true);
+        // AIDeclareTown(p, 0, PlayerStartLocation(p));
+        // AISetMainTown(p, 0);
+        // AIHarvest(p, 0);
+        // AISetAllStates(p, 1);
+        // lv_targDPoint = AIGetGatherDefLocation(p, lv_townMain);
+        // lv_targOPoint = AIGetGatherLocation(p, lv_townMain);
+        AISetNumScouts(p, 1);
+        AISetDefenseRadii(p, 15.0, 10.0, 12.0);
+        AIScout(p);
+
+        gv_pickedai = p;
+        gt_ViscerousAI = TriggerCreate("gt_ViscerousAI_Func");
+        //Use Infinite Loop
+        TriggerExecute(gt_ViscerousAI, true, false);
+    }
+    
 }
-
 
 //--------------------------------------------------------------------------------------------------
 //  Build
 //--------------------------------------------------------------------------------------------------
-void Build (int player) {
-    int mainState = AIState(player, e_mainState);
-    int lateLoop = AIGetUserInt(player, c_ldNumLateLoops);
-    int timeOut = AIGetUserInt(player, c_nextArmyTime);
+void Build (int p) {
+    int mainState = AIState(p, e_mainState);
+    int lateLoop = AIGetUserInt(p, c_ldNumLateLoops);
+    int timeOut = AIGetUserInt(p, c_nextArmyTime);
     bool nextState;
 
-    if (AIHasPlayerChangedCurrentOpening(player)) {
-        AISetMainState(player, mainState, e_mainSubState_Init);
-        return;
+    if (mainState == e_mainState_Open || mainState == e_mainState_Mid)     {
+        if (AIHasPlayerChangedCurrentOpening(p)) {
+            AISetMainState(p, mainState, e_mainSubState_Init);
+        }
+    }
+    else if (AIHasPlayerChangedCurrentLateGame(p)) {
+        AISetMainState(p, mainState, e_mainSubState_Init); return;
     }
 
-    AIClearStock(player);
+    AIClearStock(p);
 
-    ExecuteAIBuildOrder(player,bo_build);
-    
-    AIEnableStock(player);
-    AILDGeneralSharedLogic(player);
+    ExecuteAIBuildOrder(p,bo_build);
 
-    if (mainState == e_mainState_Open)     {
-        nextState = AITestTimeout(player, timeOut, e_mainState_Mid, e_mainSubState_Init);
+    AIEnableStock(p);
+    AILDGeneralSharedLogic(p);
+
+    if (mainState == e_mainState_Open) {
+        nextState = AITestTimeout(p, timeOut, e_mainState_Mid, e_mainSubState_Init);
     }
-    else  if (mainState == e_mainState_Mid)     {
-        nextState = AITestTimeout(player, timeOut, e_mainState_Late, e_mainSubState_Init);
-    }
-    else if (mainState == e_mainState_Late)     {
-        nextState = AITestTimeout(player, timeOut, e_mainState_Late, e_mainSubState_Init);
-        if (nextState) {
-            lateLoop += 1;
-            AISetUserInt(player, c_ldNumLateLoops, lateLoop);
+    else  {
+        nextState = AITestTimeout(p, timeOut, e_mainState_Late, e_mainSubState_Init);
+        if (mainState == e_mainState_Late) {
+            if (nextState) {
+                lateLoop += 1;
+                AISetUserInt(p, c_ldNumLateLoops, lateLoop);
+            }
         }
     }
 }
 
-//--------------------------------------------------------------------------------------------------
-//  ArmyInit
-//--------------------------------------------------------------------------------------------------
-int ArmyInit (int player, int buildType) {
-    ExecuteAIArmyOrder(player,bo_army);
-    return aiData[player].armyDuration;
-}
+
 
 //--------------------------------------------------------------------------------------------------
 //  AIMeleeARC
 //--------------------------------------------------------------------------------------------------
-void AIMeleeARC (int player) {
-    int mainState = AIState(player, e_mainState);
-    int mainSubState = AIState(player, e_mainSubState);
-    int buildType = 0;
-    int lateLoop = AIGetUserInt(player, c_ldNumLateLoops);
-    if (AIPlayerDifficulty(player) >= c_skirChMoney) { AIMeleeCheatResources(player); }
+void AISetupNextArmyARC (int player, int newPhase ) {
+    int origPhase = AIGetUserInt(player, c_ldNextArmyPhase);
+    int origDuration = AIGetUserInt(player, c_ldNextArmyDuration);
+    int origEndTime = AIGetUserInt(player, c_nextArmyTime);
+    int origStartTime = 0;
+    fixed origTimeElapsed = 0.0;
+    fixed percentElapsed = 0.0;
+    fixed percentRemaining = 0.0;
+    int newDuration;
+    int newEndTime;
+    int armyCount;
+    int i;
+    int count;
+    string command;
+    string u;
 
-    if (mainState == e_mainState_Init)              {
-        Init(player);
-        AIInitCommonBuildOrders(player);
-        return;
+    int mainState = AIState(player, e_mainState);  
+    int buildType = GetBuildType(player);
+    int diff = AIPlayerDifficulty(player);
+    int lateLoop = AIGetUserInt(player, c_ldNumLateLoops);
+    int state = mainState + lateLoop;
+    string race = PlayerRace(player);
+
+    if (newPhase == origPhase) {
+        // switching due to player request
+        origStartTime = origEndTime - origDuration;
+        origTimeElapsed = AIGetTime() - IntToFixed(origStartTime);
+        if (origTimeElapsed > origDuration - 1) { origTimeElapsed = origDuration - 1; }
+        percentElapsed = origTimeElapsed / IntToFixed(origDuration);
+        percentRemaining = 1.0 - percentElapsed;
+        if (percentRemaining < 0.01) { percentRemaining = 0.01;}
+        AIScaleCurrentStockArmy(player, percentElapsed / percentRemaining, 0, c_ldMaxArmyStockSize-1);
+    } else {
+        // switching to next phase
+        AIClearStockArmy(player);
     }
     
-    if (mainSubState != e_mainSubState_Build) {
-        if (mainState < e_mainState_Late)     {
-            AIChooseNextOpeningBuild(player);
-        }
-        else{
-            AIChooseNextLateGameBuild(player);
-        }
-        AIInitBuildOrders(player);
+    // add new army stock ArmyInit
+    newDuration = aiData[player].armyDuration;
+    for(i = 0; i< 100; i+=1){
+        command = aiData[player].orders[bo_army][i];
+        if(command == ""){break;}
+        count = StringToInt(StringWord(command, 1));
+        u = StringWord(command, 2);
+        // AIAddToStockArmyARC(player, u, count);
+        
+        AITrain(player,2,c_townMain,u,count);
 
-        buildType = GetBuildType(player);
-        AISetupNextArmy (player, buildType, mainState - 1 + lateLoop, ArmyInit);
+        //if(warrior == c_TU_Marine){ AIAddToStockArmy(player, c_TU_Marine, count);} working
+        //AIAddToStockArmy(player, warrior, count); not working
+    }
+    
+
+    AISetUserInt(player, c_ldNextArmyRoll, aiData[player].armyRoll);
+
+    if (newDuration < 60) {
+        ErrorMeleeScript(player, "AISetupNextArmy bogus duration?");
+        newDuration = 60;
+    }
+    if (newPhase == origPhase) {
+        // switching due to player request
+        if (newDuration < origDuration) {
+            newDuration = FixedToInt(IntToFixed(newDuration) * percentRemaining);
+            newDuration += FixedToInt(IntToFixed(origDuration) * percentElapsed);
+        }
+        newEndTime = origStartTime + newDuration;
+        AIScaleCurrentStockArmy(player, percentRemaining, 0, c_ldMaxArmyStockSize-1);
+    } else {
+        // switching to next phase
+        newEndTime = FixedToInt(AIGetTime()) + newDuration;
+    }
+    // set wave values
+    AISetUserInt(player, c_ldNextArmyPhase, newPhase);
+    AISetUserInt(player, c_ldNextArmyDuration, newDuration);
+    AISetUserInt(player, c_nextArmyTime, newEndTime);
+    // set training delay values
+    AIForceTrainingDelay(player, AIGetWorkerDelay(player), AIGetArmyDelay(player, newDuration, newPhase), AIGetDefenseDelay(player));
+}
+
+
+void AIMeleeOpenMidLate(int player) {
+    int mainState = AIState(player, e_mainState);
+    int mainSubState = AIState(player, e_mainSubState);
+    int lateLoop = AIGetUserInt(player, c_ldNumLateLoops);
+    
+    if (mainSubState != e_mainSubState_Build) {
+        
+        if(gt_ViscerousAI == null){
+            if (mainState < e_mainState_Late)     {
+                AIChooseNextOpeningBuild(player);
+            }
+            else{
+                AIChooseNextLateGameBuild(player);
+            }
+            AIInitBuildOrders(player);
+            AISetupNextArmyARC (player, mainState - 1 + lateLoop);
+        }
+        
 
         if (mainState >= e_mainState_Mid)     {
             AISetFlag(player, e_flagsScouting, true);
@@ -1200,32 +2313,70 @@ void AIMeleeARC (int player) {
         mainSubState = AIState(player, e_mainSubState);
     }
     if (mainSubState == e_mainSubState_Build) {
-        Build(player);
+        if(gt_ViscerousAI == null){
+            Build(player);
+        }
     }
     else { 
         ErrorMeleeScript(player, "Invalid Open MainSubState"); 
     }
 }
 
+void AIMeleeARC (int player) {
+    int mainState = AIState(player, e_mainState);
+    if (AIPlayerDifficulty(player) >= c_skirChMoney) { AIMeleeCheatResources(player); }
+
+    if (mainState == e_mainState_Init)              {
+        Init(player);
+        return;
+    }
+    else{
+        AIMeleeOpenMidLate(player);
+    }
+}
+
 //--------------------------------------------------------------------------------------------------
 //  AISharedConfig
 //--------------------------------------------------------------------------------------------------
-void AISharedConfigARC (int player) {
-    //AIAddDetectionDanger(player, c_BWTU_Wraith);
-    //AIAddDetectionDanger(player, c_BWTU_Ghost);
-    //AIAddDetectionDanger(player, c_BWTU_SpiderMine);
-    //AIAddDetectionDanger(player, c_BWTU_Vulture);
-    //AIAddDetectionDanger(player, c_BWTB_ControlTower);
-    //AIAddDetectionDanger(player, c_BWTB_CovertOps);
-    //AIAddAirDanger(player, c_BWTU_Wraith);
-    //AIAddAirDanger(player, c_BWTU_Valkyrie);
-    //AIAddAirDanger(player, c_BWTU_Battlecruiser);
-    //AIAddAirDanger(player, c_BWTB_Starport);
-    //AIAddAirDanger(player, c_BWTB_PhysicsLab);
-    //AIAddAirDanger(player, c_BWTB_ControlTower);
-}
+void AISharedConfigARC (int p) {
+    int i;
+    string techUnit;
+    //AIAddDetectionDanger(p, c_BWTU_Wraith);
+    //AIAddDetectionDanger(p, c_BWTU_Ghost);
+    //AIAddDetectionDanger(p, c_BWTU_SpiderMine);
+    //AIAddDetectionDanger(p, c_BWTU_Vulture);
+    //AIAddDetectionDanger(p, c_BWTB_ControlTower);
+    //AIAddDetectionDanger(p, c_BWTB_CovertOps);
+    //AIAddAirDanger(p, c_BWTU_Wraith);
+    //AIAddAirDanger(p, c_BWTU_Valkyrie);
+    //AIAddAirDanger(p, c_BWTU_Battlecruiser);
+    //AIAddAirDanger(p, c_BWTB_Starport);
+    //AIAddAirDanger(p, c_BWTB_PhysicsLab);
+    //AIAddAirDanger(p, c_BWTB_ControlTower);
 
-void AIGlobalConfigARC () {
-    // AIAddRushTech(c_BWTB_Barracks,2,c_rushTechEarly);
-    // AIAddRushCounterTech(c_BWTB_Bunker, 1);
+
+    //Global Part
+    techUnit = PGet(p,c_DU_Warrior);
+    if(techUnit){
+        AIAddRushCounterTech(techUnit, 6);
+        AIAddRushTech(techUnit, 16,c_rushTechLate);
+        AIAddRushTech(techUnit, 8,c_rushTechEarly);
+        AIAddRushTech(techUnit, 4,c_rushTechVeryEarly);
+        AISetBuildFlag(techUnit,c_makeCenter);
+    }
+    for ( i = 1; i <= PCount(p,c_DU_TownHall) ; i += 1 ) { AISetBuildFlag(PGetI(p,c_DU_TownHall,i),c_makeCenter); }
+    for ( i = 1; i <= PCount(p,c_DU_Radar) ; i += 1 ) { AISetBuildFlag(PGetI(p,c_DU_Radar,i),c_nearChokePoint); }
+    for ( i = 1; i <= PCount(p,c_DU_Refinery) ; i += 1 ) { AISetBuildFlag(PGetI(p,c_DU_Refinery,i),c_makeCollector); }
+    for ( i = 1; i <= PCount(p,c_DU_Power) ; i += 1 ) { AISetBuildFlag(PGetI(p,c_DU_Power,i),c_makePower); }
+    for ( i = 1; i <= PCount(p,c_DU_Creep) ; i += 1 ) { AISetBuildFlag(PGetI(p,c_DU_Creep,i),c_makeCreep); }
+    for ( i = 1; i <= PCount(p,c_DU_DarkPower) ; i += 1 ) { AISetBuildFlag(PGetI(p,c_DU_DarkPower,i),c_makeDarkPower); }
+    for ( i = 1; i <= PCount(p,c_DU_Gate) ; i += 1 ) { AISetBuildFlag(PGetI(p,c_DU_Gate,i),c_makeLowerable); }
+    for ( i = 1; i <= PCount(p,c_DU_Defense) ; i += 1 ) { 
+        //ant-ground
+        AISetBuildFlag(PGetI(p,c_DU_Defense,i),c_makeDefense);
+        AIAddRushCounterTech(techUnit, 2);
+        //anti-air defense
+        //AISetBuildFlag(c_TB_MissileTurret,c_makeResourceDefense);
+    }
+    AIReqAddSpecialMaker( c_ZB_CreepTumorBurrowed, c_ZB_CreepTumor, "BurrowCreepTumorDown", 0);
 }

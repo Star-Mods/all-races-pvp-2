@@ -17,7 +17,7 @@ include "TriggerLibs/Keiron/KeironMdHd"
 //--------------------------------------------------------------------------------------------------
 //  Counter-Attack Units
 //--------------------------------------------------------------------------------------------------
-static void InitCounters (int player) {
+static void InitCountersKeiron (int player) {
     // versus Protoss
     AICounterUnitSetup(player, c_PU_Zealot,             0.75, c_KU_Pulsar,      0.75, c_KU_Pulsar);
     AICounterUnitSetup(player, c_PU_Stalker,            0.75, c_KU_Umbra,       0.75, c_KU_Umbra);
@@ -252,7 +252,7 @@ void AIWaveThinkKeir (int player, wave w, int type) {
 //--------------------------------------------------------------------------------------------------
 static void KeironInit (int player) {
 
-    InitCounters(player);
+    InitCountersKeiron(player);
     AIMeleeSharedInit(player);
     AISetFlag(player, e_flagsScouting, false);
     AISetFlag(player, e_flagsEarlyDefScout, false);
@@ -348,33 +348,14 @@ void AISharedConfigKeiron (int player) {
 //--------------------------------------------------------------------------------------------------
 //  AI Building Functions
 //--------------------------------------------------------------------------------------------------
-int AIGetDefaultBuildFlagsKeiron (int player, string objType) {
-    if (objType == c_KB_Citadel) {
-        return c_makeCenter;
-    }
-    if (objType == c_KB_Nullifier) {
-        return c_makeDefense;
-    }
-    if (objType == c_KB_Stratus) {
-        return c_makeResourceDefense;
-    }
-    if (objType == c_KB_Oculus) {
-        return c_nearChokePoint;
-    }
-    if (objType == c_KB_Formulator) {
-        return c_makeCollector;
-    }
-    if (objType == c_KB_Conduit) {
-        return c_avoidFactory;
-    }
-    if (objType == c_KB_Outlet) {
-        return c_avoidFactory;
-    }
-    if (objType == c_KB_Empyrean) {
-        return c_avoidFactory;
-    }
-    if (objType == c_KB_Zenith) {
-        return c_avoidFactory;
-    }
-    return c_makeNoFlags;
+void AIGlobalConfigKeiron () {
+    AISetBuildFlag(c_KB_Citadel,c_makeCenter);
+    AISetBuildFlag(c_KB_Nullifier,c_makeDefense);
+    AISetBuildFlag(c_KB_Stratus,c_makeResourceDefense);
+    AISetBuildFlag(c_KB_Oculus,c_nearChokePoint);
+    AISetBuildFlag(c_KB_Formulator,c_makeCollector);
+    AISetBuildFlag(c_KB_Conduit,c_avoidFactory);
+    AISetBuildFlag(c_KB_Outlet,c_avoidFactory);
+    AISetBuildFlag(c_KB_Empyrean,c_avoidFactory);
+    AISetBuildFlag(c_KB_Zenith,c_avoidFactory);
 }

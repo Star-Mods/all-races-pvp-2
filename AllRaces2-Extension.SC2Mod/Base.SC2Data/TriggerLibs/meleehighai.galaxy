@@ -642,7 +642,7 @@ void AIAddRushCounterTech(string rushTechUnit,int count){
     rushCounterTech += IntToString(count) + " " + rushTechUnit + " ";
 }
 
-bool AIHigeCheckTechCount (int player,string techString) {
+bool AIHighCheckTechCount (int player,string techString) {
     string tech;
     int count;
     int index;
@@ -658,16 +658,16 @@ bool AIHigeCheckTechCount (int player,string techString) {
 bool AIHighOpponentHasRushTech (int player) {
     fixed time = AIGetTime();
     if (time > 180) {return false;}
-    if(AIHigeCheckTechCount(player, rushTech[c_rushTechLate])){return true;}
+    if(AIHighCheckTechCount(player, rushTech[c_rushTechLate])){return true;}
     if (time > 105) {return false;}
-    if(AIHigeCheckTechCount(player, rushTech[c_rushTechEarly])){return true;}
+    if(AIHighCheckTechCount(player, rushTech[c_rushTechEarly])){return true;}
     if (time > 75) {return false;}
-    if(AIHigeCheckTechCount(player, rushTech[c_rushTechVeryEarly])){return true;}
+    if(AIHighCheckTechCount(player, rushTech[c_rushTechVeryEarly])){return true;}
     return false;
 }
 
 bool AIHighOpponentHasRushCounterTech (int player) {
-    if(AIHigeCheckTechCount(player, rushCounterTech)){return true;}
+    if(AIHighCheckTechCount(player, rushCounterTech)){return true;}
     return false;
 }
 

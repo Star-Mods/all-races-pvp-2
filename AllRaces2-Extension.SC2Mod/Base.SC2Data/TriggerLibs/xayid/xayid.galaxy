@@ -17,7 +17,7 @@ include "TriggerLibs/Xayid/XayidHard"
 //--------------------------------------------------------------------------------------------------
 //  Counter-Attack Units
 //--------------------------------------------------------------------------------------------------
-static void InitCounters (int player) {
+static void InitCountersXayid (int player) {
     // versus Protoss
     AICounterUnitSetup(player, c_PU_Zealot,             1.00, c_XU_Scorpalisk,  1.00, c_XU_Scorpalisk);
     AICounterUnitSetup(player, c_PU_Stalker,            1.50, c_XU_Xayidling,   0.50, c_XU_Eroder);
@@ -221,7 +221,7 @@ void AIWaveThinkXayi (int player, wave w, int type) {
 //--------------------------------------------------------------------------------------------------
 static void XayidInit (int player) {
 
-    InitCounters(player);
+    InitCountersXayid(player);
     AIMeleeSharedInit(player);
     AISetFlag(player, e_flagsScouting, false);
     AISetFlag(player, e_flagsEarlyDefScout, false);
@@ -314,18 +314,9 @@ void AISharedConfigXayid (int player) {
 //--------------------------------------------------------------------------------------------------
 //  AI Building Functions
 //--------------------------------------------------------------------------------------------------
-int AIGetDefaultBuildFlagsXayid (int player, string objType) {
-    if (objType == c_XB_ScavengerNest) {
-        return c_makeCenter;
-    }
-    if (objType == c_XB_FeedingPool) {
-        return c_nearFactory;
-    }
-    if (objType == c_XB_BilePit) {
-        return c_makeDefense;
-    }
-    if (objType == c_XB_Siphoner) {
-        return c_makeCollector;
-    }
-    return c_makeNoFlags;
+void AIGlobalConfigXayid () {
+    AISetBuildFlag(c_XB_ScavengerNest,c_makeCenter);
+    AISetBuildFlag(c_XB_FeedingPool,c_nearFactory);
+    AISetBuildFlag(c_XB_BilePit,c_makeDefense);
+    AISetBuildFlag(c_XB_Siphoner,c_makeCollector);
 }

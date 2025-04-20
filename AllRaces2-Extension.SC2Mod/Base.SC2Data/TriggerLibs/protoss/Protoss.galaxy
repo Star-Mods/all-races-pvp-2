@@ -14,11 +14,10 @@ include "TriggerLibs/Protoss/ProtossVyHd"
 include "TriggerLibs/Protoss/ProtossChVi"
 include "TriggerLibs/Protoss/ProtossChRe"
 include "TriggerLibs/Protoss/ProtossChIn"
-include "TriggerLibs/Protoss/TactProtAI"
 //--------------------------------------------------------------------------------------------------
 //  Counter-Attack Units
 //--------------------------------------------------------------------------------------------------
-static void InitCounters (int player) {
+static void InitCountersProtoss (int player) {
     // versus Protoss
     AICounterUnitSetup(player, c_PU_Zealot,             1.00, c_PU_Zealot,      1.00, c_PU_Zealot);
     AICounterUnitSetup(player, c_PU_Stalker,            1.00, c_PU_Stalker,     0.33, c_PU_Immortal);
@@ -215,7 +214,7 @@ void AIWaveThinkProtLegacy (int player, wave w, int type) {
 //--------------------------------------------------------------------------------------------------
 static void ProtossInit (int player) {
 
-    InitCounters(player);
+    InitCountersProtoss(player);
     AIMeleeSharedInit(player);
     AISetFlag(player, e_flagsScouting, false);
     AISetFlag(player, e_flagsEarlyDefScout, false);
@@ -309,31 +308,14 @@ void AISharedConfigProtoss (int player) {
 }
 
 //--------------------------------------------------------------------------------------------------
-//  AI Building Functions
-//--------------------------------------------------------------------------------------------------
-int AIGetDefaultBuildFlagsProtoss (int player, string objType) {
-    if (objType == c_PB_Nexus) {
-        return c_makeCenter;
-    }
-    if (objType == c_PB_Pylon) {
-        return c_makePower;
-    }
-    if (objType == c_PB_Obelisk) {
-        return c_makeDarkPower;
-    }
-    if (objType == c_PB_PhotonCannon) {
-        return c_makeDefense;
-    }
-    if (objType == c_PB_Assimilator) {
-        return c_makeCollector;
-    }
-    return c_makeNoFlags;
-}
-
-//--------------------------------------------------------------------------------------------------
 //  AIGlobalConfig
 //--------------------------------------------------------------------------------------------------
 void AIGlobalConfigProtoss () {
+    AISetBuildFlag(c_PB_Nexus,c_makeCenter);
+    AISetBuildFlag(c_PB_Pylon,c_makePower);
+    AISetBuildFlag(c_PB_Obelisk,c_makeDarkPower);
+    AISetBuildFlag(c_PB_PhotonCannon,c_makeDefense);
+    AISetBuildFlag(c_PB_Assimilator,c_makeCollector);
     AIAddRushTech(c_PB_Gateway,3,c_rushTechLate);
     AIAddRushTech(c_PB_Gateway,2,c_rushTechEarly);
     AIAddRushCounterTech(c_PB_PhotonCannon,1);
